@@ -151,7 +151,7 @@ autocmd BufEnter *.txt set ft=confluencewiki
 "  plugins and relative configuration  "
 """"""""""""""""""""""""""""""""""""""""
 
-call plug#begin('~/nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 "状态栏的例子
 Plug 'bling/vim-airline'
@@ -243,8 +243,8 @@ let g:airline_theme='luna'
 
 
 
-colorscheme murphy        " 修改配色
-color deus
+" crscheme murphy        " 修改配色
+" color deus
 
 
 
