@@ -21,7 +21,8 @@ filetype plugin indent on " 启用根据文件类型自动缩进
 set mouse=a
 set wrap
 set showcmd
-
+set ignorecase
+set smartcase
 set encoding=utf-8
 " modify cursor pattern.
 let &t_ut=''
@@ -29,6 +30,9 @@ let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
+set path=.,** 
+set wildmenu
+set wildmode=longest:list,full
 
 " ===
 " === Terminal Behaviors
@@ -67,7 +71,7 @@ set tw=0
 set backspace=2           " 在多数终端上修正退格键Backspace的行为
 set foldlevel=99
 set laststatus=2
-set autochdir
+" set autochdir
 
 " restore cursor position which last was.
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -103,6 +107,7 @@ set clipboard=unnamed,unnamedplus
 map T :edit $MYVIMRC<CR>
 map Z :w<CR>:so $MYVIMRC<CR>
 
+map <F12> :Vista finder<CR>
 
 " 使用<Ctrl> + hjkl快速在窗口间跳转
 noremap <c-h> <c-w><c-h>
@@ -178,6 +183,7 @@ Plug 'https://github.com/tpope/vim-surround'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'https://github.com/liuchengxu/vista.vim'
 
 call plug#end()
 
@@ -425,3 +431,26 @@ let g:airline_theme='luna'
 " autoformat configuration
 noremap <F3> :Autoformat<CR>
 
+
+" vista configuration
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'coc'
+" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+let g:vista#renderer#enable_icon = 1
+
+" The default icons can't be suitable for all the filetypes, you can extend it as you wish.
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+set statusline+=%{NearestMethodOrFunction()}
+
+" By default vista.vim never run if you don't call it explicitly.
+"
+" If you want to show the nearest function in your statusline automatically,
+" you can add the following line to your vimrc
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
