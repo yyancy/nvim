@@ -1,17 +1,14 @@
+" ===
+" === yancy vim configuration
+" ===
 
 
+" ===
+" === common configuration
+" ===
 
-
-" 将先导键映射为空格键
 let mapleader=" "
 " let g:VM_leader="\\\\"
-
-
-
-
-
-
-" personal configuration
 set nocompatible
 syntax on                 " 支持语法高亮显示
 set number                " show line number.
@@ -23,7 +20,10 @@ set wrap
 set showcmd
 set ignorecase
 set smartcase
+
 set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1
+
 " modify cursor pattern.
 let &t_ut=''
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -33,30 +33,6 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 set path=.,** 
 set wildmenu
 set wildmode=longest:list,full
-
-" ===
-" === Terminal Behaviors
-" ===
-let g:neoterm_autoscroll = 1
-autocmd TermOpen term://* startinsert
-tnoremap <C-N> <C-\><C-N>
-tnoremap <C-O> <C-\><C-N><C-O>
-let g:terminal_color_0  = '#2e3436'
-let g:terminal_color_1  = '#cc0000'
-let g:terminal_color_2  = '#4e9a06'
-let g:terminal_color_3  = '#c4a000'
-let g:terminal_color_4  = '#3465a4'
-let g:terminal_color_5  = '#75507b'
-let g:terminal_color_6  = '#0b939b'
-let g:terminal_color_7  = '#d3d7cf'
-let g:terminal_color_8  = '#555753'
-let g:terminal_color_9  = '#ef2929'
-let g:terminal_color_10 = '#8ae234'
-let g:terminal_color_11 = '#fce94f'
-let g:terminal_color_12 = '#729fcf'
-let g:terminal_color_13 = '#ad7fa8'
-let g:terminal_color_14 = '#00f5e9'
-let g:terminal_color_15 = '#eeeeec'
 
 set hlsearch
 exec "nohlsearch"
@@ -76,16 +52,57 @@ set laststatus=2
 " restore cursor position which last was.
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-set wildmenu                      " 启用增强的Tab自动补全
-set wildmode=list:longest,full    " 补全为允许的最长字符串，然后打开wildmenu
-
 " set list
 "set listchars=tab:▸\ ,trail:▫
 set scrolloff=5
 
-set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1
-" mappings 
+set clipboard=unnamed,unnamedplus
+"set clipboard^=unnamed
+"set clipboard^=autoselect
 
+"set clipboard=unnamed,autoselect
+ set guioptions+=a
+
+
+
+" ===
+" === autocmd 
+" ===
+
+autocmd BufNewFile *.txt set ft=confluencewiki
+autocmd BufEnter *.txt set ft=confluencewiki
+
+
+
+
+" ===
+" === Terminal Behaviors
+" ===
+" autocmd TermOpen term://* startinsert
+tnoremap <C-N> <C-\><C-N>
+tnoremap <C-O> <C-\><C-N><C-O>
+let g:terminal_color_0  = '#2e3436'
+let g:terminal_color_1  = '#cc0000'
+let g:terminal_color_2  = '#4e9a06'
+let g:terminal_color_3  = '#c4a000'
+let g:terminal_color_4  = '#3465a4'
+let g:terminal_color_5  = '#75507b'
+let g:terminal_color_6  = '#0b939b'
+let g:terminal_color_7  = '#d3d7cf'
+let g:terminal_color_8  = '#555753'
+let g:terminal_color_9  = '#ef2929'
+let g:terminal_color_10 = '#8ae234'
+let g:terminal_color_11 = '#fce94f'
+let g:terminal_color_12 = '#729fcf'
+let g:terminal_color_13 = '#ad7fa8'
+let g:terminal_color_14 = '#00f5e9'
+let g:terminal_color_15 = '#eeeeec'
+
+
+
+" ===
+" === mappings
+" ===
 
 vmap <C-c> y
 vmap <C-v> p
@@ -97,12 +114,6 @@ nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
 nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
 nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 
-set clipboard=unnamed,unnamedplus
-"set clipboard^=unnamed
-"set clipboard^=autoselect
-
-"set clipboard=unnamed,autoselect
- set guioptions+=a
 
 map T :edit $MYVIMRC<CR>
 map Z :w<CR>:so $MYVIMRC<CR>
@@ -131,12 +142,6 @@ map tn :+tabnext<CR>
 map sv <C-w>t<C-w>H
 map sh <C-w>t<C-w>K
 
-" 在插入模式下加入一对引号或括号
-""inoremap ' ''<esc>i
-""inoremap " ""<esc>i
-""inoremap ( ()<esc>i
-""inoremap { {}<esc>i
-""inoremap [ []<esc>i
 noremap <LEADER><CR> :nohlsearch<CR>
 
 noremap <leader>q :q<cr>
@@ -147,8 +152,6 @@ noremap <leader>x :x<cr>
 "noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>
 
 
-autocmd BufNewFile *.txt set ft=confluencewiki
-autocmd BufEnter *.txt set ft=confluencewiki
 
 
 
@@ -187,12 +190,20 @@ Plug 'https://github.com/liuchengxu/vista.vim'
 
 call plug#end()
 
+
+" ===
+" === coc-explorer
+" ===
+
 nmap <leader>e :CocCommand explorer
     \ --toggle
     \ --sources=buffer+,file+
     \ --open-action-strategy tab
     \<CR>
 
+" ===
+" === coc
+" ===
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -239,7 +250,6 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 
-
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -258,9 +268,6 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
-
-
-
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -356,14 +363,12 @@ let g:webdevicons_enable = 1
 
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                             UltiSnips                               "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ===
+" === UltiSnips
+" ===
 
 " Trigger configuration. Do not use <tab> if you use
 " https://github.com/Valloric/YouCompleteMe.
-
-
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -410,6 +415,13 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
 " disable coc warnig
 let g:coc_disable_startup_warning = 1
 
+
+
+" ===
+" === airline 
+" ===
+
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='luna'
 
@@ -427,12 +439,16 @@ let g:airline_theme='luna'
 
 
 
+" ===
+" === autoformat 
+" ===
 
-" autoformat configuration
 noremap <F3> :Autoformat<CR>
 
+" ===
+" === vista
+" ===
 
-" vista configuration
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'
 " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
