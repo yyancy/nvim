@@ -126,10 +126,10 @@ noremap <c-j> <c-w><c-j>
 noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
 
-map sl :set splitright<CR>:vsplit<CR>
-map sj :set nosplitright<CR>:vsplit<CR>
-map si :set nosplitbelow<CR>:split<CR>
-map sk :set splitbelow<CR>:split<CR>
+map <leader>sl :set splitright<CR>:vsplit<CR>
+map <leader>sj :set nosplitright<CR>:vsplit<CR>
+map <leader>si :set nosplitbelow<CR>:split<CR>
+map <leader>sk :set splitbelow<CR>:split<CR>
 
 map <up> :res +5<CR>
 map <down> :res -5<CR>
@@ -187,9 +187,16 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/liuchengxu/vista.vim'
-
+Plug 'https://github.com/svermeulen/vim-subversive'
 call plug#end()
 
+" ===
+" === vim-subversive
+" ===
+
+nmap s <plug>(SubversiveSubstitute)
+nmap ss <plug>(SubversiveSubstituteLine)
+nmap S <plug>(SubversiveSubstituteToEndOfLine)
 
 " ===
 " === coc-explorer
