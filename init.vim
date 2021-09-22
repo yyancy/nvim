@@ -126,9 +126,9 @@ noremap <c-j> <c-w><c-j>
 noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
 
-map <leader>sl :set splitright<CR>:vsplit<CR>
+map <leader>\| :set splitright<CR>:vsplit<CR>
 map <leader>sj :set nosplitright<CR>:vsplit<CR>
-map <leader>si :set nosplitbelow<CR>:split<CR>
+map <leader>- :set nosplitbelow<CR>:split<CR>
 map <leader>sk :set splitbelow<CR>:split<CR>
 
 map <up> :res +5<CR>
@@ -199,10 +199,17 @@ nmap ss <plug>(SubversiveSubstituteLine)
 nmap S <plug>(SubversiveSubstituteToEndOfLine)
 
 " ===
+" === fzf.vim
+" ===
+
+noremap <leader><C-n> :Files<cr>
+
+
+" ===
 " === coc-explorer
 " ===
 
-nmap <leader>e :CocCommand explorer
+nmap <leader>e<leader> :CocCommand explorer
     \ --toggle
     \ --sources=buffer+,file+
     \ --open-action-strategy tab
