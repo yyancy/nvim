@@ -115,8 +115,8 @@ nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
 nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 
 
-map T :edit $MYVIMRC<CR>
-map Z :w<CR>:so $MYVIMRC<CR>
+map <leader>T :edit $MYVIMRC<CR>
+map <leader>Z :w<CR>:so $MYVIMRC<CR>
 
 map <F12> :Vista finder<CR>
 
@@ -162,8 +162,8 @@ noremap <leader>x :x<cr>
 call plug#begin('~/.config/nvim/plugged')
 
 "状态栏的例子
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'https://github.com.cnpmjs.org/bling/vim-airline'
+Plug 'https://github.com.cnpmjs.org/vim-airline/vim-airline-themes'
 Plug 'https://gitee.com/winwood/vim-deus'
 
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
@@ -177,17 +177,18 @@ Plug 'https://gitee.com/yyancyer/vim-terminal-help'
 Plug 'https://gitee.com/yyancyer/nerdcommenter'
 Plug 'https://gitee.com/yyancyer/vim-autoformat'
 Plug 'https://gitee.com/yyancyer/SimpylFold'
-Plug 'junegunn/vim-easy-align'
+Plug 'https://github.com.cnpmjs.org/junegunn/vim-easy-align'
 "Plug 'mg979/vim-xtabline'
-Plug 'https://github.com/gcmt/wildfire.vim.git'
+Plug 'https://github.com.cnpmjs.org/gcmt/wildfire.vim'
+Plug 'https://github.com.cnpmjs.org/wellle/targets.vim'
 
 Plug 'https://gitee.com/yyancyer/vim-devicons'
-Plug 'https://github.com/tpope/vim-surround'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'https://github.com/liuchengxu/vista.vim'
-Plug 'https://github.com/svermeulen/vim-subversive'
+Plug 'https://github.com.cnpmjs.org/tpope/vim-surround'
+Plug 'https://github.com.cnpmjs.org/iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'https://github.com.cnpmjs.org/junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'https://github.com.cnpmjs.org/junegunn/fzf.vim'
+Plug 'https://github.com.cnpmjs.org/liuchengxu/vista.vim'
+Plug 'https://github.com.cnpmjs.org/svermeulen/vim-subversive'
 call plug#end()
 
 " ===
@@ -384,8 +385,8 @@ let g:webdevicons_enable = 1
 " Trigger configuration. Do not use <tab> if you use
 " https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
 
 " Insert mode completion
@@ -442,7 +443,7 @@ let g:airline_theme='luna'
 
 
 " crscheme murphy        " 修改配色
-" color deus
+color deus
 
 
 
