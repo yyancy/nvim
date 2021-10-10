@@ -205,15 +205,20 @@ nmap S <plug>(SubversiveSubstituteToEndOfLine)
 
 noremap <leader><C-n> :Files<cr>
 
+" ===
+" === wildfile.vim
+" ===
+
+nmap <leader>S <Plug>(wildfire-quick-select)
+
 
 " ===
 " === coc-explorer
 " ===
 
-nmap <leader>e<leader> :CocCommand explorer
+nmap <leader>E :CocCommand explorer
     \ --toggle
     \ --sources=buffer+,file+
-    \ --open-action-strategy tab
     \<CR>
 
 " ===
@@ -412,10 +417,13 @@ nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)
 "autocmd vimenter * NERDTree
 "noremap <leader>n  :NERDTreeToggle<cr>
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" ===
+" === vim-easy-align
+" ===
+
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
-
-
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
@@ -443,12 +451,15 @@ let g:airline_theme='luna'
 
 
 " crscheme murphy        " 修改配色
-color deus
+" color deus
 
 
 
 
-
+" ===
+" === auto-pairs
+" ===
+let g:AutoPairsFlyMode = 1
 
 
 
