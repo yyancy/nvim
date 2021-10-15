@@ -5,5 +5,7 @@
       "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
       "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
     }
-  }
+  },
+  "coc.preferences.colorSupport": true,
+  "tsserver.enable": true
 }

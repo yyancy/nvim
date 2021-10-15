@@ -37,7 +37,6 @@ set wildmode=longest:list,full
 set hlsearch
 exec "nohlsearch"
 set incsearch
-set smartcase
 
 set autoindent            " 开始新行时处理缩进
 set expandtab             " 将制表符Tab展开为空格，这对于Python尤其有用
@@ -166,6 +165,10 @@ Plug 'https://github.com.cnpmjs.org/bling/vim-airline'
 Plug 'https://github.com.cnpmjs.org/vim-airline/vim-airline-themes'
 Plug 'https://gitee.com/winwood/vim-deus'
 
+Plug 'https://github.com.cnpmjs.org/skywind3000/asynctasks.vim'
+Plug 'https://github.com.cnpmjs.org/skywind3000/asyncrun.vim'
+
+
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
 Plug 'https://gitee.com/yyancyer/coc.nvim', {'branch': 'release'}
 Plug 'https://gitee.com/yyancyer/ultisnips'
@@ -224,6 +227,14 @@ nmap <leader>E :CocCommand explorer
 " ===
 " === coc
 " ===
+
+let g:coc_global_extensions = [
+      \'coc-json',
+      \'coc-git',
+      \'coc-yank',
+      \'coc-yaml',
+      \'coc-vimlsp',
+      \]
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -378,9 +389,55 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 
+" grep word under cursor
+command! -nargs=+ -complete=custom,s:GrepArgs Fzf exe 'CocList grep '.<q-args>
+
+function! s:GrepArgs(...)
+  let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
+        \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
+  return join(list, "\n")
+endfunction
+
+" Keymapping for grep word under cursor with interactive mode
+nnoremap <silent> <Leader>cf :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+
+vnoremap <leader>g :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
+nnoremap <leader>g :<C-u>set operatorfunc=<SID>GrepFromSelected<CR>g@
+
+function! s:GrepFromSelected(type)
+  let saved_unnamed_register = @@
+  if a:type ==# 'v'
+    normal! `<v`>y
+  elseif a:type ==# 'char'
+    normal! `[v`]y
+  else
+    return
+  endif
+  let word = substitute(@@, '\n$', '', 'g')
+  let word = escape(word, '| ')
+  let @@ = saved_unnamed_register
+  execute 'CocList grep '.word
+endfunction
+
+nnoremap <silent> <space>W  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
+
+
+
 " loading the plugin
 let g:webdevicons_enable = 1
 
+" ===
+" === coc-yank
+" ===
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+
+" ===
+" === coc-vimlsp
+" ===
+let g:markdown_fenced_languages = [
+      \ 'vim',
+      \ 'help'
+      \]
 
 
 " ===
@@ -451,7 +508,7 @@ let g:airline_theme='luna'
 
 
 " crscheme murphy        " 修改配色
-" color deus
+color deus
 
 
 
@@ -496,3 +553,16 @@ set statusline+=%{NearestMethodOrFunction()}
 " If you want to show the nearest function in your statusline automatically,
 " you can add the following line to your vimrc
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+
+
+
+" ===
+" === asynctasks 
+" ===
+let g:asyncrun_open = 6
+
+noremap <silent><f5> :AsyncTask file-run<cr>
+noremap <silent><f9> :AsyncTask file-build<cr>
+
+noremap <silent><f6> :AsyncTask project-run<cr>
+noremap <silent><f7> :AsyncTask project-build<cr>
