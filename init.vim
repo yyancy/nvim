@@ -185,6 +185,9 @@ Plug 'https://github.com.cnpmjs.org/junegunn/vim-easy-align'
 Plug 'https://github.com.cnpmjs.org/gcmt/wildfire.vim'
 Plug 'https://github.com.cnpmjs.org/wellle/targets.vim'
 
+" highlight
+Plug 'https://github.com.cnpmjs.org/RRethy/vim-illuminate'
+
 Plug 'https://gitee.com/yyancyer/vim-devicons'
 Plug 'https://github.com.cnpmjs.org/tpope/vim-surround'
 Plug 'https://github.com.cnpmjs.org/iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -303,6 +306,7 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" set termguicolors
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -566,3 +570,13 @@ noremap <silent><f9> :AsyncTask file-build<cr>
 
 noremap <silent><f6> :AsyncTask project-run<cr>
 noremap <silent><f7> :AsyncTask project-build<cr>
+
+
+
+" ===
+" === vim-illuminate
+" ===
+" augroup illuminate_augroup
+    " autocmd!
+    " autocmd VimEnter * hi illuminatedWord cterm=underline gui=underline
+" augroup END
