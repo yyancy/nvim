@@ -192,6 +192,7 @@ Plug 'https://github.com.cnpmjs.org/junegunn/fzf', { 'do': { -> fzf#install() } 
 Plug 'https://github.com.cnpmjs.org/junegunn/fzf.vim'
 Plug 'https://github.com.cnpmjs.org/liuchengxu/vista.vim'
 Plug 'https://github.com.cnpmjs.org/svermeulen/vim-subversive'
+Plug 'https://github.com.cnpmjs.org/lambdalisue/suda.vim'
 call plug#end()
 
 " ===
@@ -231,8 +232,10 @@ nmap <leader>E :CocCommand explorer
 let g:coc_global_extensions = [
       \'coc-json',
       \'coc-git',
+      \'coc-diagnostic',
       \'coc-yank',
       \'coc-yaml',
+      \'coc-explorer',
       \'coc-vimlsp',
       \]
 
