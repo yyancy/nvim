@@ -125,6 +125,9 @@ noremap <c-j> <c-w><c-j>
 noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
 
+noremap j gj
+noremap k gk
+
 map <leader>\| :set splitright<CR>:vsplit<CR>
 map <leader>sj :set nosplitright<CR>:vsplit<CR>
 map <leader>- :set nosplitbelow<CR>:split<CR>
@@ -167,7 +170,9 @@ Plug 'https://gitee.com/winwood/vim-deus'
 
 Plug 'https://github.com.cnpmjs.org/skywind3000/asynctasks.vim'
 Plug 'https://github.com.cnpmjs.org/skywind3000/asyncrun.vim'
-
+Plug 'https://github.com.cnpmjs.org/christoomey/vim-tmux-navigator'
+Plug 'https://github.com.cnpmjs.org/easymotion/vim-easymotion'
+" Plug 'https://github.com.cnpmjs.org/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
 Plug 'https://gitee.com/yyancyer/coc.nvim', {'branch': 'release'}
@@ -574,7 +579,23 @@ noremap <silent><f9> :AsyncTask file-build<cr>
 noremap <silent><f6> :AsyncTask project-run<cr>
 noremap <silent><f7> :AsyncTask project-build<cr>
 
+" ===
+" === suda.vim
+" ===
+let g:suda_smart_edit = 1
 
+" ===
+" === nvim-treesitter
+" ===
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+ " ensure_installed = {"python","c"},     -- one of "all", "language", or a list of languages
+  "highlight = {
+   " enable = true,              -- false will disable the whole extension
+    "disable = {  "rust" },  -- list of language that will be disabled
+ " },
+"}
+"EOF
 
 " ===
 " === vim-illuminate
@@ -583,3 +604,16 @@ noremap <silent><f7> :AsyncTask project-build<cr>
     " autocmd!
     " autocmd VimEnter * hi illuminatedWord cterm=underline gui=underline
 " augroup END
+
+
+
+" ===
+" === vim-easymotion
+" ===
+" Move to word
+map  <Leader><Leader>w <Plug>(easymotion-bd-wl)
+map  <Leader><Leader>f <Plug>(easymotion-sl)
+" JK motions: Line motions
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+" nmap <Leader>w <Plug>(easymotion-overwin-w)
