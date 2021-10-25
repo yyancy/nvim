@@ -167,7 +167,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'https://github.com.cnpmjs.org/bling/vim-airline'
 Plug 'https://github.com.cnpmjs.org/vim-airline/vim-airline-themes'
 Plug 'https://gitee.com/winwood/vim-deus'
-
+Plug 'https://github.com.cnpmjs.org/pechorin/any-jump.vim'
 Plug 'https://github.com.cnpmjs.org/skywind3000/asynctasks.vim'
 Plug 'https://github.com.cnpmjs.org/skywind3000/asyncrun.vim'
 Plug 'https://github.com.cnpmjs.org/christoomey/vim-tmux-navigator'
@@ -617,3 +617,13 @@ map  <Leader><Leader>f <Plug>(easymotion-sl)
 map <Leader><Leader>j <Plug>(easymotion-j)
 map <Leader><Leader>k <Plug>(easymotion-k)
 " nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" Gif config
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
