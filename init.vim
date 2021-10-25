@@ -216,6 +216,9 @@ nmap S <plug>(SubversiveSubstituteToEndOfLine)
 " ===
 
 noremap <leader><C-n> :Files<cr>
+noremap <C-N> :Files<cr>
+noremap <M-a> :Files<cr>
+noremap <M-A> :Files<cr>
 
 " ===
 " === wildfile.vim
