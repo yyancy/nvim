@@ -174,6 +174,9 @@ Plug 'https://github.com.cnpmjs.org/christoomey/vim-tmux-navigator'
 Plug 'https://github.com.cnpmjs.org/easymotion/vim-easymotion'
 " Plug 'https://github.com.cnpmjs.org/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
+" search
+Plug 'https://github.com.cnpmjs.org/Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
 Plug 'https://gitee.com/yyancyer/coc.nvim', {'branch': 'release'}
 Plug 'https://gitee.com/yyancyer/ultisnips'
@@ -630,3 +633,14 @@ omap / <Plug>(easymotion-tn)
 " different highlight method and have some other features )
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
+
+
+" ===
+" === LeaderF
+" ===
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+
+" ===
+" === end LeaderF
+" ===
