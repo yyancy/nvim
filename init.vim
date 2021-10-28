@@ -172,7 +172,9 @@ Plug 'https://github.com.cnpmjs.org/skywind3000/asynctasks.vim'
 Plug 'https://github.com.cnpmjs.org/skywind3000/asyncrun.vim'
 Plug 'https://github.com.cnpmjs.org/christoomey/vim-tmux-navigator'
 Plug 'https://github.com.cnpmjs.org/easymotion/vim-easymotion'
-" Plug 'https://github.com.cnpmjs.org/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'https://github.com.cnpmjs.org/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+
+Plug 'https://github.com.cnpmjs.org/airblade/vim-rooter'
 
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
 Plug 'https://gitee.com/yyancyer/coc.nvim', {'branch': 'release'}
@@ -300,7 +302,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-
+nn <silent> L :call CocActionAsync('doHover')<cr>
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -523,7 +525,7 @@ let g:airline_theme='luna'
 
 
 " crscheme murphy        " 修改配色
-color deus
+" color deus
 
 
 
@@ -590,15 +592,15 @@ let g:suda_smart_edit = 1
 " ===
 " === nvim-treesitter
 " ===
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
- " ensure_installed = {"python","c"},     -- one of "all", "language", or a list of languages
-  "highlight = {
-   " enable = true,              -- false will disable the whole extension
-    "disable = {  "rust" },  -- list of language that will be disabled
- " },
-"}
-"EOF
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+ ensure_installed = {"python","c"},     -- one of "all", "language", or a list of languages
+  highlight = {
+   enable = true,              -- false will disable the whole extension
+    disable = {  "rust" },  -- list of language that will be disabled
+ },
+}
+EOF
 
 " ===
 " === vim-illuminate
@@ -630,3 +632,39 @@ omap / <Plug>(easymotion-tn)
 " different highlight method and have some other features )
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
+
+
+" ===
+" === ccls
+" ===
+" bases
+nn <silent> xb :call CocLocations('ccls','$ccls/inheritance')<cr>
+" bases of up to 3 levels
+nn <silent> xB :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
+" derived
+nn <silent> xd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
+" derived of up to 3 levels
+nn <silent> xD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
+
+" caller
+nn <silent> xc :call CocLocations('ccls','$ccls/call')<cr>
+" callee
+nn <silent> xC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
+
+" $ccls/member
+" member variables / variables in a namespace
+nn <silent> xm :call CocLocations('ccls','$ccls/member')<cr>
+" member functions / functions in a namespace
+nn <silent> xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
+" nested classes / types in a namespace
+nn <silent> xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
+
+nmap <silent> xt <Plug>(coc-type-definition)<cr>
+nn <silent> xv :call CocLocations('ccls','$ccls/vars')<cr>
+nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
+
+nn xx x
+
+" ===
+" === end ccls
+" ===
