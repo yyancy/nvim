@@ -176,6 +176,9 @@ Plug 'https://github.com.cnpmjs.org/nvim-treesitter/nvim-treesitter', {'do': ':T
 
 Plug 'https://github.com.cnpmjs.org/airblade/vim-rooter'
 
+" search
+Plug 'https://github.com.cnpmjs.org/Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
 Plug 'https://gitee.com/yyancyer/coc.nvim', {'branch': 'release'}
 Plug 'https://gitee.com/yyancyer/ultisnips'
@@ -667,4 +670,16 @@ nn xx x
 
 " ===
 " === end ccls
+" ===
+
+
+
+" ===
+" === LeaderF
+" ===
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+
+" ===
+" === end LeaderF
 " ===
