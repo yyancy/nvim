@@ -61,7 +61,7 @@ set clipboard=unnamed,unnamedplus
 
 "set clipboard=unnamed,autoselect
  set guioptions+=a
-
+set foldmethod=manual
 
 
 " ===
@@ -173,9 +173,9 @@ Plug 'https://github.com.cnpmjs.org/skywind3000/asyncrun.vim'
 Plug 'https://github.com.cnpmjs.org/christoomey/vim-tmux-navigator'
 Plug 'https://github.com.cnpmjs.org/easymotion/vim-easymotion'
 Plug 'https://github.com.cnpmjs.org/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-
+Plug 'https://github.com.cnpmjs.org/pseewald/vim-anyfold'
 Plug 'https://github.com.cnpmjs.org/airblade/vim-rooter'
-
+Plug 'https://github.com.cnpmjs.org/rhysd/clever-f.vim'
 " search
 Plug 'https://github.com.cnpmjs.org/Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
@@ -221,6 +221,7 @@ nmap S <plug>(SubversiveSubstituteToEndOfLine)
 " ===
 
 noremap <leader><C-n> :Files<cr>
+noremap <C-e> :Buffers<cr>
 noremap <C-N> :Files<cr>
 noremap <M-a> :Files<cr>
 noremap <M-A> :Files<cr>
@@ -683,3 +684,15 @@ let g:Lf_PreviewInPopup = 1
 " ===
 " === end LeaderF
 " ===
+
+
+" ===
+" === vim-anyfold
+" ===
+autocmd Filetype * AnyFoldActivate    
+" ===
+" === end vim-anyfold
+" ===
+
+
+let g:clever_f_mark_direct = 1
