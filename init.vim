@@ -178,6 +178,9 @@ Plug 'https://github.com.cnpmjs.org/airblade/vim-rooter'
 Plug 'https://github.com.cnpmjs.org/rhysd/clever-f.vim'
 " search
 Plug 'https://github.com.cnpmjs.org/Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+" bookmarks
+Plug 'https://github.com.cnpmjs.org/MattesGroeger/vim-bookmarks'
+
 
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
 Plug 'https://gitee.com/yyancyer/coc.nvim', {'branch': 'release'}
@@ -194,6 +197,8 @@ Plug 'https://github.com.cnpmjs.org/junegunn/vim-easy-align'
 "Plug 'mg979/vim-xtabline'
 Plug 'https://github.com.cnpmjs.org/gcmt/wildfire.vim'
 Plug 'https://github.com.cnpmjs.org/wellle/targets.vim'
+
+Plug 'https://github.com.cnpmjs.org/haya14busa/vim-asterisk'
 
 " highlight
 Plug 'https://github.com.cnpmjs.org/RRethy/vim-illuminate'
@@ -696,3 +701,21 @@ autocmd Filetype * AnyFoldActivate
 
 
 let g:clever_f_mark_direct = 1
+
+
+
+" ===
+" === vim-asterisk
+" ===
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)
+map g#  <Plug>(asterisk-g#)
+map z*  <Plug>(asterisk-z*)
+map gz* <Plug>(asterisk-gz*)
+map z#  <Plug>(asterisk-z#)
+map gz# <Plug>(asterisk-gz#)
+
+" ===
+" === end vim-asterisk
+" ===
