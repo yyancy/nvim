@@ -181,7 +181,8 @@ Plug 'https://github.com.cnpmjs.org/Yggdroot/LeaderF', { 'do': ':LeaderfInstallC
 " bookmarks
 Plug 'https://github.com.cnpmjs.org/MattesGroeger/vim-bookmarks'
 
-
+Plug 'https://github.com.cnpmjs.org/wellle/context.vim'
+Plug 'https://github.com.cnpmjs.org/Yggdroot/indentLine'
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
 Plug 'https://gitee.com/yyancyer/coc.nvim', {'branch': 'release'}
 Plug 'https://gitee.com/yyancyer/ultisnips'
@@ -226,7 +227,7 @@ nmap S <plug>(SubversiveSubstituteToEndOfLine)
 " ===
 
 noremap <leader><C-n> :Files<cr>
-noremap <C-e> :Buffers<cr>
+nmap <C-E> :Buffers<cr>
 noremap <C-N> :Files<cr>
 noremap <M-a> :Files<cr>
 noremap <M-A> :Files<cr>
@@ -288,7 +289,7 @@ endfunction
 
 " Use <c-space> to trigger completion.
 " if has('nvim')
-  inoremap <silent><expr> <A-,> coc#refresh()
+inoremap <silent><expr> <A-,> coc#refresh()
 " else
   " inoremap <silent><expr> <c-@> coc#refresh()
 " endif
@@ -718,4 +719,14 @@ map gz# <Plug>(asterisk-gz#)
 
 " ===
 " === end vim-asterisk
+" ===
+
+
+" ===
+" === context.vim
+" ===
+let g:context_add_mappings = 0
+
+" ===
+" === end context.vim
 " ===
