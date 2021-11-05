@@ -180,6 +180,7 @@ Plug 'https://github.com.cnpmjs.org/rhysd/clever-f.vim'
 Plug 'https://github.com.cnpmjs.org/Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 " bookmarks
 Plug 'https://github.com.cnpmjs.org/MattesGroeger/vim-bookmarks'
+Plug 'https://github.com.cnpmjs.org/phaazon/hop.nvim'
 
 Plug 'https://github.com.cnpmjs.org/wellle/context.vim'
 Plug 'https://github.com.cnpmjs.org/Yggdroot/indentLine'
@@ -415,6 +416,11 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+
 
 " grep word under cursor
 command! -nargs=+ -complete=custom,s:GrepArgs Fzf exe 'CocList grep '.<q-args>
@@ -535,7 +541,7 @@ let g:airline_theme='luna'
 
 
 " crscheme murphy        " 修改配色
-" color deus
+color deus
 
 
 
@@ -610,6 +616,7 @@ require'nvim-treesitter.configs'.setup {
     disable = {  "rust" },  -- list of language that will be disabled
  },
 }
+require 'nvim-treesitter.install'.compilers = { "clang" }
 EOF
 
 " ===
@@ -729,4 +736,14 @@ let g:context_add_mappings = 0
 
 " ===
 " === end context.vim
+" ===
+
+" ===
+" === hop
+" ===
+lua<<EOF
+require'hop'.setup()
+EOF
+" ===
+" === end hop
 " ===
