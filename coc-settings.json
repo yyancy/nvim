@@ -16,6 +16,70 @@
       "args": ["start"],
       "filetypes": ["sh"],
       "ignoredRootPaths": []
+    },
+    "dls": {
+      "command": "diagnostic-languageserver",
+      "args": ["--stdio"],
+      "filetypes": [ "sh", "email", "dart" ],
+      "initializationOptions": {
+        "linters": {
+          "shellcheck": {
+            "command": "shellcheck",
+            "debounce": 100,
+            "args": [ "--format=gcc", "-"],
+            "offsetLine": 0,
+            "offsetColumn": 0,
+            "sourceName": "shellcheck",
+            "formatLines": 1,
+            "formatPattern": [
+              "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
+              {
+                "line": 1,
+                "column": 2,
+                "message": 4,
+                "security": 3
+              }
+            ],
+            "securities": {
+              "error": "error",
+              "warning": "warning",
+              "note": "info"
+            }
+          },
+          "languagetool": {
+            "command": "languagetool",
+            "debounce": 200,
+            "args": ["-"],
+            "offsetLine": 0,
+            "offsetColumn": 0,
+            "sourceName": "languagetool",
+            "formatLines": 2,
+            "formatPattern": [
+              "^\\d+?\\.\\)\\s+Line\\s+(\\d+),\\s+column\\s+(\\d+),\\s+([^\\n]+)\nMessage:\\s+(.*)$",
+              {
+                "line": 1,
+                "column": 2,
+                "message": [4, 3]
+              }
+            ]
+          }
+        },
+        "formatters": {
+          "dartfmt": {
+            "command": "dartfmt",
+            "args": [ "--fix" ]
+          }
+        },
+        "filetypes": {
+          "sh": "languagetool",
+          "email": "languagetool",
+          "*" : "languagetool"
+
+        },
+        "formatFiletypes": {
+          "dart": "dartfmt"
+        }
+      }
     }
   },
   "coc.preferences.colorSupport": true,
@@ -25,13 +89,14 @@
     "vim": "vint",
     "email": "languagetool",
     "markdown": [ "write-good", "markdownlint" ],
-    "sh": "shellcheck",
+    "sh": "languagetool",
     "elixir": ["mix_credo", "mix_credo_compile"],
     "eelixir": ["mix_credo", "mix_credo_compile"],
     "php": ["phpstan", "psalm"],
     "yaml": [ "yamllint" ],
     "cmake": [ "cmake-lint", "cmakelint" ],
-    "systemd": "systemd-analyze"
+    "systemd": "systemd-analyze",
+    "*" : "languagetool"
   },
   "diagnostic-languageserver.formatFiletypes": {
     "dart": "dartfmt",

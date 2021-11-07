@@ -23,6 +23,7 @@ set smartcase
 
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1
+set conceallevel=0
 
 " modify cursor pattern.
 let &t_ut=''
@@ -199,11 +200,13 @@ Plug 'https://github.com.cnpmjs.org/junegunn/vim-easy-align'
 "Plug 'mg979/vim-xtabline'
 Plug 'https://github.com.cnpmjs.org/gcmt/wildfire.vim'
 Plug 'https://github.com.cnpmjs.org/wellle/targets.vim'
-
+Plug 'https://github.com.cnpmjs.org/puremourning/vimspector'
 Plug 'https://github.com.cnpmjs.org/haya14busa/vim-asterisk'
-
+" Plug 'https://github.com.cnpmjs.org/mfussenegger/nvim-dap'
+" Plug 'https://github.com.cnpmjs.org/mfussenegger/nvim-dap-python'
 " highlight
 Plug 'https://github.com.cnpmjs.org/RRethy/vim-illuminate'
+Plug 'https://github.com.cnpmjs.org/Pocco81/AbbrevMan.nvim'
 
 Plug 'https://gitee.com/yyancyer/vim-devicons'
 Plug 'https://github.com.cnpmjs.org/tpope/vim-surround'
@@ -608,16 +611,16 @@ let g:suda_smart_edit = 1
 " ===
 " === nvim-treesitter
 " ===
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
- ensure_installed = {"python","c"},     -- one of "all", "language", or a list of languages
-  highlight = {
-   enable = true,              -- false will disable the whole extension
-    disable = {  "rust" },  -- list of language that will be disabled
- },
-}
-require 'nvim-treesitter.install'.compilers = { "clang" }
-EOF
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+ " ensure_installed = {"python","c"},     -- one of "all", "language", or a list of languages
+  " highlight = {
+   " enable = true,              -- false will disable the whole extension
+    " disable = {  "rust" },  -- list of language that will be disabled
+ " },
+" }
+" require 'nvim-treesitter.install'.compilers = { "clang" }
+" EOF
 
 " ===
 " === vim-illuminate
@@ -733,7 +736,7 @@ map gz# <Plug>(asterisk-gz#)
 " === context.vim
 " ===
 let g:context_add_mappings = 0
-
+let g:context_nvim_no_redraw = 1
 " ===
 " === end context.vim
 " ===
@@ -743,7 +746,99 @@ let g:context_add_mappings = 0
 " ===
 lua<<EOF
 require'hop'.setup()
+-- place this in one of your configuration file(s)
+vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader>F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 EOF
+map <leader>l :HopLineStart<cr>
 " ===
 " === end hop
+" ===
+
+
+
+" ===
+" === dap
+" ===
+
+" mappings
+" nnoremap <C-S-F12> :lua require'dap'.continue()<cr>
+
+" map <silent> <F5> :lua require'dap'.continue()<CR>
+" map <silent> <F10> :lua require'dap'.step_over()<CR>
+" map <silent> <F11> :lua require'dap'.step_into()<CR>
+" map <silent> <F12> :lua require'dap'.step_out()<CR>
+" map <silent> <leader>b :lua require'dap'.toggle_breakpoint()<CR>
+" map <silent> <leader>B :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+" map <silent> <leader>lp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+" map <silent> <leader>dr :lua require'dap'.repl.open()<CR>
+" map <silent> <leader>dl :lua require'dap'.run_last()<CR>
+
+" lua require('dap-python').setup('~/.venv/bin/python')
+" lua<<EOF
+" local dap = require 'dap'
+" local repl = require 'dap.repl'
+          " repl.commands = vim.tbl_extend('force', repl.commands, {
+            " -- Add a new alias for the existing .exit command
+            " exit = {'exit', '.exit', '.bye'},
+            " -- Add your own commands; run `.echo hello world` to invoke
+            " -- this function with the text "hello world"
+            " custom_commands = {
+              " ['.echo'] = function(text)
+                " dap.repl.append(text)
+              " end,
+              " -- Hook up a new command to an existing dap function
+              " ['.restart'] = dap.restart,
+            " },
+          " })
+" EOF
+
+" ===
+" === end dap
+" ===
+
+" ===
+" === vimspector
+" ===
+" map <C-S-F12> <Plug>VimspectorContinue
+let g:vimspector_enable_mappings = 'HUMAN'
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
+" ===
+" === end vimspector
+" ===
+
+
+" ===
+" === indentLine
+" ===
+let g:indentLine_concealcursor = 'nc'
+
+" ===
+" === end indentLine
+" ===
+
+" ===
+" === abbrevMan
+" ===
+lua << EOF
+local abbrev_man = require("abbrev-man")
+
+abbrev_man.setup({
+	load_natural_dictionaries_at_startup = true,
+	load_programming_dictionaries_at_startup = true,
+natural_dictionaries = {
+  ["nt_en"] = {
+    }
+	},
+	programming_dictionaries = {
+		["pr_py"] = {}
+	}
+})
+EOF
+
+" ===
+" === end abbrevMan
 " ===
