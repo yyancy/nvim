@@ -553,8 +553,8 @@ let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\
 
 
 " crscheme murphy        " 修改配色
-color deus
-" colorscheme OceanicNext
+" color deus
+colorscheme OceanicNext
 
 
 
