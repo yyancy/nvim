@@ -84,6 +84,8 @@
   },
   "coc.preferences.colorSupport": true,
   "tsserver.enable": true,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.icon.source": "vim-devicons",
   "diagnostic.enable": true,
   "diagnostic-languageserver.filetypes": {
     "vim": "vint",
@@ -109,3 +111,4 @@
     "cmake": "cmake-format"
   }
 }
+

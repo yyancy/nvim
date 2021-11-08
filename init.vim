@@ -20,7 +20,7 @@ set wrap
 set showcmd
 set ignorecase
 set smartcase
-
+" set guifont=Hack\ Nerd\ Font
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1
 set conceallevel=0
@@ -183,6 +183,8 @@ Plug 'https://github.com.cnpmjs.org/Yggdroot/LeaderF', { 'do': ':LeaderfInstallC
 Plug 'https://github.com.cnpmjs.org/MattesGroeger/vim-bookmarks'
 Plug 'https://github.com.cnpmjs.org/phaazon/hop.nvim'
 
+Plug 'https://github.com.cnpmjs.org/qpkorr/vim-bufkill'
+
 Plug 'https://github.com.cnpmjs.org/wellle/context.vim'
 Plug 'https://github.com.cnpmjs.org/Yggdroot/indentLine'
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
@@ -207,6 +209,8 @@ Plug 'https://github.com.cnpmjs.org/haya14busa/vim-asterisk'
 " highlight
 Plug 'https://github.com.cnpmjs.org/RRethy/vim-illuminate'
 Plug 'https://github.com.cnpmjs.org/Pocco81/AbbrevMan.nvim'
+
+Plug 'https://github.com.cnpmjs.org/mhartington/oceanic-next'
 
 Plug 'https://gitee.com/yyancyer/vim-devicons'
 Plug 'https://github.com.cnpmjs.org/tpope/vim-surround'
@@ -249,7 +253,8 @@ nmap <leader>S <Plug>(wildfire-quick-select)
 
 nmap <leader>E :CocCommand explorer
     \ --toggle
-    \ --sources=buffer+,file+
+    \ --sources=buffer+,file+ 
+    \ --width=30
     \<CR>
 
 " ===
@@ -331,7 +336,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " set termguicolors
 
@@ -373,14 +378,12 @@ xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
+nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
@@ -540,11 +543,18 @@ let g:coc_disable_startup_warning = 1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='luna'
+let g:airline_powerline_fonts = 1
+" testing rounded separators (extra-powerline-symbols):
+let g:airline_left_sep = "\uE0B4"
+let g:airline_right_sep = "\uE0B6"
 
+" set the CN (column number) symbol:
+let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 
 
 " crscheme murphy        " 修改配色
 color deus
+" colorscheme OceanicNext
 
 
 
@@ -696,6 +706,20 @@ nn xx x
 " ===
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
+let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0,'Buffer':1 }
+let g:Lf_PopupPreviewPosition = 'bottom'
+
+let g:Lf_ShortcutF = "<leader>ff"
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+
+noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+" search visually selected text literally
+xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+noremap go :<C-U>Leaderf! rg --recall<CR>
 
 " ===
 " === end LeaderF
@@ -841,4 +865,13 @@ EOF
 
 " ===
 " === end abbrevMan
+" ===
+
+" ===
+" === vim-bufkill
+" ===
+map <C-F4> :BD<CR>
+
+" ===
+" === end vim-bufkill
 " ===
