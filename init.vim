@@ -182,7 +182,7 @@ Plug 'https://github.com.cnpmjs.org/Yggdroot/LeaderF', { 'do': ':LeaderfInstallC
 " bookmarks
 Plug 'https://github.com.cnpmjs.org/MattesGroeger/vim-bookmarks'
 Plug 'https://github.com.cnpmjs.org/phaazon/hop.nvim'
-
+" Plug 'https://github.com.cnpmjs.org/instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 Plug 'https://github.com.cnpmjs.org/qpkorr/vim-bufkill'
 
 Plug 'https://github.com.cnpmjs.org/wellle/context.vim'
@@ -212,9 +212,12 @@ Plug 'https://github.com.cnpmjs.org/Pocco81/AbbrevMan.nvim'
 
 Plug 'https://github.com.cnpmjs.org/mhartington/oceanic-next'
 
+" markdown
+Plug 'https://github.com.cnpmjs.org/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'https://github.com.cnpmjs.org/dhruvasagar/vim-table-mode'
+
 Plug 'https://gitee.com/yyancyer/vim-devicons'
 Plug 'https://github.com.cnpmjs.org/tpope/vim-surround'
-Plug 'https://github.com.cnpmjs.org/iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'https://github.com.cnpmjs.org/junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'https://github.com.cnpmjs.org/junegunn/fzf.vim'
 Plug 'https://github.com.cnpmjs.org/liuchengxu/vista.vim'
@@ -874,4 +877,14 @@ map <C-F4> :BD<CR>
 
 " ===
 " === end vim-bufkill
+" ===
+
+
+" ===
+" === instant-markdown
+" ===
+let g:instant_markdown_slow = 1
+
+" ===
+" === end instant-markdown
 " ===
