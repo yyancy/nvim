@@ -232,7 +232,10 @@ call plug#end()
 nmap s <plug>(SubversiveSubstitute)
 nmap ss <plug>(SubversiveSubstituteLine)
 nmap S <plug>(SubversiveSubstituteToEndOfLine)
-
+nmap <leader>s <plug>(SubversiveSubstituteRange)
+xmap <leader>s <plug>(SubversiveSubstituteRange)
+nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
+set icm="split"
 " ===
 " === fzf.vim
 " ===
@@ -774,8 +777,9 @@ let g:context_nvim_no_redraw = 1
 lua<<EOF
 require'hop'.setup()
 -- place this in one of your configuration file(s)
-vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
-vim.api.nvim_set_keymap('n', '<leader>F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
+-- vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
+vim.api.nvim_set_keymap('n', '<leader>F', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
 EOF
 map <leader>l :HopLineStart<cr>
 " ===
