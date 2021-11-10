@@ -179,7 +179,7 @@ Plug 'https://github.com.cnpmjs.org/windwp/nvim-ts-autotag'
 
 Plug 'https://github.com.cnpmjs.org/pseewald/vim-anyfold'
 Plug 'https://github.com.cnpmjs.org/airblade/vim-rooter'
-Plug 'https://github.com.cnpmjs.org/rhysd/clever-f.vim'
+" Plug 'https://github.com.cnpmjs.org/rhysd/clever-f.vim'
 " search
 Plug 'https://github.com.cnpmjs.org/Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 " bookmarks
@@ -747,7 +747,7 @@ autocmd Filetype * AnyFoldActivate
 " ===
 
 
-let g:clever_f_mark_direct = 1
+" let g:clever_f_mark_direct = 1
 
 
 
@@ -783,9 +783,8 @@ let g:context_nvim_no_redraw = 1
 lua<<EOF
 require'hop'.setup()
 -- place this in one of your configuration file(s)
--- vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
-vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
-vim.api.nvim_set_keymap('n', '<leader>F', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
+vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
+vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
 EOF
 map <leader>l :HopLineStart<cr>
 " ===
