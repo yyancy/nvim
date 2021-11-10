@@ -12,7 +12,7 @@ let mapleader=" "
 set nocompatible
 syntax on                 " 支持语法高亮显示
 set number                " show line number.
-set norelativenumber
+set relativenumber
 " set cursorline " displays a line on the line where the cursor is 
 filetype plugin indent on " 启用根据文件类型自动缩进
 set mouse=a
@@ -174,6 +174,9 @@ Plug 'https://github.com.cnpmjs.org/skywind3000/asyncrun.vim'
 Plug 'https://github.com.cnpmjs.org/christoomey/vim-tmux-navigator'
 Plug 'https://github.com.cnpmjs.org/easymotion/vim-easymotion'
 Plug 'https://github.com.cnpmjs.org/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'https://github.com.cnpmjs.org/windwp/nvim-ts-autotag'
+
+
 Plug 'https://github.com.cnpmjs.org/pseewald/vim-anyfold'
 Plug 'https://github.com.cnpmjs.org/airblade/vim-rooter'
 Plug 'https://github.com.cnpmjs.org/rhysd/clever-f.vim'
@@ -211,6 +214,9 @@ Plug 'https://github.com.cnpmjs.org/RRethy/vim-illuminate'
 Plug 'https://github.com.cnpmjs.org/Pocco81/AbbrevMan.nvim'
 
 Plug 'https://github.com.cnpmjs.org/mhartington/oceanic-next'
+
+" html
+Plug 'https://github.com.cnpmjs.org/shime/vim-livedown'
 
 " markdown
 Plug 'https://github.com.cnpmjs.org/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -624,16 +630,16 @@ let g:suda_smart_edit = 1
 " ===
 " === nvim-treesitter
 " ===
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
- " ensure_installed = {"python","c"},     -- one of "all", "language", or a list of languages
-  " highlight = {
-   " enable = true,              -- false will disable the whole extension
-    " disable = {  "rust" },  -- list of language that will be disabled
- " },
-" }
-" require 'nvim-treesitter.install'.compilers = { "clang" }
-" EOF
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+ ensure_installed = {"python","c", "html", "javascript"},     -- one of "all", "language", or a list of languages
+  highlight = {
+   enable = true,              -- false will disable the whole extension
+    disable = {  "rust" },  -- list of language that will be disabled
+ },
+}
+require 'nvim-treesitter.install'.compilers = { "clang" }
+EOF
 
 " ===
 " === vim-illuminate
@@ -887,4 +893,17 @@ let g:instant_markdown_slow = 1
 
 " ===
 " === end instant-markdown
+" ===
+
+
+" ===
+" === nvim-ts-autotag
+" ===
+lua<<EOF
+require('nvim-ts-autotag').setup()
+EOF
+
+" ===
+" === end nvim-ts-autotag
+"
 " ===
