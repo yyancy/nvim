@@ -53,8 +53,9 @@ set laststatus=2
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " set list
-"set listchars=tab:▸\ ,trail:▫
+set listchars=tab:▸\ ,trail:▫
 set scrolloff=5
+set sidescroll=10
 
 set clipboard=unnamed,unnamedplus
 "set clipboard^=unnamed
@@ -175,8 +176,8 @@ Plug 'https://github.com.cnpmjs.org/christoomey/vim-tmux-navigator'
 Plug 'https://github.com.cnpmjs.org/easymotion/vim-easymotion'
 Plug 'https://github.com.cnpmjs.org/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'https://github.com.cnpmjs.org/windwp/nvim-ts-autotag'
-
-
+" Plug 'https://github.com.cnpmjs.org/ggandor/lightspeed.nvim'
+Plug 'https://github.com.cnpmjs.org/andymass/vim-matchup'
 Plug 'https://github.com.cnpmjs.org/pseewald/vim-anyfold'
 Plug 'https://github.com.cnpmjs.org/airblade/vim-rooter'
 " Plug 'https://github.com.cnpmjs.org/rhysd/clever-f.vim'
@@ -214,6 +215,7 @@ Plug 'https://github.com.cnpmjs.org/RRethy/vim-illuminate'
 Plug 'https://github.com.cnpmjs.org/Pocco81/AbbrevMan.nvim'
 
 Plug 'https://github.com.cnpmjs.org/mhartington/oceanic-next'
+
 
 " html
 Plug 'https://github.com.cnpmjs.org/shime/vim-livedown'
@@ -640,6 +642,9 @@ require'nvim-treesitter.configs'.setup {
    enable = true,              -- false will disable the whole extension
     disable = {  "rust" },  -- list of language that will be disabled
  },
+ matchup = {
+   enable = true
+   }
 }
 require 'nvim-treesitter.install'.compilers = { "clang" }
 EOF
@@ -783,9 +788,12 @@ let g:context_nvim_no_redraw = 1
 lua<<EOF
 require'hop'.setup()
 -- place this in one of your configuration file(s)
-vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
-vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
+vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
+vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
+vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1()<cr>",{})
+vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_words()<cr>", {})
 EOF
+onoremap f v:HopChar1<CR>
 map <leader>l :HopLineStart<cr>
 " ===
 " === end hop
