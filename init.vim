@@ -225,7 +225,8 @@ Plug 'https://github.com.cnpmjs.org/iamcco/markdown-preview.nvim',{ 'do': { -> m
 Plug 'https://github.com.cnpmjs.org/dhruvasagar/vim-table-mode'
 
 Plug 'https://gitee.com/yyancyer/vim-devicons'
-Plug 'https://github.com.cnpmjs.org/tpope/vim-surround'
+" Plug 'https://github.com.cnpmjs.org/tpope/vim-surround'
+Plug 'https://github.com.cnpmjs.org/machakann/vim-sandwich'
 Plug 'https://github.com.cnpmjs.org/junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'https://github.com.cnpmjs.org/junegunn/fzf.vim'
 Plug 'https://github.com.cnpmjs.org/liuchengxu/vista.vim'
@@ -260,6 +261,27 @@ noremap <M-A> :Files<cr>
 
 nmap <leader>S <Plug>(wildfire-quick-select)
 
+
+" ===
+" === vim-sandwich
+" ===
+" using surround keymapings
+runtime macros/sandwich/keymap/surround.vim
+" if you have not copied default recipes
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+
+" add spaces inside bracket
+let g:sandwich#recipes += [
+      \   {'buns': ['{ ', ' }'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['{']},
+      \   {'buns': ['[ ', ' ]'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['[']},
+      \   {'buns': ['( ', ' )'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['(']},
+      \   {'buns': ['{\s*', '\s*}'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['{']},
+      \   {'buns': ['\[\s*', '\s*\]'], 'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['[']},
+      \   {'buns': ['(\s*', '\s*)'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['(']},
+      \ ]
+" ===
+" === end vim-sandwich
+" ===
 
 " ===
 " === coc-explorer
@@ -916,5 +938,4 @@ EOF
 
 " ===
 " === end nvim-ts-autotag
-"
 " ===
