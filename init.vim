@@ -13,7 +13,7 @@ set nocompatible
 syntax on                 " 支持语法高亮显示
 set number                " show line number.
 set relativenumber
-" set cursorline " displays a line on the line where the cursor is 
+" set cursorline " displays a line on the line where the cursor is
 filetype plugin indent on " 启用根据文件类型自动缩进
 set mouse=a
 set wrap
@@ -31,7 +31,7 @@ let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
-set path=.,** 
+set path=.,**
 set wildmenu
 set wildmode=longest:list,full
 
@@ -62,12 +62,12 @@ set clipboard=unnamed,unnamedplus
 "set clipboard^=autoselect
 
 "set clipboard=unnamed,autoselect
- set guioptions+=a
+set guioptions+=a
 set foldmethod=manual
 
 
 " ===
-" === autocmd 
+" === autocmd
 " ===
 
 autocmd BufNewFile *.txt set ft=confluencewiki
@@ -154,7 +154,8 @@ noremap <leader>w :w<cr>
 noremap <leader>x :x<cr>
 " Opening a terminal window
 "noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>
-
+noremap > >>
+noremap < <<
 
 
 
@@ -189,6 +190,9 @@ Plug 'https://github.com.cnpmjs.org/phaazon/hop.nvim'
 " Plug 'https://github.com.cnpmjs.org/instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 Plug 'https://github.com.cnpmjs.org/qpkorr/vim-bufkill'
 
+Plug 'https://github.com.cnpmjs.org/tversteeg/registers.nvim' , { 'branch': 'main' }
+Plug 'https://github.com.cnpmjs.org/akinsho/bufferline.nvim'
+
 Plug 'https://github.com.cnpmjs.org/wellle/context.vim'
 Plug 'https://github.com.cnpmjs.org/Yggdroot/indentLine'
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
@@ -206,7 +210,7 @@ Plug 'https://github.com.cnpmjs.org/junegunn/vim-easy-align'
 "Plug 'mg979/vim-xtabline'
 Plug 'https://github.com.cnpmjs.org/gcmt/wildfire.vim'
 Plug 'https://github.com.cnpmjs.org/wellle/targets.vim'
-Plug 'https://github.com.cnpmjs.org/puremourning/vimspector'
+" Plug 'https://github.com.cnpmjs.org/puremourning/vimspector'
 Plug 'https://github.com.cnpmjs.org/haya14busa/vim-asterisk'
 " Plug 'https://github.com.cnpmjs.org/mfussenegger/nvim-dap'
 " Plug 'https://github.com.cnpmjs.org/mfussenegger/nvim-dap-python'
@@ -288,11 +292,14 @@ let g:sandwich#recipes += [
 " ===
 
 nmap <leader>E :CocCommand explorer
-    \ --toggle
-    \ --sources=buffer+,file+ 
-    \ --width=30
-    \<CR>
-
+      \ --toggle
+      \ --sources=buffer+,file+
+      \ --width=30
+      \<CR>
+"" if only one buffer is shown and it's name is not 'coc-explorer', then show coc-explorer
+autocmd BufEnter * if (winnr("$") == 1 && &filetype != 'coc-explorer') | exe ':CocCommand explorer --width=30 --no-focus' | endif
+"" if only one buffer named 'coc-explorer' is shown, then exit
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 " ===
 " === coc
 " ===
@@ -336,13 +343,13 @@ endfunction
 " if has('nvim')
 inoremap <silent><expr> <A-,> coc#refresh()
 " else
-  " inoremap <silent><expr> <c-@> coc#refresh()
+" inoremap <silent><expr> <c-@> coc#refresh()
 " endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 " inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              " \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 
 
@@ -543,7 +550,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 let g:VM_mouse_mappings = 1
 
 nmap   <C-LeftMouse>         <Plug>(VM-Mouse-Cursor)
-nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)  
+nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)
 
 " neadtree settings
 "autocmd vimenter * NERDTree
@@ -563,7 +570,7 @@ nmap <leader>cc <Plug>(NERDCommenterToggle)
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
 " Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1 
+let g:NERDSpaceDelims = 1
 let g:NERDToggleCheckAllLines = 1
 " Add your own custom formats or override the defaults
 let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
@@ -573,11 +580,11 @@ let g:coc_disable_startup_warning = 1
 
 
 " ===
-" === airline 
+" === airline
 " ===
 
 
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='luna'
 let g:airline_powerline_fonts = 1
 " testing rounded separators (extra-powerline-symbols):
@@ -605,7 +612,7 @@ let g:AutoPairsFlyMode = 1
 
 
 " ===
-" === autoformat 
+" === autoformat
 " ===
 
 noremap <F3> :Autoformat<CR>
@@ -621,9 +628,9 @@ let g:vista#renderer#enable_icon = 1
 
 " The default icons can't be suitable for all the filetypes, you can extend it as you wish.
 let g:vista#renderer#icons = {
-\   "function": "\uf794",
-\   "variable": "\uf71b",
-\  }
+      \   "function": "\uf794",
+      \   "variable": "\uf71b",
+      \  }
 function! NearestMethodOrFunction() abort
   return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
@@ -639,7 +646,7 @@ autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 
 " ===
-" === asynctasks 
+" === asynctasks
 " ===
 let g:asyncrun_open = 6
 
@@ -659,14 +666,14 @@ let g:suda_smart_edit = 1
 " ===
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
- ensure_installed = {"python","c", "html", "javascript"},     -- one of "all", "language", or a list of languages
-  highlight = {
-   enable = true,              -- false will disable the whole extension
-    disable = {  "rust" },  -- list of language that will be disabled
- },
+ensure_installed = {"python","c", "html", "javascript"},     -- one of "all", "language", or a list of languages
+highlight = {
+enable = true,              -- false will disable the whole extension
+disable = {  "rust" },  -- list of language that will be disabled
+},
  matchup = {
-   enable = true
-   }
+ enable = true
+ }
 }
 require 'nvim-treesitter.install'.compilers = { "clang" }
 EOF
@@ -675,8 +682,8 @@ EOF
 " === vim-illuminate
 " ===
 " augroup illuminate_augroup
-    " autocmd!
-    " autocmd VimEnter * hi illuminatedWord cterm=underline gui=underline
+" autocmd!
+" autocmd VimEnter * hi illuminatedWord cterm=underline gui=underline
 " augroup END
 
 
@@ -768,7 +775,21 @@ noremap go :<C-U>Leaderf! rg --recall<CR>
 " ===
 " === vim-anyfold
 " ===
-autocmd Filetype * AnyFoldActivate    
+" activate anyfold by default
+augroup anyfold
+    autocmd!
+    autocmd Filetype <filetype> AnyFoldActivate
+augroup END
+
+" disable anyfold for large files
+let g:LargeFile = 1000000 " file is large if size greater than 1MB
+autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
+function LargeFile()
+    augroup anyfold
+        autocmd! " remove AnyFoldActivate
+        autocmd Filetype <filetype> setlocal foldmethod=indent " fall back to indent folding
+    augroup END
+endfunction
 " ===
 " === end vim-anyfold
 " ===
@@ -844,19 +865,19 @@ map <leader>l :HopLineStart<cr>
 " lua<<EOF
 " local dap = require 'dap'
 " local repl = require 'dap.repl'
-          " repl.commands = vim.tbl_extend('force', repl.commands, {
-            " -- Add a new alias for the existing .exit command
-            " exit = {'exit', '.exit', '.bye'},
-            " -- Add your own commands; run `.echo hello world` to invoke
-            " -- this function with the text "hello world"
-            " custom_commands = {
-              " ['.echo'] = function(text)
-                " dap.repl.append(text)
-              " end,
-              " -- Hook up a new command to an existing dap function
-              " ['.restart'] = dap.restart,
-            " },
-          " })
+" repl.commands = vim.tbl_extend('force', repl.commands, {
+" -- Add a new alias for the existing .exit command
+" exit = {'exit', '.exit', '.bye'},
+" -- Add your own commands; run `.echo hello world` to invoke
+" -- this function with the text "hello world"
+" custom_commands = {
+" ['.echo'] = function(text)
+" dap.repl.append(text)
+" end,
+" -- Hook up a new command to an existing dap function
+" ['.restart'] = dap.restart,
+" },
+" })
 " EOF
 
 " ===
@@ -867,11 +888,11 @@ map <leader>l :HopLineStart<cr>
 " === vimspector
 " ===
 " map <C-S-F12> <Plug>VimspectorContinue
-let g:vimspector_enable_mappings = 'HUMAN'
-" for normal mode - the word under the cursor
-nmap <Leader>di <Plug>VimspectorBalloonEval
-" for visual mode, the visually selected text
-xmap <Leader>di <Plug>VimspectorBalloonEval
+" let g:vimspector_enable_mappings = 'HUMAN'
+" " for normal mode - the word under the cursor
+" nmap <Leader>di <Plug>VimspectorBalloonEval
+" " for visual mode, the visually selected text
+" xmap <Leader>di <Plug>VimspectorBalloonEval
 " ===
 " === end vimspector
 " ===
@@ -893,15 +914,15 @@ lua << EOF
 local abbrev_man = require("abbrev-man")
 
 abbrev_man.setup({
-	load_natural_dictionaries_at_startup = true,
-	load_programming_dictionaries_at_startup = true,
+load_natural_dictionaries_at_startup = true,
+load_programming_dictionaries_at_startup = true,
 natural_dictionaries = {
   ["nt_en"] = {
     }
-	},
-	programming_dictionaries = {
-		["pr_py"] = {}
-	}
+  },
+programming_dictionaries = {
+  ["pr_py"] = {}
+  }
 })
 EOF
 
@@ -938,4 +959,44 @@ EOF
 
 " ===
 " === end nvim-ts-autotag
+" ===
+
+" ===
+" === bufferline
+" ===
+set termguicolors
+lua<<EOF
+require("bufferline").setup{
+  options = {
+    offsets = {
+    {
+        filetype = 'coc-explorer',
+        text = "File Explorer",
+        highlight = "Directory",
+        text_align = "left"
+
+    }
+    }
+  }
+}
+EOF
+
+" ===
+" === end bufferline
+" ===
+
+" ===
+" === cusom functions and commands
+" ===
+" active profile to detect performance issues
+function Profile(log_file)
+  execute ":profile start " . a:log_file
+  profile file *
+  profile func *
+endfunction
+command  -nargs=1 ActiveProfile call Profile(<f-args>)
+
+
+" ===
+" === end cusom functions and commands
 " ===
