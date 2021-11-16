@@ -219,13 +219,16 @@ Plug 'https://github.com.cnpmjs.org/haya14busa/vim-asterisk'
 Plug 'https://github.com.cnpmjs.org/RRethy/vim-illuminate'
 Plug 'https://github.com.cnpmjs.org/Pocco81/AbbrevMan.nvim'
 
+" formating
+Plug 'https://github.com.cnpmjs.org/sbdchd/neoformat'
+
 Plug 'https://github.com.cnpmjs.org/mhartington/oceanic-next'
 Plug 'https://github.com.cnpmjs.org/gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com.cnpmjs.org/numToStr/Comment.nvim'
 Plug 'https://github.com.cnpmjs.org/JoosepAlviste/nvim-ts-context-commentstring'
 " html
 Plug 'https://github.com.cnpmjs.org/shime/vim-livedown'
-
+Plug 'https://github.com.cnpmjs.org/turbio/bracey.vim'
 " markdown
 Plug 'https://github.com.cnpmjs.org/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'https://github.com.cnpmjs.org/dhruvasagar/vim-table-mode'
@@ -247,22 +250,22 @@ call plug#end()
 " ===
 lua<<EOF
 require('tabout').setup {
- tabkey = '<C-o>', -- key to trigger tabout, set to an empty string to disable
-    backwards_tabkey = '<C-S-o>', -- key to trigger backwards tabout, set to an empty string to disable
-    act_as_tab = true, -- shift content if tab out is not possible
-    act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-    enable_backwards = true, -- well ...
-    completion = true, -- if the tabkey is used in a completion pum
-    tabouts = {
-      {open = "'", close = "'"},
-      {open = '"', close = '"'},
-      {open = '`', close = '`'},
-      {open = '(', close = ')'},
-      {open = '[', close = ']'},
-      {open = '{', close = '}'}
-    },
-    ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-    exclude = {} -- tabout will ignore these filetypes
+  tabkey = '<C-o>', -- key to trigger tabout, set to an empty string to disable
+  backwards_tabkey = '<A-o>', -- key to trigger backwards tabout, set to an empty string to disable
+  act_as_tab = true, -- shift content if tab out is not possible
+  act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+enable_backwards = true, -- well ...
+completion = true, -- if the tabkey is used in a completion pum
+tabouts = {
+  {open = "'", close = "'"},
+  {open = '"', close = '"'},
+  {open = '`', close = '`'},
+  {open = '(', close = ')'},
+  {open = '[', close = ']'},
+  {open = '{', close = '}'}
+  },
+ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+exclude = {} -- tabout will ignore these filetypes
 }
 EOF
 
@@ -697,18 +700,18 @@ let g:suda_smart_edit = 1
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
 ensure_installed = {"python","c","html","javascript","css" },     -- one of "all", "language", or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = {  "rust" },  -- list of language that will be disabled
-  },
+highlight = {
+enable = true,              -- false will disable the whole extension
+disable = {  "rust" },  -- list of language that will be disabled
+},
   matchup = {
-    enable = true
+  enable = true
   },
-  context_commentstring = {
-    enable = true,
+context_commentstring = {
+enable = true,
     enable_autocmd = false
+    }
   }
-}
 require 'nvim-treesitter.install'.compilers = { "clang" }
 EOF
 
@@ -811,18 +814,18 @@ noremap go :<C-U>Leaderf! rg --recall<CR>
 " ===
 " activate anyfold by default
 augroup anyfold
-    autocmd!
-    autocmd Filetype <filetype> AnyFoldActivate
+  autocmd!
+  autocmd Filetype <filetype> AnyFoldActivate
 augroup END
 
 " disable anyfold for large files
 let g:LargeFile = 1000000 " file is large if size greater than 1MB
 autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
 function LargeFile()
-    augroup anyfold
-        autocmd! " remove AnyFoldActivate
-        autocmd Filetype <filetype> setlocal foldmethod=indent " fall back to indent folding
-    augroup END
+  augroup anyfold
+    autocmd! " remove AnyFoldActivate
+    autocmd Filetype <filetype> setlocal foldmethod=indent " fall back to indent folding
+  augroup END
 endfunction
 " ===
 " === end vim-anyfold
@@ -869,10 +872,9 @@ vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1({ current_lin
 vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
 vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1()<cr>",{})
 vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_words()<cr>", {})
+vim.api.nvim_set_keymap('', '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", {})
 EOF
 onoremap f v:HopChar1<CR>
-map <leader>l :HopLineStart<cr>
-vmap <leader>l :HopLineStart<cr>
 " ===
 " === end hop
 " ===
@@ -1046,12 +1048,12 @@ call wilder#set_option('pipeline', [
 call wilder#set_option('renderer', wilder#popupmenu_renderer({
       \ 'highlighter': wilder#basic_highlighter(),
       \ 'left': [
-      \   ' ', wilder#popupmenu_devicons(),
-      \ ],
-      \ 'right': [
-      \   ' ', wilder#popupmenu_scrollbar(),
-      \ ],
-      \ }))
+        \   ' ', wilder#popupmenu_devicons(),
+        \ ],
+        \ 'right': [
+          \   ' ', wilder#popupmenu_scrollbar(),
+          \ ],
+          \ }))
 " ===
 " === end wilder.nvim
 " ===
@@ -1062,26 +1064,55 @@ call wilder#set_option('renderer', wilder#popupmenu_renderer({
 lua << EOF
 require('Comment').setup {
   pre_hook = function(ctx)
-    local U = require 'Comment.utils'
+  local U = require 'Comment.utils'
 
-    local location = nil
-    if ctx.ctype == U.ctype.block then
-      location = require('ts_context_commentstring.utils').get_cursor_location()
-    elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-      location = require('ts_context_commentstring.utils').get_visual_start_location()
-    end
+  local location = nil
+  if ctx.ctype == U.ctype.block then
+    location = require('ts_context_commentstring.utils').get_cursor_location()
+  elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+    location = require('ts_context_commentstring.utils').get_visual_start_location()
+  end
 
-    return require('ts_context_commentstring.internal').calculate_commentstring {
-      key = ctx.ctype == U.ctype.line and '__default' or '__multiline',
-      location = location,
+  return require('ts_context_commentstring.internal').calculate_commentstring {
+    key = ctx.ctype == U.ctype.line and '__default' or '__multiline',
+    location = location,
     }
-  end,
+end,
 }
 EOF
 
 " ===
 " === end comment.vim
 " ===
+
+
+
+" ===
+" === neoformat
+" ===
+
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+" Enable tab to spaces conversion
+let g:neoformat_basic_format_retab = 1
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
+let g:neoformat_html_htmlbeautify = {
+            \ 'exe': 'html-beautify',
+            \ 'args': ['-'],
+            \ 'stdin': 1 
+            \ }
+let g:neoformat_enabled_html = ['htmlbeautify']
+let g:neoformat_javascript_jsbeautify = {
+            \ 'exe': 'js-beautify',
+            \ 'args': ['-'],
+            \ 'stdin': 1 
+            \ }
+let g:neoformat_enabled_javascript = ['jsbeautify']
+" ===
+" === end neoformat
+" ===
+
 
 " ===
 " === cusom functions and commands
