@@ -176,6 +176,7 @@ Plug 'https://github.com.cnpmjs.org/skywind3000/asyncrun.vim'
 Plug 'https://github.com.cnpmjs.org/christoomey/vim-tmux-navigator'
 Plug 'https://github.com.cnpmjs.org/easymotion/vim-easymotion'
 Plug 'https://github.com.cnpmjs.org/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'https://github.com.cnpmjs.org/abecodes/tabout.nvim'
 Plug 'https://github.com.cnpmjs.org/windwp/nvim-ts-autotag'
 " Plug 'https://github.com.cnpmjs.org/ggandor/lightspeed.nvim'
 Plug 'https://github.com.cnpmjs.org/andymass/vim-matchup'
@@ -203,7 +204,7 @@ Plug 'https://gitee.com/yyancyer/vim-visual-multi'
 " Plug 'https://gitee.com/yyancyer/vim-floaterm'
 Plug 'https://gitee.com/yyancyer/auto-pairs'
 Plug 'https://gitee.com/yyancyer/vim-terminal-help'
-Plug 'https://gitee.com/yyancyer/nerdcommenter'
+" Plug 'https://gitee.com/yyancyer/nerdcommenter'
 Plug 'https://gitee.com/yyancyer/vim-autoformat'
 Plug 'https://gitee.com/yyancyer/SimpylFold'
 Plug 'https://github.com.cnpmjs.org/junegunn/vim-easy-align'
@@ -219,8 +220,9 @@ Plug 'https://github.com.cnpmjs.org/RRethy/vim-illuminate'
 Plug 'https://github.com.cnpmjs.org/Pocco81/AbbrevMan.nvim'
 
 Plug 'https://github.com.cnpmjs.org/mhartington/oceanic-next'
-
-
+Plug 'https://github.com.cnpmjs.org/gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'https://github.com.cnpmjs.org/numToStr/Comment.nvim'
+Plug 'https://github.com.cnpmjs.org/JoosepAlviste/nvim-ts-context-commentstring'
 " html
 Plug 'https://github.com.cnpmjs.org/shime/vim-livedown'
 
@@ -237,6 +239,37 @@ Plug 'https://github.com.cnpmjs.org/liuchengxu/vista.vim'
 Plug 'https://github.com.cnpmjs.org/svermeulen/vim-subversive'
 Plug 'https://github.com.cnpmjs.org/lambdalisue/suda.vim'
 call plug#end()
+
+
+
+" ===
+" === tabout
+" ===
+lua<<EOF
+require('tabout').setup {
+ tabkey = '<C-o>', -- key to trigger tabout, set to an empty string to disable
+    backwards_tabkey = '<C-S-o>', -- key to trigger backwards tabout, set to an empty string to disable
+    act_as_tab = true, -- shift content if tab out is not possible
+    act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+    enable_backwards = true, -- well ...
+    completion = true, -- if the tabkey is used in a completion pum
+    tabouts = {
+      {open = "'", close = "'"},
+      {open = '"', close = '"'},
+      {open = '`', close = '`'},
+      {open = '(', close = ')'},
+      {open = '[', close = ']'},
+      {open = '{', close = '}'}
+    },
+    ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+    exclude = {} -- tabout will ignore these filetypes
+}
+EOF
+
+" ===
+" === end tabout
+" ===
+
 
 " ===
 " === vim-subversive
@@ -316,13 +349,11 @@ let g:coc_global_extensions = [
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+set signcolumn=yes
 
+
+" disable coc warnig
+let g:coc_disable_startup_warning = 1
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -389,6 +420,7 @@ nmap <leader>rn <Plug>(coc-rename)
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+vmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -566,16 +598,14 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-nmap <leader>cc <Plug>(NERDCommenterToggle)
-" Create default mappings
-let g:NERDCreateDefaultMappings = 1
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-let g:NERDToggleCheckAllLines = 1
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
-" disable coc warnig
-let g:coc_disable_startup_warning = 1
+" nmap <leader>cc <Plug>(NERDCommenterToggle)
+" " Create default mappings
+" let g:NERDCreateDefaultMappings = 1
+" " Add spaces after comment delimiters by default
+" let g:NERDSpaceDelims = 1
+" let g:NERDToggleCheckAllLines = 1
+" " Add your own custom formats or override the defaults
+" let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
 
 
 
@@ -584,7 +614,7 @@ let g:coc_disable_startup_warning = 1
 " ===
 
 
-" let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='luna'
 let g:airline_powerline_fonts = 1
 " testing rounded separators (extra-powerline-symbols):
@@ -666,14 +696,18 @@ let g:suda_smart_edit = 1
 " ===
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-ensure_installed = {"python","c", "html", "javascript"},     -- one of "all", "language", or a list of languages
-highlight = {
-enable = true,              -- false will disable the whole extension
-disable = {  "rust" },  -- list of language that will be disabled
-},
- matchup = {
- enable = true
- }
+ensure_installed = {"python","c","html","javascript","css" },     -- one of "all", "language", or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = {  "rust" },  -- list of language that will be disabled
+  },
+  matchup = {
+    enable = true
+  },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false
+  }
 }
 require 'nvim-treesitter.install'.compilers = { "clang" }
 EOF
@@ -838,6 +872,7 @@ vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_words()<cr>", {})
 EOF
 onoremap f v:HopChar1<CR>
 map <leader>l :HopLineStart<cr>
+vmap <leader>l :HopLineStart<cr>
 " ===
 " === end hop
 " ===
@@ -965,24 +1000,87 @@ EOF
 " === bufferline
 " ===
 set termguicolors
-lua<<EOF
-require("bufferline").setup{
-  options = {
-    offsets = {
-    {
-        filetype = 'coc-explorer',
-        text = "File Explorer",
-        highlight = "Directory",
-        text_align = "left"
+" lua<<EOF
+" require("bufferline").setup{
+"   options = {
+"     offsets = {
+"     {
+"         filetype = 'coc-explorer',
+"         text = "File Explorer",
+"         highlight = "Directory",
+"         text_align = "left"
+"
+"     }
+"     }
+"   }
+" }
+" EOF
 
+" ===
+" === end bufferline
+" ===
+
+
+" ===
+" === wilder.nvim
+" ===
+call wilder#setup({'modes': [':', '/', '?']})
+call wilder#set_option('pipeline', [
+      \   wilder#branch(
+      \     wilder#python_file_finder_pipeline({
+      \       'file_command': ['rg', '--files'],
+      \       'dir_command': ['fzf', '.', '-type', 'd', '-printf', '%P\n'],
+      \       'filters': ['fuzzy_filter', 'difflib_sorter'],
+      \     }),
+      \     wilder#cmdline_pipeline({
+      \       'language': 'python',
+      \       'fuzzy': 1,
+      \     }),
+      \     wilder#python_search_pipeline({
+      \       'pattern': wilder#python_fuzzy_pattern(),
+      \       'sorter': wilder#python_difflib_sorter(),
+      \       'engine': 're',
+      \     }),
+      \   ),
+      \ ])
+call wilder#set_option('renderer', wilder#popupmenu_renderer({
+      \ 'highlighter': wilder#basic_highlighter(),
+      \ 'left': [
+      \   ' ', wilder#popupmenu_devicons(),
+      \ ],
+      \ 'right': [
+      \   ' ', wilder#popupmenu_scrollbar(),
+      \ ],
+      \ }))
+" ===
+" === end wilder.nvim
+" ===
+
+" ===
+" === comment.vim
+" ===
+lua << EOF
+require('Comment').setup {
+  pre_hook = function(ctx)
+    local U = require 'Comment.utils'
+
+    local location = nil
+    if ctx.ctype == U.ctype.block then
+      location = require('ts_context_commentstring.utils').get_cursor_location()
+    elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+      location = require('ts_context_commentstring.utils').get_visual_start_location()
+    end
+
+    return require('ts_context_commentstring.internal').calculate_commentstring {
+      key = ctx.ctype == U.ctype.line and '__default' or '__multiline',
+      location = location,
     }
-    }
-  }
+  end,
 }
 EOF
 
 " ===
-" === end bufferline
+" === end comment.vim
 " ===
 
 " ===
