@@ -20,7 +20,6 @@ set wrap
 set showcmd
 set ignorecase
 set smartcase
-" set guifont=Hack\ Nerd\ Font
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1
 set conceallevel=0
@@ -232,6 +231,7 @@ Plug 'https://github.com.cnpmjs.org/turbio/bracey.vim'
 " markdown
 Plug 'https://github.com.cnpmjs.org/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'https://github.com.cnpmjs.org/dhruvasagar/vim-table-mode'
+Plug 'https://github.com.cnpmjs.org/folke/which-key.nvim'
 
 Plug 'https://gitee.com/yyancyer/vim-devicons'
 " Plug 'https://github.com.cnpmjs.org/tpope/vim-surround'
@@ -243,7 +243,16 @@ Plug 'https://github.com.cnpmjs.org/svermeulen/vim-subversive'
 Plug 'https://github.com.cnpmjs.org/lambdalisue/suda.vim'
 call plug#end()
 
+" ===
+" === which-key
+" ===
+lua<<EOF
+require("which-key").setup{}
+EOF
 
+" ===
+" === end which-key
+" ===
 
 " ===
 " === tabout
@@ -683,7 +692,7 @@ autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 " ===
 let g:asyncrun_open = 6
 
-noremap <silent><f5> :AsyncTask file-run<cr>
+" noremap <silent><f5> :AsyncTask file-run<cr>
 noremap <silent><f9> :AsyncTask file-build<cr>
 
 noremap <silent><f6> :AsyncTask project-run<cr>
@@ -1002,21 +1011,39 @@ EOF
 " === bufferline
 " ===
 set termguicolors
-" lua<<EOF
-" require("bufferline").setup{
-"   options = {
-"     offsets = {
-"     {
-"         filetype = 'coc-explorer',
-"         text = "File Explorer",
-"         highlight = "Directory",
-"         text_align = "left"
-"
-"     }
-"     }
-"   }
-" }
-" EOF
+lua<<EOF
+require("bufferline").setup{
+  options = {
+    numbers = function(opts)
+      return string.format('%s.', opts.ordinal)
+    end,
+    diagnostics = 'coc',
+    offsets = {
+    {
+        filetype = 'coc-explorer',
+        text = "File Explorer",
+        highlight = "Directory",
+        text_align = "left"
+
+    }
+    }
+  }
+}
+EOF
+map <silent> <leader>gb :BufferLinePick<CR>
+
+nnoremap <silent>[b :BufferLineCycleNext<CR>
+nnoremap <silent>]b :BufferLineCyclePrev<CR>
+
+nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
 
 " ===
 " === end bufferline
