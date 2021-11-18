@@ -111,13 +111,14 @@ map <S-C-v> p
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
 nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
 
-nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
-nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
-
+nnoremap [<leader>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
+nnoremap ]<leader>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+nnoremap <leader>, A,<esc>
+nnoremap <leader>; A;<esc>
 
 map <leader>T :edit $MYVIMRC<CR>
 map <leader>Z :w<CR>:so $MYVIMRC<CR>
-
+nmap 0 _
 map <F12> :Vista finder<CR>
 
 " 使用<Ctrl> + hjkl快速在窗口间跳转
@@ -201,7 +202,7 @@ Plug 'https://gitee.com/yyancyer/ultisnips'
 Plug 'https://gitee.com/zgpio/vim-snippets'
 Plug 'https://gitee.com/yyancyer/vim-visual-multi'
 " Plug 'https://gitee.com/yyancyer/vim-floaterm'
-Plug 'https://gitee.com/yyancyer/auto-pairs'
+" Plug 'https://gitee.com/yyancyer/auto-pairs'
 Plug 'https://gitee.com/yyancyer/vim-terminal-help'
 " Plug 'https://gitee.com/yyancyer/nerdcommenter'
 Plug 'https://gitee.com/yyancyer/vim-autoformat'
@@ -217,7 +218,7 @@ Plug 'https://github.com.cnpmjs.org/haya14busa/vim-asterisk'
 " highlight
 Plug 'https://github.com.cnpmjs.org/RRethy/vim-illuminate'
 Plug 'https://github.com.cnpmjs.org/Pocco81/AbbrevMan.nvim'
-
+Plug 'https://github.com.cnpmjs.org/windwp/nvim-autopairs'
 " formating
 Plug 'https://github.com.cnpmjs.org/sbdchd/neoformat'
 
@@ -231,8 +232,7 @@ Plug 'https://github.com.cnpmjs.org/turbio/bracey.vim'
 " markdown
 Plug 'https://github.com.cnpmjs.org/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'https://github.com.cnpmjs.org/dhruvasagar/vim-table-mode'
-Plug 'https://github.com.cnpmjs.org/folke/which-key.nvim'
-
+Plug 'https://github.com.cnpmjs.org/ceigh/AutoSave.nvim' , {'branch': 'execution_message-fn'}
 Plug 'https://gitee.com/yyancyer/vim-devicons'
 " Plug 'https://github.com.cnpmjs.org/tpope/vim-surround'
 Plug 'https://github.com.cnpmjs.org/machakann/vim-sandwich'
@@ -241,17 +241,90 @@ Plug 'https://github.com.cnpmjs.org/junegunn/fzf.vim'
 Plug 'https://github.com.cnpmjs.org/liuchengxu/vista.vim'
 Plug 'https://github.com.cnpmjs.org/svermeulen/vim-subversive'
 Plug 'https://github.com.cnpmjs.org/lambdalisue/suda.vim'
+Plug 'https://github.com.cnpmjs.org/haringsrob/nvim_context_vt'
+Plug 'https://github.com.cnpmjs.org/rmagatti/auto-session'
+Plug 'https://github.com.cnpmjs.org/akinsho/toggleterm.nvim'
 call plug#end()
 
+
 " ===
-" === which-key
+" === auto-session
 " ===
 lua<<EOF
-require("which-key").setup{}
+
+require('auto-session').setup {
+  log_level = 'info',
+  auto_session_suppress_dirs = {'~/', '~/Projects'},
+auto_session_enabled = true
+}
+
 EOF
 
 " ===
-" === end which-key
+" === end auto-session
+" ===
+
+" ===
+" === toggleterm
+" ===
+lua<<EOF
+require("toggleterm").setup{
+   open_mapping = [[<c-\>]],
+  close_on_exit =  false
+}
+EOF
+
+" ===
+" === end toggleterm
+" ===
+
+" ===
+" === nvim_context_vt
+" ===
+lua<<EOF
+require('nvim_context_vt').setup {}
+EOF
+
+" ===
+" === end nvim_context_vt
+" ===
+
+" ===
+" === autosave
+" ===
+lua<<EOF
+require("autosave").setup{
+  enabled = true,
+  execution_message = function()
+    return "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S")
+  end,
+  clean_command_line_interval = 500,
+  debounce_delay = 500
+}
+EOF
+
+" ===
+" === end autosave
+" ===
+
+" ===
+" === vim-matchup
+" ===
+let g:matchup_matchparen_offscreen = {'method': 'popup'}
+
+" ===
+" === end vim-matchup
+" ===
+
+" ===
+" === nvim-autopairs
+" ===
+lua<<EOF
+require('nvim-autopairs').setup{}
+EOF
+
+" ===
+" === end nvim-autopairs
 " ===
 
 " ===
@@ -647,7 +720,7 @@ colorscheme OceanicNext
 " ===
 " === auto-pairs
 " ===
-let g:AutoPairsFlyMode = 1
+" let g:AutoPairsFlyMode = 1
 
 
 
@@ -708,7 +781,7 @@ let g:suda_smart_edit = 1
 " ===
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-ensure_installed = {"python","c","html","javascript","css" },     -- one of "all", "language", or a list of languages
+ensure_installed = {"python","c","html","javascript","css","json" },     -- one of "all", "language", or a list of languages
 highlight = {
 enable = true,              -- false will disable the whole extension
 disable = {  "rust" },  -- list of language that will be disabled
@@ -980,6 +1053,7 @@ EOF
 " === vim-bufkill
 " ===
 map <C-F4> :BD<CR>
+nnoremap <leader>bd :BD<CR>
 
 " ===
 " === end vim-bufkill
@@ -1152,7 +1226,7 @@ function Profile(log_file)
 endfunction
 command  -nargs=1 ActiveProfile call Profile(<f-args>)
 
-
 " ===
 " === end cusom functions and commands
 " ===
+
