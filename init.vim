@@ -242,27 +242,10 @@ Plug 'https://github.com.cnpmjs.org/liuchengxu/vista.vim'
 Plug 'https://github.com.cnpmjs.org/svermeulen/vim-subversive'
 Plug 'https://github.com.cnpmjs.org/lambdalisue/suda.vim'
 Plug 'https://github.com.cnpmjs.org/haringsrob/nvim_context_vt'
-Plug 'https://github.com.cnpmjs.org/rmagatti/auto-session'
+" Plug 'https://github.com.cnpmjs.org/rmagatti/auto-session'
 Plug 'https://github.com.cnpmjs.org/akinsho/toggleterm.nvim'
 call plug#end()
 
-
-" ===
-" === auto-session
-" ===
-lua<<EOF
-
-require('auto-session').setup {
-  log_level = 'info',
-  auto_session_suppress_dirs = {'~/', '~/Projects'},
-auto_session_enabled = true
-}
-
-EOF
-
-" ===
-" === end auto-session
-" ===
 
 " ===
 " === toggleterm
@@ -415,7 +398,7 @@ nmap <leader>E :CocCommand explorer
       \ --width=30
       \<CR>
 "" if only one buffer is shown and it's name is not 'coc-explorer', then show coc-explorer
-autocmd BufEnter * if (winnr("$") == 1 && &filetype != 'coc-explorer') | exe ':CocCommand explorer --width=30 --no-focus' | endif
+" autocmd BufEnter * if (winnr("$") == 1 && &filetype != 'coc-explorer') | exe ':CocCommand explorer --width=30 --no-focus' | endif
 "" if only one buffer named 'coc-explorer' is shown, then exit
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 " ===
@@ -897,7 +880,7 @@ noremap go :<C-U>Leaderf! rg --recall<CR>
 " activate anyfold by default
 augroup anyfold
   autocmd!
-  autocmd Filetype <filetype> AnyFoldActivate
+  autocmd Filetype * AnyFoldActivate
 augroup END
 
 " disable anyfold for large files
@@ -905,8 +888,8 @@ let g:LargeFile = 1000000 " file is large if size greater than 1MB
 autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
 function LargeFile()
   augroup anyfold
-    autocmd! " remove AnyFoldActivate
-    autocmd Filetype <filetype> setlocal foldmethod=indent " fall back to indent folding
+    autocmd! 
+    autocmd Filetype * setlocal foldmethod=indent " fall back to indent folding
   augroup END
 endfunction
 " ===
