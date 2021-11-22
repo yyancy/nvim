@@ -170,35 +170,35 @@ noremap 0 _
 call plug#begin('~/.config/nvim/plugged')
 
 "状态栏的例子
-Plug 'https://github.com.cnpmjs.org/bling/vim-airline'
-Plug 'https://github.com.cnpmjs.org/vim-airline/vim-airline-themes'
+Plug 'https://github.com/bling/vim-airline'
+Plug 'https://github.com/vim-airline/vim-airline-themes'
 Plug 'https://gitee.com/winwood/vim-deus'
-Plug 'https://github.com.cnpmjs.org/pechorin/any-jump.vim'
-Plug 'https://github.com.cnpmjs.org/skywind3000/asynctasks.vim'
-Plug 'https://github.com.cnpmjs.org/skywind3000/asyncrun.vim'
-Plug 'https://github.com.cnpmjs.org/christoomey/vim-tmux-navigator'
-Plug 'https://github.com.cnpmjs.org/easymotion/vim-easymotion'
-Plug 'https://github.com.cnpmjs.org/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'https://github.com.cnpmjs.org/abecodes/tabout.nvim'
-Plug 'https://github.com.cnpmjs.org/windwp/nvim-ts-autotag'
-" Plug 'https://github.com.cnpmjs.org/ggandor/lightspeed.nvim'
-Plug 'https://github.com.cnpmjs.org/andymass/vim-matchup'
-Plug 'https://github.com.cnpmjs.org/pseewald/vim-anyfold'
-Plug 'https://github.com.cnpmjs.org/airblade/vim-rooter'
-" Plug 'https://github.com.cnpmjs.org/rhysd/clever-f.vim'
+Plug 'https://github.com/pechorin/any-jump.vim'
+Plug 'https://github.com/skywind3000/asynctasks.vim'
+Plug 'https://github.com/skywind3000/asyncrun.vim'
+Plug 'https://github.com/christoomey/vim-tmux-navigator'
+Plug 'https://github.com/easymotion/vim-easymotion'
+Plug 'https://github.com/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'https://github.com/abecodes/tabout.nvim'
+Plug 'https://github.com/windwp/nvim-ts-autotag'
+" Plug 'https://github.com/ggandor/lightspeed.nvim'
+Plug 'https://github.com/andymass/vim-matchup'
+Plug 'https://github.com/pseewald/vim-anyfold'
+Plug 'https://github.com/airblade/vim-rooter'
+" Plug 'https://github.com/rhysd/clever-f.vim'
 " search
-Plug 'https://github.com.cnpmjs.org/Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+Plug 'https://github.com/Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 " bookmarks
-Plug 'https://github.com.cnpmjs.org/MattesGroeger/vim-bookmarks'
-Plug 'https://github.com.cnpmjs.org/phaazon/hop.nvim'
-" Plug 'https://github.com.cnpmjs.org/instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
-Plug 'https://github.com.cnpmjs.org/qpkorr/vim-bufkill'
+Plug 'https://github.com/MattesGroeger/vim-bookmarks'
+Plug 'https://github.com/phaazon/hop.nvim'
+" Plug 'https://github.com/instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+Plug 'https://github.com/qpkorr/vim-bufkill'
 
-Plug 'https://github.com.cnpmjs.org/tversteeg/registers.nvim' , { 'branch': 'main' }
-Plug 'https://github.com.cnpmjs.org/akinsho/bufferline.nvim'
+Plug 'https://github.com/tversteeg/registers.nvim' , { 'branch': 'main' }
+Plug 'https://github.com/akinsho/bufferline.nvim'
 
-Plug 'https://github.com.cnpmjs.org/wellle/context.vim'
-" Plug 'https://github.com.cnpmjs.org/Yggdroot/indentLine'
+Plug 'https://github.com/wellle/context.vim'
+" Plug 'https://github.com/Yggdroot/indentLine'
 Plug 'https://github.com/lukas-reineke/indent-blankline.nvim'
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
 Plug 'https://gitee.com/yyancyer/coc.nvim', {'branch': 'release'}
@@ -211,51 +211,51 @@ Plug 'https://gitee.com/yyancyer/vim-terminal-help'
 " Plug 'https://gitee.com/yyancyer/nerdcommenter'
 Plug 'https://gitee.com/yyancyer/vim-autoformat'
 Plug 'https://gitee.com/yyancyer/SimpylFold'
-Plug 'https://github.com.cnpmjs.org/junegunn/vim-easy-align'
+Plug 'https://github.com/junegunn/vim-easy-align'
 "Plug 'mg979/vim-xtabline'
-Plug 'https://github.com.cnpmjs.org/gcmt/wildfire.vim'
-Plug 'https://github.com.cnpmjs.org/wellle/targets.vim'
-" Plug 'https://github.com.cnpmjs.org/puremourning/vimspector'
-Plug 'https://github.com.cnpmjs.org/haya14busa/vim-asterisk'
-" Plug 'https://github.com.cnpmjs.org/mfussenegger/nvim-dap'
-" Plug 'https://github.com.cnpmjs.org/mfussenegger/nvim-dap-python'
+Plug 'https://github.com/gcmt/wildfire.vim'
+Plug 'https://github.com/wellle/targets.vim'
+" Plug 'https://github.com/puremourning/vimspector'
+Plug 'https://github.com/haya14busa/vim-asterisk'
+" Plug 'https://github.com/mfussenegger/nvim-dap'
+" Plug 'https://github.com/mfussenegger/nvim-dap-python'
 " highlight
-Plug 'https://github.com.cnpmjs.org/RRethy/vim-illuminate'
-Plug 'https://github.com.cnpmjs.org/Pocco81/AbbrevMan.nvim'
-Plug 'https://github.com.cnpmjs.org/windwp/nvim-autopairs'
+Plug 'https://github.com/RRethy/vim-illuminate'
+Plug 'https://github.com/Pocco81/AbbrevMan.nvim'
+Plug 'https://github.com/windwp/nvim-autopairs'
 " formating
-Plug 'https://github.com.cnpmjs.org/sbdchd/neoformat'
+Plug 'https://github.com/sbdchd/neoformat'
 
-Plug 'https://github.com.cnpmjs.org/mhartington/oceanic-next'
-Plug 'https://github.com.cnpmjs.org/gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'https://github.com.cnpmjs.org/numToStr/Comment.nvim'
-Plug 'https://github.com.cnpmjs.org/JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'https://github.com/mhartington/oceanic-next'
+Plug 'https://github.com/gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'https://github.com/numToStr/Comment.nvim'
+Plug 'https://github.com/JoosepAlviste/nvim-ts-context-commentstring'
 " html
-Plug 'https://github.com.cnpmjs.org/shime/vim-livedown'
-Plug 'https://github.com.cnpmjs.org/turbio/bracey.vim'
+Plug 'https://github.com/shime/vim-livedown'
+Plug 'https://github.com/turbio/bracey.vim'
 " markdown
-Plug 'https://github.com.cnpmjs.org/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'https://github.com.cnpmjs.org/dhruvasagar/vim-table-mode'
-Plug 'https://github.com.cnpmjs.org/ceigh/AutoSave.nvim' , {'branch': 'execution_message-fn'}
+Plug 'https://github.com/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'https://github.com/dhruvasagar/vim-table-mode'
+Plug 'https://github.com/ceigh/AutoSave.nvim' , {'branch': 'execution_message-fn'}
 Plug 'https://gitee.com/yyancyer/vim-devicons'
-" Plug 'https://github.com.cnpmjs.org/tpope/vim-surround'
-Plug 'https://github.com.cnpmjs.org/machakann/vim-sandwich'
-Plug 'https://github.com.cnpmjs.org/junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'https://github.com.cnpmjs.org/junegunn/fzf.vim'
-Plug 'https://github.com.cnpmjs.org/liuchengxu/vista.vim'
-Plug 'https://github.com.cnpmjs.org/svermeulen/vim-subversive'
-Plug 'https://github.com.cnpmjs.org/lambdalisue/suda.vim'
-Plug 'https://github.com.cnpmjs.org/haringsrob/nvim_context_vt'
-" Plug 'https://github.com.cnpmjs.org/rmagatti/auto-session'
-Plug 'https://github.com.cnpmjs.org/akinsho/toggleterm.nvim'
+" Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/machakann/vim-sandwich'
+Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'https://github.com/junegunn/fzf.vim'
+Plug 'https://github.com/liuchengxu/vista.vim'
+Plug 'https://github.com/svermeulen/vim-subversive'
+Plug 'https://github.com/lambdalisue/suda.vim'
+Plug 'https://github.com/haringsrob/nvim_context_vt'
+" Plug 'https://github.com/rmagatti/auto-session'
+Plug 'https://github.com/akinsho/toggleterm.nvim'
 
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/chaoren/vim-wordmotion' 
 Plug 'https://github.com/winston0410/cmd-parser.nvim'
 Plug 'https://github.com/winston0410/range-highlight.nvim'
 
-Plug 'https://github.com.cnpmjs.org/tpope/vim-repeat'
-Plug 'https://github.com.cnpmjs.org/vim-scripts/repeatable-motions.vim'
+Plug 'https://github.com/tpope/vim-repeat'
+
 
 call plug#end()
 
@@ -386,9 +386,6 @@ set icm="split"
 
 noremap <leader><C-n> :Files<cr>
 nmap <C-E> :Buffers<cr>
-noremap <C-N> :Files<cr>
-noremap <M-a> :Files<cr>
-noremap <M-A> :Files<cr>
 imap <leader><tab> <plug>(fzf-maps-i)
 " ===
 " === wildfile.vim
@@ -423,10 +420,11 @@ let g:sandwich#recipes += [
 " ===
 
 " navigate chunks of current buffer
-nmap [[g <Plug>(coc-git-prevchunk)
+nmap [[g <Plug>(coc-git-prevchunk)<Plug>(coc-git-prevchunk)<Plug>(coc-git-prevchunk)
 nmap ]]g <Plug>(coc-git-nextchunk)
-silent! call repeat#set("\<Plug>(coc-git-prevchunk)", v:count)
-" call AddRepeatableMotion("[[g", "]]g", 0)
+call repeat#set("\<Plug>(coc-git-prevchunk)", v:count)
+" call AddRepeatableMotion("[[g", "]]g", 1)
+" debug call <SNR>116_Move(']]g')
 " navigate conflicts of current buffer
 nmap [c <Plug>(coc-git-prevconflict)
 nmap ]c <Plug>(coc-git-nextconflict)
