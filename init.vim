@@ -198,7 +198,8 @@ Plug 'https://github.com.cnpmjs.org/tversteeg/registers.nvim' , { 'branch': 'mai
 Plug 'https://github.com.cnpmjs.org/akinsho/bufferline.nvim'
 
 Plug 'https://github.com.cnpmjs.org/wellle/context.vim'
-Plug 'https://github.com.cnpmjs.org/Yggdroot/indentLine'
+" Plug 'https://github.com.cnpmjs.org/Yggdroot/indentLine'
+Plug 'https://github.com/lukas-reineke/indent-blankline.nvim'
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
 Plug 'https://gitee.com/yyancyer/coc.nvim', {'branch': 'release'}
 Plug 'https://gitee.com/yyancyer/ultisnips'
@@ -245,43 +246,35 @@ Plug 'https://github.com.cnpmjs.org/liuchengxu/vista.vim'
 Plug 'https://github.com.cnpmjs.org/svermeulen/vim-subversive'
 Plug 'https://github.com.cnpmjs.org/lambdalisue/suda.vim'
 Plug 'https://github.com.cnpmjs.org/haringsrob/nvim_context_vt'
-Plug 'https://github.com.cnpmjs.org/rmagatti/auto-session'
+" Plug 'https://github.com.cnpmjs.org/rmagatti/auto-session'
 Plug 'https://github.com.cnpmjs.org/akinsho/toggleterm.nvim'
+
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/chaoren/vim-wordmotion' 
 Plug 'https://github.com/winston0410/cmd-parser.nvim'
 Plug 'https://github.com/winston0410/range-highlight.nvim'
+
+Plug 'https://github.com.cnpmjs.org/tpope/vim-repeat'
+Plug 'https://github.com.cnpmjs.org/vim-scripts/repeatable-motions.vim'
+
 call plug#end()
 
 
 " ===
-" === range-highlight
+" === indent-blankline
 " ===
 lua<<EOF
 
-require("range-highlight").setup {}
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    show_current_context = true,
+    show_current_context_start = true,
+}
 
 EOF
 
 " ===
-" === end range-highlight
-" ===
-
-" ===
-" === auto-session
-" ===
-lua<<EOF
-
-require('auto-session').setup {
-  log_level = 'info',
-  auto_session_suppress_dirs = {'~/', '~/Projects'},
-  auto_session_enabled = true
-  }
-
-EOF
-
-" ===
-" === end auto-session
+" === end indent-blankline
 " ===
 
 " ===
@@ -396,6 +389,7 @@ nmap <C-E> :Buffers<cr>
 noremap <C-N> :Files<cr>
 noremap <M-a> :Files<cr>
 noremap <M-A> :Files<cr>
+imap <leader><tab> <plug>(fzf-maps-i)
 " ===
 " === wildfile.vim
 " ===
@@ -425,6 +419,32 @@ let g:sandwich#recipes += [
 " ===
 
 " ===
+" === coc-git
+" ===
+
+" navigate chunks of current buffer
+nmap [[g <Plug>(coc-git-prevchunk)
+nmap ]]g <Plug>(coc-git-nextchunk)
+silent! call repeat#set("\<Plug>(coc-git-prevchunk)", v:count)
+" call AddRepeatableMotion("[[g", "]]g", 0)
+" navigate conflicts of current buffer
+nmap [c <Plug>(coc-git-prevconflict)
+nmap ]c <Plug>(coc-git-nextconflict)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap gc <Plug>(coc-git-commit)
+" create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
+
+" ===
+" === end coc-git
+" ===
+
+" ===
 " === coc-explorer
 " ===
 
@@ -434,7 +454,7 @@ nmap <leader>E :CocCommand explorer
       \ --width=30
       \<CR>
 "" if only one buffer is shown and it's name is not 'coc-explorer', then show coc-explorer
-autocmd BufEnter * if (winnr("$") == 1 && &filetype != 'coc-explorer') | exe ':CocCommand explorer --width=30 --no-focus' | endif
+" autocmd BufEnter * if (winnr("$") == 1 && &filetype != 'coc-explorer') | exe ':CocCommand explorer --width=30 --no-focus' | endif
 "" if only one buffer named 'coc-explorer' is shown, then exit
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 " ===
@@ -913,7 +933,7 @@ noremap go :<C-U>Leaderf! rg --recall<CR>
 " activate anyfold by default
 augroup anyfold
   autocmd!
-  autocmd Filetype <filetype> AnyFoldActivate
+  autocmd Filetype * AnyFoldActivate
 augroup END
 
 " disable anyfold for large files
@@ -921,8 +941,8 @@ let g:LargeFile = 1000000 " file is large if size greater than 1MB
 autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
 function LargeFile()
   augroup anyfold
-    autocmd! " remove AnyFoldActivate
-    autocmd Filetype <filetype> setlocal foldmethod=indent " fall back to indent folding
+    autocmd! 
+    autocmd Filetype * setlocal foldmethod=indent " fall back to indent folding
   augroup END
 endfunction
 " ===
@@ -1036,7 +1056,7 @@ onoremap f v:HopChar1<CR>
 " ===
 " === indentLine
 " ===
-let g:indentLine_concealcursor = 'nc'
+" let g:indentLine_concealcursor = 'nc'
 
 " ===
 " === end indentLine
