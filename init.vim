@@ -156,7 +156,10 @@ noremap <leader>x :x<cr>
 "noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>
 noremap > >>
 noremap < <<
-
+vnoremap > >gv
+vnoremap < <gv
+inoremap <C-T> <C-F>
+noremap 0 _
 
 
 
@@ -244,8 +247,25 @@ Plug 'https://github.com.cnpmjs.org/lambdalisue/suda.vim'
 Plug 'https://github.com.cnpmjs.org/haringsrob/nvim_context_vt'
 Plug 'https://github.com.cnpmjs.org/rmagatti/auto-session'
 Plug 'https://github.com.cnpmjs.org/akinsho/toggleterm.nvim'
+Plug 'https://github.com/AndrewRadev/splitjoin.vim'
+Plug 'https://github.com/chaoren/vim-wordmotion' 
+Plug 'https://github.com/winston0410/cmd-parser.nvim'
+Plug 'https://github.com/winston0410/range-highlight.nvim'
 call plug#end()
 
+
+" ===
+" === range-highlight
+" ===
+lua<<EOF
+
+require("range-highlight").setup {}
+
+EOF
+
+" ===
+" === end range-highlight
+" ===
 
 " ===
 " === auto-session
@@ -255,8 +275,8 @@ lua<<EOF
 require('auto-session').setup {
   log_level = 'info',
   auto_session_suppress_dirs = {'~/', '~/Projects'},
-auto_session_enabled = true
-}
+  auto_session_enabled = true
+  }
 
 EOF
 
@@ -376,7 +396,6 @@ nmap <C-E> :Buffers<cr>
 noremap <C-N> :Files<cr>
 noremap <M-a> :Files<cr>
 noremap <M-A> :Files<cr>
-
 " ===
 " === wildfile.vim
 " ===
@@ -455,17 +474,13 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-" if has('nvim')
+" Use <A-,> to trigger completion.
 inoremap <silent><expr> <A-,> coc#refresh()
-" else
-" inoremap <silent><expr> <c-@> coc#refresh()
-" endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-" \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 
 
@@ -700,7 +715,8 @@ nmap ga <Plug>(EasyAlign)
 
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='luna'
+" let g:airline_theme='luna'
+let g:airline_theme='oceanicnext'
 let g:airline_powerline_fonts = 1
 " testing rounded separators (extra-powerline-symbols):
 let g:airline_left_sep = "\uE0B4"
@@ -954,7 +970,7 @@ vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1({ current_lin
 vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
 vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1()<cr>",{})
 vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_words()<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", {})
+vim.api.nvim_set_keymap('', '<leader>l', "<cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>", {})
 EOF
 onoremap f v:HopChar1<CR>
 " ===
