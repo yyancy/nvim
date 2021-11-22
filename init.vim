@@ -386,7 +386,7 @@ set icm="split"
 
 noremap <leader><C-n> :Files<cr>
 nmap <C-E> :Buffers<cr>
-imap <leader><tab> <plug>(fzf-maps-i)
+" imap <leader><tab> <plug>(fzf-maps-i)
 " ===
 " === wildfile.vim
 " ===
