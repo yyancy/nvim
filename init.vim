@@ -195,7 +195,8 @@ Plug 'https://github.com.cnpmjs.org/tversteeg/registers.nvim' , { 'branch': 'mai
 Plug 'https://github.com.cnpmjs.org/akinsho/bufferline.nvim'
 
 Plug 'https://github.com.cnpmjs.org/wellle/context.vim'
-Plug 'https://github.com.cnpmjs.org/Yggdroot/indentLine'
+" Plug 'https://github.com.cnpmjs.org/Yggdroot/indentLine'
+Plug 'https://github.com/lukas-reineke/indent-blankline.nvim'
 "Plug 'https://gitee.com/zimingzpp/nerdtree'
 Plug 'https://gitee.com/yyancyer/coc.nvim', {'branch': 'release'}
 Plug 'https://gitee.com/yyancyer/ultisnips'
@@ -244,8 +245,27 @@ Plug 'https://github.com.cnpmjs.org/lambdalisue/suda.vim'
 Plug 'https://github.com.cnpmjs.org/haringsrob/nvim_context_vt'
 " Plug 'https://github.com.cnpmjs.org/rmagatti/auto-session'
 Plug 'https://github.com.cnpmjs.org/akinsho/toggleterm.nvim'
+Plug 'https://github.com.cnpmjs.org/tpope/vim-repeat'
+Plug 'https://github.com.cnpmjs.org/vim-scripts/repeatable-motions.vim'
 call plug#end()
 
+
+" ===
+" === indent-blankline
+" ===
+lua<<EOF
+
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    show_current_context = true,
+    show_current_context_start = true,
+}
+
+EOF
+
+" ===
+" === end indent-blankline
+" ===
 
 " ===
 " === toggleterm
@@ -360,6 +380,8 @@ noremap <C-N> :Files<cr>
 noremap <M-a> :Files<cr>
 noremap <M-A> :Files<cr>
 
+imap <leader><tab> <plug>(fzf-maps-i)
+
 " ===
 " === wildfile.vim
 " ===
@@ -386,6 +408,32 @@ let g:sandwich#recipes += [
       \ ]
 " ===
 " === end vim-sandwich
+" ===
+
+" ===
+" === coc-git
+" ===
+
+" navigate chunks of current buffer
+nmap [[g <Plug>(coc-git-prevchunk)
+nmap ]]g <Plug>(coc-git-nextchunk)
+silent! call repeat#set("\<Plug>(coc-git-prevchunk)", v:count)
+" call AddRepeatableMotion("[[g", "]]g", 0)
+" navigate conflicts of current buffer
+nmap [c <Plug>(coc-git-prevconflict)
+nmap ]c <Plug>(coc-git-nextconflict)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap gc <Plug>(coc-git-commit)
+" create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
+
+" ===
+" === end coc-git
 " ===
 
 " ===
@@ -1003,7 +1051,7 @@ onoremap f v:HopChar1<CR>
 " ===
 " === indentLine
 " ===
-let g:indentLine_concealcursor = 'nc'
+" let g:indentLine_concealcursor = 'nc'
 
 " ===
 " === end indentLine
