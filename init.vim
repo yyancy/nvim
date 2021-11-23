@@ -1,19 +1,28 @@
-" ===
-" === yancy vim configuration
-" ===
+"                               _             _           
+"  _   _  __ _ _ __   ___ _   _( )___  __   _(_)_ __ ___  
+" | | | |/ _` | '_ \ / __| | | |// __| \ \ / / | '_ ` _ \ 
+" | |_| | (_| | | | | (__| |_| | \__ \  \ V /| | | | | | |
+"  \__, |\__,_|_| |_|\___|\__, | |___/   \_/ |_|_| |_| |_|
+"  |___/                  |___/                           
+"                   __ _                       _   _                 
+"   ___ ___  _ __  / _(_) __ _ _   _ _ __ __ _| |_(_) ___  _ __  ___ 
+"  / __/ _ \| '_ \| |_| |/ _` | | | | '__/ _` | __| |/ _ \| '_ \/ __|
+" | (_| (_) | | | |  _| | (_| | |_| | | | (_| | |_| | (_) | | | \__ \
+"  \___\___/|_| |_|_| |_|\__, |\__,_|_|  \__,_|\__|_|\___/|_| |_|___/
+"                        |___/                                       
 
 
 " ===
 " === common configuration
 " ===
 
-let mapleader=" "
 " let g:VM_leader="\\\\"
 set nocompatible
 syntax on                 " 支持语法高亮显示
 set number                " show line number.
+set hidden
 set relativenumber
-" set cursorline " displays a line on the line where the cursor is
+set cursorline " displays a line on the line where the cursor is
 filetype plugin indent on " 启用根据文件类型自动缩进
 set mouse=a
 set wrap
@@ -41,6 +50,7 @@ set incsearch
 set autoindent            " 开始新行时处理缩进
 set expandtab             " 将制表符Tab展开为空格，这对于Python尤其有用
 set tabstop=2             " 要计算的空格数
+set softtabstop=2
 set shiftwidth=2          " 用于自动缩进的空格数
 set tw=0
 set backspace=2           " 在多数终端上修正退格键Backspace的行为
@@ -48,13 +58,25 @@ set foldlevel=99
 set laststatus=2
 " set autochdir
 
+
+
+" set ttimeoutlen=0
+" set notimeout
+set inccommand=split
+set completeopt=longest,noinsert,menuone,noselect,preview
+set visualbell
+set lazyredraw "same as above
+
 " restore cursor position which last was.
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
 
 " set list
+set list
 set listchars=tab:▸\ ,trail:▫
 set scrolloff=5
 set sidescroll=10
+
+" set backupdir
 
 set clipboard=unnamed,unnamedplus
 "set clipboard^=unnamed
@@ -62,7 +84,23 @@ set clipboard=unnamed,unnamedplus
 
 "set clipboard=unnamed,autoselect
 set guioptions+=a
-set foldmethod=manual
+set foldmethod=indent
+set foldlevel=99
+set foldenable
+set formatoptions-=tc
+set colorcolumn=100
+set updatetime=2000
+set virtualedit=block
+
+
+
+silent !mkdir -p ~/.config/nvim/tmp/backup
+silent !mkdir -p ~/.config/nvim/tmp/undo
+set backupdir=~/.config/nvim/tmp/backup,.
+set directory=~/.config/nvim/tmp/backup,.
+
+set undofile
+set undodir=~/.config/nvim/tmp/undo,.
 
 
 " ===
@@ -104,6 +142,7 @@ let g:terminal_color_15 = '#eeeeec'
 " === mappings
 " ===
 
+let mapleader=" "
 vmap <C-c> y
 vmap <C-v> p
 imap <C-v> <esc>p`]a
@@ -160,6 +199,7 @@ vnoremap > >gv
 vnoremap < <gv
 inoremap <C-T> <C-F>
 noremap 0 _
+noremap <leader>tx :r !figlet
 
 
 
@@ -379,7 +419,6 @@ nmap S <plug>(SubversiveSubstituteToEndOfLine)
 nmap <leader>s <plug>(SubversiveSubstituteRange)
 xmap <leader>s <plug>(SubversiveSubstituteRange)
 nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
-set icm="split"
 " ===
 " === fzf.vim
 " ===
@@ -942,6 +981,7 @@ function LargeFile()
     autocmd! 
     autocmd Filetype * setlocal foldmethod=indent " fall back to indent folding
   augroup END
+  execute ":ContextDisable"
 endfunction
 " ===
 " === end vim-anyfold
@@ -974,6 +1014,9 @@ map gz# <Plug>(asterisk-gz#)
 " ===
 let g:context_add_mappings = 0
 let g:context_nvim_no_redraw = 1
+
+let g:context_max_filesize = 2000000
+autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:context_max_filesize || f == -2 | execute ":ContextDisable" | endif
 " ===
 " === end context.vim
 " ===
