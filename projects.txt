@@ -1,4 +1,0 @@
-/home/yancy/.config/
-/home/yancy/.config/nvim/
-/home/yancy/learning/books/
-/home/yancy/learning/learning-english/
