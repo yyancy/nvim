@@ -2,6 +2,7 @@
 
 import subprocess
 import sys
+from subprocess import PIPE
 
 projects_links = []
 with open("projects.txt") as file:
@@ -9,7 +10,7 @@ with open("projects.txt") as file:
 
 
 def exe(args, location, suppress):
-    command = subprocess.run(args, capture_output=True, text=True, cwd = location)
+    command = subprocess.run(args, stdout=PIPE, stderr=PIPE, cwd = location)
     if command.returncode != 0 and not suppress:
         print(command.stdout)
         print(command.stderr)
