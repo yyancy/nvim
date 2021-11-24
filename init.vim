@@ -1,15 +1,15 @@
-"                               _             _           
-"  _   _  __ _ _ __   ___ _   _( )___  __   _(_)_ __ ___  
-" | | | |/ _` | '_ \ / __| | | |// __| \ \ / / | '_ ` _ \ 
+"                               _             _
+"  _   _  __ _ _ __   ___ _   _( )___  __   _(_)_ __ ___
+" | | | |/ _` | '_ \ / __| | | |// __| \ \ / / | '_ ` _ \
 " | |_| | (_| | | | | (__| |_| | \__ \  \ V /| | | | | | |
 "  \__, |\__,_|_| |_|\___|\__, | |___/   \_/ |_|_| |_| |_|
-"  |___/                  |___/                           
-"                   __ _                       _   _                 
-"   ___ ___  _ __  / _(_) __ _ _   _ _ __ __ _| |_(_) ___  _ __  ___ 
+"  |___/                  |___/
+"                   __ _                       _   _
+"   ___ ___  _ __  / _(_) __ _ _   _ _ __ __ _| |_(_) ___  _ __  ___
 "  / __/ _ \| '_ \| |_| |/ _` | | | | '__/ _` | __| |/ _ \| '_ \/ __|
 " | (_| (_) | | | |  _| | (_| | |_| | | | (_| | |_| | (_) | | | \__ \
 "  \___\___/|_| |_|_| |_|\__, |\__,_|_|  \__,_|\__|_|\___/|_| |_|___/
-"                        |___/                                       
+"                        |___/
 
 
 " ===
@@ -96,6 +96,7 @@ set virtualedit=block
 
 silent !mkdir -p $HOME/.config/nvim/tmp/backup
 silent !mkdir -p $HOME/.config/nvim/tmp/undo
+silent !mkdir -p $HOME/.config/nvim/tmp/session
 set backupdir=$HOME/.config/nvim/tmp/backup,.
 set directory=$HOME/.config/nvim/tmp/backup,.
 
@@ -287,7 +288,7 @@ Plug 'https://github.com/liuchengxu/vista.vim'
 Plug 'https://github.com/svermeulen/vim-subversive'
 Plug 'https://github.com/lambdalisue/suda.vim'
 Plug 'https://github.com/haringsrob/nvim_context_vt'
-" Plug 'https://github.com/rmagatti/auto-session'
+Plug 'https://github.com/rmagatti/auto-session'
 Plug 'https://github.com/akinsho/toggleterm.nvim'
 
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
@@ -299,6 +300,23 @@ Plug 'https://github.com/tpope/vim-repeat'
 " Plug 'https://github.com/glepnir/dashboard-nvim'
 
 call plug#end()
+
+
+" ===
+" === auto-session
+" ===
+lua<<EOF
+require('auto-session').setup {
+      log_level = 'info',
+      auto_session_root_dir = vim.fn.stdpath('config').."/tmp/session/",
+      auto_session_suppress_dirs = {'~/', '~/Projects'}
+    }
+
+EOF
+
+" ===
+" === end auto-session
+" ===
 
 " ===
 " === dashboard
@@ -961,7 +979,7 @@ map  N <Plug>(easymotion-prev)
 " ===
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
-let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0,'Buffer':1 }
+let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0,'Buffer':1 ,'File':1}
 let g:Lf_PopupPreviewPosition = 'bottom'
 
 let g:Lf_ShortcutF = "<leader>ff"
@@ -969,6 +987,7 @@ noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
 noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+noremap <leader>fu :<C-U><C-R>=printf("Leaderf function %s", "")<CR><CR>
 
 noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
 noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
