@@ -65,7 +65,7 @@ set laststatus=2
 set inccommand=split
 set completeopt=longest,noinsert,menuone,noselect,preview
 set visualbell
-set lazyredraw "same as above
+" set lazyredraw "same as above
 
 " restore cursor position which last was.
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
@@ -94,13 +94,14 @@ set virtualedit=block
 
 
 
-silent !mkdir -p ~/.config/nvim/tmp/backup
-silent !mkdir -p ~/.config/nvim/tmp/undo
-set backupdir=~/.config/nvim/tmp/backup,.
-set directory=~/.config/nvim/tmp/backup,.
+silent !mkdir -p $HOME/.config/nvim/tmp/backup
+silent !mkdir -p $HOME/.config/nvim/tmp/undo
+set backupdir=$HOME/.config/nvim/tmp/backup,.
+set directory=$HOME/.config/nvim/tmp/backup,.
+
 
 set undofile
-set undodir=~/.config/nvim/tmp/undo,.
+set undodir=$HOME/.config/nvim/tmp/undo,.
 
 
 " ===
@@ -295,10 +296,26 @@ Plug 'https://github.com/winston0410/cmd-parser.nvim'
 Plug 'https://github.com/winston0410/range-highlight.nvim'
 
 Plug 'https://github.com/tpope/vim-repeat'
-
+" Plug 'https://github.com/glepnir/dashboard-nvim'
 
 call plug#end()
 
+" ===
+" === dashboard
+" ===
+" let g:dashboard_default_executive ='fzf'
+" " let dashboard_session_directory='$HOME/.config/nvim/tmp/session'
+" nmap <Leader>ss :<C-u>SessionSave<CR>
+" nmap <Leader>sl :<C-u>SessionLoad<CR>
+" nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
+" nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
+" nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
+" nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
+" nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
+" nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
+" ===
+" === end dashboard
+" ===
 
 " ===
 " === indent-blankline
@@ -1291,6 +1308,7 @@ let g:neoformat_enabled_javascript = ['jsbeautify']
 " === end neoformat
 " ===
 
+" e ++enc=<encoding> reopen current buffer with <encoding>
 
 " ===
 " === cusom functions and commands
