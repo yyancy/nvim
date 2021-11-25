@@ -22,7 +22,7 @@ syntax on                 " 支持语法高亮显示
 set number                " show line number.
 set hidden
 set relativenumber
-set cursorline " displays a line on the line where the cursor is
+" set cursorline " displays a line on the line where the cursor is
 filetype plugin indent on " 启用根据文件类型自动缩进
 set mouse=a
 set wrap
@@ -71,7 +71,7 @@ set visualbell
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
 
 " set list
-set list
+" set list
 set listchars=tab:▸\ ,trail:▫
 set scrolloff=5
 set sidescroll=10
@@ -91,6 +91,7 @@ set formatoptions-=tc
 set colorcolumn=100
 set updatetime=2000
 set virtualedit=block
+set isfname+=&
 
 
 
@@ -111,7 +112,11 @@ set undodir=$HOME/.config/nvim/tmp/undo,.
 autocmd BufNewFile *.txt set ft=confluencewiki
 autocmd BufEnter *.txt set ft=confluencewiki
 
-
+augroup remember_folds
+    autocmd!
+    au BufWinLeave,BufLeave ?* silent! mkview
+    au BufWinEnter           ?* silent! loadview
+augroup END
 
 
 " ===
@@ -213,7 +218,7 @@ call plug#begin('~/.config/nvim/plugged')
 "状态栏的例子
 Plug 'https://github.com/bling/vim-airline'
 Plug 'https://github.com/vim-airline/vim-airline-themes'
-Plug 'https://gitee.com/winwood/vim-deus'
+Plug 'https://github.com/ajmwagar/vim-deus'
 Plug 'https://github.com/pechorin/any-jump.vim'
 Plug 'https://github.com/skywind3000/asynctasks.vim'
 Plug 'https://github.com/skywind3000/asyncrun.vim'
@@ -241,17 +246,16 @@ Plug 'https://github.com/akinsho/bufferline.nvim'
 Plug 'https://github.com/wellle/context.vim'
 " Plug 'https://github.com/Yggdroot/indentLine'
 Plug 'https://github.com/lukas-reineke/indent-blankline.nvim'
-"Plug 'https://gitee.com/zimingzpp/nerdtree'
-Plug 'https://gitee.com/yyancyer/coc.nvim', {'branch': 'release'}
-Plug 'https://gitee.com/yyancyer/ultisnips'
-Plug 'https://gitee.com/zgpio/vim-snippets'
-Plug 'https://gitee.com/yyancyer/vim-visual-multi'
+Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
+Plug 'https://github.com/SirVer/ultisnips'
+Plug 'https://github.com/honza/vim-snippets'
+Plug 'https://github.com/mg979/vim-visual-multi'
 " Plug 'https://gitee.com/yyancyer/vim-floaterm'
 " Plug 'https://gitee.com/yyancyer/auto-pairs'
-Plug 'https://gitee.com/yyancyer/vim-terminal-help'
+Plug 'https://github.com/skywind3000/vim-terminal-help'
 " Plug 'https://gitee.com/yyancyer/nerdcommenter'
-Plug 'https://gitee.com/yyancyer/vim-autoformat'
-Plug 'https://gitee.com/yyancyer/SimpylFold'
+Plug 'https://github.com/vim-autoformat/vim-autoformat'
+Plug 'https://github.com/tmhedberg/SimpylFold'
 Plug 'https://github.com/junegunn/vim-easy-align'
 "Plug 'mg979/vim-xtabline'
 Plug 'https://github.com/gcmt/wildfire.vim'
@@ -278,7 +282,7 @@ Plug 'https://github.com/turbio/bracey.vim'
 Plug 'https://github.com/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'https://github.com/dhruvasagar/vim-table-mode'
 Plug 'https://github.com/ceigh/AutoSave.nvim' , {'branch': 'execution_message-fn'}
-Plug 'https://gitee.com/yyancyer/vim-devicons'
+Plug 'https://github.com/ryanoasis/vim-devicons'
 " Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/machakann/vim-sandwich'
 Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -289,7 +293,7 @@ Plug 'https://github.com/lambdalisue/suda.vim'
 Plug 'https://github.com/haringsrob/nvim_context_vt'
 " Plug 'https://github.com/rmagatti/auto-session'
 Plug 'https://github.com/akinsho/toggleterm.nvim'
-
+Plug 'https://github.com/dhruvasagar/vim-open-url'
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/chaoren/vim-wordmotion' 
 Plug 'https://github.com/winston0410/cmd-parser.nvim'
@@ -299,6 +303,30 @@ Plug 'https://github.com/tpope/vim-repeat'
 " Plug 'https://github.com/glepnir/dashboard-nvim'
 
 call plug#end()
+
+" ===
+" === url
+" ===
+nmap <leader>gB :exe 'OpenURL '. substitute(expand('<cfile>'),'&','"&"','g')<CR>
+" ===
+" === end url
+" ===
+
+" ===
+" === auto-session
+" ===
+lua<<EOF
+
+-- require('auto-session').setup {
+--      log_level = 'info',
+--      auto_session_suppress_dirs = {'~/', '~/Projects'}
+--    }
+
+EOF
+
+" ===
+" === end auto-session
+" ===
 
 " ===
 " === dashboard
@@ -352,7 +380,11 @@ EOF
 " === nvim_context_vt
 " ===
 lua<<EOF
-require('nvim_context_vt').setup {}
+require('nvim_context_vt').setup {
+  custom_text_handler = function(node)
+    return nil
+  end,
+  }
 EOF
 
 " ===
