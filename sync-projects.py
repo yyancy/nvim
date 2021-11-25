@@ -12,8 +12,8 @@ with open("projects.txt") as file:
 def exe(args, location, suppress):
     command = subprocess.run(args, stdout=PIPE, stderr=PIPE, cwd = location)
     if command.returncode != 0 and not suppress:
-        print(command.stdout)
-        print(command.stderr)
+        print(str(command.stdout), file=sys.stderr)
+        print(str(command.stderr), file=sys.stderr)
         exit(1)
 
 
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     if len(sys.argv) >= 2:
         action = sys.argv[1]
     if not action in all_commands:
-        print('accepted arguments: pull, push.')
+        print('accepted arguments: pull, push.', file=sys.stderr)
         exit(1)
 
     if action == 'pull':
