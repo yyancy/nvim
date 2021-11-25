@@ -20,13 +20,13 @@
     "dls": {
       "command": "diagnostic-languageserver",
       "args": ["--stdio"],
-      "filetypes": [ "sh", "email", "dart" ],
+      "filetypes": ["sh", "email", "dart"],
       "initializationOptions": {
         "linters": {
           "shellcheck": {
             "command": "shellcheck",
             "debounce": 100,
-            "args": [ "--format=gcc", "-"],
+            "args": ["--format=gcc", "-"],
             "offsetLine": 0,
             "offsetColumn": 0,
             "sourceName": "shellcheck",
@@ -67,13 +67,13 @@
         "formatters": {
           "dartfmt": {
             "command": "dartfmt",
-            "args": [ "--fix" ]
+            "args": ["--fix"]
           }
         },
         "filetypes": {
           "sh": "languagetool",
           "email": "languagetool",
-          "*" : "languagetool"
+          "*": "languagetool"
 
         },
         "formatFiletypes": {
@@ -82,6 +82,7 @@
       }
     }
   },
+  "snippets.userSnippetsDirectory": "$HOME/.config/nvim/UltiSnips/",
   "coc.preferences.colorSupport": true,
   "tsserver.enable": true,
   "explorer.icon.enableNerdfont": true,
@@ -90,15 +91,15 @@
   "diagnostic-languageserver.filetypes": {
     "vim": "vint",
     "email": "languagetool",
-    "markdown": [ "write-good", "markdownlint" ],
+    "markdown": ["write-good", "markdownlint"],
     "sh": "languagetool",
     "elixir": ["mix_credo", "mix_credo_compile"],
     "eelixir": ["mix_credo", "mix_credo_compile"],
     "php": ["phpstan", "psalm"],
-    "yaml": [ "yamllint" ],
-    "cmake": [ "cmake-lint", "cmakelint" ],
+    "yaml": ["yamllint"],
+    "cmake": ["cmake-lint", "cmakelint"],
     "systemd": "systemd-analyze",
-    "*" : "languagetool"
+    "*": "languagetool"
   },
   "diagnostic-languageserver.formatFiletypes": {
     "dart": "dartfmt",
@@ -111,4 +112,3 @@
     "cmake": "cmake-format"
   }
 }
-
