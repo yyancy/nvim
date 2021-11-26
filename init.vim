@@ -173,8 +173,8 @@ noremap <c-j> <c-w><c-j>
 noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
 
-noremap j gj
-noremap k gk
+" noremap j gj
+" noremap k gk
 
 map <leader>\| :set splitright<CR>:vsplit<CR>
 map <leader>sj :set nosplitright<CR>:vsplit<CR>
