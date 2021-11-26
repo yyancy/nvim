@@ -492,7 +492,10 @@ nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
 
 noremap <leader><C-n> :Files<cr>
 nmap <C-E> :Buffers<cr>
-" imap <leader><tab> <plug>(fzf-maps-i)
+nmap <leader>mm :CocList maps<CR>
+
+
+
 " ===
 " === wildfile.vim
 " ===
@@ -1402,4 +1405,3 @@ command  -nargs=1 ActiveProfile call Profile(<f-args>)
 " ===
 " === end cusom functions and commands
 " ===
-
