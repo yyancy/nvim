@@ -171,8 +171,8 @@ noremap <c-j> <c-w><c-j>
 noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
 
-" noremap j gj
-" noremap k gk
+noremap j gj
+noremap k gk
 
 map <leader>\| :set splitright<CR>:vsplit<CR>
 map <leader>sj :set nosplitright<CR>:vsplit<CR>
@@ -235,8 +235,8 @@ Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/christoomey/vim-tmux-navigator'
 Plug 'https://github.com/haya14busa/vim-asterisk'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+Plug 'https://github.com/nvim-lua/plenary.nvim'
+Plug 'https://github.com/nvim-telescope/telescope.nvim'
 
 " treesitter
 Plug 'https://github.com/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -1140,7 +1140,7 @@ map gz# <Plug>(asterisk-gz#)
 let g:context_add_mappings = 0
 let g:context_nvim_no_redraw = 1
 
-let g:context_max_filesize = 2000000
+let g:context_max_filesize = 1000
 autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:context_max_filesize || f == -2 | execute ":ContextDisable" | endif
 " ===
 " === end context.vim
