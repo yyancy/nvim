@@ -17,7 +17,6 @@ def toggle_github(action: str):
     elif action == 'show':
         print(current_dir.stdout)
 
-
 """
 add github alternate website.
 

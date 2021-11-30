@@ -517,9 +517,11 @@ nmap <leader>S <Plug>(wildfire-quick-select)
 runtime macros/sandwich/keymap/surround.vim
 " if you have not copied default recipes
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
-
 " add spaces inside bracket
 let g:sandwich#recipes += [
+      \   {'buns': ['"', '"'], 'quoteescape': 1, 'expand_range': 0, 'nesting': 0, 'linewise': 0},
+      \   {'buns': ["'", "'"], 'quoteescape': 1, 'expand_range': 0, 'nesting': 0, 'linewise': 0},
+      \   {'buns': ["`", "`"], 'quoteescape': 1, 'expand_range': 0, 'nesting': 0, 'linewise': 0},
       \   {'buns': ['{ ', ' }'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['{']},
       \   {'buns': ['[ ', ' ]'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['[']},
       \   {'buns': ['( ', ' )'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['(']},
@@ -527,6 +529,18 @@ let g:sandwich#recipes += [
       \   {'buns': ['\[\s*', '\s*\]'], 'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['[']},
       \   {'buns': ['(\s*', '\s*)'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['(']},
       \ ]
+
+  " auto
+  silent! omap <unique> ib <Plug>(textobj-sandwich-auto-i)
+  silent! xmap <unique> ib <Plug>(textobj-sandwich-auto-i)
+  silent! omap <unique> ab <Plug>(textobj-sandwich-auto-a)
+  silent! xmap <unique> ab <Plug>(textobj-sandwich-auto-a)
+
+  " query
+  silent! omap <unique> is <Plug>(textobj-sandwich-query-i)
+  silent! xmap <unique> is <Plug>(textobj-sandwich-query-i)
+  silent! omap <unique> as <Plug>(textobj-sandwich-query-a)
+  silent! xmap <unique> as <Plug>(textobj-sandwich-query-a)
 " ===
 " === end vim-sandwich
 " ===
@@ -1152,11 +1166,11 @@ autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:contex
 lua<<EOF
 require'hop'.setup()
 -- place this in one of your configuration file(s)
-vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
-vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
-vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1()<cr>",{})
-vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_words()<cr>", {})
-vim.api.nvim_set_keymap('', '<leader>l', "<cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>", {})
+ vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
+ vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
+ vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1()<cr>",{})
+ vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_words()<cr>", {})
+ vim.api.nvim_set_keymap('', '<leader>l', "<cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>", {})
 EOF
 onoremap f v:HopChar1<CR>
 " ===
@@ -1495,6 +1509,8 @@ let g:neoformat_enabled_javascript = ['jsbeautify']
 " ===
 " === end neoformat
 " ===
+
+" nmap t <Plug>Lightspeed_s
 
 " e ++enc=<encoding> reopen current buffer with <encoding>
 
