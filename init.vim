@@ -529,13 +529,11 @@ let g:sandwich#recipes += [
       \   {'buns': ['\[\s*', '\s*\]'], 'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['[']},
       \   {'buns': ['(\s*', '\s*)'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['(']},
       \ ]
-
   " auto
   silent! omap <unique> ib <Plug>(textobj-sandwich-auto-i)
   silent! xmap <unique> ib <Plug>(textobj-sandwich-auto-i)
   silent! omap <unique> ab <Plug>(textobj-sandwich-auto-a)
   silent! xmap <unique> ab <Plug>(textobj-sandwich-auto-a)
-
   " query
   silent! omap <unique> is <Plug>(textobj-sandwich-query-i)
   silent! xmap <unique> is <Plug>(textobj-sandwich-query-i)
