@@ -68,7 +68,7 @@ set visualbell
 " set lazyredraw "same as above
 
 " restore cursor position which last was.
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
+au BufReadPost * if line("'\"") > 2 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
 
 " set list
 " set list
@@ -82,7 +82,7 @@ set sidescroll=10
 set clipboard+=unnamedplus
 
 set guioptions+=a
-set foldmethod=indent
+" set foldmethod=indent
 set foldlevel=99
 set foldenable
 set formatoptions-=tc
@@ -214,6 +214,9 @@ noremap <leader>tx :r !figlet
 
 call plug#begin('~/.config/nvim/plugged')
 
+" temporary
+" Plug 'https://github.com/sheerun/vim-polyglot'
+
 " adorn editor
 Plug 'https://github.com/bling/vim-airline'
 Plug 'https://github.com/vim-airline/vim-airline-themes'
@@ -308,7 +311,7 @@ Plug 'https://github.com/liuchengxu/vista.vim'
 Plug 'https://github.com/dhruvasagar/vim-open-url'
 Plug 'https://github.com/lambdalisue/suda.vim'
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
-" Plug 'https://github.com/rmagatti/auto-session'
+Plug 'https://github.com/rmagatti/auto-session'
 Plug 'https://github.com/Pocco81/AbbrevMan.nvim'
 
 " new text objects
@@ -350,11 +353,11 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 " === auto-session
 " ===
 lua<<EOF
--- require('auto-session').setup {
---       log_level = 'info',
---       auto_session_root_dir = vim.fn.stdpath('config').."/tmp/session/",
---       auto_session_suppress_dirs = {'~/', '~/Projects'}
---     }
+ require('auto-session').setup {
+       log_level = 'info',
+       auto_session_root_dir = vim.fn.stdpath('config').."/tmp/session/",
+       auto_session_suppress_dirs = {'~/', '~/Projects'}
+     }
 
 EOF
 
@@ -374,10 +377,10 @@ nmap <leader>gB :exe 'OpenURL '. substitute(expand('<cfile>'),'&','"&"','g')<CR>
 " === dashboard.vim
 " ===
 let g:dashboard_default_executive ='telescope'
-nmap <Leader><Leader>ss :<C-u>SessionSave<CR>
-nmap <Leader><Leader>sl :<C-u>SessionLoad<CR>
+nmap <Leader><Leader>ss :<C-u>SaveSession<CR>
+nmap <Leader><Leader>sl :<C-u>RestoreSession<CR>
 nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-" let g:dashboard_session_directory = '~/.config/nvim/tmp/session'
+let g:dashboard_session_directory = $HOME.'/.config/nvim/tmp/session'
 " ===
 " === end dashboard.vim
 " ===
@@ -621,13 +624,40 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+
+function! IsLineEmpty(line)
+    return match(a:line, "^\\s*$") != -1
+endfu
+
+function! s:check_space() abort
+  let col = col('.') 
+  let head_str =  getline('.')[:col - 1]
+  echo head_str
+  startinsert
+  if IsLineEmpty(head_str) !=0
+    if  IsLineEmpty(getline(line(".")-1)) ==1
+      " echo  "empty line above"
+      normal kdd0a
+    else
+      " echo "non-empty line above"
+      normal kJa
+    endif
+  else
+    normal kJi
+  endif
+endfunction
+
+
+
+command CheckSpace call s:check_space()
+imap <c-u> <esc>:CheckSpace<CR>
 " Use <A-,> to trigger completion.
 inoremap <silent><expr> <A-,> coc#refresh()
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+" \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 
 
@@ -968,21 +998,36 @@ let g:suda_smart_edit = 1
 " ===
 " === nvim-treesitter
 " ===
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
 ensure_installed = {"python","c","html","javascript","css","json" },     -- one of "all", "language", or a list of languages
-highlight = {
-enable = true,              -- false will disable the whole extension
-disable = {  "rust" },  -- list of language that will be disabled
-},
-  matchup = {
-  enable = true
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = {  "rust" },  -- list of language that will be disabled
   },
-context_commentstring = {
-enable = true,
+  matchup = {
+    enable = true
+  },
+  context_commentstring = {
+    enable = true,
     enable_autocmd = false
-    }
-  }
+  },
+incremental_selection = {
+enable = true,
+keymaps = {
+  init_selection = "gnn",
+  node_incremental = "grn",
+  scope_incremental = "grc",
+  node_decremental = "grm",
+  },
+},
+indent = {
+enable = false
+}
+ 
+}
 require 'nvim-treesitter.install'.compilers = { "clang" }
 EOF
 

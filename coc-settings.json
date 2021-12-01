@@ -18,7 +18,7 @@
       "ignoredRootPaths": []
     }
   },
-  "snippets.userSnippetsDirectory": "$HOME/.config/nvim/UltiSnips/",
+  "snippets.userSnippetsDirectory": "~/.config/nvim/UltiSnips/",
   "coc.preferences.colorSupport": true,
   "tsserver.enable": true,
   "explorer.icon.enableNerdfont": true,
