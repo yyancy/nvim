@@ -11,7 +11,6 @@
 "  \___\___/|_| |_|_| |_|\__, |\__,_|_|  \__,_|\__|_|\___/|_| |_|___/
 "                        |___/
 
-
 " ===
 " === common configuration
 " ===
@@ -446,13 +445,29 @@ let g:matchup_matchparen_offscreen = {'method': 'popup'}
 " === end vim-matchup
 " ===
 
+
 " ===
 " === nvim-autopairs
 " ===
 lua<<EOF
-require('nvim-autopairs').setup{}
-EOF
+local npairs = require("nvim-autopairs")
+local Rule = require('nvim-autopairs.rule')
+npairs.setup({
+    check_ts = true,
+    ts_config = { },
+    fast_wrap = {},
+})
+local ts_conds = require('nvim-autopairs.ts-conds')
 
+
+-- press % => %% only while inside a comment or string
+npairs.add_rules({
+  Rule("%", "%", "lua")
+    :with_pair(ts_conds.is_ts_node({'string','comment'})),
+  Rule("$", "$", "lua")
+    :with_pair(ts_conds.is_not_ts_node({'function'}))
+})
+EOF
 " ===
 " === end nvim-autopairs
 " ===
@@ -652,12 +667,12 @@ endfunction
 command CheckSpace call s:check_space()
 imap <c-u> <esc>:CheckSpace<CR>
 " Use <A-,> to trigger completion.
-inoremap <silent><expr> <A-,> coc#refresh()
+inoremap <silent><expr> <C-,> coc#refresh()
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-" \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 
 
@@ -729,10 +744,12 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
+
+set cmdheight=2
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<C-f>"
 inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
@@ -773,11 +790,6 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
-nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 
 
 " grep word under cursor
