@@ -151,6 +151,10 @@ vmap <C-c> y
 vmap <C-v> p
 imap <C-v> <esc>p`]a
 map <S-C-v> p
+
+map <C-a> :echo('C-a')<CR>
+map <C-S-a> :echo('C-S-a')<CR>
+
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
 nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
 
@@ -745,7 +749,6 @@ xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
 
-set cmdheight=2
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
