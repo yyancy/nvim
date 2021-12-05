@@ -229,6 +229,7 @@ Plug 'https://github.com/lukas-reineke/indent-blankline.nvim'
 Plug 'https://github.com/ryanoasis/vim-devicons'
 Plug 'https://github.com/kyazdani42/nvim-web-devicons'
 Plug 'https://github.com/glepnir/dashboard-nvim'
+Plug 'https://github.com/marko-cerovac/material.nvim'
 " bufferline or statusline
 Plug 'https://github.com/akinsho/bufferline.nvim'
 
@@ -316,6 +317,7 @@ Plug 'https://github.com/lambdalisue/suda.vim'
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/rmagatti/auto-session'
 Plug 'https://github.com/Pocco81/AbbrevMan.nvim'
+Plug 'https://github.com/theniceboy/antovim'
 
 " new text objects
 Plug 'https://github.com/chaoren/vim-wordmotion' 
@@ -946,7 +948,9 @@ let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\
 
 " crscheme murphy        " 修改配色
 " color deus
-colorscheme OceanicNext
+" colorscheme OceanicNext
+let g:material_style = 'oceanic'
+colorscheme material
 
 
 
