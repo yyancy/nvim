@@ -953,8 +953,6 @@ let g:material_style = 'oceanic'
 colorscheme material
 
 
-
-
 " ===
 " === auto-pairs
 " ===
