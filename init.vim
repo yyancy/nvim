@@ -149,7 +149,7 @@ let g:terminal_color_15 = '#eeeeec'
 let mapleader=" "
 vmap <C-c> y
 vmap <C-v> p
-imap <C-v> <esc>p`]a
+imap <C-v> <C-r>+
 map <S-C-v> p
 
 map <C-a> :echo('C-a')<CR>
@@ -230,8 +230,10 @@ Plug 'https://github.com/ryanoasis/vim-devicons'
 Plug 'https://github.com/kyazdani42/nvim-web-devicons'
 Plug 'https://github.com/glepnir/dashboard-nvim'
 Plug 'https://github.com/marko-cerovac/material.nvim'
+
 " bufferline or statusline
 Plug 'https://github.com/akinsho/bufferline.nvim'
+Plug 'https://github.com/bagrat/vim-buffet'
 
 " jump and search
 Plug 'https://github.com/Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
@@ -244,6 +246,8 @@ Plug 'https://github.com/christoomey/vim-tmux-navigator'
 Plug 'https://github.com/haya14busa/vim-asterisk'
 Plug 'https://github.com/nvim-lua/plenary.nvim'
 Plug 'https://github.com/nvim-telescope/telescope.nvim'
+Plug 'https://github.com/machakann/vim-sandwich'
+Plug 'https://github.com/svermeulen/vim-subversive'
 
 " treesitter
 Plug 'https://github.com/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -271,6 +275,7 @@ Plug 'https://github.com/MattesGroeger/vim-bookmarks'
 " fold
 Plug 'https://github.com/tmhedberg/SimpylFold'
 Plug 'https://github.com/wellle/context.vim'
+Plug 'https://github.com/haringsrob/nvim_context_vt'
 
 " LSP 
 Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
@@ -301,9 +306,7 @@ Plug 'https://github.com/shime/vim-livedown'
 Plug 'https://github.com/turbio/bracey.vim'
 Plug 'https://github.com/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'https://github.com/dhruvasagar/vim-table-mode'
-Plug 'https://github.com/machakann/vim-sandwich'
-Plug 'https://github.com/svermeulen/vim-subversive'
-Plug 'https://github.com/haringsrob/nvim_context_vt'
+
 
 " terminal
 Plug 'https://github.com/akinsho/toggleterm.nvim'
@@ -934,7 +937,7 @@ nmap ga <Plug>(EasyAlign)
 " ===
 
 
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 " let g:airline_theme='luna'
 let g:airline_theme='oceanicnext'
 let g:airline_powerline_fonts = 1
@@ -1360,45 +1363,74 @@ EOF
 " ===
 " === bufferline
 " ===
-set termguicolors
+" set termguicolors
 lua<<EOF
-require("bufferline").setup{
-  options = {
-    numbers = function(opts)
-      return string.format('%s.', opts.ordinal)
-    end,
-    diagnostics = 'coc',
-    offsets = {
-    {
-        filetype = 'coc-explorer',
-        text = "File Explorer",
-        highlight = "Directory",
-        text_align = "left"
-
-    }
-    }
-  }
-}
+-- require("bufferline").setup{
+--   options = {
+--     numbers = function(opts)
+--       return string.format('%s.', opts.ordinal)
+--     end,
+--     diagnostics = 'coc',
+--     offsets = {
+--     {
+--         filetype = 'coc-explorer',
+--         text = "File Explorer",
+--         highlight = "Directory",
+--         text_align = "left"
+-- 
+--     }
+--     }
+--   }
+-- }
 EOF
-map <silent> <leader>gb :BufferLinePick<CR>
-
-nnoremap <silent>[b :BufferLineCycleNext<CR>
-nnoremap <silent>]b :BufferLineCyclePrev<CR>
-
-nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
-nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
-nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
-nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
-nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
-nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
-nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
-nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
-nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
-
+" map <silent> <leader>gb :BufferLinePick<CR>
+"
+" nnoremap <silent>[b :BufferLineCycleNext<CR>
+" nnoremap <silent>]b :BufferLineCyclePrev<CR>
+"
+" nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+" nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+" nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+" nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+" nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+" nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+" nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+" nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+" nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
+"
 " ===
 " === end bufferline
 " ===
+" ===
+" === vim-buffet
+" ===
+let g:buffet_show_index = 1
+let g:buffet_powerline_separators = 1
 
+" let g:buffet_powerline_separators = 1
+" let g:buffet_tab_icon = "\uf00a"
+" let g:buffet_left_trunc_icon = "\uf0a8"
+" let g:buffet_right_trunc_icon = "\uf0a9"
+
+noremap <Tab> :bn<CR>
+noremap <S-Tab> :bp<CR>
+noremap <Leader><Tab> :Bw<CR>
+noremap <Leader><S-Tab> :Bw!<CR>
+
+nmap <leader>1 <Plug>BuffetSwitch(1)
+nmap <leader>2 <Plug>BuffetSwitch(2)
+nmap <leader>3 <Plug>BuffetSwitch(3)
+nmap <leader>4 <Plug>BuffetSwitch(4)
+nmap <leader>5 <Plug>BuffetSwitch(5)
+nmap <leader>6 <Plug>BuffetSwitch(6)
+nmap <leader>7 <Plug>BuffetSwitch(7)
+nmap <leader>8 <Plug>BuffetSwitch(8)
+nmap <leader>9 <Plug>BuffetSwitch(9)
+nmap <leader>0 <Plug>BuffetSwitch(10)
+
+" ===
+" === end vim-buffet
+" ===
 
 " ===
 " === wilder.nvim
