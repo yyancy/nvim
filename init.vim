@@ -219,9 +219,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 " temporary
 " Plug 'https://github.com/sheerun/vim-polyglot'
-
+Plug 'https://github.com/nvim-lualine/lualine.nvim'
 " adorn editor
-Plug 'https://github.com/bling/vim-airline'
+" Plug 'https://github.com/bling/vim-airline'
 Plug 'https://github.com/vim-airline/vim-airline-themes'
 Plug 'https://github.com/ajmwagar/vim-deus'
 Plug 'https://github.com/mhartington/oceanic-next'
@@ -330,9 +330,26 @@ Plug 'https://github.com/wellle/targets.vim'
 " command line enhancement
 Plug 'https://github.com/winston0410/cmd-parser.nvim'
 Plug 'https://github.com/gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'https://github.com/winston0410/range-highlight.nvim'
+" Plug 'https://github.com/winston0410/range-highlight.nvifoldexprm'
 
 call plug#end()
+
+" ===
+" === lualine
+" ===
+lua<<EOF
+local OceanicNext = require'lualine.themes.OceanicNext'
+require'lualine'.setup{
+   options = { theme = OceanicNext } 
+  
+}
+
+EOF
+
+" ===
+" === end lualine
+" ===
+
 
 lua<<EOF
 
@@ -946,7 +963,7 @@ let g:airline_left_sep = "\uE0B4"
 let g:airline_right_sep = "\uE0B6"
 
 " set the CN (column number) symbol:
-let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
+" let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 
 
 " crscheme murphy        " 修改配色
@@ -1018,8 +1035,8 @@ let g:suda_smart_edit = 1
 " ===
 " === nvim-treesitter
 " ===
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
 ensure_installed = {"python","c","html","javascript","css","json" },     -- one of "all", "language", or a list of languages
@@ -1155,8 +1172,8 @@ noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
 noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 noremap <leader>fu :<C-U><C-R>=printf("Leaderf function %s", "")<CR><CR>
 
-noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
-noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+" noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+" noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 " search visually selected text literally
 xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 noremap go :<C-U>Leaderf! rg --recall<CR>
