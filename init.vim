@@ -248,6 +248,7 @@ Plug 'https://github.com/nvim-lua/plenary.nvim'
 Plug 'https://github.com/nvim-telescope/telescope.nvim'
 Plug 'https://github.com/machakann/vim-sandwich'
 Plug 'https://github.com/svermeulen/vim-subversive'
+Plug 'https://github.com/matze/vim-move'
 
 " treesitter
 Plug 'https://github.com/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -1246,8 +1247,8 @@ autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:contex
 lua<<EOF
 require'hop'.setup()
 -- place this in one of your configuration file(s)
- vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
- vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
+ vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
+ vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
  vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1()<cr>",{})
  vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_words()<cr>", {})
  vim.api.nvim_set_keymap('', '<leader>l', "<cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>", {})
