@@ -219,17 +219,17 @@ call plug#begin('~/.config/nvim/plugged')
 
 " temporary
 " Plug 'https://github.com/sheerun/vim-polyglot'
-Plug 'https://github.com/nvim-lualine/lualine.nvim'
 " adorn editor
 " Plug 'https://github.com/bling/vim-airline'
-Plug 'https://github.com/vim-airline/vim-airline-themes'
-Plug 'https://github.com/ajmwagar/vim-deus'
-Plug 'https://github.com/mhartington/oceanic-next'
+" Plug 'https://github.com/vim-airline/vim-airline-themes'
+" Plug 'https://github.com/ajmwagar/vim-deus'
+" Plug 'https://github.com/mhartington/oceanic-next'
+Plug 'https://github.com/nvim-lualine/lualine.nvim'
+Plug 'https://github.com/marko-cerovac/material.nvim'
 Plug 'https://github.com/lukas-reineke/indent-blankline.nvim'
 Plug 'https://github.com/ryanoasis/vim-devicons'
 Plug 'https://github.com/kyazdani42/nvim-web-devicons'
 Plug 'https://github.com/glepnir/dashboard-nvim'
-Plug 'https://github.com/marko-cerovac/material.nvim'
 
 " bufferline or statusline
 Plug 'https://github.com/akinsho/bufferline.nvim'
@@ -262,7 +262,7 @@ Plug 'https://github.com/abecodes/tabout.nvim'
 Plug 'https://github.com/windwp/nvim-ts-autotag'
 Plug 'https://github.com/andymass/vim-matchup'
 Plug 'https://github.com/pseewald/vim-anyfold'
-Plug 'https://github.com/qpkorr/vim-bufkill'
+" Plug 'https://github.com/qpkorr/vim-bufkill'
 Plug 'https://github.com/airblade/vim-rooter'
 Plug 'https://github.com/tversteeg/registers.nvim' , { 'branch': 'main' }
 Plug 'https://github.com/mg979/vim-visual-multi'
@@ -274,7 +274,7 @@ Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/MattesGroeger/vim-bookmarks'
 
 " fold
-Plug 'https://github.com/tmhedberg/SimpylFold'
+" Plug 'https://github.com/tmhedberg/SimpylFold'
 Plug 'https://github.com/wellle/context.vim'
 Plug 'https://github.com/haringsrob/nvim_context_vt'
 
@@ -295,7 +295,7 @@ Plug 'https://github.com/RRethy/vim-illuminate'
 Plug 'https://github.com/windwp/nvim-autopairs'
 
 " formating
-Plug 'https://github.com/sbdchd/neoformat'
+" Plug 'https://github.com/sbdchd/neoformat'
 Plug 'https://github.com/vim-autoformat/vim-autoformat'
 
 " comment
