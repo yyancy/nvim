@@ -86,7 +86,7 @@ set foldlevel=99
 set foldenable
 set formatoptions-=tc
 set colorcolumn=100
-set updatetime=2000
+set updatetime=4000
 set virtualedit=block
 set isfname+=&
 set viewoptions=folds,cursor
@@ -110,6 +110,7 @@ set undodir=$HOME/.config/nvim/tmp/undo,.
 " autocmd BufNewFile *.txt set ft=confluencewiki
 " autocmd BufEnter *.txt set ft=confluencewiki
 autocmd CursorHold * normal! m'
+" autocmd CursorHold * if line(".") != 1 | normal! m' | endif
 augroup remember_folds
     autocmd!
     au BufWinLeave,BufLeave ?* silent! mkview
@@ -219,6 +220,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " temporary
 " Plug 'https://github.com/sheerun/vim-polyglot'
+Plug 'https://github.com/xiyaowong/nvim-transparent'
 " adorn editor
 " Plug 'https://github.com/bling/vim-airline'
 " Plug 'https://github.com/vim-airline/vim-airline-themes'
@@ -346,6 +348,22 @@ require'lualine'.setup{
 }
 
 EOF
+
+" ===
+" === transparent
+" ===
+lua<<EOF
+
+require("transparent").setup({
+  enable = false, -- boolean: enable transparent
+  exclude = {}, -- table: groups you don't want to clear
+})
+
+EOF
+
+" ===
+" === end transparent
+" ===
 
 " ===
 " === end lualine
@@ -970,7 +988,7 @@ let g:airline_right_sep = "\uE0B6"
 " crscheme murphy        " 修改配色
 " color deus
 " colorscheme OceanicNext
-let g:material_style = 'oceanic'
+let g:material_style = 'darker'
 colorscheme material
 
 
@@ -986,7 +1004,8 @@ colorscheme material
 " ===
 " === autoformat
 " ===
-
+let g:formatdef_my_custom_c = '"clang-format -style=google"'
+let g:formatters_c = ['my_custom_c']
 noremap <F3> :Autoformat<CR>
 
 " ===
@@ -1430,7 +1449,7 @@ let g:buffet_powerline_separators = 1
 " let g:buffet_left_trunc_icon = "\uf0a8"
 " let g:buffet_right_trunc_icon = "\uf0a9"
 
-noremap <Tab> :bn<CR>
+" noremap <Tab> :bn<CR>
 noremap <S-Tab> :bp<CR>
 noremap <Leader><Tab> :Bw<CR>
 noremap <Leader><S-Tab> :Bw!<CR>
@@ -1635,6 +1654,9 @@ function Profile(log_file)
 endfunction
 command  -nargs=1 ActiveProfile call Profile(<f-args>)
 
+map qw ysiw{
+map <leader>d I& <esc>j0
+map <leader>sw :set wrap!<cr>
 " ===
 " === end cusom functions and commands
 " ===
