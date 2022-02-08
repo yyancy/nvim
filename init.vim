@@ -1081,7 +1081,7 @@ keymaps = {
   },
 },
 indent = {
-enable = false
+enable = true
 }
  
 }
