@@ -86,7 +86,7 @@ set foldlevel=99
 set foldenable
 set formatoptions-=tc
 set colorcolumn=100
-set updatetime=4000
+set updatetime=2000
 set virtualedit=block
 set isfname+=&
 set viewoptions=folds,cursor
@@ -168,7 +168,7 @@ map <leader>T :edit $MYVIMRC<CR>
 map <leader>Z :w<CR>:so $MYVIMRC<CR>
 nmap 0 _
 map <F12> :Vista finder<CR>
-
+imap <C-d> <del>
 " 使用<Ctrl> + hjkl快速在窗口间跳转
 noremap <c-h> <c-w><c-h>
 noremap <c-j> <c-w><c-j>
@@ -220,6 +220,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " temporary
 " Plug 'https://github.com/sheerun/vim-polyglot'
+Plug 'https://github.com/Mofiqul/dracula.nvim'
 Plug 'https://github.com/xiyaowong/nvim-transparent'
 " adorn editor
 " Plug 'https://github.com/bling/vim-airline'
@@ -332,7 +333,14 @@ Plug 'https://github.com/wellle/targets.vim'
 
 " command line enhancement
 Plug 'https://github.com/winston0410/cmd-parser.nvim'
-Plug 'https://github.com/gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
+
+function! UpdateRemotePlugins(...)
+    " Needed to refresh runtime files
+    let &rtp=&rtp
+    UpdateRemotePlugins
+endfunction
+
+Plug 'https://github.com/gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
 " Plug 'https://github.com/winston0410/range-highlight.nvifoldexprm'
 
 call plug#end()
@@ -555,7 +563,7 @@ nmap ss <plug>(SubversiveSubstituteLine)
 nmap S <plug>(SubversiveSubstituteToEndOfLine)
 nmap <leader>s <plug>(SubversiveSubstituteRange)
 xmap <leader>s <plug>(SubversiveSubstituteRange)
-nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
+" nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
 " ===
 " === fzf.vim
 " ===
@@ -908,6 +916,7 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
 
+map <leader>ss :CocList snippets<CR>
 " ===
 " === end coc-snippets
 " ===
@@ -990,6 +999,7 @@ let g:airline_right_sep = "\uE0B6"
 " colorscheme OceanicNext
 let g:material_style = 'darker'
 colorscheme material
+" colorscheme dracula
 
 
 " ===
@@ -1266,8 +1276,8 @@ autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:contex
 lua<<EOF
 require'hop'.setup()
 -- place this in one of your configuration file(s)
- vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
- vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
+ vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
+ vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
  vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1()<cr>",{})
  vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_words()<cr>", {})
  vim.api.nvim_set_keymap('', '<leader>l', "<cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>", {})
