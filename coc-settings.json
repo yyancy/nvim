@@ -16,6 +16,11 @@
       "args": ["start"],
       "filetypes": ["sh"],
       "ignoredRootPaths": []
+    },
+    "efm": {
+      "command": "efm-langserver",
+      "args": [],
+      "filetypes": ["vim","lua"]
     }
   },
   "snippets.userSnippetsDirectory": "~/.config/nvim/UltiSnips/",
@@ -36,7 +41,7 @@
         {
           "line": 1,
           "column": 2,
-          "message": [5,7,4,3]
+          "message": [5, 7, 4, 3]
         }
       ],
       "formatLines": 3

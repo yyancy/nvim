@@ -724,8 +724,8 @@ inoremap <silent><expr> <C-,> coc#refresh()
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+" \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 
 
@@ -905,10 +905,10 @@ imap <C-l> <Plug>(coc-snippets-expand)
 vmap <C-j> <Plug>(coc-snippets-select)
 
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<tab>'
+let g:coc_snippet_next = '<c-j>'
 
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<A-m>'
+let g:coc_snippet_prev = '<c-k>'
 
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
@@ -1396,6 +1396,7 @@ let g:instant_markdown_slow = 1
 " ===
 
 
+
 " ===
 " === nvim-ts-autotag
 " ===
@@ -1485,19 +1486,13 @@ nmap <leader>0 <Plug>BuffetSwitch(10)
 call wilder#setup({'modes': [':', '/', '?']})
 call wilder#set_option('pipeline', [
       \   wilder#branch(
-      \     wilder#python_file_finder_pipeline({
-      \       'file_command': ['rg', '--files'],
-      \       'dir_command': ['fzf', '.', '-type', 'd', '-printf', '%P\n'],
-      \       'filters': ['fuzzy_filter', 'difflib_sorter'],
-      \     }),
       \     wilder#cmdline_pipeline({
-      \       'language': 'python',
       \       'fuzzy': 1,
+      \       'set_pcre2_pattern': 1,
+      \ 'sorter':  wilder#python_difflib_sorter(),
       \     }),
       \     wilder#python_search_pipeline({
-      \       'pattern': wilder#python_fuzzy_pattern(),
-      \       'sorter': wilder#python_difflib_sorter(),
-      \       'engine': 're',
+      \       'pattern': 'fuzzy',
       \     }),
       \   ),
       \ ])
@@ -1667,6 +1662,8 @@ command  -nargs=1 ActiveProfile call Profile(<f-args>)
 map qw ysiw{
 map <leader>d I& <esc>j0
 map <leader>sw :set wrap!<cr>
+
+
 " ===
 " === end cusom functions and commands
 " ===
