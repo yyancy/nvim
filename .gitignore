@@ -1,4 +1,8 @@
 plugged/
-.netrwhist
-*.txt
 tmp/
+
+
+.netrwhist
+
+*.txt
+*.log
