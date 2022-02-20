@@ -81,12 +81,12 @@ set sidescroll=10
 set clipboard+=unnamedplus
 
 set guioptions+=a
-" set foldmethod=indent
+set foldmethod=indent
 set foldlevel=99
 set foldenable
 set formatoptions-=tc
 set colorcolumn=100
-set updatetime=2000
+set updatetime=4000
 set virtualedit=block
 set isfname+=&
 set viewoptions=folds,cursor
@@ -210,8 +210,10 @@ inoremap <C-T> <C-F>
 noremap 0 _
 noremap <leader>tx :r !figlet
 
-
-
+" <++>
+" <++>
+" <++>
+" <++>
 """"""""""""""""""""""""""""""""""""""""
 "  plugins and relative configuration  "
 """"""""""""""""""""""""""""""""""""""""
@@ -221,7 +223,7 @@ call plug#begin('~/.config/nvim/plugged')
 " temporary
 " Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Mofiqul/dracula.nvim'
-Plug 'https://github.com/xiyaowong/nvim-transparent'
+" Plug 'https://github.com/xiyaowong/nvim-transparent'
 " adorn editor
 " Plug 'https://github.com/bling/vim-airline'
 " Plug 'https://github.com/vim-airline/vim-airline-themes'
@@ -310,7 +312,7 @@ Plug 'https://github.com/shime/vim-livedown'
 Plug 'https://github.com/turbio/bracey.vim'
 Plug 'https://github.com/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'https://github.com/dhruvasagar/vim-table-mode'
-
+Plug 'https://github.com/dkarter/bullets.vim'
 
 " terminal
 Plug 'https://github.com/akinsho/toggleterm.nvim'
@@ -362,10 +364,10 @@ EOF
 " ===
 lua<<EOF
 
-require("transparent").setup({
-  enable = false, -- boolean: enable transparent
-  exclude = {}, -- table: groups you don't want to clear
-})
+-- require("transparent").setup({
+--   enable = false, -- boolean: enable transparent
+--   exclude = {}, -- table: groups you don't want to clear
+-- })
 
 EOF
 
@@ -666,6 +668,7 @@ let g:coc_global_extensions = [
       \'coc-yaml',
       \'coc-explorer',
       \'coc-vimlsp',
+      \'coc-tabnine',
       \]
 
 " Always show the signcolumn, otherwise it would shift the text each time
@@ -1065,8 +1068,8 @@ let g:suda_smart_edit = 1
 " ===
 " === nvim-treesitter
 " ===
-" set foldmethod=expr
-" set foldexpr=nvim_treesitter#foldexpr()
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
 ensure_installed = {"python","c","html","javascript","css","json" },     -- one of "all", "language", or a list of languages
@@ -1097,7 +1100,6 @@ enable = true
 }
 require 'nvim-treesitter.install'.compilers = { "clang" }
 EOF
-
 " ===
 " === vim-illuminate
 " ===
@@ -1127,7 +1129,6 @@ omap / <Plug>(easymotion-tn)
 " different highlight method and have some other features )
 " map  n <Plug>(easymotion-next)
 " map  N <Plug>(easymotion-prev)
-
 
 " ===
 " === ccls
