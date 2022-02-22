@@ -153,7 +153,7 @@ vmap <C-v> p
 imap <C-v> <C-r>+
 map <S-C-v> p
 
-map <C-a> :echo('C-a')<CR>
+" map <C-a> :echo('C-a')<CR>
 map <C-S-a> :echo('C-S-a')<CR>
 
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
