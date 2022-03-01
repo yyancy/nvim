@@ -50,7 +50,7 @@
   "diagnostic-languageserver.filetypes": {
     "vim": "vint",
     "email": "languagetool",
-    "markdown": ["languagetool", "markdownlint"],
+    "markdown": [ "markdownlint"],
     "sh": "shellcheck",
     "elixir": ["mix_credo", "mix_credo_compile"],
     "eelixir": ["mix_credo", "mix_credo_compile"],
