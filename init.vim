@@ -223,6 +223,7 @@ call plug#begin('~/.config/nvim/plugged')
 " temporary
 " Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Mofiqul/dracula.nvim'
+Plug 'https://github.com/lilydjwg/fcitx.vim', { 'branch':'fcitx4' }
 " Plug 'https://github.com/xiyaowong/nvim-transparent'
 " adorn editor
 " Plug 'https://github.com/bling/vim-airline'
