@@ -229,7 +229,10 @@ call plug#begin('~/.config/nvim/plugged')
 " temporary
 " Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Mofiqul/dracula.nvim'
-Plug 'https://github.com/lilydjwg/fcitx.vim', { 'branch':'fcitx4' }
+Plug 'http://github.com/tpope/vim-dadbod'
+if has('unix')
+  Plug 'https://github.com/lilydjwg/fcitx.vim', { 'branch':'fcitx4' }
+endif
 " Plug 'https://github.com/xiyaowong/nvim-transparent'
 " adorn editor
 " Plug 'https://github.com/bling/vim-airline'
@@ -261,7 +264,7 @@ Plug 'https://github.com/nvim-telescope/telescope.nvim'
 Plug 'https://github.com/machakann/vim-sandwich'
 Plug 'https://github.com/svermeulen/vim-subversive'
 Plug 'https://github.com/matze/vim-move'
-
+Plug 'https://github.com/wellle/tmux-complete.vim'
 " treesitter
 Plug 'https://github.com/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -750,7 +753,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nn <silent> L :call CocActionAsync('doHover')<cr>
+" nn <silent> L :call CocActionAsync('doHover')<cr>
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
