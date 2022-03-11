@@ -230,6 +230,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Mofiqul/dracula.nvim'
 Plug 'http://github.com/tpope/vim-dadbod'
+Plug 'http://github.com/fatih/vim-go',  { 'do': ':GoInstallBinaries' }
 if has('unix')
   Plug 'https://github.com/lilydjwg/fcitx.vim', { 'branch':'fcitx4' }
 endif
@@ -368,6 +369,16 @@ require'lualine'.setup{
 }
 
 EOF
+
+" ===
+" === vim-go
+" ===
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_highlight_types = 1
+" ===
+" === end vim-go
+" ===
 
 " ===
 " === transparent
@@ -753,7 +764,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-" nn <silent> L :call CocActionAsync('doHover')<cr>
+nn <silent> L :call CocActionAsync('doHover')<cr>
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 

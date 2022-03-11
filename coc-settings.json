@@ -11,6 +11,11 @@
 
       }
     },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    },
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],
@@ -20,7 +25,7 @@
     "efm": {
       "command": "efm-langserver",
       "args": [],
-      "filetypes": ["vim","lua"]
+      "filetypes": ["vim", "lua"]
     }
   },
   "snippets.userSnippetsDirectory": "~/.config/nvim/UltiSnips/",
@@ -50,7 +55,7 @@
   "diagnostic-languageserver.filetypes": {
     "vim": "vint",
     "email": "languagetool",
-    "markdown": [ "markdownlint"],
+    "markdown": ["markdownlint"],
     "sh": "shellcheck",
     "elixir": ["mix_credo", "mix_credo_compile"],
     "eelixir": ["mix_credo", "mix_credo_compile"],
