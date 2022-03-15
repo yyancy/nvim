@@ -529,25 +529,74 @@ lua<<EOF
 local npairs = require("nvim-autopairs")
 local Rule = require('nvim-autopairs.rule')
 npairs.setup({
-    check_ts = true,
+    check_ts = false,
     ts_config = { },
     fast_wrap = {},
 })
 local ts_conds = require('nvim-autopairs.ts-conds')
 
 
--- press % => %% only while inside a comment or string
-npairs.add_rules({
-  Rule("%", "%", "lua")
-    :with_pair(ts_conds.is_ts_node({'string','comment'})),
-  Rule("$", "$", "lua")
-    :with_pair(ts_conds.is_not_ts_node({'function'}))
-})
+local npairs = require'nvim-autopairs'
+local Rule = require'nvim-autopairs.rule'
+local cond = require'nvim-autopairs.conds'
+
+npairs.add_rule(Rule("$$","$$"))
+npairs.add_rules {
+  Rule(' ', ' ')
+    :with_pair(function(opts)
+      local pair = opts.line:sub(opts.col, opts.col + 1)
+      return vim.tbl_contains({ '()', '{}', '[]' }, pair)
+    end)
+    :with_move(cond.none())
+    :with_cr(cond.none())
+    :with_del(function(opts)
+      local col = vim.api.nvim_win_get_cursor(0)[2]
+      local context = opts.line:sub(col - 1, col + 2)
+      return vim.tbl_contains({ '(  )', '{  }', '[  ]' }, context)
+    end),
+  Rule('', ' )')
+    :with_pair(cond.none())
+    :with_move(function(opts) return opts.char == ')' end)
+    :with_cr(cond.none())
+    :with_del(cond.none())
+    :use_key(')'),
+  Rule('', ' }')
+    :with_pair(cond.none())
+    :with_move(function(opts) return opts.char == '}' end)
+    :with_cr(cond.none())
+    :with_del(cond.none())
+    :use_key('}'),
+  Rule('', ' ]')
+    :with_pair(cond.none())
+    :with_move(function(opts) return opts.char == ']' end)
+    :with_cr(cond.none())
+    :with_del(cond.none())
+    :use_key(']'),
+}
+
+
+local remap = vim.api.nvim_set_keymap
+local npairs = require('nvim-autopairs')
+npairs.setup({map_cr=false})
+
+-- skip it, if you use another global object
+_G.MUtils= {}
+
+MUtils.completion_confirm=function()
+  if vim.fn.pumvisible() ~= 0  then
+    return vim.fn["coc#_select_confirm"]()
+  else
+    return npairs.autopairs_cr()
+  end
+end
+
+remap('i' , '<CR>','v:lua.MUtils.completion_confirm()', {expr = true , noremap = true})
+
 EOF
 " ===
 " === end nvim-autopairs
 " ===
-
+ 
 " ===
 " === tabout
 " ===
@@ -1142,8 +1191,8 @@ map <Leader><Leader>k <Plug>(easymotion-k)
 " nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " Gif config
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
 
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
 " Without these mappings, `n` & `N` works fine. (These mappings just provide
@@ -1485,7 +1534,7 @@ let g:buffet_powerline_separators = 1
 " noremap <Tab> :bn<CR>
 noremap <S-Tab> :bp<CR>
 noremap <Leader><Tab> :Bw<CR>
-noremap <Leader><S-Tab> :Bw!<CR>
+noremap <Leader><S-Tab> :Bonly<CR>
 
 nmap <leader>1 <Plug>BuffetSwitch(1)
 nmap <leader>2 <Plug>BuffetSwitch(2)
@@ -1505,7 +1554,7 @@ nmap <leader>0 <Plug>BuffetSwitch(10)
 " ===
 " === wilder.nvim
 " ===
-call wilder#setup({'modes': [':', '/', '?']})
+call wilder#setup({'modes': [':']})
 call wilder#set_option('pipeline', [
       \   wilder#branch(
       \     wilder#cmdline_pipeline({
