@@ -359,6 +359,15 @@ Plug 'https://github.com/gelguy/wilder.nvim', { 'do': function('UpdateRemotePlug
 call plug#end()
 
 " ===
+" === word-motion
+" ===
+let g:wordmotion_prefix = '<Leader>'
+
+" ===
+" === end word-motion
+" ===
+
+" ===
 " === lualine
 " ===
 lua<<EOF
