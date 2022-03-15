@@ -230,7 +230,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Mofiqul/dracula.nvim'
 Plug 'http://github.com/tpope/vim-dadbod'
-Plug 'http://github.com/fatih/vim-go',  { 'do': ':GoInstallBinaries' }
+Plug 'https://github.com/fatih/vim-go',  { 'do': ':GoInstallBinaries' }
 if has('unix')
   Plug 'https://github.com/lilydjwg/fcitx.vim', { 'branch':'fcitx4' }
 endif
@@ -1119,7 +1119,7 @@ enable = true
 }
  
 }
-require 'nvim-treesitter.install'.compilers = { "clang" }
+require 'nvim-treesitter.install'.compilers = { "clang","gcc" }
 EOF
 " ===
 " === vim-illuminate
