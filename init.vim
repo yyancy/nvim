@@ -208,6 +208,8 @@ noremap <leader>w :w<cr>
 noremap <leader>x :x<cr>
 " Opening a terminal window
 "noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>
+noremap ; :
+noremap : ;
 noremap > >>
 noremap < <<
 vnoremap > >gv
@@ -362,7 +364,7 @@ call plug#end()
 " ===
 " === word-motion
 " ===
-let g:wordmotion_prefix = '<Leader>'
+let g:wordmotion_prefix = '<Alt>'
 
 " ===
 " === end word-motion
@@ -840,7 +842,7 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 
-set termguicolors
+" set termguicolors
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
