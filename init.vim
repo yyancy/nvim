@@ -230,6 +230,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Mofiqul/dracula.nvim'
 Plug 'http://github.com/tpope/vim-dadbod'
+" Plug 'http://github.com/romgrk/barbar.nvim'
 Plug 'http://github.com/fatih/vim-go',  { 'do': ':GoInstallBinaries' }
 if has('unix')
   Plug 'https://github.com/lilydjwg/fcitx.vim', { 'branch':'fcitx4' }
@@ -811,7 +812,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> <leader>gd <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nn <silent> L :call CocActionAsync('doHover')<cr>
 " Use K to show documentation in preview window.
@@ -830,7 +831,7 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" set termguicolors
+set termguicolors
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -1520,11 +1521,30 @@ EOF
 " ===
 " === end bufferline
 " ===
+
+" ===
+" === barbar.nvim
+" ===
+" let bufferline = get(g:, 'bufferline', {})
+" let bufferline.icons = 'buffer_number'
+" nnoremap <silent>    <leader>1 :BufferGoto 1<CR>
+" nnoremap <silent>    <leader>2 :BufferGoto 2<CR>
+" nnoremap <silent>    <leader>3 :BufferGoto 3<CR>
+" nnoremap <silent>    <leader>4 :BufferGoto 4<CR>
+" nnoremap <silent>    <leader>5 :BufferGoto 5<CR>
+" nnoremap <silent>    <leader>6 :BufferGoto 6<CR>
+" nnoremap <silent>    <leader>7 :BufferGoto 7<CR>
+" nnoremap <silent>    <leader>8 :BufferGoto 8<CR>
+" nnoremap <silent>    <leader>9 :BufferLast<CR>
+
+" ===
+" === end barbar.nvim
+" ===
+
+
 " ===
 " === vim-buffet
 " ===
-let g:buffet_show_index = 1
-let g:buffet_powerline_separators = 1
 
 " let g:buffet_powerline_separators = 1
 " let g:buffet_tab_icon = "\uf00a"
@@ -1532,6 +1552,10 @@ let g:buffet_powerline_separators = 1
 " let g:buffet_right_trunc_icon = "\uf0a9"
 
 " noremap <Tab> :bn<CR>
+
+
+let g:buffet_show_index = 1
+let g:buffet_powerline_separators = 1
 noremap <S-Tab> :bp<CR>
 noremap <Leader><Tab> :Bw<CR>
 noremap <Leader><S-Tab> :Bonly<CR>
