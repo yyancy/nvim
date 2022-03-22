@@ -231,7 +231,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'https://github.com/Mofiqul/dracula.nvim'
 Plug 'http://github.com/tpope/vim-dadbod'
 " Plug 'http://github.com/romgrk/barbar.nvim'
-Plug 'http://github.com/fatih/vim-go',  { 'do': ':GoInstallBinaries' }
+Plug 'https://github.com/fatih/vim-go',  { 'do': ':GoInstallBinaries' }
 if has('unix')
   Plug 'https://github.com/lilydjwg/fcitx.vim', { 'branch':'fcitx4' }
 endif
@@ -358,6 +358,15 @@ Plug 'https://github.com/gelguy/wilder.nvim', { 'do': function('UpdateRemotePlug
 " Plug 'https://github.com/winston0410/range-highlight.nvifoldexprm'
 
 call plug#end()
+
+" ===
+" === word-motion
+" ===
+let g:wordmotion_prefix = '<Leader>'
+
+" ===
+" === end word-motion
+" ===
 
 " ===
 " === lualine
@@ -1169,7 +1178,7 @@ enable = true
 }
  
 }
-require 'nvim-treesitter.install'.compilers = { "clang" }
+require 'nvim-treesitter.install'.compilers = { "clang","gcc" }
 EOF
 " ===
 " === vim-illuminate
