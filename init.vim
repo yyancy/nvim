@@ -209,7 +209,6 @@ noremap <leader>x :x<cr>
 " Opening a terminal window
 "noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>
 noremap ; :
-noremap : ;
 noremap > >>
 noremap < <<
 vnoremap > >gv
@@ -343,7 +342,7 @@ Plug 'https://github.com/Pocco81/AbbrevMan.nvim'
 Plug 'https://github.com/theniceboy/antovim'
 
 " new text objects
-Plug 'https://github.com/chaoren/vim-wordmotion' 
+" Plug 'https://github.com/chaoren/vim-wordmotion' 
 Plug 'https://github.com/gcmt/wildfire.vim'
 Plug 'https://github.com/wellle/targets.vim'
 
@@ -364,7 +363,7 @@ call plug#end()
 " ===
 " === word-motion
 " ===
-let g:wordmotion_prefix = '<Alt>'
+" let g:wordmotion_prefix = '<Alt>'
 
 " ===
 " === end word-motion
