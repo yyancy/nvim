@@ -9,5 +9,5 @@ My000 nvim configurations.
 2. open file
 3. run :CocCommand workspace.showOutput and select option diagnostic-languageserver
 
-### completion functools
+### completion tools
 * tabnine

@@ -189,8 +189,8 @@ map <leader>sj :set nosplitright<CR>:vsplit<CR>
 map <leader>- :set nosplitbelow<CR>:split<CR>
 map <leader>sk :set splitbelow<CR>:split<CR>
 
-map <up> :res +5<CR>
-map <down> :res -5<CR>
+map <up> :res -5<CR>
+map <down> :res +5<CR>
 map <left> :vertical resize-5<CR>
 map <right> :vertical resize+5<CR>
 
@@ -231,6 +231,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Mofiqul/dracula.nvim'
 Plug 'http://github.com/tpope/vim-dadbod'
+Plug 'https://github.com/kkoomen/vim-doge'
 " Plug 'http://github.com/romgrk/barbar.nvim'
 Plug 'https://github.com/fatih/vim-go',  { 'do': ':GoInstallBinaries' }
 if has('unix')
@@ -768,7 +769,6 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 
 
 function! s:check_back_space() abort
@@ -1765,7 +1765,7 @@ endfunction
 command  -nargs=1 ActiveProfile call Profile(<f-args>)
 
 map qw ysiw{
-map <leader>d I& <esc>j0
+" map <leader>d I& <esc>j0
 map <leader>sw :set wrap!<cr>
 
 
