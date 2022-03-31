@@ -669,7 +669,7 @@ nmap <leader>S <Plug>(wildfire-quick-select)
 " === vim-sandwich
 " ===
 " using surround keymapings
-runtime macros/sandwich/keymap/surround.vim
+" runtime macros/sandwich/keymap/surround.vim
 " if you have not copied default recipes
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 " add spaces inside bracket
@@ -1767,7 +1767,8 @@ command  -nargs=1 ActiveProfile call Profile(<f-args>)
 map qw ysiw{
 " map <leader>d I& <esc>j0
 map <leader>sw :set wrap!<cr>
-
+inoremap <a-o> <Esc>/[)}"'\]>]<CR>:nohl<CR>a
+inoremap <a-i> <Esc>?[({"'\[<]<CR>:nohl<CR>a
 
 " ===
 " === end cusom functions and commands
