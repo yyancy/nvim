@@ -172,6 +172,8 @@ nnoremap <leader>; A;<esc>
 
 map <leader>T :edit $MYVIMRC<CR>
 map <leader>Z :w<CR>:so $MYVIMRC<CR>
+nnoremap n nzz
+nnoremap N Nzz
 nmap 0 _
 map <F12> :Vista finder<CR>
 imap <C-d> <del>
