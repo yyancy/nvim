@@ -1769,8 +1769,8 @@ command  -nargs=1 ActiveProfile call Profile(<f-args>)
 map qw ysiw{
 " map <leader>d I& <esc>j0
 map <leader>sw :set wrap!<cr>
-inoremap <a-o> <Esc>/[)}"'\]>]<CR>:nohl<CR>a
-inoremap <a-i> <Esc>?[({"'\[<]<CR>:nohl<CR>a
+inoremap <a-o> <Esc>/[)}"'\]>`]<CR>:nohl<CR>a
+inoremap <a-i> <Esc>?[({"'\[<`]<CR>:nohl<CR>a
 
 " ===
 " === end cusom functions and commands

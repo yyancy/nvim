@@ -19,3 +19,4 @@ second, you can use `gn` object motion to change or delete highlight content. fo
 
 ### jump backward and forward in the changelist.
 using `g;` and `g,` jump backward and forward
+using `gi` go to the latest insert position in insert mode
