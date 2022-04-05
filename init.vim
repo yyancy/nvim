@@ -1245,6 +1245,7 @@ map <Leader><Leader>k <Plug>(easymotion-k)
 " ===
 " === telescope
 " ===
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>mm <cmd>Telescope keymaps<cr>
 nnoremap <leader>fh <cmd>Telescope oldfiles<cr>
 nnoremap <leader>fa <cmd>Telescope live_grep<cr>
@@ -1275,7 +1276,7 @@ let g:Lf_PreviewInPopup = 1
 let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0,'Buffer':1 ,'File':0}
 let g:Lf_PopupPreviewPosition = 'bottom'
 
-let g:Lf_ShortcutF = "<leader>ff"
+" let g:Lf_ShortcutF = "<leader>ff"
 noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
