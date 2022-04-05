@@ -158,7 +158,8 @@ vmap <C-c> y
 vmap <C-v> p
 imap <C-v> <C-r>+
 map <S-C-v> p
-
+nmap i i<C-f>
+nmap a a<C-f>
 " map <C-a> :echo('C-a')<CR>
 map <C-S-a> :echo('C-S-a')<CR>
 
@@ -230,6 +231,7 @@ noremap <leader>tx :r !figlet
 call plug#begin('~/.config/nvim/plugged')
 
 " temporary
+Plug 'https://github.com/tpope/vim-abolish'
 " Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Mofiqul/dracula.nvim'
 Plug 'http://github.com/tpope/vim-dadbod'
@@ -371,6 +373,16 @@ call plug#end()
 " ===
 " === end word-motion
 " ===
+
+" ===
+" === vim-abolish
+" ===
+let g:abolish_save_file = $HOME.'/.config/nvim/after/plugin/abolish.vim'
+" source $HOME/.config/nvim/abolish.vim
+" ===
+" === end vim-abolish
+" ===
+
 
 " ===
 " === lualine
@@ -540,77 +552,59 @@ let g:matchup_matchparen_offscreen = {'method': 'popup'}
 " === nvim-autopairs
 " ===
 lua<<EOF
-local npairs = require("nvim-autopairs")
-local Rule = require('nvim-autopairs.rule')
-npairs.setup({
-    check_ts = false,
-    ts_config = { },
-    fast_wrap = {},
-})
-local ts_conds = require('nvim-autopairs.ts-conds')
-
-
-local npairs = require'nvim-autopairs'
-local Rule = require'nvim-autopairs.rule'
-local cond = require'nvim-autopairs.conds'
-
-npairs.add_rule(Rule("$$","$$"))
-npairs.add_rules {
-  Rule(' ', ' ')
-    :with_pair(function(opts)
-      local pair = opts.line:sub(opts.col, opts.col + 1)
-      return vim.tbl_contains({ '()', '{}', '[]' }, pair)
-    end)
-    :with_move(cond.none())
-    :with_cr(cond.none())
-    :with_del(function(opts)
-      local col = vim.api.nvim_win_get_cursor(0)[2]
-      local context = opts.line:sub(col - 1, col + 2)
-      return vim.tbl_contains({ '(  )', '{  }', '[  ]' }, context)
-    end),
-  Rule('', ' )')
-    :with_pair(cond.none())
-    :with_move(function(opts) return opts.char == ')' end)
-    :with_cr(cond.none())
-    :with_del(cond.none())
-    :use_key(')'),
-  Rule('', ' }')
-    :with_pair(cond.none())
-    :with_move(function(opts) return opts.char == '}' end)
-    :with_cr(cond.none())
-    :with_del(cond.none())
-    :use_key('}'),
-  Rule('', ' ]')
-    :with_pair(cond.none())
-    :with_move(function(opts) return opts.char == ']' end)
-    :with_cr(cond.none())
-    :with_del(cond.none())
-    :use_key(']'),
-}
-
-
-local remap = vim.api.nvim_set_keymap
-local npairs = require('nvim-autopairs')
-npairs.setup({map_cr=false})
-
--- skip it, if you use another global object
-_G.MUtils= {}
-
-MUtils.completion_confirm=function()
-  if vim.fn.pumvisible() ~= 0  then
-    return vim.fn["coc#_select_confirm"]()
-  else
-    return npairs.autopairs_cr()
-  end
-end
-
-remap('i' , '<CR>','v:lua.MUtils.completion_confirm()', {expr = true , noremap = true})
+ local npairs = require("nvim-autopairs")
+ local Rule = require('nvim-autopairs.rule')
+ npairs.setup({
+     check_ts = false,
+     ts_config = { },
+     fast_wrap = {},
+ })
+ local ts_conds = require('nvim-autopairs.ts-conds')
+ 
+ 
+ local npairs = require'nvim-autopairs'
+ local Rule = require'nvim-autopairs.rule'
+ local cond = require'nvim-autopairs.conds'
+ 
+ npairs.add_rule(Rule("$$","$$"))
+ npairs.add_rules {
+   Rule(' ', ' ')
+     :with_pair(function(opts)
+       local pair = opts.line:sub(opts.col, opts.col + 1)
+       return vim.tbl_contains({ '()', '{}', '[]' }, pair)
+     end)
+     :with_move(cond.none())
+     :with_cr(cond.none())
+     :with_del(function(opts)
+       local col = vim.api.nvim_win_get_cursor(0)[2]
+       local context = opts.line:sub(col - 1, col + 2)
+       return vim.tbl_contains({ '(  )', '{  }', '[  ]' }, context)
+     end),
+   Rule('', ' )')
+     :with_pair(cond.none())
+     :with_move(function(opts) return opts.char == ')' end)
+     :with_cr(cond.none())
+     :with_del(cond.none())
+     :use_key(')'),
+   Rule('', ' }')
+     :with_pair(cond.none())
+     :with_move(function(opts) return opts.char == '}' end)
+     :with_cr(cond.none())
+     :with_del(cond.none())
+     :use_key('}'),
+   Rule('', ' ]')
+     :with_pair(cond.none())
+     :with_move(function(opts) return opts.char == ']' end)
+     :with_cr(cond.none())
+     :with_del(cond.none())
+     :use_key(']'),
+ }
 
 EOF
 " ===
 " === end nvim-autopairs
 " ===
- 
+
 " ===
 " === tabout
 " ===
@@ -806,8 +800,8 @@ endfunction
 command CheckSpace call s:check_space()
 imap <c-u> <esc>:CheckSpace<CR>
 " Use <A-,> to trigger completion.
-inoremap <silent><expr> <C-,> coc#refresh()
-
+inoremap <silent><expr> <A-,> coc#refresh()
+inoremap <C-P> <C-\><C-O>:call CocActionAsync('showSignatureHelp')<cr>
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 " inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
@@ -1252,6 +1246,8 @@ map <Leader><Leader>k <Plug>(easymotion-k)
 " === telescope
 " ===
 nnoremap <leader>mm <cmd>Telescope keymaps<cr>
+nnoremap <leader>fh <cmd>Telescope oldfiles<cr>
+nnoremap <leader>fa <cmd>Telescope live_grep<cr>
 lua<<EOF
 
 local actions = require('telescope.actions')
@@ -1447,10 +1443,17 @@ load_natural_dictionaries_at_startup = true,
 load_programming_dictionaries_at_startup = true,
 natural_dictionaries = {
   ["nt_en"] = {
-    }
+    ["adn"] = "AND",
+    ["THe"] = "rm_am"
+    },
+  ["nt_my_slangs"] = {
+        ["lmao"] = "LMAO"
+          }
   },
 programming_dictionaries = {
-  ["pr_py"] = {}
+  ["pr_py"] = {
+    ["tset"] = "test"
+    }
   }
 })
 EOF
