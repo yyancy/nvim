@@ -156,7 +156,7 @@ let g:terminal_color_15 = '#eeeeec'
 let mapleader=" "
 vmap <C-c> y
 vmap <C-v> p
-imap <C-v> <C-r>+
+imap <C-v> <esc>pa
 map <S-C-v> p
 nmap i i<C-f>
 nmap a a<C-f>
@@ -232,6 +232,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " temporary
 Plug 'https://github.com/tpope/vim-abolish'
+Plug 'https://github.com/fannheyward/telescope-coc.nvim'
 " Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Mofiqul/dracula.nvim'
 Plug 'http://github.com/tpope/vim-dadbod'
@@ -1256,6 +1257,7 @@ require('telescope').setup{
   defaults = {
     disable_devicons = false,
     color_devicons = true,
+    layout_strategy = 'center',
     mappings = {
       i = {
         ["<esc>"] = actions.close
@@ -1263,6 +1265,9 @@ require('telescope').setup{
     },
   }
 }
+
+
+require('telescope').load_extension('coc')
 EOF
 " ===
 " === end telescope
