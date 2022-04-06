@@ -1250,22 +1250,50 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>mm <cmd>Telescope keymaps<cr>
 nnoremap <leader>fh <cmd>Telescope oldfiles<cr>
 nnoremap <leader>fa <cmd>Telescope live_grep<cr>
+
+" lsp with coc.vim configurations
+nnoremap <leader>tc :Telescope coc 
+nnoremap <leader>ls <cmd>Telescope coc workspace_symbols theme=dropdown<cr>
+nnoremap <leader>lr <cmd>Telescope coc references theme=dropdown<cr>
 lua<<EOF
 
 local actions = require('telescope.actions')
+local builtin = require('telescope.builtin')
+
 require('telescope').setup{
   defaults = {
     disable_devicons = false,
     color_devicons = true,
-    layout_strategy = 'center',
+    -- layout_strategy = 'center',
+    layout_config={
+     vertical = {
+       preview_cutoff = 60
+       },
+    },
     mappings = {
       i = {
         ["<esc>"] = actions.close
       },
     },
+  },
+pickers = {
+  find_files = {
+     theme = "dropdown",
+     layout_config = {
+         preview_cutoff = 60
+      }
+    },
+  keymaps = {
+    theme = "dropdown"
+    },
+  live_grep = {
+    theme = "dropdown"
+    },
+  oldfiles = {
+    theme = "dropdown"
+    }
   }
 }
-
 
 require('telescope').load_extension('coc')
 EOF
