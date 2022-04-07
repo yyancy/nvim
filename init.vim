@@ -124,6 +124,11 @@ au FocusLost,WinLeave * :silent! wa
 " Trigger autoread when changing buffers or coming back to vim.
 au FocusGained,BufEnter * :silent! !
 
+augroup insert_remap
+  autocmd FileType c,cpp,go,typescript,json nmap i i<C-f>
+  autocmd FileType c,cpp,go,typescript,json nmap a a<C-f>
+augroup END
+
 " ===
 " === Terminal Behaviors
 " ===
@@ -158,8 +163,6 @@ vmap <C-c> y
 vmap <C-v> p
 imap <C-v> <esc>pa
 map <S-C-v> p
-nmap i i<C-f>
-nmap a a<C-f>
 " map <C-a> :echo('C-a')<CR>
 map <C-S-a> :echo('C-S-a')<CR>
 
@@ -1074,11 +1077,29 @@ let g:airline_right_sep = "\uE0B6"
 " set the CN (column number) symbol:
 " let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 
+" ===
+" === material
+" ===
+lua<<EOF
 
+require('material').setup({
+  custom_highlights = {
+    NvimTreeFolderIcon = { fg = 'LightBlue' },
+    NvimTreeGitNew = { fg = 'cyan' },
+    NvimTreeGitDirty = { fg = 'red' },
+    NvimTreeGitStaged = { guifg = 'LightGreen' }
+  }
+})
+
+EOF
+
+" ===
+" === end material
+" ===
 " crscheme murphy        " 修改配色
 " color deus
 " colorscheme OceanicNext
-let g:material_style = 'darker'
+let g:material_style = 'palenight'
 colorscheme material
 " colorscheme dracula
 
