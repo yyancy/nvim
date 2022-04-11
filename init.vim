@@ -553,24 +553,21 @@ let g:matchup_matchparen_offscreen = {'method': 'popup'}
 " === end vim-matchup
 " ===
 
-
 " ===
 " === nvim-autopairs
 " ===
 lua<<EOF
  local npairs = require("nvim-autopairs")
  local Rule = require('nvim-autopairs.rule')
+ local cond = require'nvim-autopairs.conds'
+ local ts_conds = require('nvim-autopairs.ts-conds')
  npairs.setup({
      check_ts = false,
      ts_config = { },
      fast_wrap = {},
  })
- local ts_conds = require('nvim-autopairs.ts-conds')
  
  
- local npairs = require'nvim-autopairs'
- local Rule = require'nvim-autopairs.rule'
- local cond = require'nvim-autopairs.conds'
  
  npairs.add_rule(Rule("$$","$$"))
  npairs.add_rules {
@@ -705,7 +702,7 @@ let g:sandwich#recipes += [
 " ===
 
 " navigate chunks of current buffer
-nmap [[g <Plug>(coc-git-prevchunk)<Plug>(coc-git-prevchunk)<Plug>(coc-git-prevchunk)
+nmap [[g <Plug>(coc-git-prevchunk)
 nmap ]]g <Plug>(coc-git-nextchunk)
 call repeat#set("\<Plug>(coc-git-prevchunk)", v:count)
 " call AddRepeatableMotion("[[g", "]]g", 1)
