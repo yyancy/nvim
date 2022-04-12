@@ -794,7 +794,7 @@ function! s:check_space() abort
       normal kJa
     endif
   else
-    normal kJi
+    normal kJa
   endif
 endfunction
 
