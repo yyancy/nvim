@@ -250,7 +250,7 @@ endif
 " Plug 'https://github.com/bling/vim-airline'
 " Plug 'https://github.com/vim-airline/vim-airline-themes'
 " Plug 'https://github.com/ajmwagar/vim-deus'
-" Plug 'https://github.com/mhartington/oceanic-next'
+Plug 'https://github.com/mhartington/oceanic-next'
 Plug 'https://github.com/nvim-lualine/lualine.nvim'
 Plug 'https://github.com/marko-cerovac/material.nvim'
 Plug 'https://github.com/lukas-reineke/indent-blankline.nvim'
@@ -794,7 +794,7 @@ function! s:check_space() abort
       normal kJa
     endif
   else
-    normal kJi
+    normal kJa
   endif
 endfunction
 
@@ -840,7 +840,7 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" set termguicolors
+set termguicolors
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -1097,9 +1097,9 @@ EOF
 " ===
 " crscheme murphy        " 修改配色
 " color deus
-" colorscheme OceanicNext
-let g:material_style = 'palenight'
-colorscheme material
+colorscheme OceanicNext
+" let g:material_style = 'palenight'
+" colorscheme material
 " colorscheme dracula
 
 
@@ -1647,28 +1647,35 @@ nmap <leader>0 <Plug>BuffetSwitch(10)
 " ===
 " === wilder.nvim
 " ===
-call wilder#setup({'modes': [':']})
+
+
+call wilder#setup({'modes': [':', '/', '?']})
+
 call wilder#set_option('pipeline', [
       \   wilder#branch(
       \     wilder#cmdline_pipeline({
       \       'fuzzy': 1,
       \       'set_pcre2_pattern': 1,
-      \ 'sorter':  wilder#python_difflib_sorter(),
       \     }),
       \     wilder#python_search_pipeline({
       \       'pattern': 'fuzzy',
       \     }),
       \   ),
       \ ])
-call wilder#set_option('renderer', wilder#popupmenu_renderer({
-      \ 'highlighter': wilder#basic_highlighter(),
-      \ 'left': [
-        \   ' ', wilder#popupmenu_devicons(),
-        \ ],
-        \ 'right': [
-          \   ' ', wilder#popupmenu_scrollbar(),
-          \ ],
-          \ }))
+
+let s:highlighters = [
+        \ wilder#pcre2_highlighter(),
+        \ wilder#basic_highlighter(),
+        \ ]
+
+call wilder#set_option('renderer', wilder#renderer_mux({
+      \ ':': wilder#popupmenu_renderer({
+      \   'highlighter': s:highlighters,
+      \ }),
+      \ '/': wilder#wildmenu_renderer({
+      \   'highlighter': s:highlighters,
+      \ }),
+      \ }))
 " ===
 " === end wilder.nvim
 " ===
