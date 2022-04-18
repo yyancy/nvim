@@ -234,16 +234,19 @@ noremap <leader>tx :r !figlet
 call plug#begin('~/.config/nvim/plugged')
 
 " temporary
+" Plug 'https://github.com/folke/trouble.nvim'
 Plug 'https://github.com/tpope/vim-abolish'
+Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/fannheyward/telescope-coc.nvim'
 " Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/Mofiqul/dracula.nvim'
-Plug 'http://github.com/tpope/vim-dadbod'
+" Plug 'http://github.com/tpope/vim-dadbod'
 Plug 'https://github.com/kkoomen/vim-doge'
 " Plug 'http://github.com/romgrk/barbar.nvim'
 Plug 'https://github.com/fatih/vim-go',  { 'do': ':GoInstallBinaries' }
 if has('unix')
   Plug 'https://github.com/lilydjwg/fcitx.vim', { 'branch':'fcitx4' }
+  Plug 'https://github.com/wellle/tmux-complete.vim'
 endif
 " Plug 'https://github.com/xiyaowong/nvim-transparent'
 " adorn editor
@@ -276,7 +279,8 @@ Plug 'https://github.com/nvim-telescope/telescope.nvim'
 Plug 'https://github.com/machakann/vim-sandwich'
 Plug 'https://github.com/svermeulen/vim-subversive'
 Plug 'https://github.com/matze/vim-move'
-Plug 'https://github.com/wellle/tmux-complete.vim'
+
+
 " treesitter
 Plug 'https://github.com/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -607,6 +611,21 @@ EOF
 " ===
 " === end nvim-autopairs
 " ===
+
+" ===
+" === Trouble
+" ===
+lua<<EOF
+
+  -- require("trouble").setup {
+  -- }
+
+EOF
+
+" ===
+" === end Trouble
+" ===
+
 
 " ===
 " === tabout
@@ -1688,17 +1707,21 @@ require('Comment').setup {
   pre_hook = function(ctx)
   local U = require 'Comment.utils'
 
-  local location = nil
-  if ctx.ctype == U.ctype.block then
-    location = require('ts_context_commentstring.utils').get_cursor_location()
-  elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-    location = require('ts_context_commentstring.utils').get_visual_start_location()
-  end
+  -- Detemine whether to use linewise or blockwise commentstring
+            local type = ctx.ctype == U.ctype.line and '__default' or '__multiline'
 
-  return require('ts_context_commentstring.internal').calculate_commentstring {
-    key = ctx.ctype == U.ctype.line and '__default' or '__multiline',
-    location = location,
-    }
+            -- Determine the location where to calculate commentstring from
+            local location = nil
+            if ctx.ctype == U.ctype.block then
+                location = require('ts_context_commentstring.utils').get_cursor_location()
+            elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+                location = require('ts_context_commentstring.utils').get_visual_start_location()
+            end
+
+            return require('ts_context_commentstring.internal').calculate_commentstring({
+                key = type,
+                location = location,
+            })
 end,
 }
 EOF
