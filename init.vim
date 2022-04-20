@@ -276,6 +276,8 @@ Plug 'https://github.com/christoomey/vim-tmux-navigator'
 Plug 'https://github.com/haya14busa/vim-asterisk'
 Plug 'https://github.com/nvim-lua/plenary.nvim'
 Plug 'https://github.com/nvim-telescope/telescope.nvim'
+Plug 'https://github.com/nvim-telescope/telescope-smart-history.nvim'
+" Plug 'https://github.com/nvim-telescope/telescope-smart-history.nvim'
 Plug 'https://github.com/machakann/vim-sandwich'
 Plug 'https://github.com/svermeulen/vim-subversive'
 Plug 'https://github.com/matze/vim-move'
@@ -1298,7 +1300,6 @@ lua<<EOF
 
 local actions = require('telescope.actions')
 local builtin = require('telescope.builtin')
-
 require('telescope').setup{
   defaults = {
     disable_devicons = false,
@@ -1311,7 +1312,9 @@ require('telescope').setup{
     },
     mappings = {
       i = {
-        ["<esc>"] = actions.close
+        ["<esc>"] = actions.close,
+        ["<Down>"] = require('telescope.actions').cycle_history_next,
+        ["<Up>"] = require('telescope.actions').cycle_history_prev,
       },
     },
   },
@@ -1335,6 +1338,7 @@ pickers = {
 }
 
 require('telescope').load_extension('coc')
+-- require('telescope').load_extension('smart_history')
 EOF
 " ===
 " === end telescope
