@@ -179,6 +179,9 @@ map <leader>Z :w<CR>:so $MYVIMRC<CR>
 nnoremap n nzz
 nnoremap N Nzz
 nmap 0 _
+
+nmap . .`[
+
 map <F12> :Vista finder<CR>
 imap <C-d> <del>
 " 使用<Ctrl> + hjkl快速在窗口间跳转
@@ -235,6 +238,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 " temporary
 " Plug 'https://github.com/folke/trouble.nvim'
+
+Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
+Plug 'https://github.com/stevearc/qf_helper.nvim.git'
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/fannheyward/telescope-coc.nvim'
@@ -379,6 +385,32 @@ call plug#end()
 " === word-motion
 " ===
 " let g:wordmotion_prefix = '<Alt>'
+
+" ===
+" === qf_helper
+" ===
+lua<<EOF
+
+-- require'qf_helper'.setup()
+
+EOF
+
+" ===
+" === end qf_helper
+" ===
+
+" ===
+" === nvim-pqf
+" ===
+lua<<EOF
+
+require('pqf').setup()
+
+EOF
+
+" ===
+" === end nvim-pqf
+" ===
 
 " ===
 " === end word-motion
@@ -1862,6 +1894,36 @@ map qw ysiw{
 map <leader>sw :set wrap!<cr>
 inoremap <a-o> <Esc>/[)}"'\]>`]<CR>:nohl<CR>a
 inoremap <a-i> <Esc>?[({"'\[<`]<CR>:nohl<CR>a
+
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+nmap <silent> <leader><leader>l :call ToggleList("Location List", 'l')<CR>
+nmap <silent> <leader><leader>e :call ToggleList("Quickfix List", 'c')<CR>
 
 " ===
 " === end cusom functions and commands
