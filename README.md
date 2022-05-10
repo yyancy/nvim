@@ -11,3 +11,11 @@ My000 nvim configurations.
 
 ### completion tools
 * tabnine
+
+## FAQ
+
+### non-greedy search
+`.\{-}` or `\v.{-}`
+
+### dot matching include space and newline char
+`\_.`
