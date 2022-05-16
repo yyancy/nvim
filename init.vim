@@ -226,6 +226,10 @@ inoremap <C-T> <C-F>
 noremap 0 _
 noremap <leader>tx :r !figlet
 
+if has('unix')
+  let g:python3_host_prog="/usr/bin/python3"
+endif
+
 " <++>
 " <++>
 " <++>
