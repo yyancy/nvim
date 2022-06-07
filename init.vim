@@ -59,7 +59,7 @@ set laststatus=2
 
 
 
-" set ttimeoutlen=0
+set ttimeoutlen=100
 " set notimeout
 set inccommand=split
 set completeopt=longest,noinsert,menuone,noselect,preview
@@ -244,6 +244,8 @@ call plug#begin('~/.config/nvim/plugged')
 " Plug 'https://github.com/folke/trouble.nvim'
 
 Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
+Plug 'https://github.com/tami5/sqlite.lua.git'
+Plug 'https://github.com/nvim-telescope/telescope-frecency.nvim.git'
 Plug 'https://github.com/stevearc/qf_helper.nvim.git'
 Plug 'https://github.com/tpope/vim-abolish'
 Plug 'https://github.com/tpope/vim-unimpaired'
@@ -256,7 +258,7 @@ Plug 'https://github.com/kkoomen/vim-doge'
 Plug 'https://github.com/fatih/vim-go',  { 'do': ':GoInstallBinaries' }
 if has('unix')
   Plug 'https://github.com/lilydjwg/fcitx.vim', { 'branch':'fcitx4' }
-  Plug 'https://github.com/wellle/tmux-complete.vim'
+  " Plug 'https://github.com/wellle/tmux-complete.vim'
 endif
 " Plug 'https://github.com/xiyaowong/nvim-transparent'
 " adorn editor
@@ -1323,7 +1325,8 @@ map <Leader><Leader>k <Plug>(easymotion-k)
 " ===
 " === telescope
 " ===
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>ff <cmd>Telescope frecency theme=dropdown<cr>
 nnoremap <leader>mm <cmd>Telescope keymaps<cr>
 nnoremap <leader>fh <cmd>Telescope oldfiles<cr>
 nnoremap <leader>fa <cmd>Telescope live_grep<cr>
@@ -1370,10 +1373,16 @@ pickers = {
   oldfiles = {
     theme = "dropdown"
     }
+  },
+extensions = {
+  frecency = {
+    default_workspace = 'CWD'
+    }
   }
 }
 
 require('telescope').load_extension('coc')
+require('telescope').load_extension("frecency")
 -- require('telescope').load_extension('smart_history')
 EOF
 " ===

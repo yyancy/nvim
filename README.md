@@ -2,6 +2,10 @@
 
 My000 nvim configurations.
 
+## TODO
+* currently, the completion list is not good. look for improving it.
+* add MRU sort for telescope.nvim with telescope-frecency.nvim
+
 ## FAQ
 
 ### debug coc
