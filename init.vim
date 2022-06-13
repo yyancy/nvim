@@ -171,8 +171,9 @@ vmap <C-c> y
 vmap <C-v> p
 imap <C-v> <esc>pa
 map <S-C-v> p
-" map <C-a> :echo('C-a')<CR>
+map <C-a> :echo('C-a')<CR>
 map <C-S-a> :echo('C-S-a')<CR>
+map <S-S> :echo('S-S')<CR>
 
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
 nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
@@ -285,10 +286,7 @@ Plug 'https://github.com/akinsho/bufferline.nvim'
 Plug 'https://github.com/bagrat/vim-buffet'
 
 " jump and search
-Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/phaazon/hop.nvim'
-Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/christoomey/vim-tmux-navigator'
 Plug 'https://github.com/haya14busa/vim-asterisk'
 Plug 'https://github.com/nvim-lua/plenary.nvim'
@@ -400,6 +398,11 @@ lua<<EOF
 
 EOF
 
+if !has('unix')
+" sqlite.lua
+let g:sqlite_clib_path="F:/opt/sqlite/sqlite3.dll"
+endif
+" 
 
 " ===
 " === word-motion
@@ -696,12 +699,6 @@ nmap S <plug>(SubversiveSubstituteToEndOfLine)
 nmap <leader>s <plug>(SubversiveSubstituteRange)
 xmap <leader>s <plug>(SubversiveSubstituteRange)
 " nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
-" ===
-" === fzf.vim
-" ===
-
-noremap <leader><C-n> :Files<cr>
-nmap <C-E> :Buffers<cr>
 " nmap <leader>mm :CocList maps<CR>
 
 
@@ -1068,8 +1065,8 @@ endif
 
 " Insert mode completion
 " imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-l> <plug>(fzf-complete-line)
+" imap <c-x><c-f> <plug>(fzf-complete-path)
+" imap <c-x><c-l> <plug>(fzf-complete-line)
 
 
 
@@ -1259,26 +1256,6 @@ EOF
 " augroup END
 
 
-" ===
-" === vim-easymotion
-" ===
-" Move to word
-map  <Leader><Leader>w <Plug>(easymotion-bd-wl)
-map  <Leader><Leader>f <Plug>(easymotion-sl)
-" JK motions: Line motions
-map <Leader><Leader>j <Plug>(easymotion-j)
-map <Leader><Leader>k <Plug>(easymotion-k)
-" nmap <Leader>w <Plug>(easymotion-overwin-w)
-
-" Gif config
-" map  / <Plug>(easymotion-sn)
-" omap / <Plug>(easymotion-tn)
-
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-" map  n <Plug>(easymotion-next)
-" map  N <Plug>(easymotion-prev)
 
 " ===
 " === ccls
@@ -1327,6 +1304,10 @@ nnoremap <leader>fa <cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>
 nnoremap <leader>rn <cmd>call VSCodeNotify('editor.action.rename')<cr>
 nnoremap [g <cmd>call VSCodeNotify('editor.action.marker.prev')<cr>
 nnoremap ]g <cmd>call VSCodeNotify('editor.action.marker.next')<cr>
+nnoremap [[g <cmd>call VSCodeNotify('workbench.action.editor.previousChange')<cr>
+nnoremap ]]g <cmd>call VSCodeNotify('workbench.action.editor.nextChange')<cr>
+nnoremap [c <cmd>call VSCodeNotify('merge-conflict.next')<cr>
+nnoremap ]c <cmd>call VSCodeNotify('merge-conflict.previous')<cr>
 endif
 if !exists('g:vscode')
 " ===
