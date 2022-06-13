@@ -60,6 +60,7 @@ set laststatus=2
 
 
 set ttimeoutlen=100
+set timeoutlen=500
 " set notimeout
 set inccommand=split
 set completeopt=longest,noinsert,menuone,noselect,preview
@@ -74,6 +75,11 @@ au BufReadPost * if line("'\"") > 2 && line("'\"") <= line("$") | exe "normal! g
 set listchars=tab:▸\ ,trail:▫
 set scrolloff=5
 set sidescroll=10
+
+
+" if exists('g:vscode')
+"   finish
+" endif
 
 " set backupdir
 
@@ -124,10 +130,12 @@ au FocusLost,WinLeave * :silent! wa
 " Trigger autoread when changing buffers or coming back to vim.
 au FocusGained,BufEnter * :silent! !
 
+if !exists('g:vscode')
 augroup insert_remap
   autocmd FileType c,cpp,go,typescript,json nmap i i<C-f>
   autocmd FileType c,cpp,go,typescript,json nmap a a<C-f>
 augroup END
+endif
 
 " ===
 " === Terminal Behaviors
@@ -182,7 +190,6 @@ nmap 0 _
 
 nmap . .`[
 
-map <F12> :Vista finder<CR>
 imap <C-d> <del>
 " 使用<Ctrl> + hjkl快速在窗口间跳转
 noremap <c-h> <c-w><c-h>
@@ -240,27 +247,26 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
+
+" quickfix enforcement
+Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
+Plug 'https://github.com/stevearc/qf_helper.nvim.git'
 " temporary
 " Plug 'https://github.com/folke/trouble.nvim'
-
-Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
+Plug 'https://github.com/folke/which-key.nvim.git'
 Plug 'https://github.com/tami5/sqlite.lua.git'
-Plug 'https://github.com/nvim-telescope/telescope-frecency.nvim.git'
-Plug 'https://github.com/stevearc/qf_helper.nvim.git'
 Plug 'https://github.com/tpope/vim-abolish'
-Plug 'https://github.com/tpope/vim-unimpaired'
-Plug 'https://github.com/fannheyward/telescope-coc.nvim'
-" Plug 'https://github.com/sheerun/vim-polyglot'
+" Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/Mofiqul/dracula.nvim'
-" Plug 'http://github.com/tpope/vim-dadbod'
 Plug 'https://github.com/kkoomen/vim-doge'
 " Plug 'http://github.com/romgrk/barbar.nvim'
-Plug 'https://github.com/fatih/vim-go',  { 'do': ':GoInstallBinaries' }
-if has('unix')
-  Plug 'https://github.com/lilydjwg/fcitx.vim', { 'branch':'fcitx4' }
+Plug 'https://github.com/fatih/vim-go',Cond(!exists('g:vscode'), { 'do': ':GoInstallBinaries' })
+Plug 'https://github.com/lilydjwg/fcitx.vim',Cond(has('unix'), { 'branch':'fcitx4' })
   " Plug 'https://github.com/wellle/tmux-complete.vim'
-endif
-" Plug 'https://github.com/xiyaowong/nvim-transparent'
 " adorn editor
 " Plug 'https://github.com/bling/vim-airline'
 " Plug 'https://github.com/vim-airline/vim-airline-themes'
@@ -268,7 +274,8 @@ endif
 Plug 'https://github.com/mhartington/oceanic-next'
 Plug 'https://github.com/nvim-lualine/lualine.nvim'
 Plug 'https://github.com/marko-cerovac/material.nvim'
-Plug 'https://github.com/lukas-reineke/indent-blankline.nvim'
+
+Plug 'https://github.com/lukas-reineke/indent-blankline.nvim',Cond(!exists('g:vscode'))
 Plug 'https://github.com/ryanoasis/vim-devicons'
 Plug 'https://github.com/kyazdani42/nvim-web-devicons'
 Plug 'https://github.com/glepnir/dashboard-nvim'
@@ -278,8 +285,6 @@ Plug 'https://github.com/akinsho/bufferline.nvim'
 Plug 'https://github.com/bagrat/vim-buffet'
 
 " jump and search
-Plug 'https://github.com/Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-Plug 'https://github.com/pechorin/any-jump.vim'
 Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/phaazon/hop.nvim'
 Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -287,9 +292,12 @@ Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/christoomey/vim-tmux-navigator'
 Plug 'https://github.com/haya14busa/vim-asterisk'
 Plug 'https://github.com/nvim-lua/plenary.nvim'
+
 Plug 'https://github.com/nvim-telescope/telescope.nvim'
 Plug 'https://github.com/nvim-telescope/telescope-smart-history.nvim'
-" Plug 'https://github.com/nvim-telescope/telescope-smart-history.nvim'
+Plug 'https://github.com/fannheyward/telescope-coc.nvim'
+Plug 'https://github.com/nvim-telescope/telescope-frecency.nvim.git'
+
 Plug 'https://github.com/machakann/vim-sandwich'
 Plug 'https://github.com/svermeulen/vim-subversive'
 Plug 'https://github.com/matze/vim-move'
@@ -303,15 +311,12 @@ Plug 'https://github.com/skywind3000/asynctasks.vim'
 Plug 'https://github.com/skywind3000/asyncrun.vim'
 
 " editor enhancement
-Plug 'https://github.com/abecodes/tabout.nvim'
 Plug 'https://github.com/windwp/nvim-ts-autotag'
 Plug 'https://github.com/andymass/vim-matchup'
-Plug 'https://github.com/pseewald/vim-anyfold'
-" Plug 'https://github.com/qpkorr/vim-bufkill'
 Plug 'https://github.com/airblade/vim-rooter'
 Plug 'https://github.com/tversteeg/registers.nvim' , { 'branch': 'main' }
 Plug 'https://github.com/mg979/vim-visual-multi'
-Plug 'https://github.com/ceigh/AutoSave.nvim' , {'branch': 'execution_message-fn'}
+Plug 'https://github.com/ceigh/AutoSave.nvim', Cond(!exists('g:vscode'), {'branch': 'execution_message-fn'})
 Plug 'https://github.com/tpope/vim-repeat'
 " Plug 'https://github.com/rhysd/clever-f.vim'
 
@@ -320,12 +325,11 @@ Plug 'https://github.com/MattesGroeger/vim-bookmarks'
 
 " fold
 " Plug 'https://github.com/tmhedberg/SimpylFold'
-Plug 'https://github.com/wellle/context.vim'
-Plug 'https://github.com/haringsrob/nvim_context_vt'
+" Plug 'https://github.com/wellle/context.vim'
+" Plug 'https://github.com/haringsrob/nvim_context_vt'
 
 " LSP 
-Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
-
+Plug 'https://github.com/neoclide/coc.nvim',Cond(!exists('g:vscode'),{'branch': 'release'})
 " snippets
 Plug 'https://github.com/honza/vim-snippets'
 " Plug 'https://gitee.com/yyancyer/vim-floaterm'
@@ -348,8 +352,6 @@ Plug 'https://github.com/numToStr/Comment.nvim'
 Plug 'https://github.com/JoosepAlviste/nvim-ts-context-commentstring'
 
 " html and markdown
-Plug 'https://github.com/shime/vim-livedown'
-Plug 'https://github.com/turbio/bracey.vim'
 Plug 'https://github.com/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'https://github.com/dhruvasagar/vim-table-mode'
 Plug 'https://github.com/dkarter/bullets.vim'
@@ -358,13 +360,14 @@ Plug 'https://github.com/dkarter/bullets.vim'
 Plug 'https://github.com/akinsho/toggleterm.nvim'
 
 " tags
-Plug 'https://github.com/liuchengxu/vista.vim'
+
+Plug 'https://github.com/liuchengxu/vista.vim', Cond(!exists('g:vscode'))
 
 " useful stuffs
 Plug 'https://github.com/dhruvasagar/vim-open-url'
 Plug 'https://github.com/lambdalisue/suda.vim'
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
-Plug 'https://github.com/rmagatti/auto-session'
+Plug 'https://github.com/rmagatti/auto-session', Cond(!exists('g:vscode'))
 Plug 'https://github.com/Pocco81/AbbrevMan.nvim'
 Plug 'https://github.com/theniceboy/antovim'
 
@@ -374,7 +377,7 @@ Plug 'https://github.com/gcmt/wildfire.vim'
 Plug 'https://github.com/wellle/targets.vim'
 
 " command line enhancement
-Plug 'https://github.com/winston0410/cmd-parser.nvim'
+Plug 'https://github.com/winston0410/cmd-parser.nvim', Cond(!exists('g:vscode'))
 
 function! UpdateRemotePlugins(...)
     " Needed to refresh runtime files
@@ -382,10 +385,21 @@ function! UpdateRemotePlugins(...)
     UpdateRemotePlugins
 endfunction
 
-Plug 'https://github.com/gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
+Plug 'https://github.com/gelguy/wilder.nvim',Cond(!exists('g:vscode'), { 'do': function('UpdateRemotePlugins') })
 " Plug 'https://github.com/winston0410/range-highlight.nvifoldexprm'
 
 call plug#end()
+
+lua<<EOF
+
+  require("which-key").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+
+EOF
+
 
 " ===
 " === word-motion
@@ -500,6 +514,7 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 " === end vim-tmux-navigator
 " ===
 
+if !exists('g:vscode')
 " ===
 " === auto-session
 " ===
@@ -511,7 +526,7 @@ lua<<EOF
      }
 
 EOF
-
+endif
 " ===
 " === end auto-session
 " ===
@@ -559,17 +574,18 @@ EOF
 " === nvim_context_vt
 " ===
 lua<<EOF
-require('nvim_context_vt').setup {
-  custom_text_handler = function(node)
-    return nil
-  end,
-  }
+--require('nvim_context_vt').setup {
+ -- custom_text_handler = function(node)
+  --  return nil
+ -- end,
+ -- }
 EOF
 
 " ===
 " === end nvim_context_vt
 " ===
 
+if !exists('g:vscode')
 " ===
 " === autosave
 " ===
@@ -583,6 +599,7 @@ require("autosave").setup{
   debounce_delay = 500
 }
 EOF
+endif
 
 " ===
 " === end autosave
@@ -667,33 +684,6 @@ EOF
 " ===
 
 
-" ===
-" === tabout
-" ===
-lua<<EOF
-require('tabout').setup {
-  tabkey = '<C-o>', -- key to trigger tabout, set to an empty string to disable
-  backwards_tabkey = '<A-o>', -- key to trigger backwards tabout, set to an empty string to disable
-  act_as_tab = true, -- shift content if tab out is not possible
-  act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-enable_backwards = true, -- well ...
-completion = false, -- if the tabkey is used in a completion pum
-tabouts = {
-  {open = "'", close = "'"},
-  {open = '"', close = '"'},
-  {open = '`', close = '`'},
-  {open = '(', close = ')'},
-  {open = '[', close = ']'},
-  {open = '{', close = '}'}
-  },
-ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-exclude = {} -- tabout will ignore these filetypes
-}
-EOF
-
-" ===
-" === end tabout
-" ===
 
 
 " ===
@@ -756,6 +746,7 @@ let g:sandwich#recipes += [
 " === end vim-sandwich
 " ===
 
+if !exists('g:vscode')
 " ===
 " === coc-git
 " ===
@@ -1062,7 +1053,7 @@ map <leader>ss :CocList snippets<CR>
 " ===
 " === end coc-snippets
 " ===
-
+endif
 
 " ===
 " === UltiSnips
@@ -1178,10 +1169,12 @@ let g:formatdef_my_custom_c = '"clang-format -style=google"'
 let g:formatters_c = ['my_custom_c']
 noremap <F3> :Autoformat<CR>
 
+if !exists('g:vscode')
 " ===
 " === vista
 " ===
 
+map <F12> :Vista finder<CR>
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'
 " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
@@ -1204,7 +1197,7 @@ set statusline+=%{NearestMethodOrFunction()}
 " you can add the following line to your vimrc
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
-
+endif
 
 " ===
 " === asynctasks
@@ -1322,6 +1315,20 @@ map <Leader><Leader>k <Plug>(easymotion-k)
 " === end ccls
 " ===
 
+if exists('g:vscode')
+ nnoremap <leader>ff :Find<cr>
+nnoremap <leader>ls <cmd>call VSCodeNotify('workbench.action.showAllSymbols')<cr>
+map <f12> <cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>
+
+
+nnoremap <leader>fa <cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>
+
+
+nnoremap <leader>rn <cmd>call VSCodeNotify('editor.action.rename')<cr>
+nnoremap [g <cmd>call VSCodeNotify('editor.action.marker.prev')<cr>
+nnoremap ]g <cmd>call VSCodeNotify('editor.action.marker.next')<cr>
+endif
+if !exists('g:vscode')
 " ===
 " === telescope
 " ===
@@ -1388,31 +1395,7 @@ EOF
 " ===
 " === end telescope
 " ===
-
-" ===
-" === LeaderF
-" ===
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_PreviewInPopup = 1
-let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0,'Buffer':1 ,'File':0}
-let g:Lf_PopupPreviewPosition = 'bottom'
-
-" let g:Lf_ShortcutF = "<leader>ff"
-noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
-noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
-noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
-noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
-noremap <leader>fu :<C-U><C-R>=printf("Leaderf function %s", "")<CR><CR>
-
-" noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
-" noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
-" search visually selected text literally
-xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
-noremap go :<C-U>Leaderf! rg --recall<CR>
-
-" ===
-" === end LeaderF
-" ===
+endif
 
 
 " ===
@@ -1425,15 +1408,15 @@ noremap go :<C-U>Leaderf! rg --recall<CR>
 " augroup END
 
 " disable anyfold for large files
-let g:LargeFile = 1000000 " file is large if size greater than 1MB
-autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
-function LargeFile()
-  augroup anyfold
-    autocmd! 
-    autocmd Filetype * setlocal foldmethod=indent " fall back to indent folding
-  augroup END
-  execute ":ContextDisable"
-endfunction
+" let g:LargeFile = 1000000 " file is large if size greater than 1MB
+" autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
+" function LargeFile()
+  " augroup anyfold
+    " autocmd! 
+    " autocmd Filetype * setlocal foldmethod=indent " fall back to indent folding
+  " augroup END
+  " execute ":ContextDisable"
+" endfunction
 " ===
 " === end vim-anyfold
 " ===
@@ -1463,11 +1446,11 @@ map gz# <Plug>(asterisk-gz#)
 " ===
 " === context.vim
 " ===
-let g:context_add_mappings = 0
-let g:context_nvim_no_redraw = 1
-
-let g:context_max_filesize = 1000
-autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:context_max_filesize || f == -2 | execute ":ContextDisable" | endif
+" let g:context_add_mappings = 0
+" let g:context_nvim_no_redraw = 1
+"
+" let g:context_max_filesize = 1000
+" autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:context_max_filesize || f == -2 | execute ":ContextDisable" | endif
 " ===
 " === end context.vim
 " ===
