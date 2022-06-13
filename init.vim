@@ -187,6 +187,9 @@ map <leader>T :edit $MYVIMRC<CR>
 map <leader>Z :w<CR>:so $MYVIMRC<CR>
 nnoremap n nzz
 nnoremap N Nzz
+onoremap b vb
+onoremap F vF
+onoremap T vT
 nmap 0 _
 
 nmap . .`[

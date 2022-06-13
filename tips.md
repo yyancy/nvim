@@ -20,3 +20,9 @@ second, you can use `gn` object motion to change or delete highlight content. fo
 ### jump backward and forward in the changelist.
 using `g;` and `g,` jump backward and forward
 using `gi` go to the latest insert position in insert mode
+
+### toggle the exclusivity of a motion
+precede it with a `v` character. eg: `dvw` will delete string `Hello world` to `orld`
+
+
+
