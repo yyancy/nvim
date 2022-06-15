@@ -137,6 +137,11 @@ augroup insert_remap
 augroup END
 endif
 
+augroup highlight_yank
+    autocmd!
+autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup=(vim.fn['hlexists']('HighlightedyankRegion') > 0 and 'HighlightedyankRegion' or 'IncSearch'), timeout=500}
+augroup END
+
 " ===
 " === Terminal Behaviors
 " ===
@@ -341,7 +346,7 @@ Plug 'https://github.com/junegunn/vim-easy-align'
 " Plug 'https://github.com/mfussenegger/nvim-dap-python'
 
 " highlight
-Plug 'https://github.com/RRethy/vim-illuminate'
+Plug 'https://github.com/RRethy/vim-illuminate', Cond(!exists('g:vscode'))
 Plug 'https://github.com/windwp/nvim-autopairs'
 
 " formating
@@ -802,6 +807,8 @@ let g:coc_global_extensions = [
       \'coc-tabnine',
       \]
 
+
+
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
@@ -871,7 +878,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> <leader>gd <Plug>(coc-implementation)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nn <silent> L :call CocActionAsync('doHover')<cr>
 " Use K to show documentation in preview window.
@@ -1302,7 +1309,9 @@ map <f12> <cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>
 
 
 nnoremap <leader>fa <cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>
-
+nnoremap gi <cmd>call VSCodeNotify('editor.action.goToImplementation')<cr>
+nnoremap gy <cmd>call VSCodeNotify('editor.action.goToTypeDefinition')<cr>
+nnoremap gr <cmd>call VSCodeNotify('editor.action.goToReferences')<cr>
 
 nnoremap <leader>rn <cmd>call VSCodeNotify('editor.action.rename')<cr>
 nnoremap [g <cmd>call VSCodeNotify('editor.action.marker.prev')<cr>
@@ -1325,6 +1334,7 @@ nnoremap <leader>fa <cmd>Telescope live_grep<cr>
 " lsp with coc.vim configurations
 nnoremap <leader>tc :Telescope coc 
 nnoremap <leader>ls <cmd>Telescope coc workspace_symbols theme=dropdown<cr>
+nnoremap gO <cmd>Telescope coc document_symbols theme=dropdown<cr>
 nnoremap <leader>lr <cmd>Telescope coc references theme=dropdown<cr>
 lua<<EOF
 

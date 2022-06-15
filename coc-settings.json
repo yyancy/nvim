@@ -30,6 +30,7 @@
   },
   "snippets.userSnippetsDirectory": "~/.config/nvim/UltiSnips/",
   "coc.preferences.colorSupport": true,
+  "yank.highlight.enable": false,
   "tsserver.enable": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.icon.source": "vim-devicons",
