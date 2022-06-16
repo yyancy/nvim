@@ -1313,6 +1313,10 @@ nnoremap gi <cmd>call VSCodeNotify('editor.action.goToImplementation')<cr>
 nnoremap gy <cmd>call VSCodeNotify('editor.action.goToTypeDefinition')<cr>
 nnoremap gr <cmd>call VSCodeNotify('editor.action.goToReferences')<cr>
 
+nnoremap za <cmd>call VSCodeNotify('editor.toggleFold')<cr>
+nnoremap zc <cmd>call VSCodeNotify('editor.fold')<cr>
+nnoremap zo <cmd>call VSCodeNotify('editor.unfold')<cr>
+
 nnoremap <leader>rn <cmd>call VSCodeNotify('editor.action.rename')<cr>
 nnoremap [g <cmd>call VSCodeNotify('editor.action.marker.prev')<cr>
 nnoremap ]g <cmd>call VSCodeNotify('editor.action.marker.next')<cr>
