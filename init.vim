@@ -68,8 +68,9 @@ set visualbell
 " set lazyredraw "same as above
 
 " restore cursor position which last was.
+if !exists('g:vscode')
 au BufReadPost * if line("'\"") > 2 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
-
+endif
 " set list
 " set list
 set listchars=tab:▸\ ,trail:▫
@@ -172,13 +173,16 @@ let g:terminal_color_15 = '#eeeeec'
 " ===
 
 let mapleader=" "
+
+if !exists('g:vscode')
 vmap <C-c> y
 vmap <C-v> p
 imap <C-v> <esc>pa
 map <S-C-v> p
-map <C-a> :echo('C-a')<CR>
-map <C-S-a> :echo('C-S-a')<CR>
-map <S-S> :echo('S-S')<CR>
+endif
+" map <C-a> :echo('C-a')<CR>
+" map <C-S-a> :echo('C-S-a')<CR>
+" map <S-S> :echo('S-S')<CR>
 
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
 nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
@@ -310,7 +314,7 @@ Plug 'https://github.com/matze/vim-move'
 
 
 " treesitter
-Plug 'https://github.com/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'https://github.com/nvim-treesitter/nvim-treesitter',Cond(!exists('g:vscode'), {'do': ':TSUpdate'})
 
 " runner
 Plug 'https://github.com/skywind3000/asynctasks.vim'
