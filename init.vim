@@ -59,7 +59,7 @@ set laststatus=2
 
 
 
-set ttimeoutlen=100
+set ttimeoutlen=500
 set timeoutlen=500
 " set notimeout
 set inccommand=split
@@ -142,6 +142,8 @@ augroup highlight_yank
     autocmd!
 autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup=(vim.fn['hlexists']('HighlightedyankRegion') > 0 and 'HighlightedyankRegion' or 'IncSearch'), timeout=500}
 augroup END
+
+
 
 " ===
 " === Terminal Behaviors
@@ -402,11 +404,11 @@ call plug#end()
 
 lua<<EOF
 
-  require("which-key").setup {
+  -- require("which-key").setup {
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
-  }
+  -- }
 
 EOF
 
@@ -1307,7 +1309,14 @@ EOF
 " ===
 
 if exists('g:vscode')
- nnoremap <leader>ff :Find<cr>
+if has('win32')
+  autocmd InsertLeave * :silent :!C:\\tools\\neovim\\im-select.exe 1033
+  autocmd InsertEnter * :silent :!C:\\tools\\neovim\\im-select.exe 2052
+endif
+autocmd InsertEnter * :!fcitx-remote -t
+autocmd InsertEnter * :!fcitx-remote -t
+
+nnoremap <leader>ff :Find<cr>
 nnoremap <leader>ls <cmd>call VSCodeNotify('workbench.action.showAllSymbols')<cr>
 map <f12> <cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>
 
