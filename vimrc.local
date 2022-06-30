@@ -1,0 +1,108 @@
+set nocompatible
+
+syntax on                 " 支持语法高亮显示
+set number                " show line number.
+set hidden
+set relativenumber
+set cursorline " displays a line on the line where the cursor is
+filetype plugin indent on " 启用根据文件类型自动缩进
+set mouse=a
+set wrap
+set showcmd
+set ignorecase
+set smartcase
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1
+
+" modify cursor pattern.
+let &t_ut=''
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+set path=.,**
+set wildmenu
+set wildmode=longest:list,full
+
+
+set hlsearch
+exec "nohlsearch"
+set incsearch
+
+
+set autoindent            " 开始新行时处理缩进
+set expandtab             " 将制表符Tab展开为空格，这对于Python尤其有用
+set tabstop=2             " 要计算的空格数
+set softtabstop=2
+set shiftwidth=2          " 用于自动缩进的空格数
+set tw=0
+set backspace=2           " 在多数终端上修正退格键Backspace的行为
+set foldlevel=99
+set laststatus=2
+
+set scrolloff=5
+set sidescroll=10
+set clipboard=unnamedplus
+
+" show count of matches
+set shortmess-=S
+
+" restore cursor position which last was.
+au BufReadPost * if line("'\"") > 2 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
+
+
+" mappings
+let mapleader=" "
+
+vmap <C-c> y
+vmap <C-v> p
+imap <C-v> <esc>pa
+map <S-C-v> p
+
+
+nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
+nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
+
+nnoremap [<leader>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
+nnoremap ]<leader>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+nnoremap <leader>, A,<esc>
+nnoremap <leader>; A;<esc>
+
+nnoremap n nzz
+nnoremap N Nzz
+onoremap b vb
+onoremap F vF
+onoremap T vT
+nmap 0 _
+
+nmap . .`[
+
+imap <C-d> <del>
+" 使用<Ctrl> + hjkl快速在窗口间跳转
+noremap <c-h> <c-w><c-h>
+noremap <c-j> <c-w><c-j>
+noremap <c-k> <c-w><c-k>
+noremap <c-l> <c-w><c-l>
+
+noremap j gj
+noremap k gk
+
+map <leader>\| :set splitright<CR>:vsplit<CR>
+map <leader>sj :set nosplitright<CR>:vsplit<CR>
+map <leader>- :set nosplitbelow<CR>:split<CR>
+map <leader>sk :set splitbelow<CR>:split<CR>
+
+noremap <LEADER><CR> :nohlsearch<CR>
+
+noremap <leader>q :q<cr>
+noremap <leader><C-q> :q!<cr>
+noremap <leader>w :w<cr>
+noremap <leader>x :x<cr>
+noremap ; :
+noremap > >>
+noremap < <<
+vnoremap > >gv
+vnoremap < <gv
+inoremap <C-T> <C-F>
+noremap 0 _
+
