@@ -1307,14 +1307,15 @@ EOF
 " ===
 " === end ccls
 " ===
-
-if exists('g:vscode')
 if has('win32')
-  autocmd InsertLeave * :silent :!C:\\tools\\neovim\\im-select.exe 1033
-  autocmd InsertEnter * :silent :!C:\\tools\\neovim\\im-select.exe 2052
+  autocmd InsertLeave * :silent :!F:\\opt\\im-select.exe 1033
+  autocmd InsertEnter * :silent :!F:\\opt\\im-select.exe 2052
 endif
+if exists('g:vscode')
+if has('unix')
 autocmd InsertEnter * :!fcitx-remote -t
 autocmd InsertEnter * :!fcitx-remote -t
+endif 
 
 nnoremap <leader>ff :Find<cr>
 nnoremap <leader>ls <cmd>call VSCodeNotify('workbench.action.showAllSymbols')<cr>
