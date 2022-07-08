@@ -323,7 +323,7 @@ Plug 'https://github.com/skywind3000/asynctasks.vim'
 Plug 'https://github.com/skywind3000/asyncrun.vim'
 
 " editor enhancement
-Plug 'https://github.com/windwp/nvim-ts-autotag'
+Plug 'https://github.com/windwp/nvim-ts-autotag', Cond(!exists('g:vscode'))
 Plug 'https://github.com/andymass/vim-matchup'
 Plug 'https://github.com/airblade/vim-rooter'
 Plug 'https://github.com/tversteeg/registers.nvim' , { 'branch': 'main' }
@@ -361,7 +361,7 @@ Plug 'https://github.com/vim-autoformat/vim-autoformat'
 
 " comment
 Plug 'https://github.com/numToStr/Comment.nvim'
-Plug 'https://github.com/JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'https://github.com/JoosepAlviste/nvim-ts-context-commentstring', Cond(!exists('g:vscode'))
 
 " html and markdown
 Plug 'https://github.com/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -568,6 +568,8 @@ let g:dashboard_session_directory = $HOME.'/.config/nvim/tmp/session'
 " === end dashboard.vim
 " ===
 
+
+if !exists('g:vscode')
 " ===
 " === indent-blankline
 " ===
@@ -582,6 +584,7 @@ require("indent_blankline").setup {
 }
 
 EOF
+endif
 
 " ===
 " === end indent-blankline
@@ -638,7 +641,7 @@ lua<<EOF
  local npairs = require("nvim-autopairs")
  local Rule = require('nvim-autopairs.rule')
  local cond = require'nvim-autopairs.conds'
- local ts_conds = require('nvim-autopairs.ts-conds')
+ -- local ts_conds = require('nvim-autopairs.ts-conds')
  npairs.setup({
      check_ts = false,
      ts_config = { },
@@ -1228,6 +1231,8 @@ noremap <silent><f7> :AsyncTask project-build<cr>
 " ===
 let g:suda_smart_edit = 1
 
+
+if !exists('g:vscode')
 " ===
 " === nvim-treesitter
 " ===
@@ -1263,6 +1268,7 @@ enable = true
 }
 require 'nvim-treesitter.install'.compilers = { "clang","gcc" }
 EOF
+endif
 " ===
 " === vim-illuminate
 " ===
@@ -1601,12 +1607,14 @@ let g:instant_markdown_slow = 1
 
 
 
+if !exists('g:vscode')
 " ===
 " === nvim-ts-autotag
 " ===
 lua<<EOF
 require('nvim-ts-autotag').setup()
 EOF
+endif
 
 " ===
 " === end nvim-ts-autotag
@@ -1707,6 +1715,8 @@ nmap <leader>0 <Plug>BuffetSwitch(10)
 " === end vim-buffet
 " ===
 
+
+if !exists('g:vscode')
 " ===
 " === wilder.nvim
 " ===
@@ -1742,7 +1752,10 @@ call wilder#set_option('renderer', wilder#renderer_mux({
 " ===
 " === end wilder.nvim
 " ===
+endif
 
+
+if !exists('g:vscode')
 " ===
 " === comment.vim
 " ===
@@ -1769,6 +1782,7 @@ require('Comment').setup {
 end,
 }
 EOF
+endif
 
 " ===
 " === end comment.vim
