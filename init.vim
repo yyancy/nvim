@@ -267,6 +267,9 @@ function! Cond(cond, ...)
   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
 
+" temporary plugins
+Plug 'https://github.com/tpope/vim-rsi.git'
+
 " quickfix enforcement
 Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
 Plug 'https://github.com/stevearc/qf_helper.nvim.git'
@@ -301,14 +304,14 @@ Plug 'https://github.com/bagrat/vim-buffet'
 
 " jump and search
 Plug 'https://github.com/phaazon/hop.nvim'
-Plug 'https://github.com/christoomey/vim-tmux-navigator'
+Plug 'https://github.com/christoomey/vim-tmux-navigator', Cond(!exists('g:vscode'))
 Plug 'https://github.com/haya14busa/vim-asterisk'
 Plug 'https://github.com/nvim-lua/plenary.nvim'
 
-Plug 'https://github.com/nvim-telescope/telescope.nvim'
-Plug 'https://github.com/nvim-telescope/telescope-smart-history.nvim'
-Plug 'https://github.com/fannheyward/telescope-coc.nvim'
-Plug 'https://github.com/nvim-telescope/telescope-frecency.nvim.git'
+Plug 'https://github.com/nvim-telescope/telescope.nvim', Cond(!exists('g:vscode'))
+Plug 'https://github.com/nvim-telescope/telescope-smart-history.nvim', Cond(!exists('g:vscode'))
+Plug 'https://github.com/fannheyward/telescope-coc.nvim', Cond(!exists('g:vscode'))
+Plug 'https://github.com/nvim-telescope/telescope-frecency.nvim.git', Cond(!exists('g:vscode'))
 
 Plug 'https://github.com/machakann/vim-sandwich'
 Plug 'https://github.com/svermeulen/vim-subversive'
@@ -517,6 +520,8 @@ require'nvim-web-devicons'.setup {
 
 EOF
 
+
+if !exists('g:vscode')
 " ===
 " === vim-tmux-navigator
 " ===
@@ -530,7 +535,7 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 " ===
 " === end vim-tmux-navigator
 " ===
-
+endif
 if !exists('g:vscode')
 " ===
 " === auto-session
@@ -1323,9 +1328,32 @@ autocmd InsertEnter * :!fcitx-remote -t
 autocmd InsertEnter * :!fcitx-remote -t
 endif 
 
+" navigation between buffers
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-h> <c-w>h
+map <c-l> <c-w>l
+
+map <leader>1 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex1')<cr>
+map <leader>2 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex2')<cr>
+map <leader>3 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex3')<cr>
+map <leader>4 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex4')<cr>
+map <leader>5 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex5')<cr>
+map <leader>6 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex6')<cr>
+map <leader>7 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex7')<cr>
+map <leader>8 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex8')<cr>
+map <leader>9 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex9')<cr>
+
+
 nnoremap <leader>ff :Find<cr>
 nnoremap <leader>ls <cmd>call VSCodeNotify('workbench.action.showAllSymbols')<cr>
 map <f12> <cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>
+map <leader>E <cmd>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<cr>
+
+
+map <leader>q <cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<cr>
+map <leader>w <cmd>call VSCodeNotify('workbench.action.files.save')<cr>
+map <leader><tab> <cmd>call VSCodeNotify('workbench.action.closeEditorsToTheRight')<cr>
 
 
 nnoremap <leader>fa <cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>
@@ -1693,7 +1721,7 @@ EOF
 
 " noremap <Tab> :bn<CR>
 
-
+if !exists('g:vscode')
 let g:buffet_show_index = 1
 let g:buffet_powerline_separators = 1
 noremap <S-Tab> :bp<CR>
@@ -1714,6 +1742,7 @@ nmap <leader>0 <Plug>BuffetSwitch(10)
 " ===
 " === end vim-buffet
 " ===
+endif
 
 
 if !exists('g:vscode')
