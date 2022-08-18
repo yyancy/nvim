@@ -59,8 +59,8 @@ set laststatus=2
 
 
 
-set ttimeoutlen=500
-set timeoutlen=500
+set ttimeoutlen=300
+" set timeoutlen=500
 " set notimeout
 set inccommand=split
 set completeopt=longest,noinsert,menuone,noselect,preview
@@ -280,7 +280,7 @@ Plug 'https://github.com/Mofiqul/dracula.nvim'
 Plug 'https://github.com/kkoomen/vim-doge'
 " Plug 'http://github.com/romgrk/barbar.nvim'
 Plug 'https://github.com/fatih/vim-go',Cond(!exists('g:vscode'), { 'do': ':GoInstallBinaries' })
-Plug 'https://github.com/lilydjwg/fcitx.vim',Cond(has('unix'), { 'branch':'fcitx4' })
+" Plug 'https://github.com/lilydjwg/fcitx.vim',Cond(has('unix'), { 'branch':'fcitx4' })
   " Plug 'https://github.com/wellle/tmux-complete.vim'
 " adorn editor
 " Plug 'https://github.com/bling/vim-airline'
@@ -1311,11 +1311,11 @@ if has('win32')
   autocmd InsertLeave * :silent :!F:\\opt\\im-select.exe 1033
   autocmd InsertEnter * :silent :!F:\\opt\\im-select.exe 2052
 endif
-if exists('g:vscode')
 if has('unix')
-autocmd InsertEnter * :!fcitx-remote -t
-autocmd InsertEnter * :!fcitx-remote -t
+  autocmd InsertLeave * :silent :!fcitx-remote -s fcitx-keyboard-us
+  autocmd InsertEnter * :silent :!fcitx-remote -s sogoupinyin
 endif 
+if exists('g:vscode')
 
 nnoremap <leader>ff :Find<cr>
 nnoremap <leader>ls <cmd>call VSCodeNotify('workbench.action.showAllSymbols')<cr>
