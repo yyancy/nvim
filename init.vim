@@ -1319,8 +1319,8 @@ endif
 " === end ccls
 " ===
 if has('win32')
-  autocmd InsertLeave * :silent :!F:\\opt\\im-select.exe 1033
-  autocmd InsertEnter * :silent :!F:\\opt\\im-select.exe 2052
+  autocmd InsertLeave * :silent :!D:\\local\\bin\\im-select.exe 1033
+  autocmd InsertEnter * :silent :!D:\\local\\bin\\im-select.exe 2052
 endif
 if exists('g:vscode')
 if has('unix')
