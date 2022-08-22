@@ -193,6 +193,8 @@ nnoremap [<leader>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
 nnoremap ]<leader>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 nnoremap <leader>, A,<esc>
 nnoremap <leader>; A;<esc>
+nnoremap ; :
+nnoremap : ;
 
 map <leader>T :edit $MYVIMRC<CR>
 map <leader>Z :w<CR>:so $MYVIMRC<CR>
@@ -202,6 +204,13 @@ onoremap b vb
 onoremap F vF
 onoremap T vT
 nmap 0 _
+
+imap <C-e> <end>
+imap <C-a> <home>
+inoremap <a-b> <C-o>b
+imap <a-f> <C-o>w
+
+
 
 nmap . .`[
 
@@ -278,7 +287,7 @@ Plug 'https://github.com/stevearc/qf_helper.nvim.git'
 Plug 'https://github.com/folke/which-key.nvim.git'
 Plug 'https://github.com/tami5/sqlite.lua.git'
 Plug 'https://github.com/tpope/vim-abolish'
-Plug 'https://github.com/tpope/vim-unimpaired'
+" Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/Mofiqul/dracula.nvim'
 Plug 'https://github.com/kkoomen/vim-doge'
 " Plug 'http://github.com/romgrk/barbar.nvim'
