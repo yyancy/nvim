@@ -105,9 +105,10 @@ silent !mkdir -p $HOME/.config/nvim/tmp/session
 set backupdir=$HOME/.config/nvim/tmp/backup,.
 set directory=$HOME/.config/nvim/tmp/backup,.
 
-
 set undofile
+
 set undodir=$HOME/.config/nvim/tmp/undo,.
+
 
 
 " ===
@@ -345,7 +346,7 @@ Plug 'https://github.com/tpope/vim-repeat'
 " Plug 'https://github.com/rhysd/clever-f.vim'
 
 " bookmarks
-Plug 'https://github.com/MattesGroeger/vim-bookmarks'
+" Plug 'https://github.com/MattesGroeger/vim-bookmarks'
 
 " fold
 " Plug 'https://github.com/tmhedberg/SimpylFold'
@@ -426,9 +427,12 @@ EOF
 
 if !has('unix')
 " sqlite.lua
-let g:sqlite_clib_path="F:/opt/sqlite/sqlite3.dll"
+let g:sqlite_clib_path="D:/local/lib/sqlite/sqlite3.dll"
 endif
 " 
+
+" vim-visual-multi
+let g:VM_theme = 'ocean'
 
 " ===
 " === word-motion
