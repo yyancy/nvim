@@ -32,6 +32,7 @@ set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1
 set conceallevel=0
 
+set termguicolors
 " modify cursor pattern.
 let &t_ut=''
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -129,6 +130,7 @@ augroup END
 " the tests inside vim without having to save all files first.
 au FocusLost,WinLeave * :silent! wa
 
+
 " Trigger autoread when changing buffers or coming back to vim.
 au FocusGained,BufEnter * :silent! !
 
@@ -194,8 +196,6 @@ nnoremap [<leader>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
 nnoremap ]<leader>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 nnoremap <leader>, A,<esc>
 nnoremap <leader>; A;<esc>
-nnoremap ; :
-nnoremap : ;
 
 map <leader>T :edit $MYVIMRC<CR>
 map <leader>Z :w<CR>:so $MYVIMRC<CR>
@@ -208,6 +208,7 @@ nmap 0 _
 
 imap <C-e> <end>
 imap <C-a> <home>
+imap <C-d> <del>
 inoremap <a-b> <C-o>b
 imap <a-f> <C-o>w
 
@@ -215,7 +216,6 @@ imap <a-f> <C-o>w
 
 nmap . .`[
 
-imap <C-d> <del>
 " 使用<Ctrl> + hjkl快速在窗口间跳转
 noremap <c-h> <c-w><c-h>
 noremap <c-j> <c-w><c-j>
@@ -249,14 +249,19 @@ noremap <leader>w :w<cr>
 noremap <leader>x :x<cr>
 " Opening a terminal window
 "noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>
-noremap ; :
 noremap > >>
 noremap < <<
 vnoremap > >gv
 vnoremap < <gv
 inoremap <C-T> <C-F>
-noremap 0 _
 noremap <leader>tx :r !figlet
+nnoremap ; :
+" nnoremap : ;
+
+map qw ysiw{
+map <leader>sw :set wrap!<cr>
+inoremap <a-o> <Esc>/[)}"'\]>`]<CR>:nohl<CR>a
+inoremap <a-i> <Esc>?[({"'\[<`]<CR>:nohl<CR>a
 
 if has('unix')
   let g:python3_host_prog="/usr/bin/python3"
@@ -296,22 +301,20 @@ Plug 'https://github.com/fatih/vim-go',Cond(!exists('g:vscode'), { 'do': ':GoIns
 " Plug 'https://github.com/lilydjwg/fcitx.vim',Cond(has('unix'), { 'branch':'fcitx4' })
   " Plug 'https://github.com/wellle/tmux-complete.vim'
 " adorn editor
-" Plug 'https://github.com/bling/vim-airline'
-" Plug 'https://github.com/vim-airline/vim-airline-themes'
 " Plug 'https://github.com/ajmwagar/vim-deus'
-Plug 'https://github.com/mhartington/oceanic-next'
+" Plug 'https://github.com/mhartington/oceanic-next'
 Plug 'https://github.com/nvim-lualine/lualine.nvim'
 Plug 'https://github.com/marko-cerovac/material.nvim'
 
 Plug 'https://github.com/lukas-reineke/indent-blankline.nvim',Cond(!exists('g:vscode'))
 Plug 'https://github.com/ryanoasis/vim-devicons'
 Plug 'https://github.com/kyazdani42/nvim-web-devicons'
-Plug 'https://github.com/glepnir/dashboard-nvim'
+" Plug 'https://github.com/glepnir/dashboard-nvim'
 
 " bufferline or statusline
-Plug 'https://github.com/akinsho/bufferline.nvim'
-Plug 'https://github.com/bagrat/vim-buffet'
-
+Plug 'https://github.com/akinsho/bufferline.nvim', Cond(!exists('g:vscode'), { 'tag': 'v2.*' })
+" Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }, Cond(!exists('g:vscode'))
+Plug 'famiu/bufdelete.nvim', Cond(!exists('g:vscode'))
 " jump and search
 Plug 'https://github.com/phaazon/hop.nvim'
 Plug 'https://github.com/christoomey/vim-tmux-navigator', Cond(!exists('g:vscode'))
@@ -358,7 +361,6 @@ Plug 'https://github.com/neoclide/coc.nvim',Cond(!exists('g:vscode'),{'branch': 
 " snippets
 Plug 'https://github.com/honza/vim-snippets'
 " Plug 'https://gitee.com/yyancyer/vim-floaterm'
-" Plug 'https://gitee.com/yyancyer/auto-pairs'
 Plug 'https://github.com/junegunn/vim-easy-align'
 " Plug 'https://github.com/puremourning/vimspector'
 " Plug 'https://github.com/mfussenegger/nvim-dap'
@@ -433,18 +435,39 @@ endif
 
 " vim-visual-multi
 let g:VM_theme = 'ocean'
+let g:VM_mouse_mappings = 1
+
+nmap   <C-LeftMouse>         <Plug>(VM-Mouse-Cursor)
+nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)
+
 
 " ===
-" === word-motion
+" === bufferline
 " ===
-" let g:wordmotion_prefix = '<Alt>'
+" In your init.lua or init.vim
+lua << EOF
+require("bufferline").setup{
+options = {
+  numbers = "ordinal"
+  }
+}
+EOF
+nnoremap <silent><leader>1 <cmd>lua require("bufferline").go_to_buffer(1, true)<cr>
+nnoremap <silent><leader>2 <cmd>lua require("bufferline").go_to_buffer(2, true)<cr>
+nnoremap <silent><leader>3 <cmd>lua require("bufferline").go_to_buffer(3, true)<cr>
+nnoremap <silent><leader>4 <cmd>lua require("bufferline").go_to_buffer(4, true)<cr>
+nnoremap <silent><leader>5 <cmd>lua require("bufferline").go_to_buffer(5, true)<cr>
+nnoremap <silent><leader>6 <cmd>lua require("bufferline").go_to_buffer(6, true)<cr>
+nnoremap <silent><leader>7 <cmd>lua require("bufferline").go_to_buffer(7, true)<cr>
+nnoremap <silent><leader>8 <cmd>lua require("bufferline").go_to_buffer(8, true)<cr>
+nnoremap <silent><leader>9 <cmd>lua require("bufferline").go_to_buffer(9, true)<cr>
+nnoremap <silent><leader>$ <cmd>lua require("bufferline").go_to_buffer(-1, true)<cr>
 
 " ===
 " === qf_helper
 " ===
 lua<<EOF
-
--- require'qf_helper'.setup()
+require'qf_helper'.setup()
 
 EOF
 
@@ -465,9 +488,6 @@ EOF
 " === end nvim-pqf
 " ===
 
-" ===
-" === end word-motion
-" ===
 
 " ===
 " === vim-abolish
@@ -504,25 +524,8 @@ let g:go_highlight_function_calls = 1
 " ===
 
 " ===
-" === transparent
+" === nvim-web-devicons
 " ===
-lua<<EOF
-
--- require("transparent").setup({
---   enable = false, -- boolean: enable transparent
---   exclude = {}, -- table: groups you don't want to clear
--- })
-
-EOF
-
-" ===
-" === end transparent
-" ===
-
-" ===
-" === end lualine
-" ===
-
 
 lua<<EOF
 
@@ -532,6 +535,10 @@ require'nvim-web-devicons'.setup {
 --require'nvim-web-devicons'.get_icons()
 
 EOF
+
+" ===
+" === end nvim-web-devicons
+" ===
 
 
 if !exists('g:vscode')
@@ -577,11 +584,11 @@ nmap <leader>gB :exe 'OpenURL '. substitute(expand('<cfile>'),'&','"&"','g')<CR>
 " ===
 " === dashboard.vim
 " ===
-let g:dashboard_default_executive ='telescope'
+" let g:dashboard_default_executive ='telescope'
 nmap <Leader><Leader>ss :<C-u>SaveSession<CR>
 nmap <Leader><Leader>sl :<C-u>RestoreSession<CR>
-nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-let g:dashboard_session_directory = $HOME.'/.config/nvim/tmp/session'
+" nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
+" let g:dashboard_session_directory = $HOME.'/.config/nvim/tmp/session'
 " ===
 " === end dashboard.vim
 " ===
@@ -606,21 +613,6 @@ endif
 
 " ===
 " === end indent-blankline
-" ===
-
-" ===
-" === nvim_context_vt
-" ===
-lua<<EOF
---require('nvim_context_vt').setup {
- -- custom_text_handler = function(node)
-  --  return nil
- -- end,
- -- }
-EOF
-
-" ===
-" === end nvim_context_vt
 " ===
 
 if !exists('g:vscode')
@@ -706,22 +698,6 @@ EOF
 " ===
 " === end nvim-autopairs
 " ===
-
-" ===
-" === Trouble
-" ===
-lua<<EOF
-
-  -- require("trouble").setup {
-  -- }
-
-EOF
-
-" ===
-" === end Trouble
-" ===
-
-
 
 
 " ===
@@ -839,8 +815,6 @@ let g:coc_global_extensions = [
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
-
-
 " disable coc warnig
 let g:coc_disable_startup_warning = 1
 " Use tab for trigger completion with characters ahead and navigate.
@@ -924,7 +898,6 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 
-set termguicolors
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -1089,40 +1062,7 @@ map <leader>ss :CocList snippets<CR>
 " ===
 endif
 
-" ===
-" === UltiSnips
-" ===
 
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-
-
-" Insert mode completion
-" imap <c-x><c-k> <plug>(fzf-complete-word)
-" imap <c-x><c-f> <plug>(fzf-complete-path)
-" imap <c-x><c-l> <plug>(fzf-complete-line)
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                end UltiSnips                        "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-
-
-let g:VM_mouse_mappings = 1
-
-nmap   <C-LeftMouse>         <Plug>(VM-Mouse-Cursor)
-nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)
-
-" neadtree settings
-"autocmd vimenter * NERDTree
-"noremap <leader>n  :NERDTreeToggle<cr>
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " ===
 " === vim-easy-align
@@ -1133,32 +1073,6 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" nmap <leader>cc <Plug>(NERDCommenterToggle)
-" " Create default mappings
-" let g:NERDCreateDefaultMappings = 1
-" " Add spaces after comment delimiters by default
-" let g:NERDSpaceDelims = 1
-" let g:NERDToggleCheckAllLines = 1
-" " Add your own custom formats or override the defaults
-" let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
-
-
-
-" ===
-" === airline
-" ===
-
-
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline_theme='luna'
-let g:airline_theme='oceanicnext'
-let g:airline_powerline_fonts = 1
-" testing rounded separators (extra-powerline-symbols):
-let g:airline_left_sep = "\uE0B4"
-let g:airline_right_sep = "\uE0B6"
-
-" set the CN (column number) symbol:
-" let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 
 " ===
 " === material
@@ -1176,24 +1090,16 @@ require('material').setup({
 
 EOF
 
+colorscheme material
+" crscheme murphy        " 修改配色
+" color deus
+" colorscheme OceanicNext
+" let g:material_style = 'palenight'
+
+
 " ===
 " === end material
 " ===
-" crscheme murphy        " 修改配色
-" color deus
-colorscheme OceanicNext
-" let g:material_style = 'palenight'
-" colorscheme material
-" colorscheme dracula
-
-
-" ===
-" === auto-pairs
-" ===
-" let g:AutoPairsFlyMode = 1
-
-
-
 
 
 " ===
@@ -1204,6 +1110,7 @@ let g:formatters_c = ['my_custom_c']
 noremap <F3> :Autoformat<CR>
 
 if !exists('g:vscode')
+
 " ===
 " === vista
 " ===
@@ -1297,40 +1204,6 @@ endif
 
 
 
-" ===
-" === ccls
-" ===
-" bases
-" nn <silent> xb :call CocLocations('ccls','$ccls/inheritance')<cr>
-" " bases of up to 3 levels
-" nn <silent> xB :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
-" " derived
-" nn <silent> xd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
-" " derived of up to 3 levels
-" nn <silent> xD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
-
-" " caller
-" nn <silent> xc :call CocLocations('ccls','$ccls/call')<cr>
-" " callee
-" nn <silent> xC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
-
-" " $ccls/member
-" " member variables / variables in a namespace
-" nn <silent> xm :call CocLocations('ccls','$ccls/member')<cr>
-" " member functions / functions in a namespace
-" nn <silent> xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
-" " nested classes / types in a namespace
-" nn <silent> xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
-
-" nmap <silent> xt <Plug>(coc-type-definition)<cr>
-" nn <silent> xv :call CocLocations('ccls','$ccls/vars')<cr>
-" nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
-
-" nn xx x
-
-" ===
-" === end ccls
-" ===
 if has('win32')
   autocmd InsertLeave * :silent :!D:\\local\\bin\\im-select.exe 1033
   autocmd InsertEnter * :silent :!D:\\local\\bin\\im-select.exe 2052
@@ -1458,34 +1331,6 @@ endif
 
 
 " ===
-" === vim-anyfold
-" ===
-" activate anyfold by default
-" augroup anyfold
-"   autocmd!
-"   autocmd Filetype * AnyFoldActivate
-" augroup END
-
-" disable anyfold for large files
-" let g:LargeFile = 1000000 " file is large if size greater than 1MB
-" autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
-" function LargeFile()
-  " augroup anyfold
-    " autocmd! 
-    " autocmd Filetype * setlocal foldmethod=indent " fall back to indent folding
-  " augroup END
-  " execute ":ContextDisable"
-" endfunction
-" ===
-" === end vim-anyfold
-" ===
-
-
-" let g:clever_f_mark_direct = 1
-
-
-
-" ===
 " === vim-asterisk
 " ===
 map *   <Plug>(asterisk-*)
@@ -1534,65 +1379,6 @@ onoremap f v:HopChar1<CR>
 
 
 " ===
-" === dap
-" ===
-
-" mappings
-" nnoremap <C-S-F12> :lua require'dap'.continue()<cr>
-
-" map <silent> <F5> :lua require'dap'.continue()<CR>
-" map <silent> <F10> :lua require'dap'.step_over()<CR>
-" map <silent> <F11> :lua require'dap'.step_into()<CR>
-" map <silent> <F12> :lua require'dap'.step_out()<CR>
-" map <silent> <leader>b :lua require'dap'.toggle_breakpoint()<CR>
-" map <silent> <leader>B :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
-" map <silent> <leader>lp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
-" map <silent> <leader>dr :lua require'dap'.repl.open()<CR>
-" map <silent> <leader>dl :lua require'dap'.run_last()<CR>
-
-" lua require('dap-python').setup('~/.venv/bin/python')
-" lua<<EOF
-" local dap = require 'dap'
-" local repl = require 'dap.repl'
-" repl.commands = vim.tbl_extend('force', repl.commands, {
-" -- Add a new alias for the existing .exit command
-" exit = {'exit', '.exit', '.bye'},
-" -- Add your own commands; run `.echo hello world` to invoke
-" -- this function with the text "hello world"
-" custom_commands = {
-" ['.echo'] = function(text)
-" dap.repl.append(text)
-" end,
-" -- Hook up a new command to an existing dap function
-" ['.restart'] = dap.restart,
-" },
-" })
-" EOF
-
-" ===
-" === end dap
-" ===
-
-" ===
-" === vimspector
-" ===
-" map <C-S-F12> <Plug>VimspectorContinue
-" let g:vimspector_enable_mappings = 'HUMAN'
-" " for normal mode - the word under the cursor
-" nmap <Leader>di <Plug>VimspectorBalloonEval
-" " for visual mode, the visually selected text
-" xmap <Leader>di <Plug>VimspectorBalloonEval
-" ===
-" === end vimspector
-" ===
-
-
-" ===
-" === indentLine
-" ===
-" let g:indentLine_concealcursor = 'nc'
-
-" ===
 " === end indentLine
 " ===
 
@@ -1622,19 +1408,11 @@ programming_dictionaries = {
 })
 EOF
 
+
 " ===
 " === end abbrevMan
 " ===
 
-" ===
-" === vim-bufkill
-" ===
-map <C-F4> :BD<CR>
-nnoremap <leader>bd :BD<CR>
-
-" ===
-" === end vim-bufkill
-" ===
 
 
 " ===
@@ -1661,66 +1439,8 @@ endif
 " === end nvim-ts-autotag
 " ===
 
-" ===
-" === bufferline
-" ===
-" set termguicolors
-lua<<EOF
--- require("bufferline").setup{
---   options = {
---     numbers = function(opts)
---       return string.format('%s.', opts.ordinal)
---     end,
---     diagnostics = 'coc',
---     offsets = {
---     {
---         filetype = 'coc-explorer',
---         text = "File Explorer",
---         highlight = "Directory",
---         text_align = "left"
--- 
---     }
---     }
---   }
--- }
-EOF
-" map <silent> <leader>gb :BufferLinePick<CR>
-"
-" nnoremap <silent>[b :BufferLineCycleNext<CR>
-" nnoremap <silent>]b :BufferLineCyclePrev<CR>
-"
-" nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
-" nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
-" nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
-" nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
-" nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
-" nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
-" nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
-" nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
-" nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
-"
-" ===
-" === end bufferline
-" ===
 
-" ===
-" === barbar.nvim
-" ===
-" let bufferline = get(g:, 'bufferline', {})
-" let bufferline.icons = 'buffer_number'
-" nnoremap <silent>    <leader>1 :BufferGoto 1<CR>
-" nnoremap <silent>    <leader>2 :BufferGoto 2<CR>
-" nnoremap <silent>    <leader>3 :BufferGoto 3<CR>
-" nnoremap <silent>    <leader>4 :BufferGoto 4<CR>
-" nnoremap <silent>    <leader>5 :BufferGoto 5<CR>
-" nnoremap <silent>    <leader>6 :BufferGoto 6<CR>
-" nnoremap <silent>    <leader>7 :BufferGoto 7<CR>
-" nnoremap <silent>    <leader>8 :BufferGoto 8<CR>
-" nnoremap <silent>    <leader>9 :BufferLast<CR>
 
-" ===
-" === end barbar.nvim
-" ===
 
 
 " ===
@@ -1737,20 +1457,23 @@ EOF
 if !exists('g:vscode')
 let g:buffet_show_index = 1
 let g:buffet_powerline_separators = 1
-noremap <S-Tab> :bp<CR>
-noremap <Leader><Tab> :Bw<CR>
-noremap <Leader><S-Tab> :Bonly<CR>
+" noremap <S-Tab> :bp<CR>
+noremap <Leader><Tab> :Bdelete<CR>
+noremap <Leader><S-Tab> :Bdelete!<CR>
+map <silent> <leader>gb :BufferLinePick<CR>
 
-nmap <leader>1 <Plug>BuffetSwitch(1)
-nmap <leader>2 <Plug>BuffetSwitch(2)
-nmap <leader>3 <Plug>BuffetSwitch(3)
-nmap <leader>4 <Plug>BuffetSwitch(4)
-nmap <leader>5 <Plug>BuffetSwitch(5)
-nmap <leader>6 <Plug>BuffetSwitch(6)
-nmap <leader>7 <Plug>BuffetSwitch(7)
-nmap <leader>8 <Plug>BuffetSwitch(8)
-nmap <leader>9 <Plug>BuffetSwitch(9)
-nmap <leader>0 <Plug>BuffetSwitch(10)
+nnoremap <silent>[b :BufferLineCycleNext<CR>
+nnoremap <silent>]b :BufferLineCyclePrev<CR>
+" nmap <leader>1 <Plug>BuffetSwitch(1)
+" nmap <leader>2 <Plug>BuffetSwitch(2)
+" nmap <leader>3 <Plug>BuffetSwitch(3)
+" nmap <leader>4 <Plug>BuffetSwitch(4)
+" nmap <leader>5 <Plug>BuffetSwitch(5)
+" nmap <leader>6 <Plug>BuffetSwitch(6)
+" nmap <leader>7 <Plug>BuffetSwitch(7)
+" nmap <leader>8 <Plug>BuffetSwitch(8)
+" nmap <leader>9 <Plug>BuffetSwitch(9)
+" nmap <leader>0 <Plug>BuffetSwitch(10)
 
 " ===
 " === end vim-buffet
@@ -1953,11 +1676,6 @@ function Profile(log_file)
 endfunction
 command  -nargs=1 ActiveProfile call Profile(<f-args>)
 
-map qw ysiw{
-" map <leader>d I& <esc>j0
-map <leader>sw :set wrap!<cr>
-inoremap <a-o> <Esc>/[)}"'\]>`]<CR>:nohl<CR>a
-inoremap <a-i> <Esc>?[({"'\[<`]<CR>:nohl<CR>a
 
 function! GetBufferList()
   redir =>buflist
