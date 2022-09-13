@@ -262,6 +262,8 @@ if has('unix')
   let g:python3_host_prog="/usr/bin/python3"
 endif
 
+let g:vimsyn_embed = 'l'
+
 " <++>
 " <++>
 " <++>
@@ -276,7 +278,7 @@ function! Cond(cond, ...)
   let opts = get(a:000, 0, {})
   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
-
+Plug 'https://github.com/ggandor/lightspeed.nvim'
 " temporary plugins
 Plug 'https://github.com/tpope/vim-rsi.git'
 
@@ -594,12 +596,12 @@ if !exists('g:vscode')
 lua<<EOF
 
 require("indent_blankline").setup {
-    -- for example, context is off by default, use this to turn it on
-    show_current_context = true,
-    show_current_context_start = true,
-    buftype_exclude = { "terminal" },
+  -- for example, context is off by default, use this to turn it on
+  show_current_context = true,
+  show_current_context_start = true,
+  buftype_exclude = { "terminal" },
   filetype_exclude = { "dashboard" },
-}
+  }
 
 EOF
 endif
@@ -624,18 +626,18 @@ EOF
 " ===
 
 if !exists('g:vscode')
-" ===
-" === autosave
-" ===
+  " ===
+  " === autosave
+  " ===
 lua<<EOF
-require("autosave").setup{
+  require("autosave").setup{
   enabled = false,
   execution_message = function()
-    return "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S")
+  return "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S")
   end,
   clean_command_line_interval = 500,
   debounce_delay = 500
-}
+  }
 EOF
 endif
 
@@ -847,11 +849,18 @@ let g:coc_disable_startup_warning = 1
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#pum#visible() ? coc#pum#next(1) :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 
 function! s:check_back_space() abort
@@ -889,10 +898,6 @@ imap <c-u> <esc>:CheckSpace<CR>
 " Use <A-,> to trigger completion.
 inoremap <silent><expr> <A-,> coc#refresh()
 inoremap <C-P> <C-\><C-O>:call CocActionAsync('showSignatureHelp')<cr>
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-" \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 
 
@@ -1517,19 +1522,20 @@ map gz# <Plug>(asterisk-gz#)
 " ===
 " === hop
 " ===
-lua<<EOF
-require'hop'.setup()
--- place this in one of your configuration file(s)
- vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
- vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
- vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1()<cr>",{})
- vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_words()<cr>", {})
- vim.api.nvim_set_keymap('', '<leader>l', "<cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>", {})
-EOF
-onoremap f v:HopChar1<CR>
+" lua<<EOF
+" require'hop'.setup()
+" -- place this in one of your configuration file(s)
+"  vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
+"  vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
+"  vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1()<cr>",{})
+"  vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_words()<cr>", {})
+"  vim.api.nvim_set_keymap('', '<leader>l', "<cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>", {})
+" EOF
+" onoremap f v:HopChar1<CR>
 " ===
 " === end hop
 " ===
+
 
 
 
