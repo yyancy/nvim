@@ -146,6 +146,7 @@ augroup END
 
 
 
+set termguicolors
 " ===
 " === Terminal Behaviors
 " ===
@@ -194,6 +195,9 @@ nnoremap [<leader>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
 nnoremap ]<leader>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 nnoremap <leader>, A,<esc>
 nnoremap <leader>; A;<esc>
+
+xmap <c-d> "ayp
+
 " nnoremap ; :
 " nnoremap : ;
 
@@ -337,11 +341,11 @@ Plug 'https://github.com/skywind3000/asyncrun.vim'
 " editor enhancement
 " Plug 'https://github.com/windwp/nvim-ts-autotag', Cond(!exists('g:vscode'))
 " Plug 'https://github.com/andymass/vim-matchup'
-Plug 'https://github.com/airblade/vim-rooter'
-Plug 'https://github.com/tversteeg/registers.nvim' , { 'branch': 'main' }
-Plug 'https://github.com/mg979/vim-visual-multi'
+" Plug 'https://github.com/airblade/vim-rooter'
+" Plug 'https://github.com/tversteeg/registers.nvim' , { 'branch': 'main' }
+" Plug 'https://github.com/mg979/vim-visual-multi'
 " Plug 'https://github.com/ceigh/AutoSave.nvim', Cond(!exists('g:vscode'), {'branch': 'execution_message-fn'})
-Plug 'https://github.com/tpope/vim-repeat'
+" Plug 'https://github.com/tpope/vim-repeat'
 " Plug 'https://github.com/rhysd/clever-f.vim'
 
 " bookmarks
@@ -352,12 +356,12 @@ Plug 'https://github.com/tpope/vim-repeat'
 " Plug 'https://github.com/haringsrob/nvim_context_vt'
 
 " LSP 
-Plug 'https://github.com/neoclide/coc.nvim',Cond(!exists('g:vscode'),{'branch': 'release'})
+" Plug 'https://github.com/neoclide/coc.nvim',Cond(!exists('g:vscode'),{'branch': 'release'})
 " snippets
 Plug 'https://github.com/honza/vim-snippets'
 " Plug 'https://gitee.com/yyancyer/vim-floaterm'
 " Plug 'https://gitee.com/yyancyer/auto-pairs'
-Plug 'https://github.com/junegunn/vim-easy-align'
+" Plug 'https://github.com/junegunn/vim-easy-align'
 
 " highlight
 Plug 'https://github.com/RRethy/vim-illuminate', Cond(!exists('g:vscode'))
@@ -381,28 +385,8 @@ Plug 'https://github.com/dkarter/bullets.vim'
 Plug 'https://github.com/liuchengxu/vista.vim', Cond(!exists('g:vscode'))
 
 " useful stuffs
-" Plug 'https://github.com/dhruvasagar/vim-open-url'
-Plug 'https://github.com/lambdalisue/suda.vim'
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
-" Plug 'https://github.com/rmagatti/auto-session', Cond(!exists('g:vscode'))
-Plug 'https://github.com/Pocco81/AbbrevMan.nvim'
-Plug 'https://github.com/theniceboy/antovim'
 
-" new text objects
-" Plug 'https://github.com/chaoren/vim-wordmotion' 
-" Plug 'https://github.com/gcmt/wildfire.vim'
-" Plug 'https://github.com/wellle/targets.vim'
-
-" command line enhancement
-Plug 'https://github.com/winston0410/cmd-parser.nvim', Cond(!exists('g:vscode'))
-
-function! UpdateRemotePlugins(...)
-    " Needed to refresh runtime files
-    let &rtp=&rtp
-    UpdateRemotePlugins
-endfunction
-
-Plug 'https://github.com/gelguy/wilder.nvim',Cond(!exists('g:vscode'), { 'do': function('UpdateRemotePlugins') })
 " Plug 'https://github.com/winston0410/range-highlight.nvifoldexprm'
 
 call plug#end()
@@ -424,7 +408,7 @@ endif
 " 
 
 " vim-visual-multi
-let g:VM_theme = 'ocean'
+" let g:VM_theme = 'ocean'
 
 " ===
 " === word-motion
@@ -764,7 +748,7 @@ let g:sandwich#recipes += [
 " === end vim-sandwich
 " ===
 
-if !exists('g:vscode')
+if exists('g:vscode')
 " ===
 " === coc-git
 " ===
@@ -883,7 +867,7 @@ command CheckSpace call s:check_space()
 imap <c-u> <esc>:CheckSpace<CR>
 " Use <A-,> to trigger completion.
 inoremap <silent><expr> <A-,> coc#refresh()
-inoremap <a-p> <C-\><C-O>:call CocActionAsync('showSignatureHelp')<cr>
+" inoremap <a-p> <C-\><C-O>:call CocActionAsync('showSignatureHelp')<cr>
 
 
 
@@ -899,7 +883,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nn <silent> L :call CocActionAsync('doHover')<cr>
+" nn <silent> L :call CocActionAsync('doHover')<cr>
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -923,7 +907,7 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+        nmap <leader>f  <Plug>(coc-format-selected)
 vmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
@@ -1108,10 +1092,10 @@ endif
 
 
 
-let g:VM_mouse_mappings = 1
-
-nmap   <C-LeftMouse>         <Plug>(VM-Mouse-Cursor)
-nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)
+" let g:VM_mouse_mappings = 1
+"
+" nmap   <C-LeftMouse>         <Plug>(VM-Mouse-Cursor)
+" nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)
 
 " neadtree settings
 "autocmd vimenter * NERDTree
@@ -1203,22 +1187,22 @@ if !exists('g:vscode')
 " === vista
 " ===
 
-map <F12> :Vista finder<CR>
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'coc'
-" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
-let g:vista#renderer#enable_icon = 1
-
-" The default icons can't be suitable for all the filetypes, you can extend it as you wish.
-let g:vista#renderer#icons = {
-      \   "function": "\uf794",
-      \   "variable": "\uf71b",
-      \  }
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-
-set statusline+=%{NearestMethodOrFunction()}
+" map <F12> :Vista finder<CR>
+" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+" let g:vista_default_executive = 'coc'
+" " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+" let g:vista#renderer#enable_icon = 1
+"
+" " The default icons can't be suitable for all the filetypes, you can extend it as you wish.
+" let g:vista#renderer#icons = {
+"       \   "function": "\uf794",
+"       \   "variable": "\uf71b",
+"       \  }
+" function! NearestMethodOrFunction() abort
+"   return get(b:, 'vista_nearest_method_or_function', '')
+" endfunction
+"
+" set statusline+=%{NearestMethodOrFunction()}
 
 " By default vista.vim never run if you don't call it explicitly.
 "
@@ -1386,7 +1370,8 @@ if !exists('g:vscode')
 " === telescope
 " ===
 " nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>ff <cmd>Telescope frecency theme=dropdown<cr>
+" nnoremap <leader>ff <cmd>Telescope frecency theme=dropdown<cr>
+nnoremap <leader>ff <Cmd>lua require('telescope').extensions.frecency.frecency(require('telescope.themes').get_dropdown())<CR>
 nnoremap <leader>mm <cmd>Telescope keymaps<cr>
 nnoremap <leader>fh <cmd>Telescope oldfiles<cr>
 nnoremap <leader>fa <cmd>Telescope live_grep<cr>
@@ -1577,26 +1562,26 @@ map gz# <Plug>(asterisk-gz#)
 " === abbrevMan
 " ===
 lua << EOF
-local abbrev_man = require("abbrev-man")
-
-abbrev_man.setup({
-load_natural_dictionaries_at_startup = true,
-load_programming_dictionaries_at_startup = true,
-natural_dictionaries = {
-  ["nt_en"] = {
-    ["adn"] = "AND",
-    ["THe"] = "rm_am"
-    },
-  ["nt_my_slangs"] = {
-        ["lmao"] = "LMAO"
-          }
-  },
-programming_dictionaries = {
-  ["pr_py"] = {
-    ["tset"] = "test"
-    }
-  }
-})
+-- local abbrev_man = require("abbrev-man")
+-- 
+-- abbrev_man.setup({
+-- load_natural_dictionaries_at_startup = true,
+-- load_programming_dictionaries_at_startup = true,
+-- natural_dictionaries = {
+--   ["nt_en"] = {
+--     ["adn"] = "AND",
+--     ["THe"] = "rm_am"
+--     },
+--   ["nt_my_slangs"] = {
+--         ["lmao"] = "LMAO"
+--           }
+--   },
+-- programming_dictionaries = {
+--   ["pr_py"] = {
+--     ["tset"] = "test"
+--     }
+--   }
+-- })
 EOF
 
 " ===
@@ -1871,6 +1856,8 @@ nmap <silent> <leader><leader>e :call ToggleList("Quickfix List", 'c')<CR>
 lua<<EOF
 require 'yancy.core'
 EOF
+
+xmap <c-d> "ayp
 " ===
 " === end cusom functions and commands
 " ===

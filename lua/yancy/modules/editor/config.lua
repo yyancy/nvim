@@ -139,7 +139,6 @@ function config.neoscroll()
 		-- All these keys will be mapped to their corresponding default scrolling animation
 		mappings = {
 			"<C-u>",
-			"<C-d>",
 			"<C-b>",
 			"<C-f>",
 			"<C-y>",
@@ -169,7 +168,7 @@ function config.auto_session()
 	local opts = {
 		log_level = "info",
 		auto_session_enable_last_session = true,
-		auto_session_root_dir = sessions_dir,
+		-- auto_session_root_dir = sessions_dir,
 		auto_session_enabled = true,
 		auto_save_enabled = true,
 		auto_restore_enabled = true,

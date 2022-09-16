@@ -76,9 +76,32 @@ tools["jvgrootveld/telescope-zoxide"] = {
 tools["dstein64/vim-startuptime"] = { opt = true, cmd = "StartupTime" }
 
 tools["gelguy/wilder.nvim"] = {
+  cond = function() return not is_vscode end,
 	event = "CmdlineEnter",
 	config = conf.wilder,
 	requires = { { "romgrk/fzy-lua-native", after = "wilder.nvim" } },
+}
+
+-- tools["airblade/vim-rooter"] = {
+-- }
+
+tools["mg979/vim-visual-multi"] = {
+  config = conf.vim_visual_multi, 
+}
+
+tools["Pocco81/AbbrevMan.nvim"] = {
+  config = conf.abbrev_man, 
+}
+tools["theniceboy/antovim"] = {
+}
+tools["tpope/vim-repeat"] = {
+}
+tools["gbprod/yanky.nvim"] = {
+  config = conf.yanky,
+}
+
+tools["tversteeg/registers.nvim"] = {
+  
 }
 
 
