@@ -759,6 +759,10 @@ if !exists('g:vscode')
 " === coc-git
 " ===
 
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " navigate chunks of current buffer
 nmap [[g <Plug>(coc-git-prevchunk)
 nmap ]]g <Plug>(coc-git-nextchunk)
@@ -870,10 +874,6 @@ inoremap <C-P> <C-\><C-O>:call CocActionAsync('showSignatureHelp')<cr>
 
 
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 
 " GoTo code navigation.
