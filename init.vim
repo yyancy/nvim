@@ -141,7 +141,7 @@ endif
 
 augroup highlight_yank
     autocmd!
-autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup=(vim.fn['hlexists']('HighlightedyankRegion') > 0 and 'HighlightedyankRegion' or 'IncSearch'), timeout=500}
+" autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup=(vim.fn['hlexists']('HighlightedyankRegion') > 0 and 'HighlightedyankRegion' or 'IncSearch'), timeout=500}
 augroup END
 
 
@@ -283,7 +283,7 @@ function! Cond(cond, ...)
   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
 " temporary plugins
-Plug 'https://github.com/tpope/vim-rsi.git'
+" Plug 'https://github.com/tpope/vim-rsi.git'
 
 " quickfix enforcement
 Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
@@ -309,34 +309,26 @@ Plug 'https://github.com/nvim-lualine/lualine.nvim'
 Plug 'https://github.com/marko-cerovac/material.nvim'
 
 Plug 'https://github.com/lukas-reineke/indent-blankline.nvim',Cond(!exists('g:vscode'))
-Plug 'https://github.com/ryanoasis/vim-devicons'
-Plug 'https://github.com/kyazdani42/nvim-web-devicons'
+" Plug 'https://github.com/ryanoasis/vim-devicons'
+" Plug 'https://github.com/kyazdani42/nvim-web-devicons'
 Plug 'https://github.com/glepnir/dashboard-nvim'
 
 " bufferline or statusline
-Plug 'https://github.com/akinsho/bufferline.nvim'
-Plug 'https://github.com/bagrat/vim-buffet'
+" Plug 'https://github.com/akinsho/bufferline.nvim'
+" Plug 'https://github.com/bagrat/vim-buffet'
 
 " jump and search
 Plug 'https://github.com/christoomey/vim-tmux-navigator', Cond(!exists('g:vscode'))
 Plug 'https://github.com/haya14busa/vim-asterisk'
 
-" Plug 'https://github.com/nvim-telescope/telescope.nvim', Cond(!exists('g:vscode'))
-" Plug 'https://github.com/nvim-telescope/telescope-smart-history.nvim', Cond(!exists('g:vscode'))
-" Plug 'https://github.com/fannheyward/telescope-coc.nvim', Cond(!exists('g:vscode'))
-" Plug 'https://github.com/nvim-telescope/telescope-frecency.nvim.git', Cond(!exists('g:vscode'))
-
 Plug 'https://github.com/machakann/vim-sandwich'
-Plug 'https://github.com/svermeulen/vim-subversive'
-Plug 'https://github.com/matze/vim-move'
-
 
 " treesitter
 " Plug 'https://github.com/nvim-treesitter/nvim-treesitter',Cond(!exists('g:vscode'), {'do': ':TSUpdate'})
 
 " runner
-Plug 'https://github.com/skywind3000/asynctasks.vim'
-Plug 'https://github.com/skywind3000/asyncrun.vim'
+" Plug 'https://github.com/skywind3000/asynctasks.vim'
+" Plug 'https://github.com/skywind3000/asyncrun.vim'
 
 " editor enhancement
 " Plug 'https://github.com/windwp/nvim-ts-autotag', Cond(!exists('g:vscode'))
@@ -364,8 +356,7 @@ Plug 'https://github.com/honza/vim-snippets'
 " Plug 'https://github.com/junegunn/vim-easy-align'
 
 " highlight
-Plug 'https://github.com/RRethy/vim-illuminate', Cond(!exists('g:vscode'))
-Plug 'https://github.com/windwp/nvim-autopairs'
+" Plug 'https://github.com/windwp/nvim-autopairs'
 
 " formating
 " Plug 'https://github.com/sbdchd/neoformat'
@@ -382,10 +373,10 @@ Plug 'https://github.com/dkarter/bullets.vim'
 
 " tags
 
-Plug 'https://github.com/liuchengxu/vista.vim', Cond(!exists('g:vscode'))
+" Plug 'https://github.com/liuchengxu/vista.vim', Cond(!exists('g:vscode'))
 
 " useful stuffs
-Plug 'https://github.com/AndrewRadev/splitjoin.vim'
+" Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 
 " Plug 'https://github.com/winston0410/range-highlight.nvifoldexprm'
 
@@ -626,51 +617,6 @@ endif
 " === nvim-autopairs
 " ===
 lua<<EOF
- local npairs = require("nvim-autopairs")
- local Rule = require('nvim-autopairs.rule')
- local cond = require'nvim-autopairs.conds'
- -- local ts_conds = require('nvim-autopairs.ts-conds')
- npairs.setup({
-     check_ts = false,
-     ts_config = { },
-     fast_wrap = {},
- })
- 
- 
- 
- npairs.add_rule(Rule("$$","$$"))
- npairs.add_rules {
-   Rule(' ', ' ')
-     :with_pair(function(opts)
-       local pair = opts.line:sub(opts.col, opts.col + 1)
-       return vim.tbl_contains({ '()', '{}', '[]' }, pair)
-     end)
-     :with_move(cond.none())
-     :with_cr(cond.none())
-     :with_del(function(opts)
-       local col = vim.api.nvim_win_get_cursor(0)[2]
-       local context = opts.line:sub(col - 1, col + 2)
-       return vim.tbl_contains({ '(  )', '{  }', '[  ]' }, context)
-     end),
-   Rule('', ' )')
-     :with_pair(cond.none())
-     :with_move(function(opts) return opts.char == ')' end)
-     :with_cr(cond.none())
-     :with_del(cond.none())
-     :use_key(')'),
-   Rule('', ' }')
-     :with_pair(cond.none())
-     :with_move(function(opts) return opts.char == '}' end)
-     :with_cr(cond.none())
-     :with_del(cond.none())
-     :use_key('}'),
-   Rule('', ' ]')
-     :with_pair(cond.none())
-     :with_move(function(opts) return opts.char == ']' end)
-     :with_cr(cond.none())
-     :with_del(cond.none())
-     :use_key(']'),
- }
 
 EOF
 " ===
@@ -698,11 +644,11 @@ EOF
 " === vim-subversive
 " ===
 
-nmap s <plug>(SubversiveSubstitute)
-nmap ss <plug>(SubversiveSubstituteLine)
-nmap S <plug>(SubversiveSubstituteToEndOfLine)
-nmap <leader>s <plug>(SubversiveSubstituteRange)
-xmap <leader>s <plug>(SubversiveSubstituteRange)
+" nmap s <plug>(SubversiveSubstitute)
+" nmap ss <plug>(SubversiveSubstituteLine)
+" nmap S <plug>(SubversiveSubstituteToEndOfLine)
+" nmap <leader>s <plug>(SubversiveSubstituteRange)
+" xmap <leader>s <plug>(SubversiveSubstituteRange)
 " nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
 " nmap <leader>mm :CocList maps<CR>
 
@@ -748,10 +694,12 @@ let g:sandwich#recipes += [
 " === end vim-sandwich
 " ===
 
-if exists('g:vscode')
+" if !exists('g:vscode')
+if exists('g:dummy')
 " ===
 " === coc-git
 " ===
+
 
 " navigate chunks of current buffer
 nmap [[g <Plug>(coc-git-prevchunk)
@@ -867,7 +815,7 @@ command CheckSpace call s:check_space()
 imap <c-u> <esc>:CheckSpace<CR>
 " Use <A-,> to trigger completion.
 inoremap <silent><expr> <A-,> coc#refresh()
-" inoremap <a-p> <C-\><C-O>:call CocActionAsync('showSignatureHelp')<cr>
+inoremap <a-p> <C-\><C-O>:call CocActionAsync('showSignatureHelp')<cr>
 
 
 
@@ -1208,7 +1156,7 @@ if !exists('g:vscode')
 "
 " If you want to show the nearest function in your statusline automatically,
 " you can add the following line to your vimrc
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 endif
 
@@ -1371,7 +1319,7 @@ if !exists('g:vscode')
 " ===
 " nnoremap <leader>ff <cmd>Telescope find_files<cr>
 " nnoremap <leader>ff <cmd>Telescope frecency theme=dropdown<cr>
-nnoremap <leader>ff <Cmd>lua require('telescope').extensions.frecency.frecency(require('telescope.themes').get_dropdown())<CR>
+nnoremap <leader>ff <Cmd>lua require('telescope').extensions.frecency.frecency({ workspace='CWD' })<CR>
 nnoremap <leader>mm <cmd>Telescope keymaps<cr>
 nnoremap <leader>fh <cmd>Telescope oldfiles<cr>
 nnoremap <leader>fa <cmd>Telescope live_grep<cr>
@@ -1679,22 +1627,22 @@ EOF
 " noremap <Tab> :bn<CR>
 
 if !exists('g:vscode')
-let g:buffet_show_index = 1
-let g:buffet_powerline_separators = 1
+" let g:buffet_show_index = 1
+" let g:buffet_powerline_separators = 1
 noremap <S-Tab> :bp<CR>
 noremap <Leader><Tab> :Bw<CR>
 noremap <Leader><S-Tab> :Bonly<CR>
 
-nmap <leader>1 <Plug>BuffetSwitch(1)
-nmap <leader>2 <Plug>BuffetSwitch(2)
-nmap <leader>3 <Plug>BuffetSwitch(3)
-nmap <leader>4 <Plug>BuffetSwitch(4)
-nmap <leader>5 <Plug>BuffetSwitch(5)
-nmap <leader>6 <Plug>BuffetSwitch(6)
-nmap <leader>7 <Plug>BuffetSwitch(7)
-nmap <leader>8 <Plug>BuffetSwitch(8)
-nmap <leader>9 <Plug>BuffetSwitch(9)
-nmap <leader>0 <Plug>BuffetSwitch(10)
+" nmap <leader>1 <Plug>BuffetSwitch(1)
+" nmap <leader>2 <Plug>BuffetSwitch(2)
+" nmap <leader>3 <Plug>BuffetSwitch(3)
+" nmap <leader>4 <Plug>BuffetSwitch(4)
+" nmap <leader>5 <Plug>BuffetSwitch(5)
+" nmap <leader>6 <Plug>BuffetSwitch(6)
+" nmap <leader>7 <Plug>BuffetSwitch(7)
+" nmap <leader>8 <Plug>BuffetSwitch(8)
+" nmap <leader>9 <Plug>BuffetSwitch(9)
+" nmap <leader>0 <Plug>BuffetSwitch(10)
 
 " ===
 " === end vim-buffet

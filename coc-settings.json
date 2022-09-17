@@ -22,14 +22,13 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": []
     },
-    // "efm": {
-    //   "command": "efm-langserver",
-    //   "args": [],
-    //   "filetypes": ["vim", "lua"]
-    // }
+     "efm": {
+       "command": "efm-langserver",
+       "args": [],
+       "filetypes": ["vim", "lua"]
+     }
   },
   "snippets.userSnippetsDirectory": "~/.config/nvim/UltiSnips/",
-  "coc.preferences.colorSupport": true,
   "yank.highlight.enable": false,
   "tsserver.enable": true,
   "explorer.icon.enableNerdfont": true,

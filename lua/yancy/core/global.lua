@@ -12,12 +12,10 @@ function global:load_variables()
 	self.modules_dir = self.vim_path .. path_sep .. "modules"
 	self.home = home
 	self.data_dir = string.format("%s/site/", vim.fn.stdpath("data"))
-  self.is_vscode = vim.g.vscode == 1
+	self.is_vscode = vim.g.vscode == 1
+	-- print("is_vscode" .. str.(self.is_vscode))
 end
 
-
 global:load_variables()
-
-
 
 return global

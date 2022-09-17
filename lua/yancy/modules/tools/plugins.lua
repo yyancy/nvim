@@ -1,4 +1,4 @@
-local is_vscode = require 'yancy.core.global'.is_vscode
+is_vscode = require 'yancy.core.global'.is_vscode
 local tools = { }
 
 local conf = require 'yancy.modules.tools.config'
@@ -82,8 +82,8 @@ tools["gelguy/wilder.nvim"] = {
 	requires = { { "romgrk/fzy-lua-native", after = "wilder.nvim" } },
 }
 
--- tools["airblade/vim-rooter"] = {
--- }
+tools["airblade/vim-rooter"] = {
+}
 
 tools["mg979/vim-visual-multi"] = {
   config = conf.vim_visual_multi, 
@@ -103,6 +103,7 @@ tools["gbprod/yanky.nvim"] = {
 tools["tversteeg/registers.nvim"] = {
   
 }
+tools['tpope/vim-rsi'] = {}
 
 
 return tools
