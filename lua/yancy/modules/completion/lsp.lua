@@ -283,3 +283,6 @@ efmls.setup({
 })
 
 formatting.configure_format_on_save()
+vim.keymap.set("n", "<C-M-l>", function()
+	formatting.format({ timeout_ms = 1000, filter = formatting.format_filter })
+end)

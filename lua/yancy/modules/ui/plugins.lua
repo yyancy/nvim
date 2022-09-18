@@ -9,6 +9,33 @@ ui["SmiteshP/nvim-navic"] = {
 }
 
 ui["kyazdani42/nvim-web-devicons"] = {}
+ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
+ui["sainnhe/edge"] = { opt = false, config = conf.edge }
+ui["catppuccin/nvim"] = {
+	opt = false,
+	as = "catppuccin",
+	config = conf.catppuccin,
+}
+ui["rcarriga/nvim-notify"] = {
+	opt = false,
+	config = conf.notify,
+}
+ui["hoob3rt/lualine.nvim"] = {
+	opt = true,
+	after = { "nvim-navic" },
+	config = conf.lualine,
+}
+ui["SmiteshP/nvim-navic"] = {
+	opt = true,
+	after = "nvim-lspconfig",
+	config = conf.nvim_navic,
+}
+ui["goolord/alpha-nvim"] = {
+	opt = true,
+	event = "BufWinEnter",
+	config = conf.alpha,
+}
+
 ui["akinsho/bufferline.nvim"] = {
 	tag = "v2.*",
 	requires = "kyazdani42/nvim-web-devicons",

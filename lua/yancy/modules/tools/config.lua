@@ -1,7 +1,7 @@
 local config = {}
 
 config.open_url = function()
-  vim.cmd([[nmap <leader>gB :exe 'OpenURL '. substitute(expand('<cfile>'),'&','"&"','g')<CR>]])
+	vim.cmd([[nmap <leader>gB :exe 'OpenURL '. substitute(expand('<cfile>'),'&','"&"','g')<CR>]])
 end
 
 function config.telescope()
@@ -14,7 +14,7 @@ function config.telescope()
 	vim.cmd([[packadd telescope-smart-history.nvim]])
 
 	local telescope_actions = require("telescope.actions.set")
-  local actions = require('telescope.actions')
+	local actions = require("telescope.actions")
 	local fixfolds = {
 		hidden = true,
 		attach_mappings = function(_)
@@ -29,19 +29,19 @@ function config.telescope()
 
 	require("telescope").setup({
 		defaults = {
-      mappings = {
-        i = {
-         ["<esc>"] = actions.close,
-         ["<M-p>"] = actions.cycle_history_prev,
-         ["<M-n>"] = actions.cycle_history_next,
-         ["<Up>"] = actions.cycle_history_prev,
-         ["<Down>"] = actions.cycle_history_next,
-        }
-      },
-      history = {
-        path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
-        limit = 100,
-      },
+			mappings = {
+				i = {
+					["<esc>"] = actions.close,
+					["<M-p>"] = actions.cycle_history_prev,
+					["<M-n>"] = actions.cycle_history_next,
+					["<Up>"] = actions.cycle_history_prev,
+					["<Down>"] = actions.cycle_history_next,
+				},
+			},
+			history = {
+				path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
+				limit = 100,
+			},
 			initial_mode = "insert",
 			prompt_prefix = "  ",
 			selection_caret = " ",
@@ -53,9 +53,12 @@ function config.telescope()
 			path_display = { "absolute" },
 			file_ignore_patterns = { ".git/", ".cache", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
 			layout_config = {
-				prompt_position = "bottom",
+				-- prompt_position = "bottom",
 				horizontal = {
 					preview_width = 0.5,
+				},
+				vertical = {
+					preview_cutoff = 60,
 				},
 			},
 			file_previewer = require("telescope.previewers").vim_buffer_cat.new,
@@ -72,14 +75,15 @@ function config.telescope()
 				case_mode = "smart_case",
 			},
 			frecency = {
-				show_scores = true,
-				show_unindexed = true,
-				ignore_patterns = { "*.git/*", "*/tmp/*" },
+				-- show_scores = true,
+				-- show_unindexed = true,
+				-- ignore_patterns = { "*.git/*", "*/tmp/*" },
+				default_workspace = "CWD",
 			},
-       coc = {
-        theme = 'ivy',
-        prefer_locations = true, -- always use Telescope locations to preview definitions/declarations/implementations etc
-    }
+			coc = {
+				theme = "ivy",
+				prefer_locations = true, -- always use Telescope locations to preview definitions/declarations/implementations etc
+			},
 		},
 		pickers = {
 			buffers = fixfolds,
@@ -88,20 +92,25 @@ function config.telescope()
 			grep_string = fixfolds,
 			live_grep = fixfolds,
 			oldfiles = fixfolds,
+			frecency = {
+				theme = "dropdown",
+			},
+			keymaps = {
+				width = 200,
+			},
 		},
 	})
 
-  require('telescope').load_extension('coc')
+	require("telescope").load_extension("coc")
 	require("telescope").load_extension("fzf")
 	require("telescope").load_extension("project")
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("frecency")
-  require('telescope').load_extension('smart_history')
+	require("telescope").load_extension("smart_history")
 end
 
-
 function config.wilder()
-vim.cmd([[
+	vim.cmd([[
 call wilder#setup({'modes': [':', '/', '?']})
 call wilder#set_option('use_python_remote_plugin', 0)
 call wilder#set_option('pipeline', [wilder#branch(
@@ -123,63 +132,58 @@ call wilder#set_option('renderer', wilder#renderer_mux({
 ]])
 end
 
-
 function config.vim_visual_multi()
-  vim.g.VM_theme = 'ocean'
-  vim.g.VM_mouse_mappings = 1
+	vim.g.VM_theme = "ocean"
+	vim.g.VM_mouse_mappings = 1
 
-  vim.keymap.set('n', '<C-LeftMouse>','<Plug>(VM-Mouse-Cursor)' )
-  vim.keymap.set('n', '<C-RightMouse>','<Plug>(VM-Mouse-Word)' )
+	vim.keymap.set("n", "<C-LeftMouse>", "<Plug>(VM-Mouse-Cursor)")
+	vim.keymap.set("n", "<C-RightMouse>", "<Plug>(VM-Mouse-Word)")
 end
-
 
 function config.abbrev_man()
-  require("abbrev-man").setup({
-  load_natural_dictionaries_at_startup = true,
-  load_programming_dictionaries_at_startup = true,
-  natural_dictionaries = {
-    ["nt_en"] = {
-      ["adn"] = "AND",
-      ["THe"] = "rm_am"
-      },
-    ["nt_my_slangs"] = {
-          ["lmao"] = "LMAO"
-            }
-    },
-  programming_dictionaries = {
-    ["pr_py"] = {
-      ["tset"] = "test"
-      }
-    }
-  })
+	require("abbrev-man").setup({
+		load_natural_dictionaries_at_startup = true,
+		load_programming_dictionaries_at_startup = true,
+		natural_dictionaries = {
+			["nt_en"] = {
+				["adn"] = "AND",
+				["THe"] = "rm_am",
+			},
+			["nt_my_slangs"] = {
+				["lmao"] = "LMAO",
+			},
+		},
+		programming_dictionaries = {
+			["pr_py"] = {
+				["tset"] = "test",
+			},
+		},
+	})
 end
 
-
 function config.yanky()
-require("yanky").setup({
+	require("yanky").setup({})
 
-})
+	vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)")
+	vim.keymap.set("n", "<m-n>", "<Plug>(YankyCycleForward)")
+	vim.keymap.set("n", "<m-p>", "<Plug>(YankyCycleBackward)")
 
-vim.keymap.set({"n","x"}, "y", "<Plug>(YankyYank)")
-vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleForward)")
-vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleBackward)")
+	vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+	vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+	vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
+	vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
+	vim.keymap.set("n", "]p", "<Plug>(YankyPutIndentAfterLinewise)")
+	vim.keymap.set("n", "[p", "<Plug>(YankyPutIndentBeforeLinewise)")
+	vim.keymap.set("n", "]P", "<Plug>(YankyPutIndentAfterLinewise)")
+	vim.keymap.set("n", "[P", "<Plug>(YankyPutIndentBeforeLinewise)")
 
-vim.keymap.set({"n","x"}, "p", "<Plug>(YankyPutAfter)")
-vim.keymap.set({"n","x"}, "P", "<Plug>(YankyPutBefore)")
-vim.keymap.set({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
-vim.keymap.set({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
-vim.keymap.set("n", "]p", "<Plug>(YankyPutIndentAfterLinewise)")
-vim.keymap.set("n", "[p", "<Plug>(YankyPutIndentBeforeLinewise)")
-vim.keymap.set("n", "]P", "<Plug>(YankyPutIndentAfterLinewise)")
-vim.keymap.set("n", "[P", "<Plug>(YankyPutIndentBeforeLinewise)")
+	vim.keymap.set("n", ">p", "<Plug>(YankyPutIndentAfterShiftRight)")
+	vim.keymap.set("n", "<p", "<Plug>(YankyPutIndentAfterShiftLeft)")
+	vim.keymap.set("n", ">P", "<Plug>(YankyPutIndentBeforeShiftRight)")
+	vim.keymap.set("n", "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)")
 
-vim.keymap.set("n", ">p", "<Plug>(YankyPutIndentAfterShiftRight)")
-vim.keymap.set("n", "<p", "<Plug>(YankyPutIndentAfterShiftLeft)")
-vim.keymap.set("n", ">P", "<Plug>(YankyPutIndentBeforeShiftRight)")
-vim.keymap.set("n", "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)")
-
-vim.keymap.set("n", "=p", "<Plug>(YankyPutAfterFilter)")
-vim.keymap.set("n", "=P", "<Plug>(YankyPutBeforeFilter)")
+	vim.keymap.set("n", "=p", "<Plug>(YankyPutAfterFilter)")
+	vim.keymap.set("n", "=P", "<Plug>(YankyPutBeforeFilter)")
 end
 
 return config

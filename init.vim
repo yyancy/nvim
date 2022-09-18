@@ -305,13 +305,13 @@ Plug 'https://github.com/fatih/vim-go',Cond(!exists('g:vscode'), { 'do': ':GoIns
 " Plug 'https://github.com/vim-airline/vim-airline-themes'
 " Plug 'https://github.com/ajmwagar/vim-deus'
 Plug 'https://github.com/mhartington/oceanic-next'
-Plug 'https://github.com/nvim-lualine/lualine.nvim'
+" Plug 'https://github.com/nvim-lualine/lualine.nvim'
 Plug 'https://github.com/marko-cerovac/material.nvim'
 
 Plug 'https://github.com/lukas-reineke/indent-blankline.nvim',Cond(!exists('g:vscode'))
 " Plug 'https://github.com/ryanoasis/vim-devicons'
 " Plug 'https://github.com/kyazdani42/nvim-web-devicons'
-Plug 'https://github.com/glepnir/dashboard-nvim'
+" Plug 'https://github.com/glepnir/dashboard-nvim'
 
 " bufferline or statusline
 " Plug 'https://github.com/akinsho/bufferline.nvim'
@@ -324,7 +324,6 @@ Plug 'https://github.com/haya14busa/vim-asterisk'
 Plug 'https://github.com/machakann/vim-sandwich'
 
 " treesitter
-" Plug 'https://github.com/nvim-treesitter/nvim-treesitter',Cond(!exists('g:vscode'), {'do': ':TSUpdate'})
 
 " runner
 " Plug 'https://github.com/skywind3000/asynctasks.vim'
@@ -360,27 +359,16 @@ Plug 'https://github.com/honza/vim-snippets'
 
 " formating
 " Plug 'https://github.com/sbdchd/neoformat'
-Plug 'https://github.com/vim-autoformat/vim-autoformat'
+" Plug 'https://github.com/vim-autoformat/vim-autoformat'
 
-" comment
-" Plug 'https://github.com/numToStr/Comment.nvim'
-" Plug 'https://github.com/JoosepAlviste/nvim-ts-context-commentstring', Cond(!exists('g:vscode'))
 
-" html and markdown
-Plug 'https://github.com/iamcco/markdown-preview.nvim',{ 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'https://github.com/dhruvasagar/vim-table-mode'
-Plug 'https://github.com/dkarter/bullets.vim'
 
-" tags
 
-" Plug 'https://github.com/liuchengxu/vista.vim', Cond(!exists('g:vscode'))
 
-" useful stuffs
-" Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 
-" Plug 'https://github.com/winston0410/range-highlight.nvifoldexprm'
 
 call plug#end()
+
 
 lua<<EOF
 
@@ -450,11 +438,11 @@ let g:abolish_save_file = $HOME.'/.config/nvim/after/plugin/abolish.vim'
 " === lualine
 " ===
 lua<<EOF
-local OceanicNext = require'lualine.themes.OceanicNext'
-require'lualine'.setup{
-   options = { theme = OceanicNext } 
-  
-}
+-- local OceanicNext = require'lualine.themes.OceanicNext'
+-- require'lualine'.setup{
+   -- options = { theme = OceanicNext } 
+ --  
+-- }
 
 EOF
 
@@ -538,11 +526,11 @@ endif
 " ===
 " === dashboard.vim
 " ===
-let g:dashboard_default_executive ='telescope'
+" let g:dashboard_default_executive ='telescope'
 nmap <Leader><Leader>ss :<C-u>SaveSession<CR>
 nmap <Leader><Leader>sl :<C-u>RestoreSession<CR>
-nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-let g:dashboard_session_directory = $HOME.'/.config/nvim/tmp/session'
+" nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
+" let g:dashboard_session_directory = $HOME.'/.config/nvim/tmp/session'
 " ===
 " === end dashboard.vim
 " ===
@@ -1126,9 +1114,9 @@ colorscheme OceanicNext
 " ===
 " === autoformat
 " ===
-let g:formatdef_my_custom_c = '"clang-format -style=google"'
-let g:formatters_c = ['my_custom_c']
-noremap <F3> :Autoformat<CR>
+" let g:formatdef_my_custom_c = '"clang-format -style=google"'
+" let g:formatters_c = ['my_custom_c']
+" noremap <F3> :Autoformat<CR>
 
 if !exists('g:vscode')
 " ===
@@ -1268,61 +1256,17 @@ if has('unix')
 endif 
 if exists('g:vscode')
 
-" navigation between buffers
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-h> <c-w>h
-map <c-l> <c-w>l
-
-map <leader>1 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex1')<cr>
-map <leader>2 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex2')<cr>
-map <leader>3 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex3')<cr>
-map <leader>4 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex4')<cr>
-map <leader>5 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex5')<cr>
-map <leader>6 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex6')<cr>
-map <leader>7 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex7')<cr>
-map <leader>8 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex8')<cr>
-map <leader>9 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex9')<cr>
-
-
-nnoremap <leader>ff :Find<cr>
-nnoremap <leader>ls <cmd>call VSCodeNotify('workbench.action.showAllSymbols')<cr>
-map <f12> <cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>
-map <leader>E <cmd>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<cr>
-
-
-map <leader>q <cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<cr>
-map <leader>w <cmd>call VSCodeNotify('workbench.action.files.save')<cr>
-map <leader><tab> <cmd>call VSCodeNotify('workbench.action.closeEditorsToTheRight')<cr>
-
-
-nnoremap <leader>fa <cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>
-nnoremap gi <cmd>call VSCodeNotify('editor.action.goToImplementation')<cr>
-nnoremap gy <cmd>call VSCodeNotify('editor.action.goToTypeDefinition')<cr>
-nnoremap gr <cmd>call VSCodeNotify('editor.action.goToReferences')<cr>
-
-nnoremap za <cmd>call VSCodeNotify('editor.toggleFold')<cr>
-nnoremap zc <cmd>call VSCodeNotify('editor.fold')<cr>
-nnoremap zo <cmd>call VSCodeNotify('editor.unfold')<cr>
-
-nnoremap <leader>rn <cmd>call VSCodeNotify('editor.action.rename')<cr>
-nnoremap [g <cmd>call VSCodeNotify('editor.action.marker.prev')<cr>
-nnoremap ]g <cmd>call VSCodeNotify('editor.action.marker.next')<cr>
-nnoremap [[g <cmd>call VSCodeNotify('workbench.action.editor.previousChange')<cr>
-nnoremap ]]g <cmd>call VSCodeNotify('workbench.action.editor.nextChange')<cr>
-nnoremap [c <cmd>call VSCodeNotify('merge-conflict.next')<cr>
-nnoremap ]c <cmd>call VSCodeNotify('merge-conflict.previous')<cr>
 endif
 if !exists('g:vscode')
 " ===
 " === telescope
 " ===
 " nnoremap <leader>ff <cmd>Telescope find_files<cr>
-" nnoremap <leader>ff <cmd>Telescope frecency theme=dropdown<cr>
-nnoremap <leader>ff <Cmd>lua require('telescope').extensions.frecency.frecency({ workspace='CWD' })<CR>
-nnoremap <leader>mm <cmd>Telescope keymaps<cr>
-nnoremap <leader>fh <cmd>Telescope oldfiles<cr>
-nnoremap <leader>fa <cmd>Telescope live_grep<cr>
+nnoremap <leader>ff <cmd>Telescope frecency theme=dropdown<cr>
+" nnoremap <leader>ff <Cmd>lua require('telescope').extensions.frecency.frecency({ workspace='CWD' })<CR>
+nnoremap <leader>mm <cmd>Telescope keymaps theme=dropdown<cr>
+nnoremap <leader>fh <cmd>Telescope oldfiles theme=dropdown<cr>
+nnoremap <leader>fa <cmd>Telescope live_grep theme=dropdown<cr>
 
 " lsp with coc.vim configurations
 nnoremap <leader>tc :Telescope coc 
@@ -1805,6 +1749,9 @@ lua<<EOF
 require 'yancy.core'
 EOF
 
+if exists('g:vscode')
+  source vscode.vim
+end
 xmap <c-d> "ayp
 " ===
 " === end cusom functions and commands
