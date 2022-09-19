@@ -26,4 +26,9 @@ lang["dkarter/bullets.vim"] = {
 	end,
 }
 
+lang["mzlogin/vim-markdown-toc"] = {
+	opt = true,
+	ft = { "markdown" },
+}
+
 return lang

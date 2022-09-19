@@ -282,40 +282,29 @@ function! Cond(cond, ...)
   let opts = get(a:000, 0, {})
   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
+
 " temporary plugins
 " Plug 'https://github.com/tpope/vim-rsi.git'
 
 " quickfix enforcement
-Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
-Plug 'https://github.com/stevearc/qf_helper.nvim.git'
+" Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
+" Plug 'https://github.com/stevearc/qf_helper.nvim.git'
 " temporary
 " Plug 'https://github.com/folke/trouble.nvim'
-Plug 'https://github.com/folke/which-key.nvim.git'
 " Plug 'https://github.com/tami5/sqlite.lua.git'
-Plug 'https://github.com/tpope/vim-abolish'
-" Plug 'https://github.com/tpope/vim-unimpaired'
+" Plug 'https://github.com/tpope/vim-abolish'
+
+
+
 Plug 'https://github.com/Mofiqul/dracula.nvim'
-Plug 'https://github.com/kkoomen/vim-doge'
-" Plug 'http://github.com/romgrk/barbar.nvim'
+" Plug 'https://github.com/kkoomen/vim-doge'
+
+
+
 Plug 'https://github.com/fatih/vim-go',Cond(!exists('g:vscode'), { 'do': ':GoInstallBinaries' })
-" Plug 'https://github.com/lilydjwg/fcitx.vim',Cond(has('unix'), { 'branch':'fcitx4' })
-  " Plug 'https://github.com/wellle/tmux-complete.vim'
 " adorn editor
-" Plug 'https://github.com/bling/vim-airline'
-" Plug 'https://github.com/vim-airline/vim-airline-themes'
-" Plug 'https://github.com/ajmwagar/vim-deus'
 Plug 'https://github.com/mhartington/oceanic-next'
-" Plug 'https://github.com/nvim-lualine/lualine.nvim'
 Plug 'https://github.com/marko-cerovac/material.nvim'
-
-Plug 'https://github.com/lukas-reineke/indent-blankline.nvim',Cond(!exists('g:vscode'))
-" Plug 'https://github.com/ryanoasis/vim-devicons'
-" Plug 'https://github.com/kyazdani42/nvim-web-devicons'
-" Plug 'https://github.com/glepnir/dashboard-nvim'
-
-" bufferline or statusline
-" Plug 'https://github.com/akinsho/bufferline.nvim'
-" Plug 'https://github.com/bagrat/vim-buffet'
 
 " jump and search
 Plug 'https://github.com/christoomey/vim-tmux-navigator', Cond(!exists('g:vscode'))
@@ -323,128 +312,26 @@ Plug 'https://github.com/haya14busa/vim-asterisk'
 
 Plug 'https://github.com/machakann/vim-sandwich'
 
-" treesitter
-
-" runner
-" Plug 'https://github.com/skywind3000/asynctasks.vim'
-" Plug 'https://github.com/skywind3000/asyncrun.vim'
-
-" editor enhancement
-" Plug 'https://github.com/windwp/nvim-ts-autotag', Cond(!exists('g:vscode'))
-" Plug 'https://github.com/andymass/vim-matchup'
-" Plug 'https://github.com/airblade/vim-rooter'
-" Plug 'https://github.com/tversteeg/registers.nvim' , { 'branch': 'main' }
-" Plug 'https://github.com/mg979/vim-visual-multi'
-" Plug 'https://github.com/ceigh/AutoSave.nvim', Cond(!exists('g:vscode'), {'branch': 'execution_message-fn'})
-" Plug 'https://github.com/tpope/vim-repeat'
-" Plug 'https://github.com/rhysd/clever-f.vim'
 
 " bookmarks
 " Plug 'https://github.com/MattesGroeger/vim-bookmarks'
-
-" fold
-" Plug 'https://github.com/wellle/context.vim'
-" Plug 'https://github.com/haringsrob/nvim_context_vt'
 
 " LSP 
 " Plug 'https://github.com/neoclide/coc.nvim',Cond(!exists('g:vscode'),{'branch': 'release'})
 " snippets
 Plug 'https://github.com/honza/vim-snippets'
-" Plug 'https://gitee.com/yyancyer/vim-floaterm'
-" Plug 'https://gitee.com/yyancyer/auto-pairs'
-" Plug 'https://github.com/junegunn/vim-easy-align'
 
 " highlight
 " Plug 'https://github.com/windwp/nvim-autopairs'
 
-" formating
-" Plug 'https://github.com/sbdchd/neoformat'
-" Plug 'https://github.com/vim-autoformat/vim-autoformat'
-
-
-
-
-
-
-
 call plug#end()
 
-
-lua<<EOF
-
-  -- require("which-key").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  -- }
-
-EOF
 
 if !has('unix')
 " sqlite.lua
 let g:sqlite_clib_path="D:/local/lib/sqlite/sqlite3.dll"
 endif
 " 
-
-" vim-visual-multi
-" let g:VM_theme = 'ocean'
-
-" ===
-" === word-motion
-" ===
-" let g:wordmotion_prefix = '<Alt>'
-
-" ===
-" === qf_helper
-" ===
-lua<<EOF
-
--- require'qf_helper'.setup()
-
-EOF
-
-" ===
-" === end qf_helper
-" ===
-
-" ===
-" === nvim-pqf
-" ===
-lua<<EOF
-
-require('pqf').setup()
-
-EOF
-
-" ===
-" === end nvim-pqf
-" ===
-
-" ===
-" === end word-motion
-" ===
-
-" ===
-" === vim-abolish
-" ===
-let g:abolish_save_file = $HOME.'/.config/nvim/after/plugin/abolish.vim'
-" source $HOME/.config/nvim/abolish.vim
-" ===
-" === end vim-abolish
-" ===
-
-
-" ===
-" === lualine
-" ===
-lua<<EOF
--- local OceanicNext = require'lualine.themes.OceanicNext'
--- require'lualine'.setup{
-   -- options = { theme = OceanicNext } 
- --  
--- }
-
-EOF
 
 " ===
 " === vim-go
@@ -457,36 +344,6 @@ let g:go_highlight_function_calls = 1
 " ===
 " === end vim-go
 " ===
-
-" ===
-" === transparent
-" ===
-lua<<EOF
-
--- require("transparent").setup({
---   enable = false, -- boolean: enable transparent
---   exclude = {}, -- table: groups you don't want to clear
--- })
-
-EOF
-
-" ===
-" === end transparent
-" ===
-
-" ===
-" === end lualine
-" ===
-
-
-lua<<EOF
-
-require'nvim-web-devicons'.setup {
- default = true;
-}
---require'nvim-web-devicons'.get_icons()
-
-EOF
 
 
 if !exists('g:vscode')
@@ -504,22 +361,6 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 " === end vim-tmux-navigator
 " ===
 endif
-if !exists('g:vscode')
-" ===
-" === auto-session
-" ===
-lua<<EOF
- -- require('auto-session').setup {
-       -- log_level = 'info',
-       -- auto_session_root_dir = vim.fn.stdpath('config').."/tmp/session/",
-       -- auto_session_suppress_dirs = {'~/', '~/Projects'}
-     -- }
-
-EOF
-endif
-" ===
-" === end auto-session
-" ===
 
 
 
@@ -542,14 +383,14 @@ if !exists('g:vscode')
 " ===
 lua<<EOF
 
-require("indent_blankline").setup {
-  -- for example, context is off by default, use this to turn it on
-  show_current_context = true,
-  show_current_context_start = true,
-  buftype_exclude = { "terminal" },
-  filetype_exclude = { "dashboard" },
-  }
-
+--require("indent_blankline").setup {
+--  -- for example, context is off by default, use this to turn it on
+--  show_current_context = true,
+--  show_current_context_start = true,
+--  buftype_exclude = { "terminal" },
+--  filetype_exclude = { "dashboard" },
+--  }
+--
 EOF
 endif
 
@@ -557,49 +398,11 @@ endif
 " === end indent-blankline
 " ===
 
-" ===
-" === nvim_context_vt
-" ===
-lua<<EOF
---require('nvim_context_vt').setup {
- -- custom_text_handler = function(node)
-  --  return nil
- -- end,
- -- }
-EOF
 
 " ===
 " === end nvim_context_vt
 " ===
 
-if !exists('g:vscode')
-  " ===
-  " === autosave
-  " ===
-lua<<EOF
-  -- require("autosave").setup{
-  -- enabled = false,
-  -- execution_message = function()
-  -- return "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S")
-  -- end,
-  -- clean_command_line_interval = 500,
-  -- debounce_delay = 500
-  -- }
-EOF
-endif
-
-" ===
-" === end autosave
-" ===
-
-" ===
-" === vim-matchup
-" ===
-" let g:matchup_matchparen_offscreen = {'method': 'popup'}
-
-" ===
-" === end vim-matchup
-" ===
 
 " ===
 " === nvim-autopairs
@@ -1044,9 +847,9 @@ endif
 " ===
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+" xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+" nmap ga <Plug>(EasyAlign)
 
 " nmap <leader>cc <Plug>(NERDCommenterToggle)
 " " Create default mappings
@@ -1057,23 +860,6 @@ nmap ga <Plug>(EasyAlign)
 " " Add your own custom formats or override the defaults
 " let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
 
-
-
-" ===
-" === airline
-" ===
-
-
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline_theme='luna'
-let g:airline_theme='oceanicnext'
-let g:airline_powerline_fonts = 1
-" testing rounded separators (extra-powerline-symbols):
-let g:airline_left_sep = "\uE0B4"
-let g:airline_right_sep = "\uE0B6"
-
-" set the CN (column number) symbol:
-" let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 
 " ===
 " === material
@@ -1096,57 +882,11 @@ EOF
 " ===
 " crscheme murphy        " 修改配色
 " color deus
-colorscheme OceanicNext
+" colorscheme OceanicNext
 " let g:material_style = 'palenight'
 " colorscheme material
 " colorscheme dracula
 
-
-" ===
-" === auto-pairs
-" ===
-" let g:AutoPairsFlyMode = 1
-
-
-
-
-
-" ===
-" === autoformat
-" ===
-" let g:formatdef_my_custom_c = '"clang-format -style=google"'
-" let g:formatters_c = ['my_custom_c']
-" noremap <F3> :Autoformat<CR>
-
-if !exists('g:vscode')
-" ===
-" === vista
-" ===
-
-" map <F12> :Vista finder<CR>
-" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-" let g:vista_default_executive = 'coc'
-" " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
-" let g:vista#renderer#enable_icon = 1
-"
-" " The default icons can't be suitable for all the filetypes, you can extend it as you wish.
-" let g:vista#renderer#icons = {
-"       \   "function": "\uf794",
-"       \   "variable": "\uf71b",
-"       \  }
-" function! NearestMethodOrFunction() abort
-"   return get(b:, 'vista_nearest_method_or_function', '')
-" endfunction
-"
-" set statusline+=%{NearestMethodOrFunction()}
-
-" By default vista.vim never run if you don't call it explicitly.
-"
-" If you want to show the nearest function in your statusline automatically,
-" you can add the following line to your vimrc
-" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-
-endif
 
 " ===
 " === asynctasks
@@ -1171,77 +911,8 @@ if !exists('g:vscode')
 " ===
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-lua <<EOF
--- require'nvim-treesitter.configs'.setup {
--- ensure_installed = {"python","c","html","javascript","css","json" },     -- one of "all", "language", or a list of languages
---   highlight = {
---     enable = true,              -- false will disable the whole extension
---     disable = {  "rust" },  -- list of language that will be disabled
---   },
---   matchup = {
---     enable = true
---   },
---   context_commentstring = {
---     enable = true,
---     enable_autocmd = false
---   },
--- incremental_selection = {
--- enable = true,
--- keymaps = {
---   init_selection = "gnn",
---   node_incremental = "grn",
---   scope_incremental = "grc",
---   node_decremental = "grm",
---   },
--- },
--- indent = {
--- enable = true
--- }
---  
--- }
--- require 'nvim-treesitter.install'.compilers = { "clang","gcc" }
-EOF
 endif
-" ===
-" === vim-illuminate
-" ===
-" augroup illuminate_augroup
-" autocmd!
-" autocmd VimEnter * hi illuminatedWord cterm=underline gui=underline
-" augroup END
 
-
-
-" ===
-" === ccls
-" ===
-" bases
-" nn <silent> xb :call CocLocations('ccls','$ccls/inheritance')<cr>
-" " bases of up to 3 levels
-" nn <silent> xB :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
-" " derived
-" nn <silent> xd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
-" " derived of up to 3 levels
-" nn <silent> xD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
-
-" " caller
-" nn <silent> xc :call CocLocations('ccls','$ccls/call')<cr>
-" " callee
-" nn <silent> xC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
-
-" " $ccls/member
-" " member variables / variables in a namespace
-" nn <silent> xm :call CocLocations('ccls','$ccls/member')<cr>
-" " member functions / functions in a namespace
-" nn <silent> xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
-" " nested classes / types in a namespace
-" nn <silent> xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
-
-" nmap <silent> xt <Plug>(coc-type-definition)<cr>
-" nn <silent> xv :call CocLocations('ccls','$ccls/vars')<cr>
-" nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
-
-" nn xx x
 
 " ===
 " === end ccls
@@ -1254,107 +925,6 @@ if has('unix')
   autocmd InsertLeave * :silent :!fcitx-remote -s fcitx-keyboard-us
   autocmd InsertEnter * :silent :!fcitx-remote -s sogoupinyin
 endif 
-if exists('g:vscode')
-
-endif
-if !exists('g:vscode')
-" ===
-" === telescope
-" ===
-" nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>ff <cmd>Telescope frecency theme=dropdown<cr>
-" nnoremap <leader>ff <Cmd>lua require('telescope').extensions.frecency.frecency({ workspace='CWD' })<CR>
-nnoremap <leader>mm <cmd>Telescope keymaps theme=dropdown<cr>
-nnoremap <leader>fh <cmd>Telescope oldfiles theme=dropdown<cr>
-nnoremap <leader>fa <cmd>Telescope live_grep theme=dropdown<cr>
-
-" lsp with coc.vim configurations
-nnoremap <leader>tc :Telescope coc 
-nnoremap <leader>ls <cmd>Telescope coc workspace_symbols theme=dropdown<cr>
-nnoremap gO <cmd>Telescope coc document_symbols theme=dropdown<cr>
-nnoremap <leader>lr <cmd>Telescope coc references theme=dropdown<cr>
-lua<<EOF
-
--- local actions = require('telescope.actions')
--- local builtin = require('telescope.builtin')
--- require('telescope').setup{
---   defaults = {
---     disable_devicons = false,
---     color_devicons = true,
---     -- layout_strategy = 'center',
---     layout_config={
---      vertical = {
---        preview_cutoff = 60
---        },
---     },
---     mappings = {
---       i = {
---         ["<esc>"] = actions.close,
---         ["<Down>"] = require('telescope.actions').cycle_history_next,
---         ["<Up>"] = require('telescope.actions').cycle_history_prev,
---       },
---     },
---   },
--- pickers = {
---   find_files = {
---      theme = "dropdown",
---      layout_config = {
---          preview_cutoff = 60
---       }
---     },
---   keymaps = {
---     theme = "dropdown"
---     },
---   live_grep = {
---     theme = "dropdown"
---     },
---   oldfiles = {
---     theme = "dropdown"
---     }
---   },
--- extensions = {
---   frecency = {
---     default_workspace = 'CWD'
---     }
---   }
--- }
--- 
--- require('telescope').load_extension('coc')
--- require('telescope').load_extension("frecency")
--- require('telescope').load_extension('smart_history')
-EOF
-" ===
-" === end telescope
-" ===
-endif
-
-
-" ===
-" === vim-anyfold
-" ===
-" activate anyfold by default
-" augroup anyfold
-"   autocmd!
-"   autocmd Filetype * AnyFoldActivate
-" augroup END
-
-" disable anyfold for large files
-" let g:LargeFile = 1000000 " file is large if size greater than 1MB
-" autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
-" function LargeFile()
-  " augroup anyfold
-    " autocmd! 
-    " autocmd Filetype * setlocal foldmethod=indent " fall back to indent folding
-  " augroup END
-  " execute ":ContextDisable"
-" endfunction
-" ===
-" === end vim-anyfold
-" ===
-
-
-" let g:clever_f_mark_direct = 1
-
 
 
 " ===
@@ -1371,299 +941,6 @@ map gz# <Plug>(asterisk-gz#)
 
 " ===
 " === end vim-asterisk
-" ===
-
-
-" ===
-" === context.vim
-" ===
-" let g:context_add_mappings = 0
-" let g:context_nvim_no_redraw = 1
-"
-" let g:context_max_filesize = 1000
-" autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:context_max_filesize || f == -2 | execute ":ContextDisable" | endif
-" ===
-" === end context.vim
-" ===
-
-
-" ===
-" === dap
-" ===
-
-" mappings
-" nnoremap <C-S-F12> :lua require'dap'.continue()<cr>
-
-" map <silent> <F5> :lua require'dap'.continue()<CR>
-" map <silent> <F10> :lua require'dap'.step_over()<CR>
-" map <silent> <F11> :lua require'dap'.step_into()<CR>
-" map <silent> <F12> :lua require'dap'.step_out()<CR>
-" map <silent> <leader>b :lua require'dap'.toggle_breakpoint()<CR>
-" map <silent> <leader>B :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
-" map <silent> <leader>lp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
-" map <silent> <leader>dr :lua require'dap'.repl.open()<CR>
-" map <silent> <leader>dl :lua require'dap'.run_last()<CR>
-
-" lua require('dap-python').setup('~/.venv/bin/python')
-" lua<<EOF
-" local dap = require 'dap'
-" local repl = require 'dap.repl'
-" repl.commands = vim.tbl_extend('force', repl.commands, {
-" -- Add a new alias for the existing .exit command
-" exit = {'exit', '.exit', '.bye'},
-" -- Add your own commands; run `.echo hello world` to invoke
-" -- this function with the text "hello world"
-" custom_commands = {
-" ['.echo'] = function(text)
-" dap.repl.append(text)
-" end,
-" -- Hook up a new command to an existing dap function
-" ['.restart'] = dap.restart,
-" },
-" })
-" EOF
-
-" ===
-" === end dap
-" ===
-
-" ===
-" === vimspector
-" ===
-" map <C-S-F12> <Plug>VimspectorContinue
-" let g:vimspector_enable_mappings = 'HUMAN'
-" " for normal mode - the word under the cursor
-" nmap <Leader>di <Plug>VimspectorBalloonEval
-" " for visual mode, the visually selected text
-" xmap <Leader>di <Plug>VimspectorBalloonEval
-" ===
-" === end vimspector
-" ===
-
-
-" ===
-" === indentLine
-" ===
-" let g:indentLine_concealcursor = 'nc'
-
-" ===
-" === end indentLine
-" ===
-
-" ===
-" === abbrevMan
-" ===
-lua << EOF
--- local abbrev_man = require("abbrev-man")
--- 
--- abbrev_man.setup({
--- load_natural_dictionaries_at_startup = true,
--- load_programming_dictionaries_at_startup = true,
--- natural_dictionaries = {
---   ["nt_en"] = {
---     ["adn"] = "AND",
---     ["THe"] = "rm_am"
---     },
---   ["nt_my_slangs"] = {
---         ["lmao"] = "LMAO"
---           }
---   },
--- programming_dictionaries = {
---   ["pr_py"] = {
---     ["tset"] = "test"
---     }
---   }
--- })
-EOF
-
-" ===
-" === end abbrevMan
-" ===
-
-
-" ===
-" === instant-markdown
-" ===
-let g:instant_markdown_slow = 1
-
-" ===
-" === end instant-markdown
-" ===
-
-
-
-
-" ===
-" === end nvim-ts-autotag
-" ===
-
-" ===
-" === bufferline
-" ===
-" set termguicolors
-lua<<EOF
--- require("bufferline").setup{
---   options = {
---     numbers = function(opts)
---       return string.format('%s.', opts.ordinal)
---     end,
---     diagnostics = 'coc',
---     offsets = {
---     {
---         filetype = 'coc-explorer',
---         text = "File Explorer",
---         highlight = "Directory",
---         text_align = "left"
--- 
---     }
---     }
---   }
--- }
-EOF
-" map <silent> <leader>gb :BufferLinePick<CR>
-"
-" nnoremap <silent>[b :BufferLineCycleNext<CR>
-" nnoremap <silent>]b :BufferLineCyclePrev<CR>
-"
-" nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
-" nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
-" nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
-" nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
-" nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
-" nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
-" nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
-" nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
-" nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
-"
-" ===
-" === end bufferline
-" ===
-
-" ===
-" === barbar.nvim
-" ===
-" let bufferline = get(g:, 'bufferline', {})
-" let bufferline.icons = 'buffer_number'
-" nnoremap <silent>    <leader>1 :BufferGoto 1<CR>
-" nnoremap <silent>    <leader>2 :BufferGoto 2<CR>
-" nnoremap <silent>    <leader>3 :BufferGoto 3<CR>
-" nnoremap <silent>    <leader>4 :BufferGoto 4<CR>
-" nnoremap <silent>    <leader>5 :BufferGoto 5<CR>
-" nnoremap <silent>    <leader>6 :BufferGoto 6<CR>
-" nnoremap <silent>    <leader>7 :BufferGoto 7<CR>
-" nnoremap <silent>    <leader>8 :BufferGoto 8<CR>
-" nnoremap <silent>    <leader>9 :BufferLast<CR>
-
-" ===
-" === end barbar.nvim
-" ===
-
-
-" ===
-" === vim-buffet
-" ===
-
-" let g:buffet_powerline_separators = 1
-" let g:buffet_tab_icon = "\uf00a"
-" let g:buffet_left_trunc_icon = "\uf0a8"
-" let g:buffet_right_trunc_icon = "\uf0a9"
-
-" noremap <Tab> :bn<CR>
-
-if !exists('g:vscode')
-" let g:buffet_show_index = 1
-" let g:buffet_powerline_separators = 1
-noremap <S-Tab> :bp<CR>
-noremap <Leader><Tab> :Bw<CR>
-noremap <Leader><S-Tab> :Bonly<CR>
-
-" nmap <leader>1 <Plug>BuffetSwitch(1)
-" nmap <leader>2 <Plug>BuffetSwitch(2)
-" nmap <leader>3 <Plug>BuffetSwitch(3)
-" nmap <leader>4 <Plug>BuffetSwitch(4)
-" nmap <leader>5 <Plug>BuffetSwitch(5)
-" nmap <leader>6 <Plug>BuffetSwitch(6)
-" nmap <leader>7 <Plug>BuffetSwitch(7)
-" nmap <leader>8 <Plug>BuffetSwitch(8)
-" nmap <leader>9 <Plug>BuffetSwitch(9)
-" nmap <leader>0 <Plug>BuffetSwitch(10)
-
-" ===
-" === end vim-buffet
-" ===
-endif
-
-
-if !exists('g:vscode')
-" ===
-" === wilder.nvim
-" ===
-
-
-" call wilder#setup({'modes': [':', '/', '?']})
-"
-" call wilder#set_option('pipeline', [
-"       \   wilder#branch(
-"       \     wilder#cmdline_pipeline({
-"       \       'fuzzy': 1,
-"       \       'set_pcre2_pattern': 1,
-"       \     }),
-"       \     wilder#python_search_pipeline({
-"       \       'pattern': 'fuzzy',
-"       \     }),
-"       \   ),
-"       \ ])
-"
-" let s:highlighters = [
-"         \ wilder#pcre2_highlighter(),
-"         \ wilder#basic_highlighter(),
-"         \ ]
-"
-" call wilder#set_option('renderer', wilder#renderer_mux({
-"       \ ':': wilder#popupmenu_renderer({
-"       \   'highlighter': s:highlighters,
-"       \ }),
-"       \ '/': wilder#wildmenu_renderer({
-"       \   'highlighter': s:highlighters,
-"       \ }),
-"       \ }))
-" ===
-" === end wilder.nvim
-" ===
-endif
-
-
-if !exists('g:vscode')
-" ===
-" === comment.vim
-" ===
-lua << EOF
--- require('Comment').setup {
---   pre_hook = function(ctx)
---   local U = require 'Comment.utils'
--- 
---   -- Detemine whether to use linewise or blockwise commentstring
---             local type = ctx.ctype == U.ctype.line and '__default' or '__multiline'
--- 
---             -- Determine the location where to calculate commentstring from
---             local location = nil
---             if ctx.ctype == U.ctype.block then
---                 location = require('ts_context_commentstring.utils').get_cursor_location()
---             elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
---                 location = require('ts_context_commentstring.utils').get_visual_start_location()
---             end
--- 
---             return require('ts_context_commentstring.internal').calculate_commentstring({
---                 key = type,
---                 location = location,
---             })
--- end,
--- }
-EOF
-endif
-
-" ===
-" === end comment.vim
 " ===
 
 

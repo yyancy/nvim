@@ -26,6 +26,18 @@ function config.alpha()
 		[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⢿⣿⣿⠂⠀⠀⠀⠀⠀⢀⣽⣿⣿⣿⣿⣿⣿⣿⣍⠛⠿⣿⣿⣿⣿⣿⣿]],
 	}
 
+	local keymap = vim.keymap.set
+	keymap("n", "<leader>ff", "<cmd>Telescope frecency theme=dropdown<cr>")
+	keymap("n", "<leader>mm", "<cmd>Telescope keymaps theme=dropdown<cr>")
+	keymap("n", "<leader>fh", "<cmd>Telescope oldfiles theme=dropdown<cr>")
+	keymap("n", "<leader>fa", "<cmd>Telescope live_grep theme=dropdown<cr>")
+
+	-- lsp with coc.vim configurations
+	keymap("n", "<leader>tc", ":Telescope coc ")
+	keymap("n", "<leader>ls", "<cmd>Telescope coc workspace_symbols theme=dropdown<cr>")
+	keymap("n", "gO", "<cmd>Telescope coc document_symbols theme=dropdown<cr>")
+	keymap("n", "<leader>lr", "<cmd>Telescope coc references theme=dropdown<cr>")
+
 	local function button(sc, txt, leader_txt, keybind, keybind_opts)
 		local sc_after = sc:gsub("%s", ""):gsub(leader_txt, "<leader>")
 
@@ -244,7 +256,7 @@ function config.catppuccin()
 				group = "_catppuccin",
 				pattern = "PackerCompileDone",
 				callback = function()
-					require("catppuccin").compile()
+					-- require("catppuccin").compile()
 					vim.defer_fn(function()
 						vim.cmd([[colorscheme catppuccin]])
 					end, 0)
@@ -256,7 +268,7 @@ function config.catppuccin()
 	vim.g.catppuccin_flavour = "mocha" -- Set flavour here
 	local cp = get_modified_palette()
 
-	local enable_compile = true -- Set to false if you would like to disable catppuccin cache. (Not recommended)
+	local enable_compile = false -- Set to false if you would like to disable catppuccin cache. (Not recommended)
 	set_auto_compile(enable_compile)
 
 	require("catppuccin").setup({
@@ -467,6 +479,7 @@ function config.catppuccin()
 			},
 		},
 	})
+	vim.cmd([[colorscheme catppuccin]])
 end
 
 function config.nvim_navic()
@@ -652,4 +665,57 @@ function config.lualine()
 		},
 	})
 end
+
+function config.indent_blankline()
+	require("indent_blankline").setup({
+		char = "│",
+		show_first_indent_level = true,
+		filetype_exclude = {
+			"startify",
+			"dashboard",
+			"dotooagenda",
+			"log",
+			"fugitive",
+			"gitcommit",
+			"packer",
+			"vimwiki",
+			"markdown",
+			"json",
+			"txt",
+			"vista",
+			"help",
+			"todoist",
+			"NvimTree",
+			"peekaboo",
+			"git",
+			"TelescopePrompt",
+			"undotree",
+			"flutterToolsOutline",
+			"", -- for all buffers without a file type
+		},
+		buftype_exclude = { "terminal", "nofile" },
+		show_trailing_blankline_indent = false,
+		show_current_context = true,
+		context_patterns = {
+			"class",
+			"function",
+			"method",
+			"block",
+			"list_literal",
+			"selector",
+			"^if",
+			"^table",
+			"if_statement",
+			"while",
+			"for",
+			"type",
+			"var",
+			"import",
+		},
+		space_char_blankline = " ",
+	})
+	-- because lazy load indent-blankline so need readd this autocmd
+	vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
+end
+
 return config

@@ -8,7 +8,13 @@ ui["SmiteshP/nvim-navic"] = {
 	config = conf.nvim_navic,
 }
 
-ui["kyazdani42/nvim-web-devicons"] = {}
+ui["kyazdani42/nvim-web-devicons"] = {
+	config = function()
+		require("nvim-web-devicons").setup({
+			default = true,
+		})
+	end,
+}
 ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
 ui["sainnhe/edge"] = { opt = false, config = conf.edge }
 ui["catppuccin/nvim"] = {
@@ -50,6 +56,15 @@ ui["famiu/bufdelete.nvim"] = {
 		vim.keymap.set("n", "<leader><tab>", "<cmd>Bdelete<CR>")
 		vim.keymap.set("n", "<leader><S-tab>", "<cmd>Bdelete!<CR>")
 	end,
+}
+
+ui["lukas-reineke/indent-blankline.nvim"] = {
+	opt = true,
+	event = "BufReadPost",
+	cond = function()
+		return not is_vscode
+	end,
+	config = conf.indent_blankline,
 }
 
 return ui

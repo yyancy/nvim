@@ -107,6 +107,7 @@ function config.telescope()
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("frecency")
 	require("telescope").load_extension("smart_history")
+
 end
 
 function config.wilder()

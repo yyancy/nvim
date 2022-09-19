@@ -133,4 +133,16 @@ editor["svermeulen/vim-subversive"] = {
 	end,
 }
 
+editor["https://gitlab.com/yorickpeterse/nvim-pqf.git"] = {
+	as = "pqf",
+	config = function()
+		require("pqf").setup()
+	end,
+}
+editor["stevearc/qf_helper.nvim"] = {
+	config = function()
+		require("qf_helper").setup()
+	end,
+}
+
 return editor
