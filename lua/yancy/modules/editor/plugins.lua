@@ -144,5 +144,26 @@ editor["stevearc/qf_helper.nvim"] = {
 		require("qf_helper").setup()
 	end,
 }
+editor["christoomey/vim-tmux-navigator"] = {
+	cond = function()
+		return not is_vscode
+	end,
+	config = function()
+		vim.g.tmux_navigator_no_mappings = 1
+
+		vim.keymap.set("n", "<c-h>", "<cmd>TmuxNavigateLeft<cr>")
+		vim.keymap.set("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>")
+		vim.keymap.set("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>")
+		vim.keymap.set("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>")
+	end,
+}
+
+editor['haya14busa/vim-asterisk'] = {
+  config = conf.asterisk,
+}
+
+editor['machakann/vim-sandwich'] = {
+  config = conf.sandwich,
+}
 
 return editor

@@ -122,7 +122,7 @@ autocmd CursorHold * normal! m'
 augroup remember_folds
     autocmd!
     au BufWinLeave,BufLeave ?* silent! mkview
-    au BufWinEnter           ?* silent! loadview
+    au BufWinEnter          ?* silent! loadview
 augroup END
 
 " Save whenever switching windows or leaving vim. This is useful when running
@@ -134,13 +134,14 @@ au FocusGained,BufEnter * :silent! !
 
 if !exists('g:vscode')
 augroup insert_remap
-  autocmd FileType c,cpp,go,typescript,json nmap i i<C-f>
-  autocmd FileType c,cpp,go,typescript,json nmap a a<C-f>
+  autocmd FileType c,cpp,go,typescript,json,lua,vim nmap i i<C-t>
+  autocmd FileType c,cpp,go,typescript,json,lua,vim nmap a a<C-t>
 augroup END
 endif
 
 augroup highlight_yank
     autocmd!
+
 " autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup=(vim.fn['hlexists']('HighlightedyankRegion') > 0 and 'HighlightedyankRegion' or 'IncSearch'), timeout=500}
 augroup END
 
@@ -261,6 +262,7 @@ vnoremap < <gv
 inoremap <C-T> <C-F>
 noremap 0 _
 noremap <leader>tx :r !figlet
+xmap <c-d> "ayp
 
 if has('unix')
   let g:python3_host_prog="/usr/bin/python3"
@@ -276,55 +278,10 @@ let g:vimsyn_embed = 'l'
 "  plugins and relative configuration  "
 """"""""""""""""""""""""""""""""""""""""
 
-call plug#begin('~/.config/nvim/plugged')
-
-function! Cond(cond, ...)
-  let opts = get(a:000, 0, {})
-  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
-endfunction
-
-" temporary plugins
-" Plug 'https://github.com/tpope/vim-rsi.git'
-
-" quickfix enforcement
-" Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
-" Plug 'https://github.com/stevearc/qf_helper.nvim.git'
-" temporary
-" Plug 'https://github.com/folke/trouble.nvim'
-" Plug 'https://github.com/tami5/sqlite.lua.git'
-" Plug 'https://github.com/tpope/vim-abolish'
-
-
-
-Plug 'https://github.com/Mofiqul/dracula.nvim'
-" Plug 'https://github.com/kkoomen/vim-doge'
-
-
-
-Plug 'https://github.com/fatih/vim-go',Cond(!exists('g:vscode'), { 'do': ':GoInstallBinaries' })
-" adorn editor
-Plug 'https://github.com/mhartington/oceanic-next'
-Plug 'https://github.com/marko-cerovac/material.nvim'
-
-" jump and search
-Plug 'https://github.com/christoomey/vim-tmux-navigator', Cond(!exists('g:vscode'))
-Plug 'https://github.com/haya14busa/vim-asterisk'
-
-Plug 'https://github.com/machakann/vim-sandwich'
-
-
+" call plug#begin('~/.config/nvim/plugged')
 " bookmarks
 " Plug 'https://github.com/MattesGroeger/vim-bookmarks'
-
-" LSP 
-" Plug 'https://github.com/neoclide/coc.nvim',Cond(!exists('g:vscode'),{'branch': 'release'})
-" snippets
-Plug 'https://github.com/honza/vim-snippets'
-
-" highlight
-" Plug 'https://github.com/windwp/nvim-autopairs'
-
-call plug#end()
+" call plug#end()
 
 
 if !has('unix')
@@ -333,29 +290,18 @@ let g:sqlite_clib_path="D:/local/lib/sqlite/sqlite3.dll"
 endif
 " 
 
-" ===
-" === vim-go
-" ===
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-let g:go_highlight_types = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-" ===
-" === end vim-go
-" ===
-
 
 if !exists('g:vscode')
 " ===
 " === vim-tmux-navigator
 " ===
-let g:tmux_navigator_no_mappings = 1
+" let g:tmux_navigator_no_mappings = 1
+"
+" nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+" nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+" nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+" nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 
-nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 
 " ===
 " === end vim-tmux-navigator
@@ -367,123 +313,9 @@ endif
 " ===
 " === dashboard.vim
 " ===
-" let g:dashboard_default_executive ='telescope'
 nmap <Leader><Leader>ss :<C-u>SaveSession<CR>
 nmap <Leader><Leader>sl :<C-u>RestoreSession<CR>
-" nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-" let g:dashboard_session_directory = $HOME.'/.config/nvim/tmp/session'
-" ===
-" === end dashboard.vim
-" ===
 
-
-if !exists('g:vscode')
-" ===
-" === indent-blankline
-" ===
-lua<<EOF
-
---require("indent_blankline").setup {
---  -- for example, context is off by default, use this to turn it on
---  show_current_context = true,
---  show_current_context_start = true,
---  buftype_exclude = { "terminal" },
---  filetype_exclude = { "dashboard" },
---  }
---
-EOF
-endif
-
-" ===
-" === end indent-blankline
-" ===
-
-
-" ===
-" === end nvim_context_vt
-" ===
-
-
-" ===
-" === nvim-autopairs
-" ===
-lua<<EOF
-
-EOF
-" ===
-" === end nvim-autopairs
-" ===
-
-" ===
-" === Trouble
-" ===
-lua<<EOF
-
-  -- require("trouble").setup {
-  -- }
-
-EOF
-
-" ===
-" === end Trouble
-" ===
-
-
-
-
-" ===
-" === vim-subversive
-" ===
-
-" nmap s <plug>(SubversiveSubstitute)
-" nmap ss <plug>(SubversiveSubstituteLine)
-" nmap S <plug>(SubversiveSubstituteToEndOfLine)
-" nmap <leader>s <plug>(SubversiveSubstituteRange)
-" xmap <leader>s <plug>(SubversiveSubstituteRange)
-" nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
-" nmap <leader>mm :CocList maps<CR>
-
-
-
-" ===
-" === wildfile.vim
-" ===
-
-" nmap <leader>S <Plug>(wildfire-quick-select)
-
-
-" ===
-" === vim-sandwich
-" ===
-" using surround keymapings
-" runtime macros/sandwich/keymap/surround.vim
-" if you have not copied default recipes
-let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
-" add spaces inside bracket
-let g:sandwich#recipes += [
-      \   {'buns': ['"', '"'], 'quoteescape': 1, 'expand_range': 0, 'nesting': 0, 'linewise': 0},
-      \   {'buns': ["'", "'"], 'quoteescape': 1, 'expand_range': 0, 'nesting': 0, 'linewise': 0},
-      \   {'buns': ["`", "`"], 'quoteescape': 1, 'expand_range': 0, 'nesting': 0, 'linewise': 0},
-      \   {'buns': ['{ ', ' }'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['{']},
-      \   {'buns': ['[ ', ' ]'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['[']},
-      \   {'buns': ['( ', ' )'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['(']},
-      \   {'buns': ['{\s*', '\s*}'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['{']},
-      \   {'buns': ['\[\s*', '\s*\]'], 'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['[']},
-      \   {'buns': ['(\s*', '\s*)'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['(']},
-      \ ]
-  " auto
-  silent! omap <unique> ib <Plug>(textobj-sandwich-auto-i)
-  silent! xmap <unique> ib <Plug>(textobj-sandwich-auto-i)
-  silent! omap <unique> ab <Plug>(textobj-sandwich-auto-a)
-  silent! xmap <unique> ab <Plug>(textobj-sandwich-auto-a)
-  " query
-  silent! omap <unique> is <Plug>(textobj-sandwich-query-i)
-  silent! xmap <unique> is <Plug>(textobj-sandwich-query-i)
-  silent! omap <unique> as <Plug>(textobj-sandwich-query-a)
-  silent! xmap <unique> as <Plug>(textobj-sandwich-query-a)
-" ===
-" === end vim-sandwich
-" ===
 
 " if !exists('g:vscode')
 if exists('g:dummy')
@@ -805,115 +637,6 @@ map <leader>ss :CocList snippets<CR>
 " ===
 endif
 
-
-" ===
-" === UltiSnips
-" ===
-
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-
-
-" Insert mode completion
-" imap <c-x><c-k> <plug>(fzf-complete-word)
-" imap <c-x><c-f> <plug>(fzf-complete-path)
-" imap <c-x><c-l> <plug>(fzf-complete-line)
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                end UltiSnips                        "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-
-
-" let g:VM_mouse_mappings = 1
-"
-" nmap   <C-LeftMouse>         <Plug>(VM-Mouse-Cursor)
-" nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)
-
-" neadtree settings
-"autocmd vimenter * NERDTree
-"noremap <leader>n  :NERDTreeToggle<cr>
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-
-" ===
-" === vim-easy-align
-" ===
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-" xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-" nmap ga <Plug>(EasyAlign)
-
-" nmap <leader>cc <Plug>(NERDCommenterToggle)
-" " Create default mappings
-" let g:NERDCreateDefaultMappings = 1
-" " Add spaces after comment delimiters by default
-" let g:NERDSpaceDelims = 1
-" let g:NERDToggleCheckAllLines = 1
-" " Add your own custom formats or override the defaults
-" let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
-
-
-" ===
-" === material
-" ===
-lua<<EOF
-
-require('material').setup({
-  custom_highlights = {
-    NvimTreeFolderIcon = { fg = 'LightBlue' },
-    NvimTreeGitNew = { fg = 'cyan' },
-    NvimTreeGitDirty = { fg = 'red' },
-    NvimTreeGitStaged = { guifg = 'LightGreen' }
-  }
-})
-
-EOF
-
-" ===
-" === end material
-" ===
-" crscheme murphy        " 修改配色
-" color deus
-" colorscheme OceanicNext
-" let g:material_style = 'palenight'
-" colorscheme material
-" colorscheme dracula
-
-
-" ===
-" === asynctasks
-" ===
-let g:asyncrun_open = 6
-
-" noremap <silent><f5> :AsyncTask file-run<cr>
-noremap <silent><f9> :AsyncTask file-build<cr>
-
-noremap <silent><f6> :AsyncTask project-run<cr>
-noremap <silent><f7> :AsyncTask project-build<cr>
-
-" ===
-" === suda.vim
-" ===
-" let g:suda_smart_edit = 1
-
-
-if !exists('g:vscode')
-" ===
-" === nvim-treesitter
-" ===
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-endif
-
-
 " ===
 " === end ccls
 " ===
@@ -926,50 +649,6 @@ if has('unix')
   autocmd InsertEnter * :silent :!fcitx-remote -s sogoupinyin
 endif 
 
-
-" ===
-" === vim-asterisk
-" ===
-map *   <Plug>(asterisk-*)
-map #   <Plug>(asterisk-#)
-map g*  <Plug>(asterisk-g*)
-map g#  <Plug>(asterisk-g#)
-map z*  <Plug>(asterisk-z*)
-map gz* <Plug>(asterisk-gz*)
-map z#  <Plug>(asterisk-z#)
-map gz# <Plug>(asterisk-gz#)
-
-" ===
-" === end vim-asterisk
-" ===
-
-
-
-" ===
-" === neoformat
-" ===
-
-" Enable alignment
-let g:neoformat_basic_format_align = 1
-" Enable tab to spaces conversion
-let g:neoformat_basic_format_retab = 1
-" Enable trimmming of trailing whitespace
-let g:neoformat_basic_format_trim = 1
-let g:neoformat_html_htmlbeautify = {
-            \ 'exe': 'html-beautify',
-            \ 'args': ['-'],
-            \ 'stdin': 1 
-            \ }
-let g:neoformat_enabled_html = ['htmlbeautify']
-let g:neoformat_javascript_jsbeautify = {
-            \ 'exe': 'js-beautify',
-            \ 'args': ['-'],
-            \ 'stdin': 1 
-            \ }
-let g:neoformat_enabled_javascript = ['jsbeautify']
-" ===
-" === end neoformat
-" ===
 
 
 " e ++enc=<encoding> reopen current buffer with <encoding>
@@ -1029,7 +708,3 @@ EOF
 if exists('g:vscode')
   source vscode.vim
 end
-xmap <c-d> "ayp
-" ===
-" === end cusom functions and commands
-" ===

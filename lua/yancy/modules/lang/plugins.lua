@@ -30,5 +30,12 @@ lang["mzlogin/vim-markdown-toc"] = {
 	opt = true,
 	ft = { "markdown" },
 }
+lang["fatih/vim-go"] = {
+	opt = true,
+  ft = {"go"},
+  cond = function() return not is_vscode end,
+  run = ":GoInstallBinaries",
+	config = conf.lang_go,
+}
 
 return lang

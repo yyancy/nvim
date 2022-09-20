@@ -279,4 +279,37 @@ function config.filetype()
 	})
 end
 
+function config.asterisk()
+	vim.cmd([[
+  map *   <Plug>(asterisk-*)
+  map #   <Plug>(asterisk-#)
+  map g*  <Plug>(asterisk-g*)
+  map g#  <Plug>(asterisk-g#)
+  map z*  <Plug>(asterisk-z*)
+  map gz* <Plug>(asterisk-gz*)
+  map z#  <Plug>(asterisk-z#)
+  map gz# <Plug>(asterisk-gz#)
+]])
+end
+
+function config.sandwich() end
+vim.cmd([[
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+" add spaces inside bracket
+let g:sandwich#recipes += [
+       \   {'buns': ['"', '"'], 'quoteescape': 1, 'expand_range': 0, 'nesting': 0, 'linewise': 0},
+       \   {'buns': ["'", "'"], 'quoteescape': 1, 'expand_range': 0, 'nesting': 0, 'linewise': 0},
+       \   {'buns': ["`", "`"], 'quoteescape': 1, 'expand_range': 0, 'nesting': 0, 'linewise': 0},
+       \   {'buns': ['{ ', ' }'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['{']},
+       \   {'buns': ['[ ', ' ]'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['[']},
+       \   {'buns': ['( ', ' )'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['(']},
+       \   {'buns': ['{\s*', '\s*}'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['{']},
+       \   {'buns': ['\[\s*', '\s*\]'], 'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['[']},
+       \   {'buns': ['(\s*', '\s*)'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['(']},
+       \ ]
+]])
+vim.keymap.set({ "o", "x" }, "ib", "<Plug>(textobj-sandwich-auto-i)", { unique = true })
+vim.keymap.set({ "o", "x" }, "ab", "<Plug>(textobj-sandwich-auto-a)", { unique = true })
+vim.keymap.set({ "o", "x" }, "is", "<Plug>(textobj-sandwich-query-i)", { unique = true })
+vim.keymap.set({ "o", "x" }, "as", "<Plug>(textobj-sandwich-query-a)", { unique = true })
 return config
