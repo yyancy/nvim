@@ -158,12 +158,12 @@ editor["christoomey/vim-tmux-navigator"] = {
 	end,
 }
 
-editor['haya14busa/vim-asterisk'] = {
-  config = conf.asterisk,
+editor["haya14busa/vim-asterisk"] = {
+	config = conf.asterisk,
 }
 
-editor['machakann/vim-sandwich'] = {
-  config = conf.sandwich,
+editor["machakann/vim-sandwich"] = {
+	config = conf.sandwich,
 }
 
 return editor

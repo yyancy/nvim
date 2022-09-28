@@ -230,6 +230,7 @@ local efmls = require("efmls-configs")
 efmls.init({
 	on_attach = custom_attach,
 	capabilities = capabilities,
+
 	init_options = { documentFormatting = true, codeAction = true },
 })
 

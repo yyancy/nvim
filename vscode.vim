@@ -13,6 +13,7 @@ map <leader>6 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex6')<cr>
 map <leader>7 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex7')<cr>
 map <leader>8 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex8')<cr>
 map <leader>9 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex9')<cr>
+noremap i  <cmd>call VSCodeCall('emacs-tab.reindentCurrentLine')<cr>i
 
 
 nnoremap <leader>ff :Find<cr>

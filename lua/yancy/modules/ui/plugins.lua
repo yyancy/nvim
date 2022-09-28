@@ -38,6 +38,9 @@ ui["SmiteshP/nvim-navic"] = {
 }
 ui["goolord/alpha-nvim"] = {
 	opt = true,
+	cond = function()
+		return not is_vscode
+	end,
 	event = "BufWinEnter",
 	config = conf.alpha,
 }

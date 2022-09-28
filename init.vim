@@ -33,10 +33,10 @@ set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1
 set conceallevel=0
 
 " modify cursor pattern.
-let &t_ut=''
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" let &t_ut=''
+" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+" let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 set path=.,**
 set wildmenu
@@ -134,8 +134,8 @@ au FocusGained,BufEnter * :silent! !
 
 if !exists('g:vscode')
 augroup insert_remap
-  autocmd FileType c,cpp,go,typescript,json,lua,vim nmap i i<C-t>
-  autocmd FileType c,cpp,go,typescript,json,lua,vim nmap a a<C-t>
+  " autocmd FileType c,cpp,go,typescript,json,lua,vim nmap i i<C-t>
+  " autocmd FileType c,cpp,go,typescript,json,lua,vim nmap a a<C-t>
 augroup END
 endif
 
@@ -700,11 +700,23 @@ endfunction
 nmap <silent> <leader><leader>l :call ToggleList("Location List", 'l')<CR>
 nmap <silent> <leader><leader>e :call ToggleList("Quickfix List", 'c')<CR>
 
-
+"smart indent when entering insert mode with i on empty lines
+function! IndentWithI()
+    " return match(a:line, "^\\s*$") != -1
+    if match(getline('.'), "^\\s*$") != -1
+      return "\"_ddko"
+      " return "ko"
+    else
+        return "i"
+    endif
+endfunction
+if !exists('g:vscode')
+  map <expr> i IndentWithI()
+end
 lua<<EOF
 require 'yancy.core'
 EOF
 
 if exists('g:vscode')
-  source vscode.vim
+  source $HOME/.config/nvim/vscode.vim
 end
