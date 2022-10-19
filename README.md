@@ -8,9 +8,23 @@ My nvim configurations.
 * node
 * python3
 
+### install scoop first
+```bash
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+irm get.scoop.sh -Proxy 'http://127.0.0.1:7890' | iex
+
+# after successful, install relevant tools
+scoop install gcc git cmake make which
+scoop install fd grep neovim fzf python3 fnm
+```
 
 ### Installing node and configure mirrors
+
+
 ```bash
+# install node first
+fnm use 16 # enough
+
 # References https://developer.aliyun.com/article/868238?spm=a2c6h.13148508.0.0.66e84f0ehbA8XI
 npm config set registry https://registry.npmmirror.com
 ```
