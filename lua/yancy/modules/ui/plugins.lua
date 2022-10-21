@@ -2,6 +2,12 @@ local ui = {}
 local conf = require("yancy.modules.ui.config")
 is_vscode = require("yancy.core.global").is_vscode
 
+if is_vscode then
+	print("is vscode")
+	return ui
+end
+
+print("what is vscode")
 ui["SmiteshP/nvim-navic"] = {
 	opt = true,
 	after = "nvim-lspconfig",
@@ -71,3 +77,4 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 }
 
 return ui
+

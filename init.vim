@@ -711,7 +711,7 @@ function! IndentWithI()
     endif
 endfunction
 if !exists('g:vscode')
-  map <expr> i IndentWithI()
+"  map <expr> i IndentWithI()
 end
 lua<<EOF
 require 'yancy.core'

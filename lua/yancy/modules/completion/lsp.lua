@@ -12,9 +12,9 @@ local mason_lsp = require("mason-lspconfig")
 mason.setup()
 mason_lsp.setup({
 	ensure_installed = {
-		"bash-language-server",
+		"bashls",
 		"efm",
-		"lua-language-server",
+		"sumneko_lua",
 		"clangd",
 		"gopls",
 		"pyright",
@@ -22,7 +22,7 @@ mason_lsp.setup({
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 local function custom_attach(client, bufnr)
 	require("lsp_signature").on_attach({
@@ -287,3 +287,4 @@ formatting.configure_format_on_save()
 vim.keymap.set("n", "<C-M-l>", function()
 	formatting.format({ timeout_ms = 1000, filter = formatting.format_filter })
 end)
+

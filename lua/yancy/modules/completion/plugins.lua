@@ -1,5 +1,11 @@
 local completion = {}
 local conf = require("yancy.modules.completion.config")
+is_vscode = require("yancy.core.global").is_vscode
+
+if is_vscode then
+	print("is vscode")
+	return completion
+end
 
 completion["neovim/nvim-lspconfig"] = {
 	opt = true,
@@ -68,3 +74,4 @@ completion["github/copilot.vim"] = { opt = true, cmd = "Copilot" }
 -- }
 
 return completion
+

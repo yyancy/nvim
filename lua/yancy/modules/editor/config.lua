@@ -294,6 +294,7 @@ end
 
 function config.sandwich() end
 vim.cmd([[
+if exists('g:sandwich#default_recipes')
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 " add spaces inside bracket
 let g:sandwich#recipes += [
@@ -307,9 +308,11 @@ let g:sandwich#recipes += [
        \   {'buns': ['\[\s*', '\s*\]'], 'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['[']},
        \   {'buns': ['(\s*', '\s*)'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['(']},
        \ ]
+end
 ]])
 vim.keymap.set({ "o", "x" }, "ib", "<Plug>(textobj-sandwich-auto-i)", { unique = true })
 vim.keymap.set({ "o", "x" }, "ab", "<Plug>(textobj-sandwich-auto-a)", { unique = true })
 vim.keymap.set({ "o", "x" }, "is", "<Plug>(textobj-sandwich-query-i)", { unique = true })
 vim.keymap.set({ "o", "x" }, "as", "<Plug>(textobj-sandwich-query-a)", { unique = true })
 return config
+
