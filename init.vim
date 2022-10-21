@@ -466,6 +466,7 @@ omap T <Plug>(eft-T)
 " ===
 " === bufferline
 " ===
+if !exists('g:vscode')
 " In your init.lua or init.vim
 lua << EOF
 require("bufferline").setup{
@@ -484,7 +485,7 @@ nnoremap <silent><leader>7 <cmd>lua require("bufferline").go_to_buffer(7, true)<
 nnoremap <silent><leader>8 <cmd>lua require("bufferline").go_to_buffer(8, true)<cr>
 nnoremap <silent><leader>9 <cmd>lua require("bufferline").go_to_buffer(9, true)<cr>
 nnoremap <silent><leader>$ <cmd>lua require("bufferline").go_to_buffer(-1, true)<cr>
-
+end
 " ===
 " === qf_helper
 " ===
