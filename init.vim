@@ -346,9 +346,11 @@ Plug 'https://github.com/andymass/vim-matchup'
 Plug 'https://github.com/airblade/vim-rooter'
 Plug 'https://github.com/tversteeg/registers.nvim' , { 'branch': 'main' }
 Plug 'https://github.com/mg979/vim-visual-multi'
-Plug 'https://github.com/ceigh/AutoSave.nvim', Cond(!exists('g:vscode'), {'branch': 'execution_message-fn'})
+" Plug 'https://github.com/ceigh/AutoSave.nvim', Cond(!exists('g:vscode'), {'branch': 'execution_message-fn'})
 Plug 'https://github.com/tpope/vim-repeat'
 " Plug 'https://github.com/rhysd/clever-f.vim'
+
+Plug 'https://github.com/hrsh7th/vim-eft.git'
 
 " bookmarks
 " Plug 'https://github.com/MattesGroeger/vim-bookmarks'
@@ -442,6 +444,24 @@ let g:VM_mouse_mappings = 1
 nmap   <C-LeftMouse>         <Plug>(VM-Mouse-Cursor)
 nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)
 
+" eft settings
+
+nmap ; <Plug>(eft-repeat)
+xmap ; <Plug>(eft-repeat)
+omap ; <Plug>(eft-repeat)
+nmap f <Plug>(eft-f)
+xmap f <Plug>(eft-f)
+omap f <Plug>(eft-f)
+nmap F <Plug>(eft-F)
+xmap F <Plug>(eft-F)
+omap F <Plug>(eft-F)
+
+nmap t <Plug>(eft-t)
+xmap t <Plug>(eft-t)
+omap t <Plug>(eft-t)
+nmap T <Plug>(eft-T)
+xmap T <Plug>(eft-T)
+omap T <Plug>(eft-T)
 
 " ===
 " === bufferline
@@ -622,14 +642,14 @@ if !exists('g:vscode')
   " === autosave
   " ===
 lua<<EOF
-  require("autosave").setup{
-  enabled = false,
-  execution_message = function()
-  return "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S")
-  end,
-  clean_command_line_interval = 500,
-  debounce_delay = 500
-  }
+--  require("autosave").setup{
+--  enabled = false,
+--  execution_message = function()
+--  return "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S")
+--  end,
+--  clean_command_line_interval = 500,
+--  debounce_delay = 500
+--  }
 EOF
 endif
 
@@ -1089,7 +1109,7 @@ require('material').setup({
     NvimTreeFolderIcon = { fg = 'LightBlue' },
     NvimTreeGitNew = { fg = 'cyan' },
     NvimTreeGitDirty = { fg = 'red' },
-    NvimTreeGitStaged = { guifg = 'LightGreen' }
+--    NvimTreeGitStaged = { guifg = 'LightGreen' }
   }
 })
 
@@ -1367,15 +1387,24 @@ map gz# <Plug>(asterisk-gz#)
 " ===
 " === hop
 " ===
-" lua<<EOF
-" require'hop'.setup()
-" -- place this in one of your configuration file(s)
-"  vim.api.nvim_set_keymap('', 'F', "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<cr>",{})
-"  vim.api.nvim_set_keymap('', 'f', "<cmd>lua require'hop'.hint_words({  current_line_only = true })<cr>", {})
-"  vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1()<cr>",{})
-"  vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_words()<cr>", {})
-"  vim.api.nvim_set_keymap('', '<leader>l', "<cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>", {})
-" EOF
+lua<<EOF
+local hop = require("hop")
+	hop.setup()
+
+	-- place this in one of your configuration file(s)
+	vim.keymap.set("n", "<leader>j", function()
+		hop.hint_char1({ current_line_only = true })
+	end, {})
+	-- vim.keymap.set('n', 'f', function() hop.hint_words({  current_line_only = true })end, {})
+	vim.keymap.set("n", "<leader>t", function()
+		hop.hint_char1()
+	end, {})
+	-- vim.keymap.set('n', 'T', function() hop.hint_words()end, {})
+	vim.keymap.set("n", "<leader>l", function()
+		hop.hint_lines_skip_whitespace()
+	end, {})
+	vim.cmd([[onoremap f v:HopChar1<CR>]])
+EOF
 " onoremap f v:HopChar1<CR>
 " ===
 " === end hop
