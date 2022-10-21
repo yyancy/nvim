@@ -34,6 +34,18 @@ npm config set registry https://registry.npmmirror.com
 ``` bash
 pip3 install pynvim --upgrade
 ```
+### Installing third-party tools
+``` bash
+# install efm-langserver
+# first. install go
+scoop install go 
+# set proxy for go
+go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.cn,direct
+
+# install efm
+go install github.com/mattn/efm-langserver@latest
+```
 
 ## TODO
 * currently, the completion list is not good. look for improving it.
