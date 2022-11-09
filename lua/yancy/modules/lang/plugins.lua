@@ -18,8 +18,8 @@ lang["dkarter/bullets.vim"] = {
 	config = function()
 		vim.g.bullets_enabled_file_types = {
 			"markdown",
-			"txt",
-			"text",
+			-- "txt",
+			-- "text",
 			"gitcomit",
 			"scratch",
 		}
@@ -32,10 +32,13 @@ lang["mzlogin/vim-markdown-toc"] = {
 }
 lang["fatih/vim-go"] = {
 	opt = true,
-  ft = {"go"},
-  cond = function() return not is_vscode end,
-  run = ":GoInstallBinaries",
+	ft = { "go" },
+	cond = function()
+		return not is_vscode
+	end,
+	run = ":GoInstallBinaries",
 	config = conf.lang_go,
 }
 
 return lang
+

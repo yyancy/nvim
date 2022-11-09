@@ -18,7 +18,7 @@
 " let g:VM_leader="\\\\"
 set nocompatible
 syntax on                 " 支持语法高亮显示
-set number                " show line number.
+" set number                " show line number.
 set hidden
 set relativenumber
 set cursorline " displays a line on the line where the cursor is
@@ -448,7 +448,6 @@ inoremap <a-p> <C-\><C-O>:call CocActionAsync('showSignatureHelp')<cr>
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -667,6 +666,7 @@ command  -nargs=1 ActiveProfile call Profile(<f-args>)
 map qw ysiw{
 " map <leader>d I& <esc>j0
 map <leader>sw :set wrap!<cr>
+map <leader>ss :set spell!<cr>
 inoremap <a-o> <Esc>/[)}"'\]>`]<CR>:nohl<CR>a
 inoremap <a-i> <Esc>?[({"'\[<`]<CR>:nohl<CR>a
 

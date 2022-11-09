@@ -3,11 +3,9 @@ local conf = require("yancy.modules.ui.config")
 is_vscode = require("yancy.core.global").is_vscode
 
 if is_vscode then
-	print("is vscode")
 	return ui
 end
 
-print("what is vscode")
 ui["SmiteshP/nvim-navic"] = {
 	opt = true,
 	after = "nvim-lspconfig",
@@ -67,14 +65,14 @@ ui["famiu/bufdelete.nvim"] = {
 	end,
 }
 
-ui["lukas-reineke/indent-blankline.nvim"] = {
-	opt = true,
-	event = "BufReadPost",
-	cond = function()
-		return not is_vscode
-	end,
-	config = conf.indent_blankline,
-}
+-- ui["lukas-reineke/indent-blankline.nvim"] = {
+-- 	opt = true,
+-- 	event = "BufReadPost",
+-- 	cond = function()
+-- 		return not is_vscode
+-- 	end,
+-- 	config = conf.indent_blankline,
+-- }
 
 return ui
 

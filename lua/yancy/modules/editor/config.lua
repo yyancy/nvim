@@ -291,7 +291,6 @@ function config.asterisk()
   map gz# <Plug>(asterisk-gz#)
 ]])
 end
-
 function config.sandwich() end
 vim.cmd([[
 if exists('g:sandwich#default_recipes')
