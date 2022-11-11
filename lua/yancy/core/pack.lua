@@ -17,7 +17,7 @@ function Packer:load_plugins()
 		local list = {}
 		local tmp = vim.split(fn.globpath(modules_dir, "*/plugins.lua"), "\n")
 		for _, f in ipairs(tmp) do
-      -- print(f:sub(#modules_dir - 12, -1))
+			-- print(f:sub(#modules_dir - 12, -1))
 			list[#list + 1] = f:sub(#modules_dir - 12, -1)
 		end
 		return list
@@ -33,55 +33,39 @@ function Packer:load_plugins()
 end
 
 function Packer:load_packer()
-  if not packer then
-    api.nvim_command("packadd packer.nvim")
-    packer = require 'packer'
-    packer.init {
-      disable_commands = true,
-      display = {
-        open_fn = function()
-          local result, win, buf = require('packer.util').float {
-            border = {
-              { '╭', 'FloatBorder' },
-              { '─', 'FloatBorder' },
-              { '╮', 'FloatBorder' },
-              { '│', 'FloatBorder' },
-              { '╯', 'FloatBorder' },
-              { '─', 'FloatBorder' },
-              { '╰', 'FloatBorder' },
-              { '│', 'FloatBorder' },
-            },
-          }
-          vim.api.nvim_win_set_option(win, 'winhighlight', 'NormalFloat:Normal')
-          return result, win, buf
-        end,
-      },
-      max_jobs = 20,
-      compile_path = packer_compiled
-    }
-  end
+	if not packer then
+		api.nvim_command("packadd packer.nvim")
+		packer = require("packer")
+		packer.init({
+			disable_commands = true,
+			display = {
+				open_fn = function()
+					return require("packer.util").float({ border = "single" })
+				end,
+			},
+			max_jobs = 20,
+			compile_path = packer_compiled,
+		})
+	end
 
-
-  local use = packer.use
-  packer.reset()
+	local use = packer.use
+	packer.reset()
 	self:load_plugins()
-  -- print('self.repos ' .. vim.inspect(self.repos))
+	-- print('self.repos ' .. vim.inspect(self.repos))
 	use({ "wbthomason/packer.nvim", opt = true })
 	for _, repo in ipairs(self.repos) do
 		use(repo)
 	end
 end
 
-
-
 function Packer:init_ensure_plugins()
-  local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-  end
-  self:load_packer()
-  packer.install()
+	local install_path = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
+	if fn.empty(fn.glob(install_path)) > 0 then
+		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+		vim.cmd([[packadd packer.nvim]])
+	end
+	self:load_packer()
+	packer.install()
 end
 
 local plugins = setmetatable({}, {
@@ -101,6 +85,7 @@ function plugins.back_compile()
 	if vim.fn.filereadable(packer_compiled) == 1 then
 		os.rename(packer_compiled, bak_compiled)
 	end
+	-- plugins.clean()
 	plugins.compile()
 	vim.notify("Packer Compile Success!", vim.log.levels.INFO, { title = "Success!" })
 end
@@ -109,7 +94,7 @@ function plugins.auto_compile()
 	local file = vim.fn.expand("%:p")
 	if file:match(modules_dir) then
 		plugins.clean()
-    -- print('comming')
+		-- print('comming')
 		plugins.back_compile()
 	end
 end
@@ -118,15 +103,29 @@ function plugins.load_compile()
 	if vim.fn.filereadable(packer_compiled) == 1 then
 		require("_compiled")
 	else
-		assert("Missing packer compile file Run PackerCompile Or PackerInstall to fix")
+		plugins.back_compile()
 	end
-	vim.cmd([[command! PackerCompile lua require('yancy.core.pack').back_compile()]])
-	vim.cmd([[command! PackerInstall lua require('yancy.core.pack').install()]])
-	vim.cmd([[command! PackerUpdate lua require('yancy.core.pack').update()]])
-	vim.cmd([[command! PackerSync lua require('yancy.core.pack').sync()]])
-	vim.cmd([[command! PackerClean lua require('yancy.core.pack').clean()]])
-	vim.cmd([[autocmd User PackerComplete lua require('yancy.core.pack').back_compile()]])
-	vim.cmd([[command! PackerStatus lua require('yancy.core.pack').compile() require('packer').status()]])
+	local cmds = { "Compile", "Install", "Update", "Sync", "Clean", "Status" }
+	for _, cmd in ipairs(cmds) do
+		api.nvim_create_user_command("Packer" .. cmd, function()
+			require("yancy.core.pack")[cmd == "Compile" and "back_compile" or string.lower(cmd)]()
+		end, { force = true })
+	end
+	api.nvim_create_autocmd("User", {
+		pattern = "PackerComplete",
+		callback = function()
+			-- require("yancy.core.pack").back_compile()
+		end,
+	})
+
+	vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    " autocmd BufWritePost yancy/**/*.lua source <afile> | PackerCompile
+    autocmd BufWritePost */yancy/*.lua source <afile> | PackerCompile
+  augroup end
+]])
 end
 
 return plugins
+

@@ -65,14 +65,14 @@ ui["famiu/bufdelete.nvim"] = {
 	end,
 }
 
--- ui["lukas-reineke/indent-blankline.nvim"] = {
--- 	opt = true,
--- 	event = "BufReadPost",
--- 	cond = function()
--- 		return not is_vscode
--- 	end,
--- 	config = conf.indent_blankline,
--- }
+ui["lukas-reineke/indent-blankline.nvim"] = {
+	opt = true,
+	event = "BufReadPost",
+	cond = function()
+		return not is_vscode
+	end,
+	config = conf.indent_blankline,
+}
 
 return ui
 

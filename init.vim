@@ -18,7 +18,7 @@
 " let g:VM_leader="\\\\"
 set nocompatible
 syntax on                 " 支持语法高亮显示
-" set number                " show line number.
+set number                " show line number.
 set hidden
 set relativenumber
 set cursorline " displays a line on the line where the cursor is
@@ -716,6 +716,8 @@ end
 lua<<EOF
 require 'yancy.core'
 EOF
+
+nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 if exists('g:vscode')
   source $HOME/.config/nvim/vscode.vim
