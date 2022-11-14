@@ -70,9 +70,6 @@ endif
 " set sidescroll=10
 
 
-" if exists('g:vscode')
-"   finish
-" endif
 
 " set backupdir
 
@@ -121,31 +118,6 @@ augroup insert_remap
 augroup END
 endif
 
-" set termguicolors
-" ===
-" === Terminal Behaviors
-" ===
-" autocmd TermOpen term://* startinsert
-tnoremap <C-N> <C-\><C-N>
-tnoremap <C-O> <C-\><C-N><C-O>
-let g:terminal_color_0  = '#2e3436'
-let g:terminal_color_1  = '#cc0000'
-let g:terminal_color_2  = '#4e9a06'
-let g:terminal_color_3  = '#c4a000'
-let g:terminal_color_4  = '#3465a4'
-let g:terminal_color_5  = '#75507b'
-let g:terminal_color_6  = '#0b939b'
-let g:terminal_color_7  = '#d3d7cf'
-let g:terminal_color_8  = '#555753'
-let g:terminal_color_9  = '#ef2929'
-let g:terminal_color_10 = '#8ae234'
-let g:terminal_color_11 = '#fce94f'
-let g:terminal_color_12 = '#729fcf'
-let g:terminal_color_13 = '#ad7fa8'
-let g:terminal_color_14 = '#00f5e9'
-let g:terminal_color_15 = '#eeeeec'
-
-
 
 " ===
 " === mappings
@@ -159,9 +131,6 @@ vmap <C-v> p
 imap <C-v> <esc>pa
 map <S-C-v> p
 endif
-" map <C-a> :echo('C-a')<CR>
-" map <C-S-a> :echo('C-S-a')<CR>
-" map <S-S> :echo('S-S')<CR>
 
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
 nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
@@ -238,6 +207,14 @@ xmap <c-d> "ayp
 
 if has('unix')
   let g:python3_host_prog="/usr/bin/python3"
+  autocmd InsertLeave * :silent :!fcitx-remote -s fcitx-keyboard-us
+  autocmd InsertEnter * :silent :!fcitx-remote -s sogoupinyin
+endif
+if has('win32')
+
+let g:sqlite_clib_path="D:/local/lib/sqlite/sqlite3.dll"
+  autocmd InsertLeave * :silent :!D:\\local\\bin\\im-select.exe 1033
+  autocmd InsertEnter * :silent :!D:\\local\\bin\\im-select.exe 2052
 endif
 
 let g:vimsyn_embed = 'l'
@@ -256,10 +233,6 @@ let g:vimsyn_embed = 'l'
 " call plug#end()
 
 
-if !has('unix')
-" sqlite.lua
-let g:sqlite_clib_path="D:/local/lib/sqlite/sqlite3.dll"
-endif
 " 
 
 
@@ -271,94 +244,6 @@ endif
 " ===
 nmap <Leader><Leader>ss :<C-u>SaveSession<CR>
 nmap <Leader><Leader>sl :<C-u>RestoreSession<CR>
-
-
-" if !exists('g:vscode')
-if exists('g:dummy')
-" ===
-" === coc-git
-" ===
-
-
-" navigate chunks of current buffer
-nmap [[g <Plug>(coc-git-prevchunk)
-nmap ]]g <Plug>(coc-git-nextchunk)
-call repeat#set("\<Plug>(coc-git-prevchunk)", v:count)
-" call AddRepeatableMotion("[[g", "]]g", 1)
-" debug call <SNR>116_Move(']]g')
-" navigate conflicts of current buffer
-nmap [c <Plug>(coc-git-prevconflict)
-nmap ]c <Plug>(coc-git-nextconflict)
-" show chunk diff at current position
-nmap gs <Plug>(coc-git-chunkinfo)
-" show commit contains current position
-nmap gc <Plug>(coc-git-commit)
-" create text object for git chunks
-omap ig <Plug>(coc-git-chunk-inner)
-xmap ig <Plug>(coc-git-chunk-inner)
-omap ag <Plug>(coc-git-chunk-outer)
-xmap ag <Plug>(coc-git-chunk-outer)
-
-
-" ===
-" === end coc-git
-" ===
-
-" ===
-" === coc-explorer
-" ===
-
-nmap <leader>E :CocCommand explorer
-      \ --toggle
-      \ --sources=buffer+,file+
-      \ --width=30
-      \<CR>
-"" if only one buffer is shown and it's name is not 'coc-explorer', then show coc-explorer
-" autocmd BufEnter * if (winnr("$") == 1 && &filetype != 'coc-explorer') | exe ':CocCommand explorer --width=30 --no-focus' | endif
-"" if only one buffer named 'coc-explorer' is shown, then exit
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
-" ===
-" === coc
-" ===
-
-let g:coc_global_extensions = [
-      \'coc-json',
-      \'coc-git',
-      \'coc-diagnostic',
-      \'coc-yank',
-      \'coc-yaml',
-      \'coc-explorer',
-      \'coc-vimlsp',
-      \'coc-tabnine',
-      \ 'coc-snippets',
-      \]
-
-
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
-
-
-" disable coc warnig
-let g:coc_disable_startup_warning = 1
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -392,23 +277,20 @@ endfunction
 
 command CheckSpace call s:check_space()
 imap <c-u> <esc>:CheckSpace<CR>
-" Use <A-,> to trigger completion.
-inoremap <silent><expr> <A-,> coc#refresh()
-inoremap <a-p> <C-\><C-O>:call CocActionAsync('showSignatureHelp')<cr>
+
+" if !exists('g:vscode')
+if exists('g:dummy')
+" ===
+" === coc-git
+" ===
 
 
 
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+
+
+
 " nn <silent> L :call CocActionAsync('doHover')<cr>
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -425,184 +307,11 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 " autocmd CursorHold * silent call CocActionAsync('highlight')
-
-set termguicolors
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-        nmap <leader>f  <Plug>(coc-format-selected)
-vmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>af  <Plug>(coc-fix-current)
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<C-f>"
-inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-" nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
-
-" grep word under cursor
-command! -nargs=+ -complete=custom,s:GrepArgs Fzf exe 'CocList grep '.<q-args>
-
-function! s:GrepArgs(...)
-  let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
-        \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
-  return join(list, "\n")
-endfunction
-
-" Keymapping for grep word under cursor with interactive mode
-nnoremap <silent> <Leader>cf :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
-
-vnoremap <leader>g :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
-nnoremap <leader>g :<C-u>set operatorfunc=<SID>GrepFromSelected<CR>g@
-
-function! s:GrepFromSelected(type)
-  let saved_unnamed_register = @@
-  if a:type ==# 'v'
-    normal! `<v`>y
-  elseif a:type ==# 'char'
-    normal! `[v`]y
-  else
-    return
-  endif
-  let word = substitute(@@, '\n$', '', 'g')
-  let word = escape(word, '| ')
-  let @@ = saved_unnamed_register
-  execute 'CocList grep '.word
-endfunction
-
-nnoremap <silent> <space>W  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
-
-
-
-" loading the plugin
-let g:webdevicons_enable = 1
-
-" ===
-" === coc-yank
-" ===
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-
-" ===
-" === coc-vimlsp
-" ===
-let g:markdown_fenced_languages = [
-      \ 'vim',
-      \ 'help'
-      \]
-
-
-
-" ===
-" === coc-snippets
-" ===
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<a-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-" Use <leader>x for convert visual selected code to snippet
-xmap <leader>x  <Plug>(coc-convert-snippet)
-
-map <leader>ss :CocList snippets<CR>
-" ===
-" === end coc-snippets
-" ===
 endif
 
 " ===
 " === end ccls
 " ===
-if has('win32')
-  autocmd InsertLeave * :silent :!D:\\local\\bin\\im-select.exe 1033
-  autocmd InsertEnter * :silent :!D:\\local\\bin\\im-select.exe 2052
-endif
-if has('unix')
-  autocmd InsertLeave * :silent :!fcitx-remote -s fcitx-keyboard-us
-  autocmd InsertEnter * :silent :!fcitx-remote -s sogoupinyin
-endif 
 
 
 
@@ -625,6 +334,7 @@ map <leader>sw :set wrap!<cr>
 map <leader>ss :set spell!<cr>
 inoremap <a-o> <Esc>/[)}"'\]>`]<CR>:nohl<CR>a
 inoremap <a-i> <Esc>?[({"'\[<`]<CR>:nohl<CR>a
+nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 function! GetBufferList()
   redir =>buflist
@@ -673,7 +383,6 @@ lua<<EOF
 require 'yancy.core'
 EOF
 
-nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 if exists('g:vscode')
   source $HOME/.config/nvim/vscode.vim
