@@ -132,8 +132,13 @@ function config.cmp()
 
 	local cmp = require("cmp")
 	cmp.setup({
+		-- enabled = false,
+		completion = {
+			autocomplete = false,
+		},
 		window = {
 			completion = {
+				autocomplete = false,
 				border = border("CmpBorder"),
 				winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
 			},
@@ -155,6 +160,7 @@ function config.cmp()
 			},
 		},
 		formatting = {
+
 			format = function(entry, vim_item)
 				local lspkind_icons = {
 					Text = "",
@@ -208,6 +214,7 @@ function config.cmp()
 			["<C-n>"] = cmp.mapping.select_next_item(),
 			["<C-d>"] = cmp.mapping.scroll_docs(-4),
 			["<C-f>"] = cmp.mapping.scroll_docs(4),
+			["<A-,>"] = cmp.mapping.complete(),
 			["<C-e>"] = cmp.mapping.close(),
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
@@ -355,3 +362,4 @@ function config.mason_install()
 	})
 end
 return config
+

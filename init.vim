@@ -16,66 +16,58 @@
 " ===
 
 " let g:VM_leader="\\\\"
-set nocompatible
-syntax on                 " 支持语法高亮显示
-set number                " show line number.
-set hidden
-set relativenumber
-set cursorline " displays a line on the line where the cursor is
-filetype plugin indent on " 启用根据文件类型自动缩进
-set mouse=a
-set wrap
-set showcmd
-set ignorecase
-set smartcase
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1
-set conceallevel=0
+" filetype plugin indent on " 启用根据文件类型自动缩进
+" syntax on                 " 支持语法高亮显示
+" set number                " show line number.
+" set hidden
+" set relativenumber
+" set cursorline " displays a line on the line where the cursor is
+" set mouse=a
+" set wrap
+" set showcmd
+" set ignorecase
+" set smartcase
+" set encoding=utf-8
+" set fileencodings=ucs-bom,utf-8,gbk,big5,gb18030,latin1
+" set conceallevel=0
 
-" modify cursor pattern.
-" let &t_ut=''
-" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-" let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" set path=.,**
+" set wildmenu
+" set wildmode=longest:list,full
 
-set path=.,**
-set wildmenu
-set wildmode=longest:list,full
-
-set hlsearch
 exec "nohlsearch"
-set incsearch
 
-set autoindent            " 开始新行时处理缩进
-set expandtab             " 将制表符Tab展开为空格，这对于Python尤其有用
-set tabstop=2             " 要计算的空格数
-set softtabstop=2
-set shiftwidth=2          " 用于自动缩进的空格数
-set tw=0
-set backspace=2           " 在多数终端上修正退格键Backspace的行为
-set foldlevel=99
-set laststatus=2
+" set autoindent            " 开始新行时处理缩进
+" set expandtab             " 将制表符Tab展开为空格，这对于Python尤其有用
+" set tabstop=2             " 要计算的空格数
+" set softtabstop=2
+" set shiftwidth=2          " 用于自动缩进的空格数
+" set tw=0
+" set backspace=2           " 在多数终端上修正退格键Backspace的行为
+" set foldlevel=99
+" set laststatus=2
+
+
+
 " set autochdir
 
 
 
-set ttimeoutlen=300
+" set ttimeoutlen=300
 " set timeoutlen=500
 " set notimeout
-set inccommand=split
-set completeopt=longest,noinsert,menuone,noselect,preview
-set visualbell
+" set inccommand=split
+" set completeopt=longest,noinsert,menuone,noselect,preview
 " set lazyredraw "same as above
 
 " restore cursor position which last was.
 if !exists('g:vscode')
-au BufReadPost * if line("'\"") > 2 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
+" au BufReadPost * if line("'\"") > 2 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
 endif
 " set list
 " set list
-set listchars=tab:▸\ ,trail:▫
-set scrolloff=5
-set sidescroll=10
+" set scrolloff=5
+" set sidescroll=10
 
 
 " if exists('g:vscode')
@@ -89,7 +81,6 @@ set clipboard+=unnamedplus
 
 set guioptions+=a
 set foldmethod=indent
-set foldlevel=99
 set foldenable
 set formatoptions-=tc
 set colorcolumn=100
@@ -98,39 +89,30 @@ set virtualedit=block
 set isfname+=&
 set viewoptions=folds,cursor
 
+" set backupdir=$HOME/.config/nvim/tmp/backup,.
+" set directory=$HOME/.config/nvim/tmp/backup,.
 
-silent !mkdir -p $HOME/.config/nvim/tmp/backup
-silent !mkdir -p $HOME/.config/nvim/tmp/undo
-silent !mkdir -p $HOME/.config/nvim/tmp/session
-set backupdir=$HOME/.config/nvim/tmp/backup,.
-set directory=$HOME/.config/nvim/tmp/backup,.
+" set undofile
 
-set undofile
-
-set undodir=$HOME/.config/nvim/tmp/undo,.
-
-
+" set undodir=$HOME/.config/nvim/tmp/undo,.
 
 " ===
 " === autocmd
 " ===
 
-" autocmd BufNewFile *.txt set ft=confluencewiki
-" autocmd BufEnter *.txt set ft=confluencewiki
 autocmd CursorHold * normal! m'
 " autocmd CursorHold * if line(".") != 1 | normal! m' | endif
-augroup remember_folds
-    autocmd!
-    au BufWinLeave,BufLeave ?* silent! mkview
-    au BufWinEnter          ?* silent! loadview
-augroup END
+" augroup remember_folds
+"     autocmd!
+"     au BufWinLeave,BufLeave ?* silent! mkview
+"     au BufWinEnter          ?* silent! loadview
+" augroup END
 
 " Save whenever switching windows or leaving vim. This is useful when running
 " the tests inside vim without having to save all files first.
-au FocusLost,WinLeave * :silent! wa
-
+" au FocusLost,WinLeave * :silent! wa
 " Trigger autoread when changing buffers or coming back to vim.
-au FocusGained,BufEnter * :silent! !
+" au FocusGained,BufEnter * :silent! !
 
 if !exists('g:vscode')
 augroup insert_remap
@@ -139,15 +121,7 @@ augroup insert_remap
 augroup END
 endif
 
-augroup highlight_yank
-    autocmd!
-
-" autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup=(vim.fn['hlexists']('HighlightedyankRegion') > 0 and 'HighlightedyankRegion' or 'IncSearch'), timeout=500}
-augroup END
-
-
-
-set termguicolors
+" set termguicolors
 " ===
 " === Terminal Behaviors
 " ===
@@ -215,8 +189,6 @@ imap <C-e> <end>
 imap <C-a> <home>
 inoremap <a-b> <C-o>b
 imap <a-f> <C-o>w
-
-
 
 nmap . .`[
 
@@ -291,22 +263,6 @@ endif
 " 
 
 
-if !exists('g:vscode')
-" ===
-" === vim-tmux-navigator
-" ===
-" let g:tmux_navigator_no_mappings = 1
-"
-" nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-" nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-" nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
-" nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
-
-
-" ===
-" === end vim-tmux-navigator
-" ===
-endif
 
 
 

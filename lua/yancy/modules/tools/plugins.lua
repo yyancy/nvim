@@ -1,4 +1,5 @@
 is_vscode = require("yancy.core.global").is_vscode
+not_vscode = require("yancy.core.global").not_vscode
 local tools = {}
 
 local conf = require("yancy.modules.tools.config")
@@ -30,9 +31,7 @@ tools["wellle/targets.vim"] = {}
 
 tools["nvim-telescope/telescope.nvim"] = {
 	opt = true,
-	cond = function()
-		return not is_vscode
-	end,
+	cond = not_vscode,
 	module = "telescope",
 	cmd = "Telescope",
 	config = conf.telescope,
@@ -122,3 +121,4 @@ tools["tpope/vim-abolish"] = {
 tools["tpope/vim-rsi"] = {}
 
 return tools
+

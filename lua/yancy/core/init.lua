@@ -55,6 +55,11 @@ function bootstrap()
 
 	-- load plugins
 	pack.ensure_plugins()
+  
+	require("yancy.core.options")
+	require("yancy.core.event")
+	require("yancy.core.mapping")
+
 	pack.load_compile()
 end
 

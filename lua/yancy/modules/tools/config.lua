@@ -1,4 +1,6 @@
 local config = {}
+local global = require("yancy.core.global")
+print(global.sep)
 
 config.open_url = function()
 	vim.cmd([[nmap <leader>gB :exe 'OpenURL '. substitute(expand('<cfile>'),'&','"&"','g')<CR>]])
@@ -50,7 +52,7 @@ function config.telescope()
 			results_title = false,
 			borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
 			layout_strategy = "horizontal",
-			path_display = { "absolute" },
+			display = { "absolute" },
 			file_ignore_patterns = { ".git/", ".cache", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
 			layout_config = {
 				-- prompt_position = "bottom",
@@ -77,7 +79,11 @@ function config.telescope()
 			frecency = {
 				-- show_scores = true,
 				-- show_unindexed = true,
-				-- ignore_patterns = { "*.git/*", "*/tmp/*" },
+				-- sep
+				ignore_patterns = {
+					"*.git*",
+					"*.tmp*",
+				},
 				default_workspace = "CWD",
 			},
 			coc = {
