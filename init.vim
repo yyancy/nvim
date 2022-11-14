@@ -17,7 +17,7 @@
 
 " let g:VM_leader="\\\\"
 filetype plugin indent on " 启用根据文件类型自动缩进
-syntax on                 " 支持语法高亮显示
+" syntax on                 " 支持语法高亮显示
 " set number                " show line number.
 " set hidden
 " set relativenumber
@@ -34,7 +34,7 @@ syntax on                 " 支持语法高亮显示
 " set path=.,**
 " set wildmenu
 " set wildmode=longest:list,full
-
+" set termguicolors
 exec "nohlsearch"
 
 " set autoindent            " 开始新行时处理缩进
@@ -61,9 +61,6 @@ exec "nohlsearch"
 " set lazyredraw "same as above
 
 " restore cursor position which last was.
-if !exists('g:vscode')
-" au BufReadPost * if line("'\"") > 2 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
-endif
 " set list
 " set list
 " set scrolloff=5
@@ -75,16 +72,15 @@ endif
 
 " set clipboard=unnamed,unnamedplus
 set clipboard+=unnamedplus
-
 set guioptions+=a
-set foldmethod=indent
-set foldenable
-set formatoptions-=tc
-set colorcolumn=100
-set updatetime=4000
-set virtualedit=block
 set isfname+=&
-set viewoptions=folds,cursor
+" set foldmethod=indent
+" set foldenable
+" set formatoptions-=tc
+" set colorcolumn=100
+" set updatetime=4000
+" set virtualedit=block
+" set viewoptions=folds,cursor
 
 " set backupdir=$HOME/.config/nvim/tmp/backup,.
 " set directory=$HOME/.config/nvim/tmp/backup,.
@@ -97,7 +93,7 @@ set viewoptions=folds,cursor
 " === autocmd
 " ===
 
-autocmd CursorHold * normal! m'
+" autocmd CursorHold * normal! m'
 " autocmd CursorHold * if line(".") != 1 | normal! m' | endif
 " augroup remember_folds
 "     autocmd!
@@ -218,26 +214,6 @@ let g:sqlite_clib_path="D:/local/lib/sqlite/sqlite3.dll"
 endif
 
 let g:vimsyn_embed = 'l'
-
-" <++>
-" <++>
-" <++>
-" <++>
-""""""""""""""""""""""""""""""""""""""""
-"  plugins and relative configuration  "
-""""""""""""""""""""""""""""""""""""""""
-
-" call plug#begin('~/.config/nvim/plugged')
-" bookmarks
-" Plug 'https://github.com/MattesGroeger/vim-bookmarks'
-" call plug#end()
-
-
-" 
-
-
-
-
 
 " ===
 " === dashboard.vim
@@ -382,7 +358,6 @@ end
 lua<<EOF
 require 'yancy.core'
 EOF
-
 
 if exists('g:vscode')
   source $HOME/.config/nvim/vscode.vim

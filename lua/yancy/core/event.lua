@@ -19,10 +19,19 @@ end
 function autocmd.load_autocmds()
 	local definitions = {
 		bufs = {
-			cond = not_vscode,
-			"BufReadPost",
-			"*",
-			[[if line("'\"") > 2 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif]],
+			{
+
+				cond = not_vscode,
+				"BufReadPost",
+				"*",
+				[[if line("'\"") > 2 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif]],
+			},
+			{
+				-- add mark when cursor is held
+				"CursorHold",
+				"*",
+				[[normal! m']],
+			},
 		},
 		yank = {
 			{
@@ -37,4 +46,3 @@ function autocmd.load_autocmds()
 end
 
 autocmd.load_autocmds()
-

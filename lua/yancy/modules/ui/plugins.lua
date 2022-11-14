@@ -75,4 +75,3 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 }
 
 return ui
-

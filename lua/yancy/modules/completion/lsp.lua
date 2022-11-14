@@ -12,7 +12,7 @@ local mason_lsp = require("mason-lspconfig")
 mason.setup()
 mason_lsp.setup({
 	ensure_installed = {
-		"bashls",
+		-- "bashls",
 		"efm",
 		"sumneko_lua",
 		"clangd",
@@ -287,4 +287,3 @@ formatting.configure_format_on_save()
 vim.keymap.set("n", "<C-M-l>", function()
 	formatting.format({ timeout_ms = 1000, filter = formatting.format_filter })
 end)
-

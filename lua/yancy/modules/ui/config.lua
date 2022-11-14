@@ -281,10 +281,10 @@ function config.catppuccin()
 		},
 		transparent_background = false,
 		term_colors = true,
-		compile = {
-			enabled = enable_compile,
-			path = vim.fn.stdpath("cache") .. "/catppuccin",
-		},
+		-- compile = {
+		-- 	enabled = enable_compile,
+		-- 	path = vim.fn.stdpath("cache") .. "/catppuccin",
+		-- },
 		styles = {
 			comments = { "italic" },
 			properties = { "italic" },
@@ -720,4 +720,3 @@ function config.indent_blankline()
 end
 
 return config
-

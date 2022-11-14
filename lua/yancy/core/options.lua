@@ -65,6 +65,7 @@ local global_local = {
 	foldlevel = 99,
 	laststatus = 2,
 
+	foldmethod = "indent",
 	foldenable = true,
 	signcolumn = "yes",
 	timeoutlen = 500,
@@ -86,4 +87,3 @@ for name, value in pairs(global_local) do
 	vim.o[name] = value
 end
 load_options()
-
