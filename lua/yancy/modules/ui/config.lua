@@ -27,16 +27,6 @@ function config.alpha()
 	}
 
 	local keymap = vim.keymap.set
-	keymap("n", "<leader>ff", "<cmd>Telescope frecency theme=dropdown<cr>")
-	keymap("n", "<leader>mm", "<cmd>Telescope keymaps theme=dropdown<cr>")
-	keymap("n", "<leader>fh", "<cmd>Telescope oldfiles theme=dropdown<cr>")
-	keymap("n", "<leader>fa", "<cmd>Telescope live_grep theme=dropdown<cr>")
-
-	-- lsp with coc.vim configurations
-	keymap("n", "<leader>tc", ":Telescope coc ")
-	keymap("n", "<leader>ls", "<cmd>Telescope coc workspace_symbols theme=dropdown<cr>")
-	keymap("n", "gO", "<cmd>Telescope coc document_symbols theme=dropdown<cr>")
-	keymap("n", "<leader>lr", "<cmd>Telescope coc references theme=dropdown<cr>")
 
 	local function button(sc, txt, leader_txt, keybind, keybind_opts)
 		local sc_after = sc:gsub("%s", ""):gsub(leader_txt, "<leader>")
@@ -254,7 +244,8 @@ function config.catppuccin()
 
 			vim.api.nvim_create_autocmd("User", {
 				group = "_catppuccin",
-				pattern = "PackerCompileDone",
+				-- pattern = "PackerCompileDone",
+				pattern = "ColorSchemePre",
 				callback = function()
 					-- require("catppuccin").compile()
 					vim.defer_fn(function()
@@ -281,9 +272,9 @@ function config.catppuccin()
 		},
 		transparent_background = false,
 		term_colors = true,
+		path = vim.fn.stdpath("cache") .. "/catppuccin",
 		-- compile = {
 		-- 	enabled = enable_compile,
-		-- 	path = vim.fn.stdpath("cache") .. "/catppuccin",
 		-- },
 		styles = {
 			comments = { "italic" },
@@ -720,3 +711,4 @@ function config.indent_blankline()
 end
 
 return config
+

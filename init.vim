@@ -17,7 +17,7 @@
 
 " let g:VM_leader="\\\\"
 filetype plugin indent on " 启用根据文件类型自动缩进
-" syntax on                 " 支持语法高亮显示
+syntax on                 " 支持语法高亮显示
 " set number                " show line number.
 " set hidden
 " set relativenumber

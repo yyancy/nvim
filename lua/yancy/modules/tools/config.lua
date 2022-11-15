@@ -80,6 +80,7 @@ function config.telescope()
 				-- show_scores = true,
 				-- show_unindexed = true,
 				-- sep
+				theme = "dropdown",
 				ignore_patterns = {
 					"*.git*",
 					"*.tmp*",
