@@ -121,4 +121,3 @@ tools["tpope/vim-abolish"] = {
 tools["tpope/vim-rsi"] = {}
 
 return tools
-

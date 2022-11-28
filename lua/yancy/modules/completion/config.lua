@@ -134,11 +134,11 @@ function config.cmp()
 	cmp.setup({
 		-- enabled = false,
 		completion = {
-			autocomplete = false,
+			autocomplete = true,
 		},
 		window = {
 			completion = {
-				autocomplete = false,
+				autocomplete = true,
 				border = border("CmpBorder"),
 				winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
 			},
@@ -362,4 +362,3 @@ function config.mason_install()
 	})
 end
 return config
-

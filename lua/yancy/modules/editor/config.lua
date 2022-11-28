@@ -18,7 +18,7 @@ function config.nvim_treesitter()
 			-- "latex",
 			-- "make",
 			-- "python",
-			-- "rust",
+			"rust",
 			-- "html",
 			-- "javascript",
 			-- "typescript",
@@ -314,4 +314,3 @@ vim.keymap.set({ "o", "x" }, "ab", "<Plug>(textobj-sandwich-auto-a)", { unique =
 vim.keymap.set({ "o", "x" }, "is", "<Plug>(textobj-sandwich-query-i)", { unique = true })
 vim.keymap.set({ "o", "x" }, "as", "<Plug>(textobj-sandwich-query-a)", { unique = true })
 return config
-
