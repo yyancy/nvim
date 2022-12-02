@@ -132,7 +132,7 @@ function config.cmp()
 
 	local cmp = require("cmp")
 	cmp.setup({
-		-- enabled = false,
+		enabled = true,
 		completion = {
 			autocomplete = true,
 		},
@@ -362,3 +362,4 @@ function config.mason_install()
 	})
 end
 return config
+

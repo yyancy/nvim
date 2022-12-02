@@ -114,7 +114,7 @@ function plugins.load_compile()
 	api.nvim_create_autocmd("User", {
 		pattern = "PackerComplete",
 		callback = function()
-			-- require("yancy.core.pack").back_compile()
+			require("yancy.core.pack").back_compile()
 		end,
 	})
 

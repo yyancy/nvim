@@ -32,5 +32,20 @@ precede it with a `v` character. eg: `dvw` will delete string `Hello world` to `
 
 In visual mode, using `o` command to achieve it. Enjoy it :)
 
+### Enjoy the POWER of global command ^\_^
 
-(()
+用问号是因为搜索点是从`global`匹配的地方开始的, 用`;` 分割而不是`,` 分割, `;`分割会把搜索点放在搜索后的地方, 而`,` 搜索点不变
+copy all fields with comments to the end of file.
+
+1. `:g/private/ ?\v/\*\*? , . copy $`
+2. `:g/private/ ?/\*\*? , . copy $`
+
+copy all comments of all fields to the end of file.
+**appreciate the details in these commands**
+
+1. `:g/private/ ?/\*\*? , ?\*/? copy $`
+2. `:g/private/ ?/\*\*? ; /\*\// copy $`
+
+费了老大力气弄出来的命令, 拷贝字段注释以及字段.
+`:g/private/yank a|?/\*\*? , ?\*/? t$ | $pu a`
+

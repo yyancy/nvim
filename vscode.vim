@@ -14,10 +14,15 @@ map <leader>7 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex7')<cr>
 map <leader>8 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex8')<cr>
 map <leader>9 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex9')<cr>
 " noremap i  <cmd>call VSCodeCall('emacs-tab.reindentCurrentLine')<cr>i
+nmap <leader>l <cmd>call VSCodeNotify('workbench.action.openNextRecentlyUsedEditor')<cr>
+nmap <leader>h <cmd>call VSCodeNotify('workbench.action.openPreviousRecentlyUsedEditor')<cr>
+nmap <leader>L <cmd>call VSCodeNotify('workbench.action.previousEditor')<cr>
+nmap <leader>H <cmd>call VSCodeNotify('workbench.action.nextEditor')<cr>
+
 
 
 nnoremap <leader>ff :Find<cr>
-nnoremap <leader>ls <cmd>call VSCodeNotify('workbench.action.showAllSymbols')<cr>
+" nnoremap <leader>ls <cmd>call VSCodeNotify('workbench.action.showAllSymbols')<cr>
 map <f12> <cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>
 map <leader>E <cmd>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<cr>
 
@@ -32,6 +37,8 @@ nnoremap gi <cmd>call VSCodeNotify('editor.action.goToImplementation')<cr>
 nnoremap gy <cmd>call VSCodeNotify('editor.action.goToTypeDefinition')<cr>
 nnoremap gr <cmd>call VSCodeNotify('editor.action.goToReferences')<cr>
 
+map go <cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>
+map gO <cmd>call VSCodeNotify('workbench.action.showAllSymbols')<cr>
 nnoremap za <cmd>call VSCodeNotify('editor.toggleFold')<cr>
 nnoremap zc <cmd>call VSCodeNotify('editor.fold')<cr>
 nnoremap zo <cmd>call VSCodeNotify('editor.unfold')<cr>
@@ -43,3 +50,10 @@ nnoremap [[g <cmd>call VSCodeNotify('workbench.action.editor.previousChange')<cr
 nnoremap ]]g <cmd>call VSCodeNotify('workbench.action.editor.nextChange')<cr>
 nnoremap [c <cmd>call VSCodeNotify('merge-conflict.next')<cr>
 nnoremap ]c <cmd>call VSCodeNotify('merge-conflict.previous')<cr>
+
+nmap <leader>ro <cmd>call VSCodeNotify('editor.action.organizeImports')<cr>
+nmap <leader>cl <cmd>call VSCodeNotify('editor.action.formatDocument')<cr>
+nnoremap <leader>n <cmd>call VSCodeNotify('editor.action.marker.next')<cr>
+nnoremap <leader>p <cmd>call VSCodeNotify('editor.action.marker.prev')<cr>
+nnoremap <leader>N <cmd>call VSCodeNotify('editor.action.marker.nextInFiles')<cr>
+nnoremap <leader>P <cmd>call VSCodeNotify('editor.action.marker.prevInFiles')<cr>

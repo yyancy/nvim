@@ -109,9 +109,9 @@ function config.hop()
 		hop.hint_char1()
 	end, {})
 	-- vim.keymap.set('n', 'T', function() hop.hint_words()end, {})
-	vim.keymap.set("n", "<leader>l", function()
-		hop.hint_lines_skip_whitespace()
-	end, {})
+	-- vim.keymap.set("n", "<leader>l", function()
+	-- 	hop.hint_lines_skip_whitespace()
+	-- end, {})
 	vim.cmd([[onoremap f v:HopChar1<CR>]])
 end
 
@@ -314,3 +314,4 @@ vim.keymap.set({ "o", "x" }, "ab", "<Plug>(textobj-sandwich-auto-a)", { unique =
 vim.keymap.set({ "o", "x" }, "is", "<Plug>(textobj-sandwich-query-i)", { unique = true })
 vim.keymap.set({ "o", "x" }, "as", "<Plug>(textobj-sandwich-query-a)", { unique = true })
 return config
+

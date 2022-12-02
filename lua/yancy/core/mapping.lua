@@ -16,7 +16,7 @@ keymap("n", "<leader>fa", "<cmd>Telescope live_grep theme=dropdown<cr>")
 
 -- lsp with coc.vim configurations
 keymap("n", "<leader>tc", ":Telescope coc ")
-keymap("n", "<leader>ls", "<cmd>Telescope coc workspace_symbols theme=dropdown<cr>")
-keymap("n", "gO", "<cmd>Telescope coc document_symbols theme=dropdown<cr>")
-keymap("n", "<leader>lr", "<cmd>Telescope coc references theme=dropdown<cr>")
+-- keymap("n", "<leader>ls", "<cmd>Telescope coc workspace_symbols theme=dropdown<cr>")
+-- keymap("n", "gO", "<cmd>Telescope coc document_symbols theme=dropdown<cr>")
+-- keymap("n", "<leader>lr", "<cmd>Telescope coc references theme=dropdown<cr>")
 

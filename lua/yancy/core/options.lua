@@ -87,3 +87,4 @@ for name, value in pairs(global_local) do
 	vim.o[name] = value
 end
 load_options()
+
