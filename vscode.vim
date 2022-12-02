@@ -28,7 +28,7 @@ map <leader>E <cmd>call VSCodeNotify('workbench.action.toggleSidebarVisibility')
 
 
 map <leader>q <cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<cr>
-map <leader>w <cmd>call VSCodeNotify('workbench.action.files.save')<cr>
+map <leader>w <cmd>call VSCodeNotify('workbench.action.files.saveFiles')<cr>
 map <leader><tab> <cmd>call VSCodeNotify('workbench.action.closeEditorsToTheRight')<cr>
 
 
