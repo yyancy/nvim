@@ -51,7 +51,7 @@ nnoremap ]]g <cmd>call VSCodeNotify('workbench.action.editor.nextChange')<cr>
 nnoremap [c <cmd>call VSCodeNotify('merge-conflict.next')<cr>
 nnoremap ]c <cmd>call VSCodeNotify('merge-conflict.previous')<cr>
 
-nmap <leader>ro <cmd>call VSCodeNotify('editor.action.organizeImports')<cr>
+nmap <leader>ro <cmd>call VSCodeNotify('editor.action.organizeImports')<cr><cmd> call VSCodeNotify('editor.action.formatDocument')<cr>
 nmap <leader>cl <cmd>call VSCodeNotify('editor.action.formatDocument')<cr>
 nnoremap <leader>n <cmd>call VSCodeNotify('editor.action.marker.next')<cr>
 nnoremap <leader>p <cmd>call VSCodeNotify('editor.action.marker.prev')<cr>
