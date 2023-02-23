@@ -14,11 +14,13 @@ map <leader>7 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex7')<cr>
 map <leader>8 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex8')<cr>
 map <leader>9 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex9')<cr>
 " noremap i  <cmd>call VSCodeCall('emacs-tab.reindentCurrentLine')<cr>i
-nmap <leader>l <cmd>call VSCodeNotify('workbench.action.openNextRecentlyUsedEditor')<cr>
-nmap <leader>h <cmd>call VSCodeNotify('workbench.action.openPreviousRecentlyUsedEditor')<cr>
+nmap <leader>i <cmd>call VSCodeNotify('workbench.action.openNextRecentlyUsedEditor')<cr>
+nmap <leader>o <cmd>call VSCodeNotify('workbench.action.openPreviousRecentlyUsedEditor')<cr>
 nmap <leader>L <cmd>call VSCodeNotify('workbench.action.previousEditor')<cr>
 nmap <leader>H <cmd>call VSCodeNotify('workbench.action.nextEditor')<cr>
 
+nmap <leader>gff <cmd>call VSCodeNotify('actions.find')<cr>
+nmap <leader>gfr <cmd>call VSCodeNotify('editor.action.startFindReplaceAction')<cr>
 
 
 nnoremap <leader>ff :Find<cr>

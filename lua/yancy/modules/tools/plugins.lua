@@ -27,7 +27,16 @@ tools["gcmt/wildfire.vim"] = {
 	end,
 }
 
+tools["kana/vim-textobj-entire"] = {}
 tools["wellle/targets.vim"] = {}
+tools["urxvtcd/vim-indent-object"] = {
+  config = function()
+		vim.keymap.set("x", "ii", "<Plug>(indent-object_linewise-none)")
+		vim.keymap.set("o", "ii", "<Plug>(indent-object_blockwise-none)")
+		vim.keymap.set("x", "ai", "<Plug>(indent-object_linewise-start)")
+		vim.keymap.set("o", "ai", "<Plug>(indent-object_linewise-start)")
+  end
+}
 
 tools["nvim-telescope/telescope.nvim"] = {
 	opt = true,
