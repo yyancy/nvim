@@ -27,6 +27,8 @@ tools["gcmt/wildfire.vim"] = {
 	end,
 }
 
+tools["Julian/vim-textobj-variable-segment"] = {}
+tools["kana/vim-textobj-user"] = {}
 tools["kana/vim-textobj-entire"] = {}
 tools["wellle/targets.vim"] = {}
 tools["urxvtcd/vim-indent-object"] = {

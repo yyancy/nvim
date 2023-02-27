@@ -136,6 +136,11 @@ function config.eft()
   nmap T <Plug>(eft-T)
   xmap T <Plug>(eft-T)
   omap T <Plug>(eft-T)
+" You can use the below function like native `f`
+let g:eft_index_function = {
+\   'all': { -> v:true },
+\ }
+
   ]])
 end
 

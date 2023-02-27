@@ -69,7 +69,7 @@ editor["andymass/vim-matchup"] = {
 	config = conf.matchup,
 }
 
-editor["hrsh7th/vim-eft"] = { opt = true, event = "BufReadPost", config = conf.eft }
+-- editor["hrsh7th/vim-eft"] = { opt = true, event = "BufReadPost", config = conf.eft }
 
 editor["karb94/neoscroll.nvim"] = {
 	opt = true,
