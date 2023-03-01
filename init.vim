@@ -41,12 +41,14 @@ exec "nohlsearch"
 " set expandtab             " 将制表符Tab展开为空格，这对于Python尤其有用
 " set tabstop=2             " 要计算的空格数
 " set softtabstop=2
-" set shiftwidth=2          " 用于自动缩进的空格数
+set shiftwidth=2          " 用于自动缩进的空格数
 " set tw=0
 " set backspace=2           " 在多数终端上修正退格键Backspace的行为
 " set foldlevel=99
 " set laststatus=2
 
+" disabled python.vim plugins set shiftwidth
+let g:python_recommended_style = 0
 
 
 " set autochdir

@@ -139,6 +139,7 @@ function config.cmp()
 		window = {
 			completion = {
 				autocomplete = true,
+
 				border = border("CmpBorder"),
 				winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
 			},
