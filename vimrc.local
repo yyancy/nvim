@@ -6,7 +6,7 @@ set hidden
 set relativenumber
 set cursorline " displays a line on the line where the cursor is
 filetype plugin indent on " 启用根据文件类型自动缩进
-set mouse=a
+" set mouse=a
 set wrap
 set showcmd
 set ignorecase
