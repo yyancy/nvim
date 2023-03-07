@@ -106,3 +106,4 @@ vnoremap < <gv
 inoremap <C-T> <C-F>
 noremap 0 _
 
+highlight Search ctermfg=237 ctermbg=251  guifg=#F5C2E7 guibg=#575268
