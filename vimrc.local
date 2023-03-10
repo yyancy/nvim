@@ -57,7 +57,7 @@ let mapleader=" "
 vmap <C-c> y
 vmap <C-v> p
 imap <C-v> <esc>pa
-map <S-C-v> p
+" map <S-C-v> p
 
 
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
