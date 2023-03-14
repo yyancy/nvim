@@ -40,6 +40,7 @@ set backspace=2           " 在多数终端上修正退格键Backspace的行为
 set foldlevel=99
 set laststatus=2
 
+set completeopt=longest,noinsert,menuone,noselect,preview
 set scrolloff=5
 set sidescroll=10
 set clipboard=unnamedplus
@@ -50,6 +51,14 @@ set shortmess-=S
 " restore cursor position which last was.
 au BufReadPost * if line("'\"") > 2 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
 
+silent !mkdir -p $HOME/.vim/tmp/backup
+silent !mkdir -p $HOME/.vim/tmp/undo
+silent !mkdir -p $HOME/.vim/tmp/session
+set backupdir=$HOME/.vim/tmp/backup,.
+set directory=$HOME/.vim/tmp/backup,.
+
+set undofile
+set undodir=$HOME/.vim/tmp/undo,.
 
 " mappings
 let mapleader=" "
