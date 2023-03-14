@@ -86,6 +86,11 @@ nmap 0 _
 
 nmap . .`[
 
+imap <C-e> <end>
+imap <C-a> <home>
+inoremap <a-b> <C-o>b
+imap <a-f> <C-o>w
+
 imap <C-d> <del>
 " 使用<Ctrl> + hjkl快速在窗口间跳转
 noremap <c-h> <c-w><c-h>
