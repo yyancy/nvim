@@ -6,7 +6,7 @@ set hidden
 set relativenumber
 set cursorline " displays a line on the line where the cursor is
 filetype plugin indent on " 启用根据文件类型自动缩进
-set mouse=a
+" set mouse=a
 set wrap
 set showcmd
 set ignorecase
@@ -40,6 +40,7 @@ set backspace=2           " 在多数终端上修正退格键Backspace的行为
 set foldlevel=99
 set laststatus=2
 
+set completeopt=longest,noinsert,menuone,noselect,preview
 set scrolloff=5
 set sidescroll=10
 set clipboard=unnamedplus
@@ -50,6 +51,14 @@ set shortmess-=S
 " restore cursor position which last was.
 au BufReadPost * if line("'\"") > 2 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
 
+silent !mkdir -p $HOME/.vim/tmp/backup
+silent !mkdir -p $HOME/.vim/tmp/undo
+silent !mkdir -p $HOME/.vim/tmp/session
+set backupdir=$HOME/.vim/tmp/backup,.
+set directory=$HOME/.vim/tmp/backup,.
+
+set undofile
+set undodir=$HOME/.vim/tmp/undo,.
 
 " mappings
 let mapleader=" "
@@ -57,7 +66,7 @@ let mapleader=" "
 vmap <C-c> y
 vmap <C-v> p
 imap <C-v> <esc>pa
-map <S-C-v> p
+" map <S-C-v> p
 
 
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
@@ -76,6 +85,11 @@ onoremap T vT
 nmap 0 _
 
 nmap . .`[
+
+imap <C-e> <end>
+imap <C-a> <home>
+inoremap <a-b> <C-o>b
+imap <a-f> <C-o>w
 
 imap <C-d> <del>
 " 使用<Ctrl> + hjkl快速在窗口间跳转
@@ -106,3 +120,4 @@ vnoremap < <gv
 inoremap <C-T> <C-F>
 noremap 0 _
 
+highlight Search ctermfg=237 ctermbg=251  guifg=#F5C2E7 guibg=#575268
