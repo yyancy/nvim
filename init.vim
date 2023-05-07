@@ -307,6 +307,12 @@ function Profile(log_file)
 endfunction
 command  -nargs=1 ActiveProfile call Profile(<f-args>)
 
+
+function DRemoveLF()
+  execute ":%s///g"
+endfunction
+command  -nargs=0 RemoveLF call DRemoveLF()
+
 map qw ysiw{
 " map <leader>d I& <esc>j0
 map <leader>sw :set wrap!<cr>
