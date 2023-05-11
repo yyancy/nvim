@@ -313,6 +313,20 @@ function DRemoveLF()
 endfunction
 command  -nargs=0 RemoveLF call DRemoveLF()
 
+
+function DTransferGo()
+  execute ":%s/native.Register/registry.register/g"
+  execute ":%s://:# :g"
+  execute ":%s/:=/=/g"
+  execute ":%s/func/def/g"
+  execute "%s/*rtda./:/g"
+  execute "%s/ {/:/g"
+  execute "%s/}//g"
+endfunction
+command -nargs=0 TransferGo call DTransferGo()
+
+
+
 map qw ysiw{
 " map <leader>d I& <esc>j0
 map <leader>sw :set wrap!<cr>

@@ -1,3 +1,7 @@
+"
+" glyph margin for add breakpoint
+"
+"
 " navigation between buffers
 map <c-j> <c-w>j
 map <c-k> <c-w>k
