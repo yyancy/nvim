@@ -185,6 +185,8 @@ map tn :+tabnext<CR>
 map sv <C-w>t<C-w>H
 map sh <C-w>t<C-w>K
 
+inoremap <C-_> <C-o>u
+inoremap <a-_> <C-o><C-r>
 
 noremap <LEADER><CR> :nohlsearch<CR>
 
