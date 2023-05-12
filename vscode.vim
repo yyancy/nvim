@@ -1,9 +1,15 @@
+"
+" glyph margin for add breakpoint
+"
+"
 " navigation between buffers
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-h> <c-w>h
 map <c-l> <c-w>l
 
+" nmap o o<cmd>call VSCodeNotifyRange('emacs-tab.reindentCurrentLine', line('.'), line('.'), 1)<cr>
+" nmap o o<cmd>call VSCodeNotifyRange('emacs-tab.reindentCurrentLine', line('.')-1, line('.')-1, 1)<cr>
 map <leader>1 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex1')<cr>
 map <leader>2 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex2')<cr>
 map <leader>3 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex3')<cr>
@@ -16,8 +22,8 @@ map <leader>9 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex9')<cr>
 " noremap i  <cmd>call VSCodeCall('emacs-tab.reindentCurrentLine')<cr>i
 nmap <leader>i <cmd>call VSCodeNotify('workbench.action.openNextRecentlyUsedEditor')<cr>
 nmap <leader>o <cmd>call VSCodeNotify('workbench.action.openPreviousRecentlyUsedEditor')<cr>
-nmap <leader>L <cmd>call VSCodeNotify('workbench.action.previousEditor')<cr>
-nmap <leader>H <cmd>call VSCodeNotify('workbench.action.nextEditor')<cr>
+nmap <leader>h <cmd>call VSCodeNotify('workbench.action.previousEditor')<cr>
+nmap <leader>l <cmd>call VSCodeNotify('workbench.action.nextEditor')<cr>
 
 nmap <leader>gf <cmd>call VSCodeNotify('actions.find')<cr>
 nmap <leader>gr <cmd>call VSCodeNotify('editor.action.startFindReplaceAction')<cr>
@@ -29,9 +35,9 @@ map <f12> <cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>
 map <leader>E <cmd>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<cr>
 
 
-map <leader>q <cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<cr>
+map <leader>qq <cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<cr>
 map <leader>w <cmd>call VSCodeNotify('workbench.action.files.saveFiles')<cr>
-map <leader><tab> <cmd>call VSCodeNotify('workbench.action.closeEditorsToTheRight')<cr>
+map <leader>qa <cmd>call VSCodeNotify('workbench.action.closeEditorsToTheRight')<cr>
 
 
 nnoremap <leader>fa <cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>
@@ -48,8 +54,8 @@ nnoremap zo <cmd>call VSCodeNotify('editor.unfold')<cr>
 nnoremap <leader>rn <cmd>call VSCodeNotify('editor.action.rename')<cr>
 nnoremap [g <cmd>call VSCodeNotify('editor.action.marker.prev')<cr>
 nnoremap ]g <cmd>call VSCodeNotify('editor.action.marker.next')<cr>
-nnoremap [[g <cmd>call VSCodeNotify('workbench.action.editor.previousChange')<cr>
-nnoremap ]]g <cmd>call VSCodeNotify('workbench.action.editor.nextChange')<cr>
+nnoremap [n <cmd>call VSCodeNotify('workbench.action.editor.previousChange')<cr>
+nnoremap ]n <cmd>call VSCodeNotify('workbench.action.editor.nextChange')<cr>
 nnoremap [c <cmd>call VSCodeNotify('merge-conflict.next')<cr>
 nnoremap ]c <cmd>call VSCodeNotify('merge-conflict.previous')<cr>
 
