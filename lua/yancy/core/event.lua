@@ -1,6 +1,11 @@
 local vim = vim
 not_vscode = require("yancy.core.global").not_vscode
+is_not_vscode = require("yancy.core.global").is_not_vscode
 local autocmd = {}
+
+function not_vscode()
+  return is_not_vscode
+end
 
 function autocmd.nvim_create_augroups(definitions)
 	for group_name, definition in pairs(definitions) do

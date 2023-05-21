@@ -20,3 +20,14 @@ keymap("n", "<leader>tc", ":Telescope coc ")
 -- keymap("n", "gO", "<cmd>Telescope coc document_symbols theme=dropdown<cr>")
 -- keymap("n", "<leader>lr", "<cmd>Telescope coc references theme=dropdown<cr>")
 
+keymap("n", "<leader>S", "<Plug>(wildfire-quick-select)")
+
+-- ----------------
+-- tool section
+-- ----------------
+-- urxvtcd/vim-indent-object
+keymap("x", "ii", "<Plug>(indent-object_linewise-none)")
+keymap("o", "ii", "<Plug>(indent-object_blockwise-none)")
+keymap("x", "ai", "<Plug>(indent-object_linewise-start)")
+keymap("o", "ai", "<Plug>(indent-object_linewise-start)")
+-- end tool section

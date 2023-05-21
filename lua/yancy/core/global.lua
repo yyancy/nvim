@@ -14,12 +14,10 @@ function global:load_variables()
 	self.home = home
 	self.data_dir = string.format("%s/site/", vim.fn.stdpath("data"))
 	self.is_vscode = vim.g.vscode == 1
+  self.is_not_vscode = vim.g.vscode ~= 1 
 	-- print("is_vscode" .. str.(self.is_vscode))
 end
 
-function global.not_vscode()
-	return not global.is_vscode
-end
 
 global:load_variables()
 

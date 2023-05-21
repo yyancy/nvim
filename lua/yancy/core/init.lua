@@ -1,5 +1,28 @@
 local global = require("yancy.core.global")
 
+
+-- Create cache dir and data dirs
+local createdir = function()
+	local data_dir = {
+		global.cache_dir .. "backup",
+		global.cache_dir .. "session",
+		global.cache_dir .. "swap",
+		global.cache_dir .. "tags",
+		global.cache_dir .. "undo",
+	}
+	-- Only check whether cache_dir exists, this would be enough.
+	if vim.fn.isdirectory(global.cache_dir) == 0 then
+		os.execute("mkdir -p " .. global.cache_dir)
+		for _, v in pairs(data_dir) do
+			if vim.fn.isdirectory(v) == 0 then
+				os.execute("mkdir -p " .. v)
+			end
+		end
+	end
+end
+
+
+
 local disable_distribution_plugins = function()
 	-- disable menu loading
 	vim.g.did_install_default_menus = 1
@@ -9,15 +32,15 @@ local disable_distribution_plugins = function()
 	-- vim.g.did_load_filetypes = 1
 
 	-- Do not load native syntax completion
-	-- vim.g.loaded_syntax_completion = 1
+	vim.g.loaded_syntax_completion = 1
 
 	-- Do not load spell files
 	vim.g.loaded_spellfile_plugin = 1
 
 	-- Whether to load netrw by default
-	-- vim.g.loaded_netrw = 1
+	vim.g.loaded_netrw = 1
 	-- vim.g.loaded_netrwFileHandlers = 1
-	-- vim.g.loaded_netrwPlugin = 1
+	vim.g.loaded_netrwPlugin = 1
 	-- vim.g.loaded_netrwSettings = 1
 	-- newtrw liststyle: https://medium.com/usevim/the-netrw-style-options-3ebe91d42456
 	vim.g.netrw_liststyle = 3
@@ -49,18 +72,18 @@ local disable_distribution_plugins = function()
 end
 
 function bootstrap()
-	local pack = require("yancy.core.pack")
-
+  createdir()
 	disable_distribution_plugins()
 
-	-- load plugins
-	pack.ensure_plugins()
   
 	require("yancy.core.options")
 	require("yancy.core.event")
 	require("yancy.core.mapping")
-
-	pack.load_compile()
+	require("yancy.core.pack")
+  local colorscheme = require("yancy.core.settings").colorscheme
+	local background = require("yancy.core.settings").background
+	-- vim.api.nvim_command("set background=" .. background)
+	-- vim.api.nvim_command("colorscheme " .. colorscheme)
 end
 
 bootstrap()

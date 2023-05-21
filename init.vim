@@ -311,7 +311,8 @@ command  -nargs=1 ActiveProfile call Profile(<f-args>)
 
 
 function DRemoveLF()
-  execute ":%s///g"
+  execute ":%s/
+//g"
 endfunction
 command  -nargs=0 RemoveLF call DRemoveLF()
 
