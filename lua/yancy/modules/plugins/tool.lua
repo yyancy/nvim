@@ -30,6 +30,19 @@ tool["nvim-tree/nvim-tree.lua"] = {
 	config = require("tool.nvim-tree"),
 }
 
+tool["michaelb/sniprun"] = {
+	lazy = true,
+	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`,
+	-- if you encountered error about no executable sniprun found.
+	build = "bash ./install.sh",
+	cmd = { "SnipRun" },
+	config = require("tool.sniprun"),
+}
+
+tool["dhruvasagar/vim-open-url"] = {
+	lazy = false,
+	config = require("tool.open-url"),
+}
 
 tool["lambdalisue/suda.vim"] = {
 	lazy = false,
@@ -64,6 +77,7 @@ tool["nvim-telescope/telescope.nvim"] = {
 	cmd = "Telescope",
 	config = require('tool.telescope'),
 	dependencies = {
+		{ "nvim-tree/nvim-web-devicons" },
 		{ "nvim-lua/plenary.nvim" },
 		{ "nvim-lua/popup.nvim" },
     { "nvim-telescope/telescope-smart-history.nvim" },
@@ -93,9 +107,8 @@ tool["mg979/vim-visual-multi"] = {
 	config = require("tool.visual-multi")
 }
 
-tool["Pocco81/abbrev-man.nvim"] = {
+tool["yyancy/abbrev-man.nvim"] = {
 	config = require("tool.abbrev-man"),
-  dev = true,
   lazy = false
 }
 tool["theniceboy/antovim"] = {}
@@ -111,7 +124,14 @@ tool["tpope/vim-abolish"] = {
 }
 tool["tpope/vim-rsi"] = {}
 
-
+tool['ibhagwan/smartyank.nvim'] = {
+  config = require('tool.smarkyank')
+}
+tool["folke/trouble.nvim"] = {
+	lazy = true,
+	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
+	config = require("tool.trouble"),
+}
 
 -- split
 

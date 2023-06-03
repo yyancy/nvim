@@ -82,8 +82,10 @@ function bootstrap()
 	require("yancy.core.pack")
   local colorscheme = require("yancy.core.settings").colorscheme
 	local background = require("yancy.core.settings").background
-	-- vim.api.nvim_command("set background=" .. background)
-	-- vim.api.nvim_command("colorscheme " .. colorscheme)
+  if global.is_not_vscode then
+    vim.api.nvim_command("set background=" .. background)
+    vim.api.nvim_command("colorscheme " .. colorscheme)
+  end
 end
 
 bootstrap()

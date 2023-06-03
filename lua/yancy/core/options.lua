@@ -69,7 +69,7 @@ local function load_options()
     foldmethod = "indent",
     foldenable = true,
     signcolumn = "yes",
-    timeoutlen = 500,
+    timeoutlen = 1000,
     ttimeoutlen = 0,
 
     pumheight = 15,

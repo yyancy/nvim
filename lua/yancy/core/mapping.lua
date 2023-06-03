@@ -31,3 +31,29 @@ keymap("o", "ii", "<Plug>(indent-object_blockwise-none)")
 keymap("x", "ai", "<Plug>(indent-object_linewise-start)")
 keymap("o", "ai", "<Plug>(indent-object_linewise-start)")
 -- end tool section
+
+
+
+-- ----------------
+-- editor section
+-- ----------------
+keymap("n", "s", "<plug>(SubversiveSubstitute)")
+keymap("n", "ss", "<plug>(SubversiveSubstituteLine)")
+keymap("n", "S", "<plug>(SubversiveSubstituteToEndOfLine)")
+keymap({ "n", "x" }, "<leader>s", "<plug>(SubversiveSubstituteRange)")
+
+
+keymap({ "o", "x" }, "ib", "<Plug>(textobj-sandwich-auto-i)", { unique = true })
+keymap({ "o", "x" }, "ab", "<Plug>(textobj-sandwich-auto-a)", { unique = true })
+keymap({ "o", "x" }, "is", "<Plug>(textobj-sandwich-query-i)", { unique = true })
+keymap({ "o", "x" }, "as", "<Plug>(textobj-sandwich-query-a)", { unique = true })
+
+if global.is_not_vscode then
+
+  keymap("n", "<c-h>", "<cmd>TmuxNavigateLeft<cr>")
+  keymap("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>")
+  keymap("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>")
+  keymap("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>")
+
+end
+-- end editor section

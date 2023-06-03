@@ -4,9 +4,9 @@ return function ()
 		load_programming_dictionaries_at_startup = true,
 		natural_dictionaries = {
 			["nt_en"] = {
-				["adn"] = "AND23",
-				["THe"] = "rm_am",
-				["ccd"] = "127.0.0.1",
+				["adn"] = "and",
+				["THe"] = "The",
+				["local"] = "127.0.0.1",
 			},
 			["nt_my_slangs"] = {
 				["lmao"] = "LMAO",
@@ -18,7 +18,6 @@ return function ()
 				["ccccd"] = "127.0.0.1",
         ['true'] = "True",
         ['false'] = "False",
-
 			},
 		},
 	})
