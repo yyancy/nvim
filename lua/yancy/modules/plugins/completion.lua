@@ -1,5 +1,12 @@
 local completion = {}
 
+is_vscode = require("yancy.core.global").is_vscode
+is_not_vscode = require("yancy.core.global").is_not_vscode
+
+if is_vscode then
+	return ui
+end
+
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },

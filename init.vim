@@ -157,6 +157,9 @@ imap <C-a> <home>
 inoremap <a-b> <C-o>b
 imap <a-f> <C-o>w
 
+nnoremap ` ~
+nnoremap ~ `
+
 nmap . .`[
 
 imap <C-d> <del>
