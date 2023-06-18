@@ -126,7 +126,7 @@ let mapleader=" "
 if !exists('g:vscode')
 vmap <C-c> y
 vmap <C-v> p
-imap <C-v> <esc>pa
+imap <C-S-v> <esc>pa
 map <S-C-v> p
 endif
 
@@ -314,8 +314,7 @@ command  -nargs=1 ActiveProfile call Profile(<f-args>)
 
 
 function DRemoveLF()
-  execute ":%s/
-//g"
+  execute ":%s///g"
 endfunction
 command  -nargs=0 RemoveLF call DRemoveLF()
 
@@ -391,3 +390,4 @@ EOF
 if exists('g:vscode')
   source $HOME/.config/nvim/vscode.vim
 end
+
