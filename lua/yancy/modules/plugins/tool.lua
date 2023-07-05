@@ -133,6 +133,10 @@ tool["folke/trouble.nvim"] = {
 	config = require("tool.trouble"),
 }
 
+tool["ggandor/leap.nvim"] = {
+	lazy = false,
+	config = require("tool.leap"),
+}
 -- split
 
 
