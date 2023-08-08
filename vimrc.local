@@ -1,7 +1,7 @@
 set nocompatible
 
 syntax on                 " 支持语法高亮显示
-set number                " show line number.
+" set number                " show line number.
 set hidden
 set relativenumber
 set cursorline " displays a line on the line where the cursor is
@@ -28,6 +28,9 @@ set wildmode=longest:list,full
 set hlsearch
 exec "nohlsearch"
 set incsearch
+
+set list
+set listchars=tab:»·,nbsp:+,trail:·,extends:→,precedes:←
 
 
 set autoindent            " 开始新行时处理缩进
