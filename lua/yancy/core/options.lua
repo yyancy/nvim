@@ -44,6 +44,7 @@ local function load_options()
 		breakat = [[\ \	;:,!?]],
 		showbreak = "↳  ",
 		backspace = "indent,eol,start",
+		list = true,
 		listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←",
 		grepformat = "%f:%l:%c:%m",
 		grepprg = "rg --hidden --vimgrep --smart-case --",

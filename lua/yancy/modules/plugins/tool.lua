@@ -137,6 +137,28 @@ tool["ggandor/leap.nvim"] = {
 	lazy = false,
 	config = require("tool.leap"),
 }
+
+tool["ggandor/flit.nvim"] = {
+	lazy = false,
+  dependencies = {
+    "ggandor/leap.nvim"
+  },
+	config = function()
+    require('flit').setup({
+      labeled_modes = "nv",
+    })
+  end
+}
+tool["ggandor/leap-spooky.nvim"] = {
+	lazy = false,
+  dependencies = {
+    "ggandor/leap.nvim"
+  },
+	config = function()
+    require('leap-spooky').setup()
+  end
+}
+
 -- split
 
 
