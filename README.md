@@ -3,6 +3,7 @@
 My nvim configurations.
 
 ## Prerequisite
+
 ### Installing node and configure mirrors
 ```bash
 # References https://developer.aliyun.com/article/868238?spm=a2c6h.13148508.0.0.66e84f0ehbA8XI

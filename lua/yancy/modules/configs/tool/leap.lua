@@ -1,7 +1,7 @@
 return function()
 	-- require('leap').add_default_mappings()
 
-	vim.keymap.set({ "n", "x", "o" }, "<c-s>", "<Plug>(leap-forward-to)")
+	vim.keymap.set({ "n", "x", "o" }, "<a-s>", "<Plug>(leap-forward-to)")
 	vim.keymap.set({ "n", "x", "o" }, "<a-a>", "<Plug>(leap-backward-to)")
 	-- vim.keymap.set({'n', 'x', 'o'}, '<C-S-s>', ':pwd')
 	vim.keymap.set({ "x", "o" }, "x", "<Plug>(leap-forward-till)")

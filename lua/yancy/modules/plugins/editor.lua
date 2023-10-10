@@ -138,6 +138,14 @@ editor["christoomey/vim-tmux-navigator"] = {
 	end,
 }
 
+editor["Lilja/zellij.nvim"] = {
+	cond = function()
+		return not is_vscode
+	end,
+  config = function()
+    require('zellij').setup({})
+  end
+}
 editor["haya14busa/vim-asterisk"] = {
 	config = require("editor.asterisk")
 }
