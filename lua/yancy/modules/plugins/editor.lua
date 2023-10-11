@@ -27,10 +27,11 @@ editor["RRethy/vim-illuminate"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("editor.vim-illuminate"),
 }
-editor["romainl/vim-cool"] = {
-	lazy = true,
-	event = { "CursorMoved", "InsertEnter" },
-}
+-- clear search highlight
+-- editor["romainl/vim-cool"] = {
+-- 	lazy = true,
+-- 	event = { "CursorMoved", "InsertEnter" },
+-- }
 
 editor["nvim-treesitter/nvim-treesitter"] = {
 	lazy = true,
