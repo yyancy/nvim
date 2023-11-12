@@ -174,5 +174,10 @@ return function()
 				watcher = false,
 			},
 		},
+		-- on_attach = function(bufnr)
+		-- 	local tree_api = require("nvim-tree.api")
+		-- 	local keymap = vim.keymap.set
+		-- 	keymap("n", "<leader>E", tree_api.tree.toggle)
+		-- end,
 	})
 end
