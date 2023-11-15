@@ -155,7 +155,7 @@ nmap 0 _
 imap <C-e> <end>
 imap <C-a> <home>
 inoremap <a-b> <C-o>b
-imap <a-f> <C-o>w
+imap <a-f> <C-o>e
 
 nmap . .`[
 
@@ -311,7 +311,8 @@ command  -nargs=1 ActiveProfile call Profile(<f-args>)
 
 
 function DRemoveLF()
-  execute ":%s///g"
+  execute ":%s/
+//g"
 endfunction
 command  -nargs=0 RemoveLF call DRemoveLF()
 
