@@ -3,7 +3,7 @@ set nocompatible
 syntax on                 " 支持语法高亮显示
 " set number                " show line number.
 set hidden
-set relativenumber
+" set relativenumber
 set cursorline " displays a line on the line where the cursor is
 filetype plugin indent on " 启用根据文件类型自动缩进
 " set mouse=a
@@ -126,4 +126,28 @@ vnoremap < <gv
 inoremap <C-T> <C-F>
 noremap 0 _
 
-highlight Search ctermfg=237 ctermbg=251  guifg=#F5C2E7 guibg=#575268
+
+" yankhighlight plugin settings
+if !exists('##TextYankPost')
+  nmap y <Plug>(highlightedyank)
+  xmap y <Plug>(highlightedyank)
+  omap y <Plug>(highlightedyank)
+endif
+let g:highlightedyank_highlight_duration = 500
+
+hi Cursor gui=NONE cterm=NONE guibg=#F92672 guifg=white ctermbg=47 ctermfg=black
+hi CursorLine guibg=#303030 ctermbg=236 cterm=NONE
+hi! link CursorColumn CursorLine
+hi! link CursorLineSign CursorLine
+hi! link CursorLineFold CursorLine
+hi! link LineNr CursorLine
+hi! link SignColumn Normal
+hi! link CursorLineNr Normal
+hi QuickFixLine guifg=black guibg=cyan ctermfg=black ctermbg=lightmagenta
+hi! Search ctermbg=LightCyan ctermfg=black guibg=LightCyan guifg=black
+hi! link IncSearch QuickFixLine
+hi! link CurSearch IncSearch
+hi! link Substitute QuickFixLine
+
+hi Visual gui=NONE cterm=NONE guifg=black guibg=white ctermfg=black ctermbg=white
+
