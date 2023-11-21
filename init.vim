@@ -16,8 +16,8 @@
 " ===
 
 " let g:VM_leader="\\\\"
-filetype plugin indent on " 启用根据文件类型自动缩进
-syntax on                 " 支持语法高亮显示
+" filetype plugin indent on " 启用根据文件类型自动缩进
+" syntax on                 " 支持语法高亮显示
 " set number                " show line number.
 " set hidden
 " set relativenumber
@@ -35,13 +35,13 @@ syntax on                 " 支持语法高亮显示
 " set wildmenu
 " set wildmode=longest:list,full
 " set termguicolors
-exec "nohlsearch"
+exec 'nohlsearch'
 
 " set autoindent            " 开始新行时处理缩进
 " set expandtab             " 将制表符Tab展开为空格，这对于Python尤其有用
 " set tabstop=2             " 要计算的空格数
 " set softtabstop=2
-set shiftwidth=2          " 用于自动缩进的空格数
+" set shiftwidth=2          " 用于自动缩进的空格数
 " set tw=0
 " set backspace=2           " 在多数终端上修正退格键Backspace的行为
 " set foldlevel=99
@@ -121,7 +121,7 @@ endif
 " === mappings
 " ===
 
-let mapleader=" "
+let mapleader=' '
 
 if !exists('g:vscode')
 vmap <C-c> y

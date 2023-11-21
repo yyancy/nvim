@@ -16,10 +16,6 @@ npm config set registry https://registry.npmmirror.com
 pip3 install pynvim --upgrade
 ```
 
-## TODO
-* currently, the completion list is not good. look for improving it.
-* add MRU sort for telescope.nvim with telescope-frecency.nvim
-
 ## FAQ
 
 ### debug coc
