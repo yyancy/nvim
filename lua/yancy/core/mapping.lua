@@ -53,6 +53,12 @@ keymap({ "o", "x" }, "as", "<Plug>(textobj-sandwich-query-a)", { unique = true }
 -- local tree_api = require("nvim-tree.api")
 keymap("n", "<leader>E", ":NvimTreeToggle<CR>")
 
+
+keymap('n', 'j', '<Plug>(accelerated_jk_gj)')
+keymap('n', 'k', '<Plug>(accelerated_jk_gk)')
+
+
+
 if global.is_not_vscode then
 	keymap("n", "<c-h>", "<cmd>TmuxNavigateLeft<cr>")
 	keymap("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>")

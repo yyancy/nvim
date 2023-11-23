@@ -50,6 +50,8 @@ tool["lambdalisue/suda.vim"] = {
 		vim.g.suda_smart_edit = 1
 	end,
 }
+
+-- <space> quickly select region
 tool["gcmt/wildfire.vim"] = {}
 
 tool["kana/vim-textobj-user"] = { lazy = false }

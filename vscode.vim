@@ -8,8 +8,8 @@ map <c-k> <c-w>k
 map <c-h> <c-w>h
 map <c-l> <c-w>l
 
-nmap j gj
-nmap k gk
+" nmap j gj
+" nmap k gk
 
 " nmap o o<cmd>call VSCodeNotifyRange('emacs-tab.reindentCurrentLine', line('.'), line('.'), 1)<cr>
 " nmap o o<cmd>call VSCodeNotifyRange('emacs-tab.reindentCurrentLine', line('.')-1, line('.')-1, 1)<cr>

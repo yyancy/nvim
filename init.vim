@@ -392,8 +392,8 @@ if exists('g:vscode')
   source $HOME/.config/nvim/vscode.vim
 end
 
-# custom targets.vim
-# a trigger: add {} to trigger
+" custom targets.vim
+" a trigger: add {} to trigger
 autocmd User targets#mappings#user call targets#mappings#extend({
     \ 'a': {'argument': [{'o': '[({[]', 'c': '[]})]', 's': ','}]},
     \ })
