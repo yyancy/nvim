@@ -193,7 +193,7 @@ inoremap <a-_> <C-o><C-r>
 
 noremap <LEADER><CR> :nohlsearch<CR>
 
-noremap <leader>q :q<cr>
+" noremap <leader>q :q<cr>
 noremap <leader><C-q> :q!<cr>
 noremap <leader>w :w<cr>
 noremap <leader>x :x<cr>
@@ -314,7 +314,8 @@ command  -nargs=1 ActiveProfile call Profile(<f-args>)
 
 
 function DRemoveLF()
-  execute ":%s///g"
+  execute ":%s/
+//g"
 endfunction
 command  -nargs=0 RemoveLF call DRemoveLF()
 
@@ -391,3 +392,8 @@ if exists('g:vscode')
   source $HOME/.config/nvim/vscode.vim
 end
 
+# custom targets.vim
+# a trigger: add {} to trigger
+autocmd User targets#mappings#user call targets#mappings#extend({
+    \ 'a': {'argument': [{'o': '[({[]', 'c': '[]})]', 's': ','}]},
+    \ })

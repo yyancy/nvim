@@ -5,6 +5,11 @@ local keymap = vim.keymap.set
 keymap("n", "Y", "y$")
 keymap("n", "<C-LeftMouse>", "<Plug>(VM-Mouse-Cursor)")
 keymap("n", "<C-RightMouse>", "<Plug>(VM-Mouse-Word)")
+
+
+keymap('n', '<leader>qq', '<cmd>BufDel<cr>')
+
+
 --
 -- telescope
 keymap("n", "<leader>ff", function()
