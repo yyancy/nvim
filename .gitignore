@@ -3,6 +3,7 @@ tmp/
 
 
 .netrwhist
+.neoconf.json
 
 *.txt
 *.log
