@@ -147,4 +147,27 @@ return {
       require("telescope").load_extension("file_browser")
     end,
   },
+  {
+    "folke/flash.nvim",
+    keys = {
+      { "s", mode = { "n", "x", "o" }, false },
+      { "S", mode = { "n", "x", "o" }, false },
+      {
+        "<A-s>",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
+      },
+      {
+        "<A-S-s>",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash",
+      },
+    },
+  },
 }
