@@ -1,5 +1,20 @@
 local global = require("yancy.core.global")
 
+local function load_custom_fun()
+	vim.cmd([[
+  function DTransferGo()
+    execute ":%s/native.Register/registry.register/g"
+    execute ":%s://:# :g"
+    execute ":%s/:=/=/g"
+    execute ":%s/func/def/g"
+    execute "%s/*rtda./:/g"
+    execute "%s/ {/:/g"
+    execute "%s/}//g"
+    endfunction
+
+    command -nargs=0 TransferGo call DTransferGo()
+    ]])
+end
 local function load_options()
 	local global_local = {
 		termguicolors = true,
@@ -86,6 +101,25 @@ local function load_options()
 	}
 	for name, value in pairs(global_local) do
 		vim.o[name] = value
+	end
+
+	-- list options
+	vim.cmd([[set guioptions+=a]])
+	vim.cmd([[set isfname+=&]])
+	-- disabled python.vim plugins set shiftwidth
+	vim.cmd([[let g:python_recommended_style = 0]])
+	vim.cmd([[let g:vimsyn_embed = 'l']])
+	vim.opt.clipboard:append("unnamedplus")
+
+	--   let g:python3_host_prog="/usr/bin/python3"
+	-- let g:sqlite_clib_path="D:/local/lib/sqlite/sqlite3.dll"
+	-- add options for auto switch inputmethod
+	if jit.os:find("Windows") then
+		vim.cmd([[au InsertLeave *  :silent :!D:\\local\\bin\\im-select.exe 1033]])
+		vim.cmd([[au InsertEnter *  :silent :!D:\\local\\bin\\im-select.exe 2052]])
+	elseif vim.fn.executable("fcitx-remote") == 1 then
+		vim.cmd([[au InsertLeave *  :silent :!fcitx-remote -s fcitx-keyboard-us]])
+		vim.cmd([[au InsertEnter *  :silent :!fcitx-remote -s sogoupinyin]])
 	end
 end
 load_options()

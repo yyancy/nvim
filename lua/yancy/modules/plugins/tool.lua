@@ -67,7 +67,18 @@ tool["kana/vim-textobj-entire"] = {
 		{ "kana/vim-textobj-user" },
 	},
 }
-tool["wellle/targets.vim"] = { lazy = false }
+tool["wellle/targets.vim"] = {
+	lazy = false,
+	config = function()
+		vim.cmd([[
+" custom targets.vim
+" a trigger: add {} to trigger
+autocmd User targets#mappings#user call targets#mappings#extend({
+    \ 'a': {'argument': [{'o': '[({[]', 'c': '[]})]', 's': ','}]},
+    \ })
+" ]])
+	end,
+}
 
 tool["urxvtcd/vim-indent-object"] = {}
 
