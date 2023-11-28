@@ -57,10 +57,10 @@ nnoremap zo <cmd>call VSCodeNotify('editor.unfold')<cr>
 nnoremap <leader>rn <cmd>call VSCodeNotify('editor.action.rename')<cr>
 nnoremap [g <cmd>call VSCodeNotify('editor.action.marker.prev')<cr>
 nnoremap ]g <cmd>call VSCodeNotify('editor.action.marker.next')<cr>
-nnoremap [n <cmd>call VSCodeNotify('workbench.action.editor.previousChange')<cr>
-nnoremap ]n <cmd>call VSCodeNotify('workbench.action.editor.nextChange')<cr>
-nnoremap [c <cmd>call VSCodeNotify('merge-conflict.next')<cr>
-nnoremap ]c <cmd>call VSCodeNotify('merge-conflict.previous')<cr>
+nmap [n <cmd>call VSCodeNotify('workbench.action.editor.previousChange')<cr>
+nmap ]n <cmd>call VSCodeNotify('workbench.action.editor.nextChange')<cr>
+nmap [c <cmd>call VSCodeNotify('merge-conflict.next')<cr>
+nmap ]c <cmd>call VSCodeNotify('merge-conflict.previous')<cr>
 nnoremap gx <cmd>call VSCodeNotify('editor.action.openLink')<cr>
 
 nmap <leader>ro <cmd>call VSCodeNotify('editor.action.organizeImports')<cr><cmd> call VSCodeNotify('editor.action.formatDocument')<cr>
