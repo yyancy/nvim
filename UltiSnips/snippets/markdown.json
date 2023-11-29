@@ -1,0 +1,16 @@
+{
+
+  "to be implemented":{
+    "prefix": "tobe",
+    "body": "assert False, f'to be implemented'",
+    "description": "not to be implemented now"
+  },
+  "add hex case":{
+    "prefix": "cax",
+    "body": [
+      "case 0x$1:",
+      "  return $2"
+    ],
+    "description": "not to be implemented now"
+  }
+}
