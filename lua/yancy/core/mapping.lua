@@ -2,17 +2,11 @@ local global = require("yancy.core.global")
 
 local keymap = vim.keymap.set
 
+-- general mappings
 vim.g.mapleader = " "
 
 keymap("n", "0", "_")
 keymap("n", "Y", "y$")
-keymap("n", "<C-LeftMouse>", "<Plug>(VM-Mouse-Cursor)")
-keymap("n", "<C-RightMouse>", "<Plug>(VM-Mouse-Word)")
-keymap("n", "<leader><cr>", "<cmd>nohl<cr>")
-keymap("n", "<leader><C-q>", "<cmd>q!<cr>")
-keymap("n", "<leader>ww", "<cmd>w<cr>")
-keymap("i", "<C-t>", "<C-f>")
-keymap("n", "<leader>tx", "<cmd>r !figlet")
 keymap("n", ">", ">>")
 keymap("n", "<", "<<")
 keymap("v", ">", ">gv")
@@ -27,13 +21,17 @@ keymap("o", "T", "vT")
 keymap("x", "<C-d>", '"ayp')
 
 keymap("n", "<leader>qq", "<cmd>BufDel<cr>")
+keymap("n", "<leader><cr>", "<cmd>nohl<cr>")
+keymap("n", "<leader><C-q>", "<cmd>q!<cr>")
+keymap("n", "<leader>ww", "<cmd>w<cr>")
+keymap("n", "<leader>tx", "<cmd>r !figlet")
 
+keymap("i", "<C-t>", "<C-f>")
 keymap("i", "<C-e>", "<end>")
 keymap("i", "<C-a>", "<home>")
 keymap("i", "<a-b>", "<C-o>b")
 keymap("i", "<a-f>", "<C-o>w")
 keymap("i", "<C-d>", "<del>")
-
 keymap("i", "<C-_>", "<C-o>u")
 keymap("i", "<a-_>", "<C-o><C-r>")
 
@@ -50,6 +48,8 @@ keymap("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true 
 keymap("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
 keymap("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
 
+keymap("n", "<C-LeftMouse>", "<Plug>(VM-Mouse-Cursor)")
+keymap("n", "<C-RightMouse>", "<Plug>(VM-Mouse-Word)")
 keymap("n", "<up>", "<cmd>res -5<cr>")
 keymap("n", "<down>", "<cmd>res +5<cr>")
 keymap("n", "<left>", "<cmd>vertical resize-5<CR>")
@@ -69,12 +69,6 @@ end)
 keymap("n", "<leader>mm", "<cmd>Telescope keymaps theme=dropdown<cr>")
 keymap("n", "<leader>fh", "<cmd>Telescope oldfiles theme=dropdown<cr>")
 keymap("n", "<leader>fa", "<cmd>Telescope live_grep theme=dropdown<cr>")
-
--- lsp with coc.vim configurations
-keymap("n", "<leader>tc", ":Telescope coc ")
--- keymap("n", "<leader>ls", "<cmd>Telescope coc workspace_symbols theme=dropdown<cr>")
--- keymap("n", "gO", "<cmd>Telescope coc document_symbols theme=dropdown<cr>")
--- keymap("n", "<leader>lr", "<cmd>Telescope coc references theme=dropdown<cr>")
 
 keymap("n", "<leader>S", "<Plug>(wildfire-quick-select)")
 
