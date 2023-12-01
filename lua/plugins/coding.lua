@@ -34,4 +34,8 @@ return {
       { "S", "<plug>(SubversiveSubstituteToEndOfLine)", desc = "replace content until end of line" },
     },
   },
+  {
+    "gbprod/yanky.nvim",
+    vscode = true,
+  },
 }
