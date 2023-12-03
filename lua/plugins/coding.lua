@@ -109,14 +109,6 @@ autocmd User targets#mappings#user call targets#mappings#extend({
     },
   },
   {
-    "svermeulen/vim-subversive",
-    keys = {
-      { "s", "<plug>(SubversiveSubstitute)", desc = "replace content" },
-      { "ss", "<plug>(SubversiveSubstituteLine)", desc = "replace the whole content" },
-      { "S", "<plug>(SubversiveSubstituteToEndOfLine)", desc = "replace content until end of line" },
-    },
-  },
-  {
     "gbprod/yanky.nvim",
     enabled = false,
     vscode = true,

@@ -9,7 +9,7 @@ set("n", "<leader><cr>", "<cmd>nohl<cr>", { desc = "clear highlight" })
 set("n", "=p", "o<esc>p==")
 set("n", "=P", "O<esc>p==")
 -- some useful mapping for insert mode
-set("i", "<C-f>", "<right>")
+set({ "i", "s" }, "<C-f>", "<right>")
 set("i", "<C-b>", "<left>")
 set("i", "<a-f>", "<C-right>")
 set("i", "<a-b>", "<C-left>")
