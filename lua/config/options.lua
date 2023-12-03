@@ -10,3 +10,5 @@ elseif vim.fn.executable("fcitx-remote") == 1 then
   vim.cmd([[au InsertLeave *  :silent :!fcitx-remote -s fcitx-keyboard-us]])
   vim.cmd([[au InsertEnter *  :silent :!fcitx-remote -s sogoupinyin]])
 end
+
+vim.opt.timeoutlen = 1000

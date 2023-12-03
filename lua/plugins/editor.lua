@@ -149,9 +149,19 @@ return {
   },
   {
     "folke/flash.nvim",
+    enabled = true,
+    opts = {
+      modes = {
+        char = {
+          enabled = false,
+        },
+      },
+    },
     keys = {
       { "s", mode = { "n", "x", "o" }, false },
       { "S", mode = { "n", "x", "o" }, false },
+      { "r", mode = "o", false },
+      { "R", mode = { "o", "x" }, false },
       {
         "<A-s>",
         mode = { "n", "x", "o" },

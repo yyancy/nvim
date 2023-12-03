@@ -8,10 +8,49 @@ map <c-k> <c-w>k
 map <c-h> <c-w>h
 map <c-l> <c-w>l
 
+
+function! s:putline(how, map) abort
+  let [body, type] = [getreg(v:register), getregtype(v:register)]
+  if type ==# 'V'
+    exe 'normal! "'.v:register.a:how
+  else
+    call setreg(v:register, body, 'l')
+    exe 'normal! "'.v:register.a:how
+    call setreg(v:register, body, type)
+  endif
+  silent! call repeat#set("\<Plug>(unimpaired-put-".a:map.")")
+endfunction
+
+nnoremap <silent> <Plug>(unimpaired-put-above) :call <SID>putline('[p', 'above')<CR>
+nnoremap <silent> <Plug>(unimpaired-put-below) :call <SID>putline(']p', 'below')<CR>
+nnoremap <silent> <Plug>(unimpaired-put-above-rightward) :<C-U>call <SID>putline(v:count1 . '[p', 'Above')<CR>>']
+nnoremap <silent> <Plug>(unimpaired-put-below-rightward) :<C-U>call <SID>putline(v:count1 . ']p', 'Below')<CR>>']
+nnoremap <silent> <Plug>(unimpaired-put-above-leftward)  :<C-U>call <SID>putline(v:count1 . '[p', 'Above')<CR><']
+nnoremap <silent> <Plug>(unimpaired-put-below-leftward)  :<C-U>call <SID>putline(v:count1 . ']p', 'Below')<CR><']
+nnoremap <silent> <Plug>(unimpaired-put-above-reformat)  :<C-U>call <SID>putline(v:count1 . '[p', 'Above')<CR>=']
+nnoremap <silent> <Plug>(unimpaired-put-below-reformat)  :<C-U>call <SID>putline(v:count1 . ']p', 'Below')<CR>=]
+nnoremap <silent> <Plug>unimpairedPutAbove :call <SID>putline([p, above)<CR>
+nnoremap <silent> <Plug>unimpairedPutBelow :call <SID>putline(]p, below)<CR>
+
+" nmap [p <Plug>(unimpaired-put-above)
+" nmap ]p <Plug>(unimpaired-put-below)
+" nmap [P <Plug>(unimpaired-put-above)
+" nmap ]P <Plug>(unimpaired-put-below)
+"
+" nmap >P <Plug>(unimpaired-put-above-rightward)
+" nmap >p <Plug>(unimpaired-put-below-rightward)
+" nmap <P <Plug>(unimpaired-put-above-leftward)
+" nmap <p <Plug>(unimpaired-put-below-leftward)
+" nmap =P <Plug>(unimpaired-put-above-reformat)
+" nmap =p <Plug>(unimpaired-put-below-reformat)
+
+
+
+
 " nmap j gj
 " nmap k gk
 
-" nmap o o<cmd>call VSCodeNotifyRange('emacs-tab.reindentCurrentLine', line('.'), line('.'), 1)<cr>
+" nmap o o<cmd>call VSCodeNotifyRange(emacs-tab.reindentCurrentLine', line('.'), line('.'), 1)<cr>
 " nmap o o<cmd>call VSCodeNotifyRange('emacs-tab.reindentCurrentLine', line('.')-1, line('.')-1, 1)<cr>
 map <leader>1 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex1')<cr>
 map <leader>2 <cmd>call VSCodeNotify('workbench.action.openEditorAtIndex2')<cr>

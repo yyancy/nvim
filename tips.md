@@ -48,4 +48,3 @@ copy all comments of all fields to the end of file.
 
 费了老大力气弄出来的命令, 拷贝字段注释以及字段.
 `:g/private/yank a|?/\*\*? , ?\*/? t$ | $pu a`
-
