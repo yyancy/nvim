@@ -78,7 +78,7 @@ map <leader>E <cmd>call VSCodeNotify('workbench.action.toggleSidebarVisibility')
 
 
 map <leader>qq <cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<cr>
-map <leader>w <cmd>call VSCodeNotify('workbench.action.files.saveFiles')<cr>
+map <leader>ww <cmd>call VSCodeNotify('workbench.action.files.saveFiles')<cr>
 map <leader>qa <cmd>call VSCodeNotify('workbench.action.closeOtherEditors')<cr>
 
 
@@ -108,3 +108,18 @@ nnoremap <leader>n <cmd>call VSCodeNotify('editor.action.marker.next')<cr>
 nnoremap <leader>p <cmd>call VSCodeNotify('editor.action.marker.prev')<cr>
 nnoremap <leader>N <cmd>call VSCodeNotify('editor.action.marker.nextInFiles')<cr>
 nnoremap <leader>P <cmd>call VSCodeNotify('editor.action.marker.prevInFiles')<cr>
+
+
+nnoremap `. <cmd>call VSCodeNotify('workbench.action.navigateToLastEditLocation')<cr>
+" nnoremap g; <cmd>call VSCodeNotify('workbench.action.navigateBackInEditLocations')<cr>
+" nnoremap g, <cmd>call VSCodeNotify('workbench.action.navigateForwardInEditLocations')<cr>
+
+nmap <C-n> mciw*<Cmd>nohl<CR>
+
+lua <<EOF
+-- vim.keymap.set({ "n", "x", "i" }, "<C-d>", function()
+--   require("vscode-multi-cursor").addSelectionToNextFindMatch()
+-- end)
+
+
+EOF
