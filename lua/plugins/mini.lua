@@ -15,4 +15,10 @@ return {
       },
     },
   },
+  {
+    "echasnovski/mini.splitjoin",
+    event = "VeryLazy",
+    vscode = true,
+    opts = {},
+  },
 }

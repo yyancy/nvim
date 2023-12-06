@@ -183,6 +183,7 @@ return {
   {
     "monaqa/dial.nvim",
     event = "VeryLazy",
+    vscode = true,
     keys = {
       {
         "<C-a>",
