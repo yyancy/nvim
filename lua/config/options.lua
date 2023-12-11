@@ -13,3 +13,8 @@ end
 
 vim.cmd([[set clipboard=unnamedplus]])
 vim.opt.timeoutlen = 1000
+
+-- fix wrrong background in zellij
+vim.schedule(function()
+  vim.o.background = "dark"
+end)
