@@ -5,6 +5,7 @@
 local set = vim.keymap.set
 local opts = { noremap = true, slient = true }
 set("n", "<leader><cr>", "<cmd>nohl<cr>", { desc = "clear highlight" })
+set("n", ";<space>", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
 set("n", "=p", "o<esc>p==")
 set("n", "=P", "O<esc>p==")
@@ -39,4 +40,10 @@ else
   set("v", "<C-c>", "y")
   set("v", "<C-v>", "p")
   set("i", "<C-v>", "<C-o>p")
+  vim.cmd([[
+  " inoremap <a-o> <Esc>/[)}"'\]>`]<CR>:nohl<CR>a
+  " inoremap <a-i> <Esc>?[({"'\[<`]<CR>:nohl<CR>a
+  inoremap <a-o> <Esc>f"i
+  inoremap <a-i> <Esc>F"a
+  ]])
 end
