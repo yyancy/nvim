@@ -72,6 +72,7 @@ return {
   },
   {
     "tpope/vim-abolish",
+    vscode = true,
     config = function()
       vim.g.abolish_save_file = vim.fn.stdpath("config") .. "/after/plugin/abolish.vim"
     end,
@@ -92,8 +93,9 @@ return {
     -- add iv/av text object for variable name
     "Julian/vim-textobj-variable-segment",
     lazy = false,
+    vscode = true,
     dependencies = {
-      { "kana/vim-textobj-user" },
+      { "kana/vim-textobj-user", vscode = true },
     },
   },
   {
