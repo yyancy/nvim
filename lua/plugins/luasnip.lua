@@ -1,9 +1,9 @@
 return {
   {
     "L3MON4D3/LuaSnip",
-    keys = function()
-      return {}
-    end,
+    -- keys = function()
+    --   return {}
+    -- end,
     config = function()
       require("luasnip.loaders.from_vscode").load({ paths = "~/.config/nvim/snippets/" })
     end,
@@ -25,28 +25,28 @@ return {
       local cmp = require("cmp")
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" } }))
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
-          if cmp.visible() then
-            local entry = cmp.get_selected_entry()
-            if not entry then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-            else
-              cmp.confirm()
-            end
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
+        -- ["<Tab>"] = cmp.mapping(function(fallback)
+        --   -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+        --   if cmp.visible() then
+        --     local entry = cmp.get_selected_entry()
+        --     if not entry then
+        --       cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+        --     else
+        --       cmp.confirm()
+        --     end
+        --   else
+        --     fallback()
+        --   end
+        -- end, { "i", "s" }),
+        -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+        --   if cmp.visible() then
+        --     cmp.select_prev_item()
+        --   elseif luasnip.jumpable(-1) then
+        --     luasnip.jump(-1)
+        --   else
+        --     fallback()
+        --   end
+        -- end, { "i", "s" }),
       })
     end,
   },
