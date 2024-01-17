@@ -12,7 +12,12 @@ elseif vim.fn.executable("fcitx-remote") == 1 then
 end
 
 vim.cmd([[set clipboard=unnamedplus]])
+-- disabled python.vim plugins set shiftwidth
+vim.cmd([[let g:python_recommended_style = 0]])
 vim.opt.timeoutlen = 1000
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
 
 -- fix wrrong background in zellij
 vim.schedule(function()
