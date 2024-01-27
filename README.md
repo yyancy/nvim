@@ -14,4 +14,7 @@ npm config set registry https://registry.npmmirror.com
 pip3 install pynvim --upgrade
 ```
 
+bind-key / copy-mode \; send-key ?
+bind-key -t vi-edit C-u delete-line
+
 ## FAQ

@@ -71,6 +71,8 @@ nmap L <cmd>call VSCodeNotify('workbench.action.nextEditor')<cr>
 
 nmap <leader>gf <cmd>call VSCodeNotify('actions.find')<cr>
 nmap <leader>gr <cmd>call VSCodeNotify('editor.action.startFindReplaceAction')<cr>
+nmap <leader>gq <cmd>call VSCodeNotify('actions.find')<cr>
+nmap <leader>gw <cmd>call VSCodeNotify('editor.action.startFindReplaceAction')<cr>
 
 
 nnoremap <leader>ff :Find<cr>
