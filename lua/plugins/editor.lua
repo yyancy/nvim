@@ -3,6 +3,7 @@ return {
     "telescope.nvim",
     dependencies = {
       "nvim-telescope/telescope-file-browser.nvim",
+      "benfowler/telescope-luasnip.nvim",
     },
     keys = {
       {
@@ -48,7 +49,7 @@ return {
         desc = "Lists files in your current working directory, respects .gitignore",
       },
       {
-        ";r",
+        "<leader>fa",
         function()
           local builtin = require("telescope.builtin")
           builtin.live_grep()
@@ -86,6 +87,13 @@ return {
           builtin.treesitter()
         end,
         desc = "Lists Function names, variables, from Treesitter",
+      },
+      {
+        ";st",
+        function()
+          require("telescope").extensions.luasnip.luasnip({})
+        end,
+        desc = "list lua snip",
       },
       {
         ";sf",
@@ -169,6 +177,7 @@ return {
       telescope.setup(opts)
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("file_browser")
+      require("telescope").load_extension("luasnip")
     end,
   },
   {
@@ -177,7 +186,7 @@ return {
     opts = {
       modes = {
         char = {
-          enabled = false,
+          enabled = true,
         },
       },
     },
@@ -195,7 +204,15 @@ return {
         desc = "Flash",
       },
       {
-        "<A-S-s>",
+        "<A-s><A-s>",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump({ continue = true })
+        end,
+        desc = "repeat last jump search",
+      },
+      {
+        "<leader><A-s>",
         mode = { "n", "x", "o" },
         function()
           require("flash").treesitter()

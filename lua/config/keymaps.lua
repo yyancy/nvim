@@ -32,6 +32,9 @@ set("n", "<down>", "<cmd>res +5<cr>")
 set("n", "<left>", "<cmd>vertical resize-5<CR>")
 set("n", "<right>", "<cmd>vertical resize+5<CR>")
 
+vim.keymap.set("n", "[<space>", "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
+vim.keymap.set("n", "]<space>", "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
+
 -- keymaps for vscode
 if vim.g.vscode then
   vim.keymap.del("n", "<leader>l")
