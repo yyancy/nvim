@@ -121,6 +121,30 @@ autocmd User targets#mappings#user call targets#mappings#extend({
     end,
   },
   {
+    "hrsh7th/nvim-cmp",
+    ---@param opts cmp.ConfigSchema
+    opts = function(_, opts)
+      local feedkey = function(key, mode)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+      end
+
+      local cmp = require("cmp")
+      opts.mapping = vim.tbl_deep_extend("force", opts.mapping, {
+        ["<C-f>"] = cmp.mapping(function(fallback)
+          -- feedkey("<right>", "")
+          fallback()
+        end, { "i", "s" }),
+        ["<C-b>"] = cmp.mapping(function(fallback)
+          -- feedkey("<left>", "")
+          fallback()
+        end, { "i", "s" }),
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- scroll up
+        ["<C-d>"] = cmp.mapping.scroll_docs(4), -- scroll down
+        -- put here the keymaps that you want to change
+      })
+    end,
+  },
+  {
     "machakann/vim-sandwich",
     enabled = false,
     config = function()
