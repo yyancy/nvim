@@ -21,6 +21,15 @@ set("i", "<C-t>", "<C-f>")
 set("i", "<C-_>", "<C-o>u")
 set("i", "<a-_>", "<C-o><C-r>")
 
+set("n", "L", "$")
+set("n", "H", "_")
+set("x", "p", "P")
+set("x", "P", "p")
+
+set({ "n", "x" }, "x", '"dd')
+set({ "n" }, "xx", '"ddd')
+set({ "n", "x" }, "X", '"dD')
+
 set("o", "b", "vb")
 set("o", "F", "vF")
 set("o", "T", "vT")

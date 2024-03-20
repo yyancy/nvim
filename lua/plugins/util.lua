@@ -6,6 +6,13 @@ return {
   },
   { "tpope/vim-repeat", lazy = false },
   {
+    "gbprod/cutlass.nvim",
+    opts = {
+      -- cut_key = "x",
+      exclude = { "nd" },
+    },
+  },
+  {
     "LunarVim/bigfile.nvim",
     opts = {
       features = {
