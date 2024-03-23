@@ -14,7 +14,7 @@ set({ "i", "s" }, "<C-f>", "<right>")
 set("i", "<C-b>", "<left>")
 set("i", "<a-f>", "<C-right>")
 set("i", "<a-b>", "<C-left>")
-set("i", "<C-a>", "<home>")
+set("i", "<C-a>", "<C-o>_")
 set("i", "<C-e>", "<end>")
 set("i", "<C-d>", "<del>")
 set("i", "<C-t>", "<C-f>")
@@ -26,9 +26,9 @@ set("n", "H", "_")
 set("x", "p", "P")
 set("x", "P", "p")
 
-set({ "n", "x" }, "x", '"dd')
-set({ "n" }, "xx", '"ddd')
-set({ "n", "x" }, "X", '"dD')
+-- set({ "n", "x" }, "x", '"dd')
+-- set({ "n" }, "xx", '"ddd')
+-- set({ "n", "x" }, "X", '"dD')
 
 set("o", "b", "vb")
 set("o", "F", "vF")
@@ -40,18 +40,45 @@ set("n", "<up>", "<cmd>res -5<cr>")
 set("n", "<down>", "<cmd>res +5<cr>")
 set("n", "<left>", "<cmd>vertical resize-5<CR>")
 set("n", "<right>", "<cmd>vertical resize+5<CR>")
+set("n", "gV", "`[v]`")
 
 vim.keymap.set("n", "[<space>", "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
 vim.keymap.set("n", "]<space>", "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
+
+-- tabs
+vim.keymap.del("n", "<leader><tab>l")
+vim.keymap.del("n", "<leader><tab>f")
+vim.keymap.del("n", "<leader><tab><tab>")
+vim.keymap.del("n", "<leader><tab>]")
+vim.keymap.del("n", "<leader><tab>d")
+vim.keymap.del("n", "<leader><tab>[")
+
+set("n", "<leader><tab>", "<C-^>", { desc = "Switch to Other Buffer" })
+
+set("n", "go", "<leader>ss", { remap = true })
+set("n", "gO", "<leader>sS", { remap = true })
+
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
+end
+set("n", "<leader>n", diagnostic_goto(true), { desc = "Next Diagnostic" })
+set("n", "<leader>p", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 
 -- keymaps for vscode
 if vim.g.vscode then
   vim.keymap.del("n", "<leader>l")
   vim.cmd([[source $HOME/.config/nvim/vscode.vim]])
 else
+  -- unknown keymap :(
+  vim.keymap.del({ "n", "x" }, "<leader><tab>Þ", { slient = true })
   set("v", "<C-c>", "y")
   set("v", "<C-v>", "p")
-  set("i", "<C-v>", "<C-o>p")
+  set("i", "<C-v>", "<esc>P`[v`]=`]i")
   vim.cmd([[
   " inoremap <a-o> <Esc>/[)}"'\]>`]<CR>:nohl<CR>a
   " inoremap <a-i> <Esc>?[({"'\[<`]<CR>:nohl<CR>a

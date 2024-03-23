@@ -93,7 +93,7 @@ return {
         function()
           require("telescope").extensions.luasnip.luasnip({})
         end,
-        desc = "list lua snip",
+        desc = "list lua snippets",
       },
       {
         ";sf",
@@ -184,9 +184,17 @@ return {
     "folke/flash.nvim",
     enabled = true,
     opts = {
+      label = {
+        exclude = "yt",
+      },
       modes = {
         char = {
           enabled = true,
+          jump_labels = true,
+          multi_line = false,
+          label = {
+            exclude = "yt",
+          },
         },
       },
     },

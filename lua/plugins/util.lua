@@ -5,11 +5,12 @@ return {
     lazy = false,
   },
   { "tpope/vim-repeat", lazy = false },
+  { "ku1ik/vim-pasta", lazy = false },
   {
     "gbprod/cutlass.nvim",
     opts = {
-      -- cut_key = "x",
-      exclude = { "nd" },
+      cut_key = "x",
+      -- exclude = { "nd" },
     },
   },
   {

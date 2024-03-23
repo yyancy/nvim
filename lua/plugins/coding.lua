@@ -129,6 +129,7 @@ autocmd User targets#mappings#user call targets#mappings#extend({
       end
 
       local cmp = require("cmp")
+      opts.preselect = cmp.PreselectMode.None
       opts.mapping = vim.tbl_deep_extend("force", opts.mapping, {
         ["<C-f>"] = cmp.mapping(function(fallback)
           -- feedkey("<right>", "")
@@ -140,6 +141,8 @@ autocmd User targets#mappings#user call targets#mappings#extend({
         end, { "i", "s" }),
         ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- scroll up
         ["<C-d>"] = cmp.mapping.scroll_docs(4), -- scroll down
+        ["<a-,>"] = cmp.mapping.complete(),
+
         -- put here the keymaps that you want to change
       })
     end,
