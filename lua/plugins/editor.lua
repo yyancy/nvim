@@ -328,4 +328,14 @@ return {
       current_line_blame_opts = { delay = 1000, virtual_text_pos = "eol" },
     },
   },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      incremental_selection = {
+        keymaps = {
+          node_incremental = "v",
+        },
+      },
+    },
+  },
 }
