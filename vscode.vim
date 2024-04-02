@@ -66,8 +66,8 @@ nmap <leader>i <cmd>call VSCodeNotify('workbench.action.openNextRecentlyUsedEdit
 nmap <leader>o <cmd>call VSCodeNotify('workbench.action.openPreviousRecentlyUsedEditor')<cr>
 nmap <leader>h <cmd>call VSCodeNotify('workbench.action.previousEditor')<cr>
 nmap <leader>l <cmd>call VSCodeNotify('workbench.action.nextEditor')<cr>
-nmap H <cmd>call VSCodeNotify('workbench.action.previousEditor')<cr>
-nmap L <cmd>call VSCodeNotify('workbench.action.nextEditor')<cr>
+" nmap H <cmd>call VSCodeNotify('workbench.action.previousEditor')<cr>
+" nmap L <cmd>call VSCodeNotify('workbench.action.nextEditor')<cr>
 
 nmap <leader>gf <cmd>call VSCodeNotify('actions.find')<cr>
 nmap <leader>gr <cmd>call VSCodeNotify('editor.action.startFindReplaceAction')<cr>
