@@ -3,7 +3,7 @@
 -- Add any additional keymaps here
 
 local set = vim.keymap.set
-local opts = { noremap = true, slient = true }
+local opts = { noremap = true, silent = true }
 set("n", "<leader><cr>", "<cmd>nohl<cr>", { desc = "clear highlight" })
 set("n", ";<space>", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
@@ -73,6 +73,7 @@ set("n", "<leader>p", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 if vim.g.vscode then
   vim.keymap.del("n", "<leader>l")
   vim.cmd([[source $HOME/.config/nvim/vscode.vim]])
+  require("config.vscode")
 else
   -- unknown keymap :(
   vim.keymap.del({ "n", "x" }, "<leader><tab>Þ", { slient = true })
