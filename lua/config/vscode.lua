@@ -31,6 +31,9 @@ set("n", "<leader>o", function() vscode.call("workbench.action.openPreviousRecen
 set("n", "<leader>h", function() vscode.call("workbench.action.previousEditor") end, opts)
 set("n", "<leader>l", function() vscode.call("workbench.action.nextEditor") end, opts)
 
+set("n", "[b", function() vscode.call("workbench.action.previousEditor") end, ropts)
+set("n", "]b", function() vscode.call("workbench.action.nextEditor") end, ropts)
+
 set('n', '<leader>gf', function() vscode.call('actions.find') end, opts)
 set('n', '<leader>gr', function() vscode.call('editor.action.startFindReplaceAction') end, opts)
 set('n', '<leader>gq', function() vscode.call('actions.find') end, opts)
