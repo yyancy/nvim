@@ -179,6 +179,7 @@ autocmd User targets#mappings#user call targets#mappings#extend({
   },
   {
     "mg979/vim-visual-multi",
+    vscode = true,
     lazy = false,
     keys = {
       { "<C-LeftMouse>", "<Plug>(VM-Mouse-Cursor)", mode = { "n" } },
