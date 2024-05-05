@@ -188,6 +188,9 @@ return {
         exclude = "yt",
       },
       modes = {
+        search = {
+          enabled = false,
+        },
         char = {
           enabled = true,
           jump_labels = true,
