@@ -8,8 +8,8 @@ set("n", "<c-k>", "<c-w>k", ropts)
 set("n", "<c-h>", "<c-w>h", ropts)
 set("n", "<c-l>", "<c-w>l", ropts)
 
-set("n", "j", "gj", ropts)
-set("n", "k", "gk", ropts)
+-- set("n", "j", "gj", ropts)
+-- set("n", "k", "gk", ropts)
 
 
 -- lsp

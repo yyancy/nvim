@@ -14,7 +14,7 @@ return {
       end,
     },
   },
-  { "vim-illuminate", opts = {
-    under_cursor = false,
-  } },
+  --  { "vim-illuminate", opts = {
+  --    under_cursor = false,
+  --  } },
 }

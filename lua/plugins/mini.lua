@@ -21,4 +21,13 @@ return {
     vscode = true,
     opts = {},
   },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
+  },
+  {
+    "echasnovski/mini.pairs",
+    enabled = false,
+  },
 }
