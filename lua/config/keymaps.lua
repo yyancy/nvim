@@ -76,7 +76,7 @@ if vim.g.vscode then
   require("config.vscode")
 else
   -- unknown keymap :(
-  vim.keymap.del({ "n", "x" }, "<leader><tab>Þ", { slient = true })
+  -- vim.keymap.del({ "n", "x" }, "<leader><tab>Þ", { slient = true })
   set("v", "<C-c>", "y")
   set("v", "<C-v>", "p")
   set("i", "<C-v>", "<esc>P`[v`]=`]i")
