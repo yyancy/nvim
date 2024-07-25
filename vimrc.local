@@ -92,12 +92,20 @@ nmap 0 _
 
 nmap . .`[
 
-imap <C-e> <end>
-imap <C-a> <home>
-inoremap <a-b> <C-o>b
+imap <C-f> <right>
+imap <C-b> <left>
 imap <a-f> <C-o>w
-
+imap <a-b> <C-o>b
+imap <C-a> <home>
+imap <C-e> <end>
 imap <C-d> <del>
+
+nmap L $
+nmap H _
+
+xmap p P
+xmap P p
+
 " 使用<Ctrl> + hjkl快速在窗口间跳转
 noremap <c-h> <c-w><c-h>
 noremap <c-j> <c-w><c-j>
@@ -116,7 +124,7 @@ noremap <LEADER><CR> :nohlsearch<CR>
 
 noremap <leader>q :q<cr>
 noremap <leader><C-q> :q!<cr>
-noremap <leader>w :w<cr>
+noremap <leader>ww :w<cr>
 noremap <leader>x :x<cr>
 noremap ; :
 noremap > >>
