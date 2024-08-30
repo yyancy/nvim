@@ -82,7 +82,7 @@ else
   -- vim.keymap.del({ "n", "x" }, "<leader><tab>Þ", { slient = true })
   set("v", "<C-c>", "y")
   set("v", "<C-v>", "p")
-  set("i", "<C-v>", "<esc>P`[v`]=`]i")
+  set("i", "<C-v>", "<esc>P`[v`]=`]a")
   vim.cmd([[
   " inoremap <a-o> <Esc>/[)}"'\]>`]<CR>:nohl<CR>a
   " inoremap <a-i> <Esc>?[({"'\[<`]<CR>:nohl<CR>a
