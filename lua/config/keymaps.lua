@@ -63,10 +63,12 @@ set("n", "gO", "<leader>sS", { remap = true })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
+  -- https://www.reddit.com/r/neovim/comments/smtsxk/open_float_max_width/
+  --vim.diagnostic.open_float({ width = 80 })
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
-    go({ severity = severity })
+    go({ severity = severity, float = { max_width = 50 } })
   end
 end
 set("n", "<leader>n", diagnostic_goto(true), { desc = "Next Diagnostic" })

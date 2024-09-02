@@ -24,6 +24,16 @@ elseif vim.fn.executable("fcitx-remote") == 1 then
   })
 end
 
+-- https://neovim.discourse.group/t/lsp-hover-float-window-too-wide/3276
+-- diagnostics too long, set max_width smaller :)
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or "single"
+  opts.max_width = opts.max_width or 50
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
 vim.cmd([[set clipboard=unnamedplus]])
 -- disabled python.vim plugins set shiftwidth
 vim.cmd([[let g:python_recommended_style = 0]])
