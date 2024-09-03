@@ -3,7 +3,9 @@ local opts = { noremap = true, silent = true }
 local ropts = { remap = true, silent = true }
 local vscode = require("vscode-neovim")
 
--- options
+-- Options
+-- https://github.com/vscode-neovim/vscode-neovim/issues/1498#issuecomment-2228057878
+-- Solve wrong cursor position when set gj and gk keybind.
 vim.opt.ve = "onemore"
 
 -- keymaps
@@ -93,6 +95,6 @@ set('n', '<leader>P', function() vscode.call('editor.action.marker.prevInFiles')
 
 
 set('n', '`.', function() vscode.call('workbench.action.navigateToLastEditLocation')  end, opts)
-set('n', '<-n>', 'mciw*<Cmd>nohl<CR>', ropts)
+-- set('n', '<-n>', 'mciw*<Cmd>nohl<CR>', ropts)
 
 -- quit

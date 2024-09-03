@@ -45,6 +45,9 @@ set("n", "gV", "`[v]`")
 set("x", ".", ":norm .<CR>", { silent = false })
 set("x", "@", ":norm @q<CR>", { silent = false })
 
+set("n", "<leader>h", "<cmd>bprevious<cr>", { desc = "Previous Buffer" })
+set("n", "<leader>l", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+
 vim.keymap.set("n", "[<space>", "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
 vim.keymap.set("n", "]<space>", "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
 
@@ -77,9 +80,10 @@ set("n", "<leader>p", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 -- keymaps for vscode
 if vim.g.vscode then
   vim.keymap.del("n", "<leader>l")
-  vim.cmd([[source $HOME/.config/nvim/vscode.vim]])
+  -- vim.cmd([[source $HOME/.config/nvim/vscode.vim]])
   require("config.vscode")
 else
+  set("n", "<leader>;l", "<cmd>Lazy<cr>", { desc = "Lazy" })
   -- unknown keymap :(
   -- vim.keymap.del({ "n", "x" }, "<leader><tab>Þ", { slient = true })
   set("v", "<C-c>", "y")
