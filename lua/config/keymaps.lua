@@ -35,6 +35,7 @@ set("o", "F", "vF")
 set("o", "T", "vT")
 set("n", "0", "_")
 set("n", "<leader>ww", "<cmd>w<cr><esc>", { desc = "Save file" })
+set("n", "gp", "`[v`]", { desc = "select pasted content" })
 
 set("n", "<up>", "<cmd>res -5<cr>")
 set("n", "<down>", "<cmd>res +5<cr>")
