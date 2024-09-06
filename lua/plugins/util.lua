@@ -35,4 +35,16 @@ return {
       end,
     },
   },
+  {
+    "ton/vim-bufsurf",
+    lazy = false,
+    keys = {
+      {
+        "<leader>o","<Plug>(buf-surf-back)", mode = {"n"} 
+      }      ,
+      {
+        "<leader>i","<Plug>(buf-surf-forward)", mode = {"n"} 
+      }      
+    }
+  }
 }
