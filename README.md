@@ -57,3 +57,7 @@ require('telescope').setup{
 }
 
 ```
+
+- go snippets expand
+- indentation textobject
+- <C-f> <C-b> keybinding in cmd mode
