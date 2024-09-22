@@ -46,6 +46,8 @@ set('n', '<leader>gq', function() vscode.call('actions.find') end, opts)
 set('n', '<leader>gw', function() vscode.call('editor.action.startFindReplaceAction') end, opts)
 
 set('n','<leader>ff', '<cmd>Find<cr>')
+set('n','<leader>,', '<cmd>Find<cr>')
+set('n',';f', '<cmd>Find<cr>')
 set('n','<leader>bb', function() vscode.call('workbench.action.showAllEditorsByMostRecentlyUsed') end, ropts)
 
 set('n','<f12>',function () vscode.call('workbench.action.gotoSymbol') end ,opts)

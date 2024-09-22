@@ -133,6 +133,9 @@ return {
           n = {
             ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           },
+          i = {
+            ["<esc>"] = actions.close,
+          },
         },
       })
       opts.pickers = {
