@@ -14,6 +14,7 @@ set({ "i", "c" }, "<C-f>", "<right>")
 set({ "i", "c" }, "<C-b>", "<left>")
 set({ "i", "c" }, "<a-f>", "<C-right>")
 set({ "i", "c" }, "<a-b>", "<C-left>")
+set({ "i", "c" }, "<a-d>", "<C-o>dw")
 set({ "i", "c" }, "<C-a>", "<C-o>_")
 set({ "i", "c" }, "<C-e>", "<end>")
 set({ "i", "c" }, "<C-d>", "<del>")
@@ -81,7 +82,6 @@ set("n", "<leader>p", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 -- keymaps for vscode
 if vim.g.vscode then
   vim.keymap.del("n", "<leader>l")
-  -- vim.cmd([[source $HOME/.config/nvim/vscode.vim]])
   require("config.vscode")
 else
   set("n", "<leader>;l", "<cmd>Lazy<cr>", { desc = "Lazy" })
