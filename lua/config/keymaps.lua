@@ -79,6 +79,9 @@ end
 set("n", "<leader>n", diagnostic_goto(true), { desc = "Next Diagnostic" })
 set("n", "<leader>p", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 
+-- Custom function keymaps
+vim.keymap.set("n", "<leader>up", require("util.inputmethod").toggle, { desc = "toggle switch inputmethod" })
+
 -- keymaps for vscode
 if vim.g.vscode then
   vim.keymap.del("n", "<leader>l")
