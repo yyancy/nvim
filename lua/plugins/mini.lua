@@ -36,6 +36,18 @@ return {
     enabled = true,
     opts = {
       custom_textobjects = {
+        e = {
+          {
+            "%u[%l%d]+%f[^%l%d]",
+            "%f[%S][%l%d]+%f[^%l%d]",
+            "%f[%P][%l%d]+%f[^%l%d]",
+            "^[%l%d]+%f[^%l%d]",
+            "%f[%S][%w]+%f[^%w]",
+            "%f[%P][%w]+%f[^%w]",
+            "^%w+%f[^%w]",
+          },
+          "^().*()$",
+        },
         s = {
           {
             ai.gen_spec.pair(",", ","),
