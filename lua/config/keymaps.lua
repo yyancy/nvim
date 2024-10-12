@@ -22,6 +22,8 @@ set({ "i", "c" }, "<C-d>", "<del>")
 set("i", "<C-t>", "<C-f>")
 set("i", "<C-_>", "<C-o>u")
 set("i", "<a-_>", "<C-o><C-r>")
+set("n", "<C-a-m>", "<cmd>t.<CR>")
+set("i", "<C-a-m>", "<C-o><cmd>t.<CR>")
 
 set("n", "L", "$")
 set("n", "H", "_")
