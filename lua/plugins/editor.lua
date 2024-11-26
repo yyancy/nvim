@@ -42,7 +42,7 @@ return {
         function()
           local builtin = require("telescope.builtin")
           builtin.find_files({
-            no_ignore = false,
+            no_ignore = true,
             hidden = true,
           })
         end,
@@ -52,7 +52,12 @@ return {
         "<leader>fa",
         function()
           local builtin = require("telescope.builtin")
-          builtin.live_grep()
+          builtin.live_grep({
+            additional_args = {
+              "--no-ignore",
+              "--hidden",
+            },
+          })
         end,
         desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
       },

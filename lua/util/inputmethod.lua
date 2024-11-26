@@ -1,9 +1,9 @@
 local M = {}
 
-M.enable_inputmethod = false
+M.enable_inputmethod = true
 
 M.cmd_chinese = "fcitx-remote -s sogoupinyin"
-M.cmd_english = "fcitx-remote -s sogoupinyin"
+M.cmd_english = "fcitx-remote -s fcitx-keyboard-us"
 if LazyVim.is_win() then
   M.cmd_chinese = "D:\\local\\bin\\im-select.exe 2052"
   M.cmd_english = "D:\\local\\bin\\im-select.exe 1033"
