@@ -1,10 +1,5 @@
 return {
   {
-    "smjonas/inc-rename.nvim",
-    cmd = "IncRename",
-    config = true,
-  },
-  {
     "tpope/vim-abolish",
     vscode = true,
     config = function()
