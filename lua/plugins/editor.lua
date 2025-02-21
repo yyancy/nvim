@@ -1,6 +1,6 @@
 return {
   {
-    "telescope.nvim",
+    "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-telescope/telescope-file-browser.nvim",
       "benfowler/telescope-luasnip.nvim",
