@@ -1,6 +1,6 @@
 local M = {}
 
--- after yanking comtent, keep cursor position
+-- after yanking content, keep cursor position
 -- https://github.com/svban/YankAssassin.nvim/blob/main/lua/YankAssassin/init.lua
 M.pre_yank_pos = {}
 -- Function to save the cursor position before yanking

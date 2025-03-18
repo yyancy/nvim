@@ -2,9 +2,18 @@ return {
   {
     "tpope/vim-abolish",
     vscode = true,
+    init = function()
+      -- Disable coercion mappings. I use coerce.nvim for that.
+      vim.g.abolish_no_mappings = true
+    end,
     config = function()
       vim.g.abolish_save_file = vim.fn.stdpath("config") .. "/after/plugin/abolish.vim"
     end,
+  },
+  {
+    "gregorias/coerce.nvim",
+    tag = "v4.1.0",
+    config = true,
   },
   {
     "christoomey/vim-tmux-navigator",

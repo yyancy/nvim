@@ -1,4 +1,7 @@
 return {
+  -- {
+  --   "garymjr/nvim-snippets",
+  -- },
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {

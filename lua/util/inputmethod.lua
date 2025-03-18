@@ -3,7 +3,7 @@ local M = {}
 M.enable_inputmethod = true
 
 M.cmd_chinese = "fcitx-remote -s sogoupinyin"
-M.cmd_english = "fcitx-remote -s fcitx-keyboard-us"
+M.cmd_english = "fcitx-remote -s fcitx-ueyboard-us"
 if LazyVim.is_win() then
   M.cmd_chinese = "D:\\local\\bin\\im-select.exe 2052"
   M.cmd_english = "D:\\local\\bin\\im-select.exe 1033"
@@ -16,7 +16,7 @@ function M.toggle(enable)
   M.enable_inputmethod = enable
 end
 
-function M.chinse_input()
+function M.chinese_input()
   if M.enable_inputmethod then
     vim.fn.jobstart(M.cmd_chinese)
   end
@@ -31,7 +31,7 @@ function M.setup()
   -- add options for auto switch inputmethod
   vim.api.nvim_create_autocmd({ "InsertEnter" }, {
     pattern = { "*" },
-    callback = M.chinse_input,
+    callback = M.chinese_input,
   })
   vim.api.nvim_create_autocmd({ "InsertLeave" }, {
     pattern = { "*" },
