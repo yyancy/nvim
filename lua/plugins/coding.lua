@@ -12,8 +12,12 @@ return {
   },
   {
     "gregorias/coerce.nvim",
+    vscode = true,
     tag = "v4.1.0",
     config = true,
+    dependencies = {
+      { "gregorias/coop.nvim", vscode = true },
+    },
   },
   {
     "christoomey/vim-tmux-navigator",
