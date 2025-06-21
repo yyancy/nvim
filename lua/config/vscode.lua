@@ -1,5 +1,5 @@
 local set = vim.keymap.set
-local opts = { noremap = true, silent = true }
+local opts = { silent = true }
 local ropts = { remap = true, silent = true }
 local vscode = require("vscode-neovim")
 

@@ -3,7 +3,7 @@
 -- Add any additional keymaps here
 
 local set = vim.keymap.set
-local opts = { noremap = true, silent = true }
+local opts = { remap = true, silent = true }
 set("n", "<leader><cr>", "<cmd>nohl<cr>", { desc = "clear highlight" })
 set("n", ";<space>", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
@@ -30,6 +30,25 @@ set("n", "H", "_")
 set("x", "p", "P")
 set("x", "P", "p")
 
+set("n", "yw", "yiw")
+set("n", "yq", "yiq", { remap = true })
+set("n", "yb", "yib", { remap = true })
+
+set("n", "dw", "diw")
+set("n", "dq", "diq", { remap = true })
+set("n", "db", "dib", { remap = true })
+
+set("n", "sw", "siw")
+set("n", "sq", "siq", { remap = true })
+set("n", "sb", "sib", { remap = true })
+
+set("n", "cw", "ciw")
+set("n", "cq", "ciq", { remap = true })
+set("n", "cb", "cib", { remap = true })
+
+set("n", "xw", "xiw")
+set("n", "xq", "xiq", { remap = true })
+set("n", "xb", "xib", { remap = true })
 -- set({ "n", "x" }, "x", '"dd')
 -- set({ "n" }, "xx", '"ddd')
 -- set({ "n", "x" }, "X", '"dD')
