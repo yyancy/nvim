@@ -40,6 +40,7 @@ set("n", "<leader>l", function() vscode.call("workbench.action.nextEditor") end,
 set("n", "[b", function() vscode.call("workbench.action.previousEditor") end, ropts)
 set("n", "]b", function() vscode.call("workbench.action.nextEditor") end, ropts)
 
+
 set('n', '<leader>gf', function() vscode.call('actions.find') end, opts)
 set('n', '<leader>gr', function() vscode.call('editor.action.startFindReplaceAction') end, opts)
 set('n', '<leader>gq', function() vscode.call('actions.find') end, opts)
@@ -82,6 +83,16 @@ set('n', ']c', function() vscode.call('merge-conflict.previous')  end, ropts)
 
 
 set('n', 'gx', function() vscode.call('editor.action.openLink')  end, opts)
+
+
+set("n", "<leader>`", function()
+  vscode.call("workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup")
+  vscode.call("list.select")
+end, ropts)
+set("n", "<leader><tab>", function()
+  vscode.call("workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup")
+  vscode.call("list.select")
+end, ropts)
 
 set('n', '<leader>ro', function()
   vscode.call('editor.action.organizeImports')

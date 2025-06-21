@@ -63,6 +63,7 @@ vim.keymap.del("n", "<leader><tab><tab>")
 vim.keymap.del("n", "<leader><tab>]")
 vim.keymap.del("n", "<leader><tab>d")
 vim.keymap.del("n", "<leader><tab>[")
+vim.keymap.del("n", "<leader><tab>o")
 
 set("n", "<leader><tab>", "<C-^>", { desc = "Switch to Other Buffer" })
 
