@@ -25,3 +25,9 @@ first enter cursor mode then `\\<CR>` enter single region mode, can use `<tab>` 
 ### normal command
 *vm-run-at-cursors*, use `\\z` to run normal commmand to achive more action. very useful!!
 for example, can use \\z and input `crs` to change text style or `saiw'` to add surround characters.
+
+### useful mappings
+- \\A select all words
+- \\gS reselect previous regions
+- \\c add cursor add every start of lines
+- \\C word case convert
