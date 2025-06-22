@@ -106,8 +106,13 @@ set('n', '<leader>p', function() vscode.call('editor.action.marker.prev')  end, 
 set('n', '<leader>N', function() vscode.call('editor.action.marker.nextInFiles')  end, opts)
 set('n', '<leader>P', function() vscode.call('editor.action.marker.prevInFiles')  end, opts)
 
+set('n', '<leader>gr', function() vscode.call('git.revertSelectedRanges')  end, opts)
 
 set('n', '`.', function() vscode.call('workbench.action.navigateToLastEditLocation')  end, opts)
 -- set('n', '<-n>', 'mciw*<Cmd>nohl<CR>', ropts)
-
+vim.keymap.set({ "n", "x", "i" }, "<a-s-l>", function()
+vscode.with_insert(function()
+  vscode.action("editor.action.addSelectionToNextFindMatch")
+end)
+end)
 -- quit

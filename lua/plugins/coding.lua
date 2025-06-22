@@ -116,10 +116,15 @@ return {
     keys = {
       { "<C-LeftMouse>", "<Plug>(VM-Mouse-Cursor)", mode = { "n" } },
       { "<C-RightMouse>", "<Plug>(VM-Mouse-Word)", mode = { "n" } },
+      -- { "mp", "<Plug>(VM-Add-Cursor-At-Pos)", mode = { "n" } },
+      -- { "mv", "<Plug>(VM-Switch-Mode)", mode = { "n" } },
     },
     config = function()
       vim.g.VM_theme = "ocean"
       vim.g.VM_mouse_mappings = 1
+      -- vim.g.VM_maps = {
+      --   -- ["Switch Mode"] = "mv",
+      -- }
     end,
   },
 }

@@ -2,8 +2,10 @@ local map = vim.keymap.set
 local opts = { remap = true, silent = true, buffer = true }
 
 -- search markdown links
-map("n", "<Tab>", "<Cmd>call search('\\[[^]]*\\]([^)]\\+)')<CR>", opts)
-map("n", "<S-Tab>", "<Cmd>call search('\\[[^]]*\\]([^)]\\+)', 'b')<CR>", opts)
+-- I don't know why I add these mappings... but they affect visual-multi to switch mode fcuntion :(
+-- discover it with very long time
+-- map("n", "<Tab>", "<Cmd>call search('\\[[^]]*\\]([^)]\\+)')<CR>", opts)
+-- map("n", "<S-Tab>", "<Cmd>call search('\\[[^]]*\\]([^)]\\+)', 'b')<CR>", opts)
 
 local function insert_text_at_start_line(text)
   local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
@@ -11,6 +13,9 @@ local function insert_text_at_start_line(text)
 end
 
 vim.cmd.runtime({ "lua/config/autocmds.lua", bang = true })
+
+-- Options
+-- vim.opt.spell = false
 
 map(
   "n",
