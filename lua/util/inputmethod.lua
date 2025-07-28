@@ -8,8 +8,8 @@ if LazyVim.is_win() then
   M.cmd_chinese = "D:\\local\\bin\\im-select.exe 2052"
   M.cmd_english = "D:\\local\\bin\\im-select.exe 1033"
 elseif vim.fn.has("macunix") then
-  M.cmd_chinese = "im-select com.sogou.inputmethod.sogou.pinyin"
-  M.cmd_english = "im-select com.apple.keylayout.ABC"
+  M.cmd_chinese = "macism com.sogou.inputmethod.sogou.pinyin"
+  M.cmd_english = "macism com.apple.keylayout.ABC"
 end
 
 function M.toggle(enable)
