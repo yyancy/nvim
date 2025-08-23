@@ -18,7 +18,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spell = false
   end,
 })
-
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  -- group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 })
+  end,
+})
 -- custom fuinctions
 --
 ---Register a global internal keymap that wraps `rhs` to be repeatable.
