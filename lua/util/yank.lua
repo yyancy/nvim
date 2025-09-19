@@ -10,7 +10,9 @@ end
 
 -- Function to restore the cursor position after yanking
 function M.post_yank_motion()
-  vim.api.nvim_win_set_cursor(0, M.pre_yank_pos)
+  if M.pre_yank_pos and #M.pre_yank_pos == 2 then
+    vim.api.nvim_win_set_cursor(0, M.pre_yank_pos)
+  end
 end
 
 function M.setup()
