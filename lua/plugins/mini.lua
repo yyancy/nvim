@@ -1,7 +1,7 @@
 local ai = require("mini.ai")
 return {
   {
-    "echasnovski/mini.operators",
+    "nvim-mini/mini.operators",
     event = "VeryLazy",
     vscode = true,
     keys = {
@@ -17,7 +17,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.splitjoin",
+    "nvim-mini/mini.splitjoin",
     event = "VeryLazy",
     vscode = true,
     opts = {},
@@ -28,11 +28,11 @@ return {
     opts = {},
   },
   {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     enabled = false,
   },
   {
-    "echasnovski/mini.ai",
+    "nvim-mini/mini.ai",
     enabled = true,
     opts = {
       custom_textobjects = {
@@ -148,7 +148,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     opts = {
       mappings = {
         add = "sa", -- Add surrounding in Normal and Visual modes
