@@ -80,6 +80,8 @@ set('n', '[n', function() vscode.call('workbench.action.editor.previousChange') 
 set('n', ']n', function() vscode.call('workbench.action.editor.nextChange')  end, ropts)
 set('n', '[c', function() vscode.call('merge-conflict.next')  end, ropts)
 set('n', ']c', function() vscode.call('merge-conflict.previous')  end, ropts)
+set('n', ']q', function() vscode.call('references-view.next')  end, ropts)
+set('n', '[q', function() vscode.call('references-view.prev')  end, ropts)
 
 
 set('n', 'gx', function() vscode.call('editor.action.openLink')  end, opts)
