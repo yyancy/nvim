@@ -31,3 +31,5 @@ for example, can use \\z and input `crs` to change text style or `saiw'` to add 
 - \\gS reselect previous regions
 - \\c add cursor add every start of lines
 - \\C word case convert
+- gw{motion} format lines with textwidth option. check:
+  https://github.com/LazyVim/LazyVim/discussions/2978 

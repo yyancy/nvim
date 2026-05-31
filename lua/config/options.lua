@@ -30,6 +30,8 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 
+vim.opt.textwidth = 80
+vim.opt.colorcolumn = "80"
 -- fix wrrong background in zellij
 vim.schedule(function()
   vim.o.background = "dark"

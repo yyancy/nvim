@@ -18,6 +18,22 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spell = false
   end,
 })
+
+-- shorter columns in text because it reads better that way
+local text = vim.api.nvim_create_augroup("text", { clear = true })
+for _, pat in ipairs({ "text", "markdown", "mail", "gitcommit" }) do
+  vim.api.nvim_create_autocmd("Filetype", {
+    pattern = pat,
+    group = text,
+    -- command = "setlocal spell tw=72 colorcolumn=73",
+    callback = function(ev)
+      vim.opt_local.spell = true
+      vim.opt_local.textwidth = 72
+      vim.opt_local.colorcolumn = "73"
+    end,
+  })
+end
+
 -- custom fuinctions
 --
 ---Register a global internal keymap that wraps `rhs` to be repeatable.

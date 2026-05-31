@@ -105,6 +105,18 @@ set("n", "<leader>p", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 -- Custom function keymaps
 vim.keymap.set("n", "<leader>up", require("util.inputmethod").toggle, { desc = "toggle switch inputmethod" })
 
+local wrap = require("util.auto_wrap")
+
+vim.keymap.set("n", "<leader>u88", wrap.toggle, {
+  desc = "Toggle Auto Wrap",
+})
+
+vim.keymap.set("n", "<leader>u89", function()
+  print("AutoWrap: " .. wrap.status())
+end, {
+  desc = "Auto Wrap Status",
+})
+
 -- keymaps for vscode
 if vim.g.vscode then
   vim.keymap.del("n", "<leader>l")
