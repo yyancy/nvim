@@ -34,7 +34,7 @@ return {
   {
     -- add iv/av text object for variable name
     "Julian/vim-textobj-variable-segment",
-    lazy = false,
+    event = "VeryLazy",
     vscode = true,
     dependencies = {
       { "kana/vim-textobj-user", vscode = true },
@@ -86,7 +86,6 @@ return {
   {
     "mg979/vim-visual-multi",
     vscode = true,
-    lazy = false,
     keys = {
       { "<C-LeftMouse>", "<Plug>(VM-Mouse-Cursor)", mode = { "n" } },
       { "<C-RightMouse>", "<Plug>(VM-Mouse-Word)", mode = { "n" } },

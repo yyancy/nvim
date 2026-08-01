@@ -3,6 +3,7 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-telescope/telescope-file-browser.nvim",
+      "nvim-telescope/telescope-fzf-native.nvim",
       "benfowler/telescope-luasnip.nvim",
     },
     keys = {
@@ -186,6 +187,7 @@ return {
         },
       }
       telescope.setup(opts)
+      require("telescope").load_extension("fzf")
       require("telescope").load_extension("file_browser")
       require("telescope").load_extension("luasnip")
     end,

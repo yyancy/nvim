@@ -2,31 +2,44 @@ return {
   {
     "tommcdo/vim-lion",
     vscode = true,
-    lazy = false,
+    keys = {
+      { "gl", "<Plug>(lion-left)", mode = { "n", "v" }, desc = "Align left" },
+      { "gL", "<Plug>(lion-right)", mode = { "n", "v" }, desc = "Align right" },
+    },
   },
-  { "tpope/vim-repeat", lazy = false, vscode = true },
-  { "ku1ik/vim-pasta", lazy = false },
+  {
+    "tpope/vim-repeat",
+    vscode = true,
+    keys = { { ".", ".<cr>", mode = "n" } },
+  },
+  {
+    "ku1ik/vim-pasta",
+    keys = {
+      { "p", "<Plug>(pasta)", mode = "n" },
+      { "P", "<Plug>(PastaAbove)", mode = "n" },
+    },
+  },
   {
     "gbprod/cutlass.nvim",
     vscode = true,
     opts = {
       cut_key = "x",
-      -- exclude = { "nd" },
     },
   },
   {
     "ton/vim-bufsurf",
-    lazy = false,
     keys = {
       {
         "<leader>o",
         "<Plug>(buf-surf-back)",
-        mode = { "n" },
+        mode = "n",
+        desc = "Buffer history back",
       },
       {
         "<leader>i",
         "<Plug>(buf-surf-forward)",
-        mode = { "n" },
+        mode = "n",
+        desc = "Buffer history forward",
       },
     },
   },
