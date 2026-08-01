@@ -1,41 +1,51 @@
 return {
+  -- Tokyo Night colorscheme - dark, modern theme
   {
     "folke/tokyonight.nvim",
     opts = {
       style = "night",
       on_highlights = function(hl, c)
-        local prompt = "#2d3149"
+        -- Additional highlight customizations can go here
+        -- Example: local prompt = "#2d3149"
       end,
     },
   },
+
+  -- Noice - improved UI for messages, cmdline, popupmenu
   {
     "folke/noice.nvim",
     opts = function(_, opts)
+      -- Enable LSP documentation border for better visual separation
       opts.presets.lsp_doc_border = true
     end,
   },
+
+  -- nvim-notify - notification system with high visibility
   {
     "rcarriga/nvim-notify",
     opts = {
-      timeout = 5000,
+      timeout = 5000, -- notification timeout in milliseconds
     },
   },
+
+  -- Snacks - collection of useful utilities (dashboard, picker, etc.)
   {
     "folke/snacks.nvim",
     opts = {
       dashboard = {
-        -- enabled = true,
+        -- Dashboard can be disabled by setting enabled = true
         preset = {
-          header = [[ 
+          header = [[
 ██╗   ██╗ █████╗ ███╗   ██╗ ██████╗██╗   ██╗
 ╚██╗ ██╔╝██╔══██╗████╗  ██║██╔════╝╚██╗ ██╔╝
- ╚████╔╝ ███████║██╔██╗ ██║██║      ╚████╔╝ 
-  ╚██╔╝  ██╔══██║██║╚██╗██║██║       ╚██╔╝  
-   ██║   ██║  ██║██║ ╚████║╚██████╗   ██║   
-   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝   ╚═╝   
+ ╚████╔╝ ███████║██╔██╗ ██║██║      ╚████╔╝
+  ╚██╔╝  ██╔══██║██║╚██╗██║██║       ╚██╔╝
+   ██║   ██║  ██║██║ ╚████║╚██████╗   ██║
+   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝   ╚═╝
       ]],
         },
       },
+      -- Disable snacks.nvim's built-in notifier in favor of nvim-notify
       notifier = {
         enabled = false,
         timeout = 3000,
@@ -43,3 +53,4 @@ return {
     },
   },
 }
+

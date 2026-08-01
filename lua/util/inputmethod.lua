@@ -1,3 +1,20 @@
+---Input method auto-switching utility
+---
+---Automatically switches between Chinese and English input methods
+---when entering/leaving insert mode. Platform-specific implementation.
+---
+---Platform support:
+---  - Linux: fcitx-remote (Sogou Pinyin / US English)
+---  - Windows: im-select.exe (2052=Chinese, 1033=English)
+---  - macOS: macism (Sogou Pinyin / ABC layout)
+---
+---Configuration:
+---  - Toggle: <leader>up (keymap)
+---  - Enabled by default
+---  - Non-blocking job execution with error handling
+---
+---@module inputmethod
+
 local M = {}
 
 M.enable_inputmethod = true
@@ -17,6 +34,7 @@ elseif vim.fn.has("macunix") then
 end
 
 ---Toggle input method auto-switching on/off
+---@param enable boolean|nil if nil, toggles the current state
 function M.toggle(enable)
   if enable == nil then
     enable = not M.enable_inputmethod
@@ -31,7 +49,7 @@ function M.chinese_input()
     vim.fn.jobstart(M.cmd_chinese, {
       on_exit = function(_, code)
         if code ~= 0 then
-          vim.notify("Failed to switch to Chinese input", vim.log.levels.WARN)
+          vim.notify("Failed to switch to Chinese input (exit code: " .. code .. ")", vim.log.levels.WARN)
         end
       end,
     })
@@ -44,7 +62,7 @@ function M.english_input()
     vim.fn.jobstart(M.cmd_english, {
       on_exit = function(_, code)
         if code ~= 0 then
-          vim.notify("Failed to switch to English input", vim.log.levels.WARN)
+          vim.notify("Failed to switch to English input (exit code: " .. code .. ")", vim.log.levels.WARN)
         end
       end,
     })
@@ -52,6 +70,10 @@ function M.english_input()
 end
 
 ---Initialize input method auto-switching
+---
+---Sets up autocmds to switch input methods on:
+---  - InsertEnter: switch to Chinese
+---  - InsertLeave: switch to English
 function M.setup()
   vim.api.nvim_create_autocmd("InsertEnter", {
     callback = M.chinese_input,
@@ -61,7 +83,34 @@ function M.setup()
     callback = M.english_input,
     desc = "Switch to English input on normal mode",
   })
+
+  vim.notify("Input method auto-switching initialized", vim.log.levels.DEBUG)
+end
+
+---Get current Chinese input command
+---@return string
+function M.get_chinese_cmd()
+  return M.cmd_chinese
+end
+
+---Get current English input command
+---@return string
+function M.get_english_cmd()
+  return M.cmd_english
+end
+
+---Set custom Chinese input command
+---@param cmd string command to switch to Chinese
+function M.set_chinese_cmd(cmd)
+  M.cmd_chinese = cmd
+end
+
+---Set custom English input command
+---@param cmd string command to switch to English
+function M.set_english_cmd(cmd)
+  M.cmd_english = cmd
 end
 
 return M
+
 

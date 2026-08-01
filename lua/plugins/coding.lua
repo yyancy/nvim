@@ -83,6 +83,10 @@ return {
   {
     "kkharji/sqlite.lua",
     vscode = true,
+    lazy = false,
+    -- sqlite.lua: SQLite wrapper for Lua
+    -- Dependency for other plugins (e.g., window management, caching)
+    -- Required even if not directly used, provides database functionality to plugins
   },
   {
     "mg979/vim-visual-multi",
