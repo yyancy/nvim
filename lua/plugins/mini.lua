@@ -30,6 +30,7 @@ return {
   {
     "nvim-mini/mini.pairs",
     enabled = false,
+    -- disabled in favor of nvim-autopairs for better compatibility
   },
   {
     "nvim-mini/mini.ai",

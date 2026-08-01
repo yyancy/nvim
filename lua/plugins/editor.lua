@@ -1,7 +1,4 @@
 return {
-  -- {
-  --   "garymjr/nvim-snippets",
-  -- },
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -189,7 +186,6 @@ return {
         },
       }
       telescope.setup(opts)
-      -- require("telescope").load_extension("fzf")
       require("telescope").load_extension("file_browser")
       require("telescope").load_extension("luasnip")
     end,

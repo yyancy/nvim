@@ -25,8 +25,8 @@ set("i", "<a-_>", "<C-o><C-r>")
 set("n", "<C-a-m>", "<cmd>t.<CR>")
 set("i", "<C-a-m>", "<C-o><cmd>t.<CR>")
 
-set("n", "L", "$")
-set("n", "H", "_")
+set({ "n", "o", "v" }, "L", "$")
+set({ "n", "o", "v" }, "H", "_")
 set("x", "p", "P")
 set("x", "P", "p")
 
@@ -49,9 +49,6 @@ set("n", "cb", "cib", { remap = true })
 set("n", "xw", "xiw")
 set("n", "xq", "xiq", { remap = true })
 set("n", "xb", "xib", { remap = true })
--- set({ "n", "x" }, "x", '"dd')
--- set({ "n" }, "xx", '"ddd')
--- set({ "n", "x" }, "X", '"dD')
 
 set("o", "b", "vb")
 set("o", "F", "vF")
@@ -91,8 +88,6 @@ set("n", "gO", "<leader>sS", { remap = true })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-  -- https://www.reddit.com/r/neovim/comments/smtsxk/open_float_max_width/
-  --vim.diagnostic.open_float({ width = 80 })
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
@@ -123,14 +118,10 @@ if vim.g.vscode then
   require("config.vscode")
 else
   set("n", "<leader>;l", "<cmd>Lazy<cr>", { desc = "Lazy" })
-  -- unknown keymap :(
-  -- vim.keymap.del({ "n", "x" }, "<leader><tab>Þ", { slient = true })
   set("v", "<C-c>", "y")
   set("v", "<C-v>", "p")
   set("i", "<C-v>", "<esc>P`[v`]=`]a")
   vim.cmd([[
-  " inoremap <a-o> <Esc>/[)}"'\]>`]<CR>:nohl<CR>a
-  " inoremap <a-i> <Esc>?[({"'\[<`]<CR>:nohl<CR>a
   inoremap <a-o> <Esc>f"i
   inoremap <a-i> <Esc>F"a
   ]])

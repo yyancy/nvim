@@ -61,42 +61,14 @@ return {
       opts.preselect = cmp.PreselectMode.None
       opts.mapping = vim.tbl_deep_extend("force", opts.mapping, {
         ["<C-f>"] = cmp.mapping(function(fallback)
-          -- feedkey("<right>", "")
           fallback()
         end, { "i", "s" }),
         ["<C-b>"] = cmp.mapping(function(fallback)
-          -- feedkey("<left>", "")
           fallback()
         end, { "i", "s" }),
-        ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- scroll up
-        ["<C-d>"] = cmp.mapping.scroll_docs(4), -- scroll down
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<a-,>"] = cmp.mapping.complete(),
-        -- ["<Tab>"] = cmp.mapping(function(fallback)
-        --   if cmp.visible() then
-        --     -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
-        --     cmp.select_next_item()
-        --   elseif vim.snippet.active({ direction = 1 }) then
-        --     vim.schedule(function()
-        --       vim.snippet.jump(1)
-        --     end)
-        --   elseif has_words_before() then
-        --     cmp.complete()
-        --   else
-        --     fallback()
-        --   end
-        -- end, { "i", "s" }),
-        -- ["<S-Tab>"] = cmp.mapping(function(fallback)
-        --   if cmp.visible() then
-        --     cmp.select_prev_item()
-        --   elseif vim.snippet.active({ direction = -1 }) then
-        --     vim.schedule(function()
-        --       vim.snippet.jump(-1)
-        --     end)
-        --   else
-        --     fallback()
-        --   end
-        -- end, { "i", "s" }),
-        -- put here the keymaps that you want to change
       })
     end,
   },
@@ -104,6 +76,8 @@ return {
     "gbprod/yanky.nvim",
     enabled = false,
     vscode = true,
+    -- yanky provides enhanced yank/paste history
+    -- disabled in favor of custom yank.lua with cursor position preservation
   },
   {
     "kkharji/sqlite.lua",
@@ -116,16 +90,11 @@ return {
     keys = {
       { "<C-LeftMouse>", "<Plug>(VM-Mouse-Cursor)", mode = { "n" } },
       { "<C-RightMouse>", "<Plug>(VM-Mouse-Word)", mode = { "n" } },
-      -- { "mp", "<Plug>(VM-Add-Cursor-At-Pos)", mode = { "n" } },
-      -- { "mv", "<Plug>(VM-Switch-Mode)", mode = { "n" } },
     },
     config = function()
       vim.g.VM_theme = "ocean"
       vim.g.VM_mouse_mappings = 1
       vim.g.VM_user_operators = { "ciq" }
-      -- vim.g.VM_maps = {
-      --   -- ["Switch Mode"] = "mv",
-      -- }
     end,
   },
 }
