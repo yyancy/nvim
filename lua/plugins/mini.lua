@@ -30,7 +30,9 @@ return {
   {
     "nvim-mini/mini.pairs",
     enabled = false,
-    -- disabled in favor of nvim-autopairs for better compatibility
+    -- mini.pairs: bracket pair handling from mini.nvim
+    -- Disabled in favor of nvim-autopairs for better plugin ecosystem compatibility
+    -- nvim-autopairs provides more extensive configuration options and community support
   },
   {
     "nvim-mini/mini.ai",

@@ -11,8 +11,8 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
--- https://neovim.discourse.group/t/lsp-hover-float-window-too-wide/3276
--- diagnostics too long, set max_width smaller :)
+-- Customize LSP float window max width for better diagnostics display
+-- Reference: https://neovim.discourse.group/t/lsp-hover-float-window-too-wide/3276
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 ---@diagnostic disable-next-line: duplicate-set-field
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
@@ -22,17 +22,26 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
-vim.cmd([[set clipboard=unnamedplus]])
--- disabled python.vim plugins set shiftwidth
-vim.cmd([[let g:python_recommended_style = 0]])
+-- Clipboard integration
+vim.opt.clipboard = "unnamedplus"
+
+-- Disable Python style recommendations from python.vim
+vim.g.python_recommended_style = 0
+
+-- Timeout for key sequences
 vim.opt.timeoutlen = 1000
+
+-- Indentation
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 
+-- Line wrapping
 vim.opt.textwidth = 80
 vim.opt.colorcolumn = "80"
--- fix wrrong background in zellij
+
+-- Fix background color in Zellij terminal
 vim.schedule(function()
   vim.o.background = "dark"
 end)
+

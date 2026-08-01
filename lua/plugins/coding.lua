@@ -76,8 +76,9 @@ return {
     "gbprod/yanky.nvim",
     enabled = false,
     vscode = true,
-    -- yanky provides enhanced yank/paste history
-    -- disabled in favor of custom yank.lua with cursor position preservation
+    -- yanky.nvim provides yank history and better paste behavior
+    -- Disabled in favor of custom lua/util/yank.lua implementation
+    -- which focuses on cursor position preservation during yank operations
   },
   {
     "kkharji/sqlite.lua",
