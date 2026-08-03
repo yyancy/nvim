@@ -12,13 +12,13 @@ return {
     vscode = true,
     keys = { { ".", ".<cr>", mode = "n" } },
   },
-  {
-    "ku1ik/vim-pasta",
-    keys = {
-      { "p", "<Plug>(pasta)", mode = "n" },
-      { "P", "<Plug>(PastaAbove)", mode = "n" },
-    },
-  },
+  -- {
+  --   "ku1ik/vim-pasta",
+  --   keys = {
+  --     { "p", "<Plug>(pasta)", mode = "n" },
+  --     { "P", "<Plug>(PastaAbove)", mode = "n" },
+  --   },
+  -- },
   {
     "gbprod/cutlass.nvim",
     vscode = true,
