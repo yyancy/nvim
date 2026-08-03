@@ -1,12 +1,12 @@
 return {
-  {
-    "tommcdo/vim-lion",
-    vscode = true,
-    keys = {
-      { "gl", "<Plug>(lion-left)", mode = { "n", "v" }, desc = "Align left" },
-      { "gL", "<Plug>(lion-right)", mode = { "n", "v" }, desc = "Align right" },
-    },
-  },
+  -- {
+  --   "tommcdo/vim-lion",
+  --   vscode = true,
+  --   keys = {
+  --     { "gl", "<Plug>(lion-left)", mode = { "n", "v" }, desc = "Align left" },
+  --     { "gL", "<Plug>(lion-right)", mode = { "n", "v" }, desc = "Align right" },
+  --   },
+  -- },
   {
     "tpope/vim-repeat",
     vscode = true,

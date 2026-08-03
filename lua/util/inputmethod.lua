@@ -27,6 +27,10 @@ if LazyVim.is_win() then
   -- Windows: use im-select (2052=Chinese, 1033=English)
   M.cmd_chinese = "D:\\local\\bin\\im-select.exe 2052"
   M.cmd_english = "D:\\local\\bin\\im-select.exe 1033"
+elseif vim.fn.has("wsl") == 1 then
+  -- WSL 调 Windows 输入法
+  M.cmd_chinese = "/mnt/d/local/bin/im-select.exe 2052"
+  M.cmd_english = "/mnt/d/local/bin/im-select.exe 1033"
 elseif vim.fn.has("macunix") then
   -- macOS: use macism
   M.cmd_chinese = "macism com.sogou.inputmethod.sogou.pinyin"
@@ -112,5 +116,3 @@ function M.set_english_cmd(cmd)
 end
 
 return M
-
-

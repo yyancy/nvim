@@ -13,7 +13,7 @@ return {
   {
     "gregorias/coerce.nvim",
     vscode = true,
-    tag = "v4.1.0",
+    tag = "v5.0.0",
     config = true,
     dependencies = {
       { "gregorias/coop.nvim", vscode = true },
