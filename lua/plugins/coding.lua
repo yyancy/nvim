@@ -41,36 +41,12 @@ return {
     },
   },
   {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-emoji",
+    "saghen/blink.cmp",
+    opts = {
+      keymap = {
+        preset = "super-tab",
+      },
     },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      local feedkey = function(key, mode)
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-      end
-
-      local has_words_before = function()
-        unpack = unpack or table.unpack
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
-      local cmp = require("cmp")
-      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" } }))
-      opts.preselect = cmp.PreselectMode.None
-      opts.mapping = vim.tbl_deep_extend("force", opts.mapping, {
-        ["<C-f>"] = cmp.mapping(function(fallback)
-          fallback()
-        end, { "i", "s" }),
-        ["<C-b>"] = cmp.mapping(function(fallback)
-          fallback()
-        end, { "i", "s" }),
-        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-d>"] = cmp.mapping.scroll_docs(4),
-        ["<a-,>"] = cmp.mapping.complete(),
-      })
-    end,
   },
   {
     "gbprod/yanky.nvim",
