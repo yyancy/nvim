@@ -3,7 +3,7 @@ return {
   {
     "folke/tokyonight.nvim",
     opts = {
-      style = "night",
+      style = "storm",
       on_highlights = function(hl, c)
         -- Additional highlight customizations can go here
         -- Example: local prompt = "#2d3149"
@@ -53,4 +53,3 @@ return {
     },
   },
 }
-

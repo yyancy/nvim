@@ -42,6 +42,5 @@ vim.opt.colorcolumn = "80"
 
 -- Fix background color in Zellij terminal
 vim.schedule(function()
-  vim.o.background = "dark"
+  -- vim.o.background = "dark"
 end)
-
