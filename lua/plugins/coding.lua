@@ -45,6 +45,18 @@ return {
     opts = {
       keymap = {
         preset = "super-tab",
+        ["<CR>"] = {
+          "select_and_accept",
+          "fallback",
+        },
+      },
+      completion = {
+        list = {
+          selection = {
+            preselect = true,
+            auto_insert = false,
+          },
+        },
       },
     },
   },
