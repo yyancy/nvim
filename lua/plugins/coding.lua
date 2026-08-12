@@ -79,6 +79,7 @@ return {
   {
     "mg979/vim-visual-multi",
     vscode = true,
+    lazy = false,
     keys = {
       { "<C-LeftMouse>", "<Plug>(VM-Mouse-Cursor)", mode = { "n" } },
       { "<C-RightMouse>", "<Plug>(VM-Mouse-Word)", mode = { "n" } },
