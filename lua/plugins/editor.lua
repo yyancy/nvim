@@ -9,6 +9,21 @@ return {
         end,
         desc = "Resume",
       },
+      {
+        "<leader>bb",
+        function()
+          Snacks.picker.buffers()
+        end,
+        desc = "Buffers",
+      },
+      {
+        "<leader><space>",
+        function()
+          Snacks.picker.buffers()
+        end,
+        desc = "Buffers",
+      },
+      { "<leader>fa", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
     },
   },
 
@@ -272,6 +287,20 @@ return {
           node_incremental = "v",
         },
       },
+    },
+  },
+  {
+    "chrisgrieser/nvim-spider",
+    lazy = true,
+    keys = {
+      { "w", "<cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" } },
+      { "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
+      { "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
+      { "ge", "<cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" } },
+    },
+    opts = {
+      subwordMovement = false,
+      skipInsignificantPunctuation = true,
     },
   },
 }

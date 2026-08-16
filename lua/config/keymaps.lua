@@ -99,6 +99,7 @@ vim.keymap.del("n", "<leader><tab>]")
 vim.keymap.del("n", "<leader><tab>d")
 vim.keymap.del("n", "<leader><tab>[")
 vim.keymap.del("n", "<leader><tab>o")
+-- vim.keymap.del("n", "<leader>bb")
 
 set("n", "<leader><tab>", "<C-^>", { desc = "switch to other buffer" })
 
@@ -140,4 +141,3 @@ else
   inoremap <a-i> <Esc>F"a
   ]])
 end
-
