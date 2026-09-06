@@ -107,6 +107,23 @@ set("n", "<leader><tab>", "<C-^>", { desc = "switch to other buffer" })
 set("n", "go", "<leader>ss", { remap = true, desc = "grep string" })
 set("n", "gO", "<leader>sS", { remap = true, desc = "grep string (visual)" })
 
+local mc_ns = vim.api.nvim_create_namespace("nvim.multicursor")
+vim.keymap.set("n", "<Esc>", function()
+  -- 你的 multicursor 判断
+  local mcursors = vim.api.nvim_buf_get_extmarks(0, vim.api.nvim_create_namespace("nvim.multicursor"), 0, -1, {})
+  if not vim.tbl_isempty(mcursors) then
+    vim.api.nvim_buf_clear_namespace(0, mc_ns, 0, -1)
+    return "<Esc>"
+  end
+  vim.cmd("noh")
+  LazyVim.cmp.actions.snippet_stop()
+  -- fallback 到原本的 <Esc>
+  return "<Esc>"
+end, {
+  expr = true,
+  desc = "Escape / Exit Multicursor",
+})
+
 -- Diagnostic navigation
 local diagnostic_goto = function(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
