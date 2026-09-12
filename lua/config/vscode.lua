@@ -117,4 +117,10 @@ vscode.with_insert(function()
   vscode.action("editor.action.addSelectionToNextFindMatch")
 end)
 end)
+
+
+--
+-- fix vscode visual mode
+require("util.vscode_select")
+
 -- quit
